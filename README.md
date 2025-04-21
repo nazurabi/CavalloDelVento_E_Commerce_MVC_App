@@ -2,7 +2,7 @@
 
 This project consists of two integrated applications developed for managing and selling **bicycle spare parts**:
 
-1. **Desktop Application for Main Dealer (Factory)**
+1. **Desktop Application for Main Dealer**
 2. **E-Commerce Website for Sub-Dealers**
 
 The system is designed to streamline inventory and product distribution between the main dealer and sub-dealers, allowing sub-dealers to sell products to end customers via a web-based e-commerce platform.
@@ -12,7 +12,7 @@ The system is designed to streamline inventory and product distribution between 
 
 ### 1. Main Dealer Desktop Application
 
-- **Purpose**: Allows the main dealer (factory) to manage product inventory and distribute products to sub-dealers.
+- **Purpose**: Allows the main dealer to manage product inventory and distribute products to sub-dealers.
 - **Technology**: Developed with Visual Studio (Windows Forms)
 - **Key Features**:
   - Add / Update / Delete products
