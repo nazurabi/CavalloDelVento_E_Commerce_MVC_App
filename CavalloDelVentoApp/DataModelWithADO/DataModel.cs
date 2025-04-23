@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
@@ -34,5 +35,24 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
+
+        #region Brand Applications
+
+        public DataTable brandDataBind()
+        {
+            cmd.CommandText = "SELECT * FROM Brands";
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Brand Name");
+            dt.Columns.Add("Is Brand Active For Sale");
+            dt.Columns.Add("Brand Image");
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+            commandBuilder.DataAdapter = da;
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            return dt;
+        }
+
+        #endregion
     }
 }

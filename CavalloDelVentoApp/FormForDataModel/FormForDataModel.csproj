@@ -220,5 +220,13 @@
       <Name>DataModelWithADO</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\ApplicationImages\" />
+    <Folder Include="Images\CategoriesImages\" />
+    <Folder Include="Images\ProductImages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\BrandImages\none.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

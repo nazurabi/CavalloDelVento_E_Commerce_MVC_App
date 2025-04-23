@@ -210,41 +210,147 @@ namespace FormForDataModel
 
         private void TSMI_listBrands_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(BrandsList))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                BrandsList brandsList = new BrandsList();
+                brandsList.MdiParent = this;
+                brandsList.Show();
+            }
         }
 
         private void TSMI_listCategories_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(CategoriesList))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                CategoriesList categoriesList = new CategoriesList();
+                categoriesList.MdiParent = this;
+                categoriesList.Show();
+            }
         }
 
         private void TSMI_listProducts_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(ProductsList))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                ProductsList productsList = new ProductsList();
+                productsList.MdiParent = this;
+                productsList.Show();
+            }
         }
 
         private void TSMI_settingMainDealer_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(MainDealerSettings))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                MainDealerSettings mainDealerSettings = new MainDealerSettings();
+                mainDealerSettings.MdiParent = this;
+                mainDealerSettings.Show();
+            }
         }
 
         private void TSMI_settingMainUsers_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(UserSettings))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                UserSettings userSettings = new UserSettings();
+                userSettings.MdiParent = this;
+                userSettings.Show();
+            }
         }
 
         private void TSMI_settingSubDealers_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(SubDealerSettings))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                SubDealerSettings subDealerSettings = new SubDealerSettings();
+                subDealerSettings.MdiParent = this;
+                subDealerSettings.Show();
+            }
         }
 
         private void TSMI_settingDiscount_Click(object sender, EventArgs e)
         {
-
+            Form[] openForms = this.MdiChildren;
+            bool isOpen = false;
+            foreach (var item in openForms)
+            {
+                if (item.GetType() == typeof(DiscountRatesSettings))
+                {
+                    isOpen = true;
+                    item.Activate();
+                }
+            }
+            if (isOpen == false)
+            {
+                DiscountRatesSettings discountRatesSettings = new DiscountRatesSettings();
+                discountRatesSettings.MdiParent = this;
+                discountRatesSettings.Show();
+            }
         }
 
         private void TSMI_logOut_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Buraya ne yazcaz la");
 
         }
 
