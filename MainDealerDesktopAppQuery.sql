@@ -2,37 +2,78 @@ CREATE DATABASE CavalloDelVentoWebAppDb
 GO
 USE CavalloDelVentoWebAppDb
 GO
+CREATE TABLE MainDealerSettings(
+SettingID int IDENTITY (1,1),
+DealerName nvarchar(100) not null,
+Mail nvarchar(50) not null,
+Adress nvarchar(max),
+City nvarchar(50),
+PostalCode nvarchar(20),
+Country nvarchar(50),
+InvoiceTaxAmount smallint not null,
+CONSTRAINT pk_mainDealer PRIMARY KEY (SettingID)
+)
+GO
+INSERT INTO MainDealerSettings(DealerName,Mail,Adress,City,PostalCode,Country,InvoiceTaxAmount)
+VALUES ('Cavallo Del Vento','cavallodelvento@gmail.com','Strada Statale 524','Cheiti','66022','Italy',20)
+GO
+CREATE TABLE MainDealerUsers(
+MainUserID int IDENTITY(1,1),
+UserName nvarchar(50) not null,
+UserPassword nvarchar(50) not null,
+UserType nvarchar(10) not null,
+CONSTRAINT pk_mainUser PRIMARY KEY (MainUserID)
+)
+GO
+INSERT INTO MainDealerUsers(UserName,UserPassword,UserType)VALUES ('nasuh','1863','Admin')
+INSERT INTO MainDealerUsers(UserName,UserPassword,UserType)VALUES ('nazurabi','1234','User')
+GO
+CREATE TABLE DiscountRatesSettings(
+DiscountID int IDENTITY(1,1),
+DiscountType nvarchar(10),
+DiscountAmount tinyint,
+CONSTRAINT pk_discountRates PRIMARY KEY (DiscountID)
+)
+GO
+INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Gold',10)
+INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Silver',5)
+INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Bronze',2)
+GO
+CREATE TABLE SubDealerUsers(
+SubDealerUserID int IDENTITY(1,1),
+DealerName nvarchar(50),
+DealerMail nvarchar(50),
+DiscountIDFK int,
+DealerAddress nvarchar(max),
+DealerCity nvarchar(50),
+DealerPostalCode nvarchar(20),
+DealerCountry nvarchar(50),
+CONSTRAINT pk_subDealer PRIMARY KEY (SubDealerUserID),
+CONSTRAINT fk_discount FOREIGN KEY (DiscountIDFK) REFERENCES DiscountRatesSettings(DiscountID)
+)
+GO
 CREATE TABLE Brands (
 BrandID int IDENTITY (1,1),
-BrandName nvarchar(100) not null,
+BrandName nvarchar(100),
 CONSTRAINT pk_brand PRIMARY KEY(BrandID)
 ) 
-GO
-INSERT INTO Brands(BrandName) VALUES ('Bianchi')
-INSERT INTO Brands(BrandName) VALUES ('Colnago')
-INSERT INTO Brands(BrandName) VALUES ('Wilier Triestina')
-INSERT INTO Brands(BrandName) VALUES ('Olympia')
-INSERT INTO Brands(BrandName) VALUES ('Sram')
-INSERT INTO Brands(BrandName) VALUES ('Shimano')
-INSERT INTO Brands(BrandName) VALUES ('Trek')
-INSERT INTO Brands(BrandName) VALUES ('Cannondale')
-INSERT INTO Brands(BrandName) VALUES ('Specialized')
-INSERT INTO Brands(BrandName) VALUES ('S-Works')
 GO
 CREATE TABLE Categories(
 CategoryID int IDENTITY(1,1),
 BrandIDFK int,
-CategoryName nvarchar(50) not null,
+CategoryName nvarchar(50),
 Description nvarchar(max),
 CONSTRAINT pk_category PRIMARY KEY (CategoryID),
-CONSTRAINT fk_brand FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID)
+CONSTRAINT fk_brandForC FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID)
 )
 GO
 CREATE TABLE Products(
 ProductID int IDENTITY (1,1),
 BrandIDFK int,
 CategoryIDFK int,
-ProductName nvarchar(50) not null,
+ProductName nvarchar(50),
+Description nvarchar(max),
+Image nvarchar(max),
 QuantityPerUnit nvarchar(50),
 UnitPrice money,
 UnitsInStock smallint,
@@ -41,6 +82,43 @@ ReorderLevel smallint,
 Discontinued bit,
 IsDeleted bit,
 CONSTRAINT pk_products PRIMARY KEY (ProductID),
-CONSTRAINT fk_brand FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
-CONSTRAINT fk_category FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID)
+CONSTRAINT fk_brandForP FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
+CONSTRAINT fk_categoryForP FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID)
+)
+GO
+CREATE TABLE SendToSubDealers(
+SendID int IDENTITY (1,1),
+BrandIDFK int,
+CategoryIDFK int,
+ProductIDFK int,
+SettingIDFK int,
+UserIDFK int,
+SendDate datetime,
+SendQuantity smallint,
+SubTotalPrice money,
+Tax money,
+TotalPrice money,
+CONSTRAINT pk_send PRIMARY KEY (SendID),
+CONSTRAINT fk_brandForSub FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
+CONSTRAINT fk_categoryForSub FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID),
+CONSTRAINT fk_productForSub FOREIGN KEY (ProductIDFK) REFERENCES Products(ProductID),
+CONSTRAINT fk_settingForSub FOREIGN KEY (SettingIDFK) REFERENCES MainDealerSettings(SettingID),
+CONSTRAINT fk_userForSub FOREIGN KEY (UserIDFK) REFERENCES MainDealerUsers(MainUserID)
+)
+GO
+CREATE TABLE LevelIntegration(
+LevelIntegrationID int IDENTITY(1,1),
+BrandIDFK int,
+CategoryIDFK int,
+ProductIDFK int,
+UserIDFK int,
+UnitsOnOrder smallint,
+OrderDate datetime,
+CompletionLevel smallint,
+OrderCompletionDate datetime,
+CONSTRAINT pk_levelIntegration PRIMARY KEY (LevelIntegrationID),
+CONSTRAINT fk_brandForLev FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
+CONSTRAINT fk_categoryForLev FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID),
+CONSTRAINT fk_productForLev FOREIGN KEY (ProductIDFK) REFERENCES Products(ProductID),
+CONSTRAINT fk_userForLev FOREIGN KEY (UserIDFK) REFERENCES MainDealerUsers(MainUserID)
 )

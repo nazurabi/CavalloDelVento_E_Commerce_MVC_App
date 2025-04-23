@@ -1,0 +1,6 @@
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\bin\Debug\DataModelWithADO.dll
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\bin\Debug\DataModelWithADO.pdb
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.csproj.AssemblyReference.cache
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.csproj.CoreCompileInputs.cache
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.dll
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.pdb
