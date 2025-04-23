@@ -46,16 +46,142 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrandsAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrandsAdd.Designer.cs">
+      <DependentUpon>BrandsAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrandsEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrandsEdit.Designer.cs">
+      <DependentUpon>BrandsEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BrandsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrandsList.Designer.cs">
+      <DependentUpon>BrandsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriesAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoriesAdd.Designer.cs">
+      <DependentUpon>CategoriesAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriesEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoriesEdit.Designer.cs">
+      <DependentUpon>CategoriesEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoriesList.Designer.cs">
+      <DependentUpon>CategoriesList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiscountRatesSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiscountRatesSettings.Designer.cs">
+      <DependentUpon>DiscountRatesSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LevelIntegrationOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LevelIntegrationOrders.Designer.cs">
+      <DependentUpon>LevelIntegrationOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainDealerSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainDealerSettings.Designer.cs">
+      <DependentUpon>MainDealerSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProductsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductsList.Designer.cs">
+      <DependentUpon>ProductsList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductsAdd.Designer.cs">
+      <DependentUpon>ProductsAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductsEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductsEdit.Designer.cs">
+      <DependentUpon>ProductsEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendToSubDealers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendToSubDealers.Designer.cs">
+      <DependentUpon>SendToSubDealers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubDealerSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubDealerSettings.Designer.cs">
+      <DependentUpon>SubDealerSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserSettings.Designer.cs">
+      <DependentUpon>UserSettings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BrandsAdd.resx">
+      <DependentUpon>BrandsAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrandsEdit.resx">
+      <DependentUpon>BrandsEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrandsList.resx">
+      <DependentUpon>BrandsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoriesAdd.resx">
+      <DependentUpon>CategoriesAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoriesEdit.resx">
+      <DependentUpon>CategoriesEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoriesList.resx">
+      <DependentUpon>CategoriesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiscountRatesSettings.resx">
+      <DependentUpon>DiscountRatesSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LevelIntegrationOrders.resx">
+      <DependentUpon>LevelIntegrationOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainDealerSettings.resx">
+      <DependentUpon>MainDealerSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductsList.resx">
+      <DependentUpon>ProductsList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductsAdd.resx">
+      <DependentUpon>ProductsAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductsEdit.resx">
+      <DependentUpon>ProductsEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +192,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SendToSubDealers.resx">
+      <DependentUpon>SendToSubDealers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubDealerSettings.resx">
+      <DependentUpon>SubDealerSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSettings.resx">
+      <DependentUpon>UserSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

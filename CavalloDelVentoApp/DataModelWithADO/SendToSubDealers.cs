@@ -19,5 +19,6 @@ namespace DataModelWithADO
         public decimal subTotalPrice { get; set; }
         public decimal tax { get; set; }
         public decimal totalPrice { get; set; }
+        public string description { get; set; }
     }
 }

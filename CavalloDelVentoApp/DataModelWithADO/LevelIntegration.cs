@@ -17,5 +17,6 @@ namespace DataModelWithADO
         public DateTime orderDate { get; set; }
         public short competionLevel { get; set; }
         public DateTime orderCompletionDate { get; set; }
+        public string description { get; set; }
     }
 }

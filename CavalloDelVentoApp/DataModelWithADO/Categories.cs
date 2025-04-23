@@ -12,5 +12,7 @@ namespace DataModelWithADO
         public int brandIDFK { get; set; }
         public string categoryName { get; set; }
         public string description { get; set; }
+        public bool isDeleted { get; set; }
+        public string image { get; set; }
     }
 }

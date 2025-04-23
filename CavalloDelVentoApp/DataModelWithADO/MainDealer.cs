@@ -17,6 +17,7 @@ namespace DataModelWithADO
         public string postalCode { get; set; }
         public string country { get; set; }
         public byte invoiceTaxAmount { get; set; }
-        
+        public string image { get; set; }
+
     }
 }

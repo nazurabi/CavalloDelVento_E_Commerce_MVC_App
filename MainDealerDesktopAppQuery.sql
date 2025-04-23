@@ -10,23 +10,25 @@ Adress nvarchar(max),
 City nvarchar(50),
 PostalCode nvarchar(20),
 Country nvarchar(50),
+Image nvarchar(max),
 InvoiceTaxAmount smallint not null,
 CONSTRAINT pk_mainDealer PRIMARY KEY (SettingID)
 )
 GO
-INSERT INTO MainDealerSettings(DealerName,Mail,Adress,City,PostalCode,Country,InvoiceTaxAmount)
-VALUES ('Cavallo Del Vento','cavallodelvento@gmail.com','Strada Statale 524','Cheiti','66022','Italy',20)
+INSERT INTO MainDealerSettings(DealerName,Mail,Adress,City,PostalCode,Country,Image,InvoiceTaxAmount)
+VALUES ('Cavallo Del Vento','cavallodelvento@gmail.com','Strada Statale 524','Cheiti','66022','Italy','cavallodelvento.jpeg',20)
 GO
 CREATE TABLE MainDealerUsers(
 MainUserID int IDENTITY(1,1),
 UserName nvarchar(50) not null,
 UserPassword nvarchar(50) not null,
 UserType nvarchar(10) not null,
+IsDeleted bit,
 CONSTRAINT pk_mainUser PRIMARY KEY (MainUserID)
 )
 GO
-INSERT INTO MainDealerUsers(UserName,UserPassword,UserType)VALUES ('nasuh','1863','Admin')
-INSERT INTO MainDealerUsers(UserName,UserPassword,UserType)VALUES ('nazurabi','1234','User')
+INSERT INTO MainDealerUsers(UserName,UserPassword,UserType,IsDeleted)VALUES ('nasuh','1863','Admin',0)
+INSERT INTO MainDealerUsers(UserName,UserPassword,UserType,IsDeleted)VALUES ('nazurabi','1234','User',0)
 GO
 CREATE TABLE DiscountRatesSettings(
 DiscountID int IDENTITY(1,1),
@@ -48,6 +50,7 @@ DealerAddress nvarchar(max),
 DealerCity nvarchar(50),
 DealerPostalCode nvarchar(20),
 DealerCountry nvarchar(50),
+IsDeleted bit,
 CONSTRAINT pk_subDealer PRIMARY KEY (SubDealerUserID),
 CONSTRAINT fk_discount FOREIGN KEY (DiscountIDFK) REFERENCES DiscountRatesSettings(DiscountID)
 )
@@ -55,6 +58,8 @@ GO
 CREATE TABLE Brands (
 BrandID int IDENTITY (1,1),
 BrandName nvarchar(100),
+Image nvarchar(max),
+IsDeleted bit,
 CONSTRAINT pk_brand PRIMARY KEY(BrandID)
 ) 
 GO
@@ -63,6 +68,8 @@ CategoryID int IDENTITY(1,1),
 BrandIDFK int,
 CategoryName nvarchar(50),
 Description nvarchar(max),
+IsDeleted bit,
+Image nvarchar(max),
 CONSTRAINT pk_category PRIMARY KEY (CategoryID),
 CONSTRAINT fk_brandForC FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID)
 )
@@ -98,6 +105,7 @@ SendQuantity smallint,
 SubTotalPrice money,
 Tax money,
 TotalPrice money,
+Description nvarchar(max),
 CONSTRAINT pk_send PRIMARY KEY (SendID),
 CONSTRAINT fk_brandForSub FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
 CONSTRAINT fk_categoryForSub FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID),
@@ -116,6 +124,7 @@ UnitsOnOrder smallint,
 OrderDate datetime,
 CompletionLevel smallint,
 OrderCompletionDate datetime,
+Description nvarchar(max),
 CONSTRAINT pk_levelIntegration PRIMARY KEY (LevelIntegrationID),
 CONSTRAINT fk_brandForLev FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
 CONSTRAINT fk_categoryForLev FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID),
