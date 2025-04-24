@@ -32,13 +32,13 @@
             this.lbl_brandName = new System.Windows.Forms.Label();
             this.lbl_brandActive = new System.Windows.Forms.Label();
             this.gb_addBrand = new System.Windows.Forms.GroupBox();
-            this.cb_brandActive = new System.Windows.Forms.CheckBox();
-            this.tb_brandName = new System.Windows.Forms.TextBox();
-            this.btn_save = new System.Windows.Forms.Button();
-            this.btn_clear = new System.Windows.Forms.Button();
             this.pb_brandImage = new System.Windows.Forms.PictureBox();
-            this.lbl_brandImage = new System.Windows.Forms.Label();
             this.btn_selectImage = new System.Windows.Forms.Button();
+            this.btn_clear = new System.Windows.Forms.Button();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.tb_brandName = new System.Windows.Forms.TextBox();
+            this.cb_brandActive = new System.Windows.Forms.CheckBox();
+            this.lbl_brandImage = new System.Windows.Forms.Label();
             this.dgv_addBrand = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.gb_addBrand.SuspendLayout();
@@ -96,40 +96,6 @@
             this.gb_addBrand.TabStop = false;
             this.gb_addBrand.Text = "Brands Information";
             // 
-            // cb_brandActive
-            // 
-            this.cb_brandActive.AutoSize = true;
-            this.cb_brandActive.Location = new System.Drawing.Point(289, 149);
-            this.cb_brandActive.Name = "cb_brandActive";
-            this.cb_brandActive.Size = new System.Drawing.Size(18, 17);
-            this.cb_brandActive.TabIndex = 5;
-            this.cb_brandActive.UseVisualStyleBackColor = true;
-            // 
-            // tb_brandName
-            // 
-            this.tb_brandName.Location = new System.Drawing.Point(35, 89);
-            this.tb_brandName.Name = "tb_brandName";
-            this.tb_brandName.Size = new System.Drawing.Size(350, 36);
-            this.tb_brandName.TabIndex = 3;
-            // 
-            // btn_save
-            // 
-            this.btn_save.Location = new System.Drawing.Point(27, 264);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(336, 42);
-            this.btn_save.TabIndex = 9;
-            this.btn_save.Text = "Save";
-            this.btn_save.UseVisualStyleBackColor = true;
-            // 
-            // btn_clear
-            // 
-            this.btn_clear.Location = new System.Drawing.Point(27, 216);
-            this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(165, 42);
-            this.btn_clear.TabIndex = 8;
-            this.btn_clear.Text = "Clear";
-            this.btn_clear.UseVisualStyleBackColor = true;
-            // 
             // pb_brandImage
             // 
             this.pb_brandImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -139,16 +105,6 @@
             this.pb_brandImage.Size = new System.Drawing.Size(230, 230);
             this.pb_brandImage.TabIndex = 4;
             this.pb_brandImage.TabStop = false;
-            // 
-            // lbl_brandImage
-            // 
-            this.lbl_brandImage.AutoSize = true;
-            this.lbl_brandImage.Font = new System.Drawing.Font("Calibri", 13.8F);
-            this.lbl_brandImage.Location = new System.Drawing.Point(395, 45);
-            this.lbl_brandImage.Name = "lbl_brandImage";
-            this.lbl_brandImage.Size = new System.Drawing.Size(234, 28);
-            this.lbl_brandImage.TabIndex = 7;
-            this.lbl_brandImage.Text = "Brand\'s Image Selection";
             // 
             // btn_selectImage
             // 
@@ -160,8 +116,53 @@
             this.btn_selectImage.UseVisualStyleBackColor = true;
             this.btn_selectImage.Click += new System.EventHandler(this.btn_selectImage_Click);
             // 
+            // btn_clear
+            // 
+            this.btn_clear.Location = new System.Drawing.Point(27, 216);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(165, 42);
+            this.btn_clear.TabIndex = 8;
+            this.btn_clear.Text = "Clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            // 
+            // btn_save
+            // 
+            this.btn_save.Location = new System.Drawing.Point(27, 264);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(336, 42);
+            this.btn_save.TabIndex = 9;
+            this.btn_save.Text = "Save";
+            this.btn_save.UseVisualStyleBackColor = true;
+            // 
+            // tb_brandName
+            // 
+            this.tb_brandName.Location = new System.Drawing.Point(35, 89);
+            this.tb_brandName.Name = "tb_brandName";
+            this.tb_brandName.Size = new System.Drawing.Size(350, 36);
+            this.tb_brandName.TabIndex = 3;
+            // 
+            // cb_brandActive
+            // 
+            this.cb_brandActive.AutoSize = true;
+            this.cb_brandActive.Location = new System.Drawing.Point(289, 149);
+            this.cb_brandActive.Name = "cb_brandActive";
+            this.cb_brandActive.Size = new System.Drawing.Size(18, 17);
+            this.cb_brandActive.TabIndex = 5;
+            this.cb_brandActive.UseVisualStyleBackColor = true;
+            // 
+            // lbl_brandImage
+            // 
+            this.lbl_brandImage.AutoSize = true;
+            this.lbl_brandImage.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.lbl_brandImage.Location = new System.Drawing.Point(395, 45);
+            this.lbl_brandImage.Name = "lbl_brandImage";
+            this.lbl_brandImage.Size = new System.Drawing.Size(234, 28);
+            this.lbl_brandImage.TabIndex = 7;
+            this.lbl_brandImage.Text = "Brand\'s Image Selection";
+            // 
             // dgv_addBrand
             // 
+            this.dgv_addBrand.AllowUserToAddRows = false;
             this.dgv_addBrand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_addBrand.Location = new System.Drawing.Point(12, 383);
             this.dgv_addBrand.Name = "dgv_addBrand";

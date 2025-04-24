@@ -4,3 +4,7 @@ C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\
 C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.csproj.CoreCompileInputs.cache
 C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.dll
 C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataModelWithADO.pdb
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\bin\Debug\System.Drawing.Common.dll
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\bin\Debug\System.Drawing.Common.pdb
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\bin\Debug\System.Drawing.Common.xml
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\DataModelWithADO\obj\Debug\DataMode.287359F6.Up2Date

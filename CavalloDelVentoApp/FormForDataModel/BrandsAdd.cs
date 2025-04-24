@@ -36,7 +36,33 @@ namespace FormForDataModel
 
         private void BrandsAdd_Load(object sender, EventArgs e)
         {
-            dgv_addBrand.DataSource = dm.brandDataBind();
+            DataTable dt = dm.brandDataBind();
+            dgv_addBrand.DataSource = dt;
+            //dgv_addBrand.Columns["Brand Image"].Visible = false;
+            //DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            //imageColumn.HeaderText = "Brand Images";
+            //imageColumn.Name = "Image";
+            //dgv_addBrand.Columns.Add(imageColumn);
+
+            foreach (DataGridViewRow row in dgv_addBrand.Rows)
+            {
+                //if (row.IsNewRow)
+                //    continue;
+
+                //string imagePath = row.Cells["Brand Image"].Value.ToString();
+
+                //    if (File.Exists(imagePath))
+                //    {
+                //    row.Cells["Image"].Value = Image.FromFile(imagePath);
+                //    }
+                if (dgv_addBrand.Columns["Brand Image"] is DataGridViewImageColumn imageCol)
+                {
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_addBrand.RowTemplate.Height = 100;
+                }
+
+            }
         }
     }
 }
