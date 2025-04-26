@@ -124,6 +124,7 @@
             this.btn_clear.TabIndex = 8;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // btn_save
             // 
@@ -133,6 +134,7 @@
             this.btn_save.TabIndex = 9;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // tb_brandName
             // 
@@ -163,9 +165,11 @@
             // dgv_addBrand
             // 
             this.dgv_addBrand.AllowUserToAddRows = false;
+            this.dgv_addBrand.AllowUserToDeleteRows = false;
             this.dgv_addBrand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_addBrand.Location = new System.Drawing.Point(12, 383);
             this.dgv_addBrand.Name = "dgv_addBrand";
+            this.dgv_addBrand.ReadOnly = true;
             this.dgv_addBrand.RowHeadersWidth = 51;
             this.dgv_addBrand.RowTemplate.Height = 24;
             this.dgv_addBrand.Size = new System.Drawing.Size(982, 326);

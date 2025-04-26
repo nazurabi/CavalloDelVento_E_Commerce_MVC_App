@@ -60,6 +60,7 @@ BrandID int IDENTITY (1,1),
 BrandName nvarchar(100),
 Image nvarchar(max),
 IsDeleted bit,
+IsActive bit,
 CONSTRAINT pk_brand PRIMARY KEY(BrandID)
 ) 
 GO
@@ -69,6 +70,7 @@ BrandIDFK int,
 CategoryName nvarchar(50),
 Description nvarchar(max),
 IsDeleted bit,
+IsActive bit,
 Image nvarchar(max),
 CONSTRAINT pk_category PRIMARY KEY (CategoryID),
 CONSTRAINT fk_brandForC FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID)
@@ -88,6 +90,7 @@ UnitsOnOrder smallint,
 ReorderLevel smallint,
 Discontinued bit,
 IsDeleted bit,
+IsActive bit,
 CONSTRAINT pk_products PRIMARY KEY (ProductID),
 CONSTRAINT fk_brandForP FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
 CONSTRAINT fk_categoryForP FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID)
