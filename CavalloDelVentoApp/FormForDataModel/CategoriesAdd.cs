@@ -18,6 +18,7 @@ namespace FormForDataModel
         string imageName = "";
         string selectedImagePath = "";
         string destinationImagePath = "";
+        int selectedBrandID = -1;
         public CategoriesAdd()
         {
             InitializeComponent();
@@ -41,6 +42,28 @@ namespace FormForDataModel
         private void CategoriesAdd_Load(object sender, EventArgs e)
         {
             CategoriesAddLoad();
+            comboBoxBrandsLoad();
+        }
+
+        private void comboBoxBrandsLoad()
+        {
+            List<Brands> brands = dm.getBrandsForCategories();
+            brands.Insert(0, new Brands { brandID = 0, brandName = "---Choose---" });
+            cbb_brandName.DataSource = brands;
+            cbb_brandName.DisplayMember = "BrandName";
+            cbb_brandName.ValueMember = "BrandID";
+            cbb_brandName.SelectedIndex = 0;
+        }
+
+        private void cbb_brandName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbb_brandName.SelectedIndex != 0 && cbb_brandName.SelectedValue != null)
+            {
+                if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
+                {
+                    selectedBrandID = id;
+                }
+            }
         }
 
         private void CategoriesAddLoad()
@@ -67,7 +90,7 @@ namespace FormForDataModel
                 {
                     img = Image.FromFile(returnedImage);
                 }
-                dgvVisualTable.Rows.Add(sequenceNumber, returnedBrandName,returnedCategoryName, returnedIsActiveForSale, img);
+                dgvVisualTable.Rows.Add(sequenceNumber, returnedBrandName, returnedCategoryName, returnedIsActiveForSale, img);
             }
             dgv_addCategory.DataSource = dgvVisualTable;
             dgv_addCategory.RowHeadersVisible = false;
@@ -108,6 +131,7 @@ namespace FormForDataModel
         private void btn_clear_Click(object sender, EventArgs e)
         {
             tb_categoryName.Text = "";
+            tb_description.Text = "";
             cb_categoryActive.Checked = false;
             imageName = "";
             selectedImagePath = "";
@@ -115,61 +139,75 @@ namespace FormForDataModel
             pb_categoryImage.ImageLocation = "";
         }
 
-        private void btn_save_Click(object sender, EventArgs e) // en son listbox üzerine markaları alıyordun
+        private void btn_save_Click(object sender, EventArgs e)
         {
-            string brandName = "";
+            string brandIDFK = "";
             string categoryName = "";
+            string description = "";
             bool isDeleted = false; // In order for the brand to be active, its deleted status must be false.
             bool isActive;
-            if (!string.IsNullOrEmpty(tb_categoryName.Text))
+            if (selectedBrandID != -1)
             {
-                byte checkBrandName = dm.listBrands(tb_categoryName.Text.ToUpper());
-                if (checkBrandName == 0)
+                if (!string.IsNullOrEmpty(tb_categoryName.Text))
                 {
-                    if (tb_categoryName.Text.Length < 50)
+                    byte checkCategoryName = dm.listCategories(tb_categoryName.Text.ToUpper(), cbb_brandName.SelectedValue.ToString());
+                    if (checkCategoryName == 0)
                     {
-                        if (!string.IsNullOrEmpty(imageName))
+                        if (tb_categoryName.Text.Length < 50)
                         {
-                            categoryName = tb_categoryName.Text.ToUpper();
-                            isActive = cb_categoryActive.Checked;
-                            dm.addCategory(brandName, isDeleted, isActive, imageName);
-                            destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageName);
-                            destinationImagePath = Path.GetFullPath(destinationImagePath);
-                            File.Copy(selectedImagePath, destinationImagePath, true);
-                            tb_categoryName.Text = "";
-                            cb_categoryActive.Checked = false;
-                            imageName = "";
-                            pb_categoryImage.ImageLocation = "";
-                            CategoriesAddLoad();
+                            if (!string.IsNullOrEmpty(imageName))
+                            {
+                                categoryName = tb_categoryName.Text.ToUpper();
+                                isActive = cb_categoryActive.Checked;
+                                brandIDFK = cbb_brandName.SelectedValue.ToString();
+                                description = tb_description.Text;
+                                dm.addCategory(brandIDFK, categoryName, isDeleted, isActive, description, imageName);
+                                destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\CategoriesImages", imageName);
+                                destinationImagePath = Path.GetFullPath(destinationImagePath);
+                                File.Copy(selectedImagePath, destinationImagePath, true);
+                                tb_categoryName.Text = "";
+                                cb_categoryActive.Checked = false;
+                                imageName = "";
+                                pb_categoryImage.ImageLocation = "";
+                                CategoriesAddLoad();
+                            }
+                            else
+                            {
+                                categoryName = tb_categoryName.Text.ToUpper();
+                                isActive = cb_categoryActive.Checked;
+                                brandIDFK = cbb_brandName.SelectedValue.ToString();
+                                description = tb_description.Text;
+                                imageName = "none.jpg";
+                                dm.addCategory(brandIDFK, categoryName, isDeleted, isActive, description, imageName);
+                                tb_categoryName.Text = "";
+                                cb_categoryActive.Checked = false;
+                                imageName = "";
+                                pb_categoryImage.ImageLocation = "";
+                                CategoriesAddLoad();
+
+                            }
                         }
                         else
                         {
-                            categoryName = tb_categoryName.Text.ToUpper();
-                            isActive = cb_categoryActive.Checked;
-                            imageName = "none.jpg";
-                            dm.addCategory(brandName, isDeleted, isActive, imageName);
-                            tb_categoryName.Text = "";
-                            cb_categoryActive.Checked = false;
-                            imageName = "";
-                            pb_categoryImage.ImageLocation = "";
-                            CategoriesAddLoad();
-
+                            MessageBox.Show("Category name too long, it can be max 50 character!");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Category name too long, it can be max 50 character!");
+                        MessageBox.Show("Category name has already been entered, please check your information!");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Category name has already been entered, please check your information!");
+                    MessageBox.Show("Category name cannot empty!");
                 }
             }
             else
             {
-                MessageBox.Show("Category name cannot empty!");
+                MessageBox.Show("You cannot select Brand, please select Brand!");
             }
+
         }
+
     }
 }

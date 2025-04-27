@@ -151,7 +151,7 @@
             // 
             this.cb_brandActive.AutoSize = true;
             this.cb_brandActive.Enabled = false;
-            this.cb_brandActive.Location = new System.Drawing.Point(289, 149);
+            this.cb_brandActive.Location = new System.Drawing.Point(345, 149);
             this.cb_brandActive.Name = "cb_brandActive";
             this.cb_brandActive.Size = new System.Drawing.Size(18, 17);
             this.cb_brandActive.TabIndex = 5;

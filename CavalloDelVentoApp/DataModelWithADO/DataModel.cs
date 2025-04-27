@@ -275,7 +275,7 @@ namespace DataModelWithADO
 
         public void addCategory(string brandIDFK, string categoryName, bool isDeleted, bool isActive, string description, string categoryImage)
         {
-            cmd.CommandText = "INSERT INTO Categories(BrandIDFK, CategoryName, Description, Image, IsDeleted, IsActive) VALUES (@brandIDFK, @categoryName, @description, @categoryImage, @isDeleted, @isActive)";
+            cmd.CommandText = "INSERT INTO Categories(BrandIDFK, CategoryName, IsDeleted, IsActive, Description, Image ) VALUES (@brandIDFK, @categoryName, @isDeleted, @isActive, @description, @categoryImage)";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
             cmd.Parameters.AddWithValue("@categoryName", categoryName);
@@ -324,12 +324,12 @@ namespace DataModelWithADO
             }
         }
 
-        public byte listCategories(string checkCategoryName)
+        public byte listCategories(string checkCategoryName, string checkBrandIDFKForCategory)
         {
             byte checkCounter = 0;
             try
             {
-                cmd.CommandText = "SELECT CategoryName FROM Categories";
+                cmd.CommandText = "SELECT CategoryName, BrandIDFK FROM Categories";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -337,7 +337,8 @@ namespace DataModelWithADO
                 {
                     Categories category = new Categories();
                     category.categoryName = reader.GetString(0);
-                    if (checkCategoryName == category.categoryName)
+                    category.brandIDFK = reader.GetInt32(1);
+                    if (checkCategoryName == category.categoryName && Convert.ToInt32(checkBrandIDFKForCategory) == category.brandIDFK )
                     {
                         checkCounter++;
                     }
