@@ -102,7 +102,7 @@
             this.gb_addBrand.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gb_addBrand.Location = new System.Drawing.Point(12, 47);
             this.gb_addBrand.Name = "gb_addBrand";
-            this.gb_addBrand.Size = new System.Drawing.Size(982, 330);
+            this.gb_addBrand.Size = new System.Drawing.Size(1500, 330);
             this.gb_addBrand.TabIndex = 3;
             this.gb_addBrand.TabStop = false;
             this.gb_addBrand.Text = "Brands Information";
@@ -177,7 +177,7 @@
             this.dgv_editBrand.ReadOnly = true;
             this.dgv_editBrand.RowHeadersWidth = 51;
             this.dgv_editBrand.RowTemplate.Height = 24;
-            this.dgv_editBrand.Size = new System.Drawing.Size(982, 326);
+            this.dgv_editBrand.Size = new System.Drawing.Size(1500, 500);
             this.dgv_editBrand.TabIndex = 4;
             this.dgv_editBrand.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editBrand_RowHeaderMouseClick);
             // 
@@ -189,11 +189,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1900, 981);
             this.ControlBox = false;
             this.Controls.Add(this.gb_addBrand);
             this.Controls.Add(this.dgv_editBrand);
             this.Controls.Add(this.lbl_editBrand);
+            this.MaximumSize = new System.Drawing.Size(1918, 1028);
+            this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "BrandsEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Edit Brand";

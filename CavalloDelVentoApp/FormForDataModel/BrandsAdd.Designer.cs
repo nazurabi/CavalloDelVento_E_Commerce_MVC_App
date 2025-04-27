@@ -91,7 +91,7 @@
             this.gb_addBrand.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gb_addBrand.Location = new System.Drawing.Point(12, 47);
             this.gb_addBrand.Name = "gb_addBrand";
-            this.gb_addBrand.Size = new System.Drawing.Size(982, 330);
+            this.gb_addBrand.Size = new System.Drawing.Size(1500, 330);
             this.gb_addBrand.TabIndex = 1;
             this.gb_addBrand.TabStop = false;
             this.gb_addBrand.Text = "Brands Information";
@@ -172,7 +172,7 @@
             this.dgv_addBrand.ReadOnly = true;
             this.dgv_addBrand.RowHeadersWidth = 51;
             this.dgv_addBrand.RowTemplate.Height = 24;
-            this.dgv_addBrand.Size = new System.Drawing.Size(982, 326);
+            this.dgv_addBrand.Size = new System.Drawing.Size(1500, 500);
             this.dgv_addBrand.TabIndex = 2;
             // 
             // openFileDialog1
@@ -183,11 +183,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1900, 981);
             this.ControlBox = false;
             this.Controls.Add(this.dgv_addBrand);
             this.Controls.Add(this.gb_addBrand);
             this.Controls.Add(this.lbl_addBrand);
+            this.MaximumSize = new System.Drawing.Size(1918, 1028);
+            this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "BrandsAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Add Brand";

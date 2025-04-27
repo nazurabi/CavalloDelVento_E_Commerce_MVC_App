@@ -34,8 +34,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_editBrands = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_addBrand = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_editBrand = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_editCategories = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_addCategory = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_editCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_editProducts = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_addProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_editProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_seperator = new System.Windows.Forms.ToolStripSeparator();
             this.TSMI_editSendToSubDealers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_editLevelIntegration = new System.Windows.Forms.ToolStripMenuItem();
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,13 +54,6 @@
             this.TSMI_settingMainUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_settingSubDealers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_settingDiscount = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_addBrand = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_editBrand = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_addCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_editCategory = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_addProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_editProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_seperator = new System.Windows.Forms.ToolStripSeparator();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_logOut = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_close = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +65,7 @@
             // 
             this.lbl_welcomeTitle.AutoSize = true;
             this.lbl_welcomeTitle.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_welcomeTitle.Location = new System.Drawing.Point(443, 336);
+            this.lbl_welcomeTitle.Location = new System.Drawing.Point(890, 466);
             this.lbl_welcomeTitle.Name = "lbl_welcomeTitle";
             this.lbl_welcomeTitle.Size = new System.Drawing.Size(120, 49);
             this.lbl_welcomeTitle.TabIndex = 1;
@@ -86,7 +86,7 @@
             this.otherToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1006, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1900, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -112,6 +112,20 @@
             this.TSMI_editBrands.Size = new System.Drawing.Size(251, 26);
             this.TSMI_editBrands.Text = "Brands";
             // 
+            // TSMI_addBrand
+            // 
+            this.TSMI_addBrand.Name = "TSMI_addBrand";
+            this.TSMI_addBrand.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_addBrand.Text = "Add";
+            this.TSMI_addBrand.Click += new System.EventHandler(this.TSMI_addBrand_Click);
+            // 
+            // TSMI_editBrand
+            // 
+            this.TSMI_editBrand.Name = "TSMI_editBrand";
+            this.TSMI_editBrand.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_editBrand.Text = "Edit";
+            this.TSMI_editBrand.Click += new System.EventHandler(this.TSMI_editBrand_Click);
+            // 
             // TSMI_editCategories
             // 
             this.TSMI_editCategories.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -121,6 +135,20 @@
             this.TSMI_editCategories.Size = new System.Drawing.Size(251, 26);
             this.TSMI_editCategories.Text = "Categories";
             // 
+            // TSMI_addCategory
+            // 
+            this.TSMI_addCategory.Name = "TSMI_addCategory";
+            this.TSMI_addCategory.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_addCategory.Text = "Add";
+            this.TSMI_addCategory.Click += new System.EventHandler(this.TSMI_addCategory_Click);
+            // 
+            // TSMI_editCategory
+            // 
+            this.TSMI_editCategory.Name = "TSMI_editCategory";
+            this.TSMI_editCategory.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_editCategory.Text = "Edit";
+            this.TSMI_editCategory.Click += new System.EventHandler(this.TSMI_editCategory_Click);
+            // 
             // TSMI_editProducts
             // 
             this.TSMI_editProducts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -129,6 +157,25 @@
             this.TSMI_editProducts.Name = "TSMI_editProducts";
             this.TSMI_editProducts.Size = new System.Drawing.Size(251, 26);
             this.TSMI_editProducts.Text = "Products";
+            // 
+            // TSMI_addProduct
+            // 
+            this.TSMI_addProduct.Name = "TSMI_addProduct";
+            this.TSMI_addProduct.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_addProduct.Text = "Add";
+            this.TSMI_addProduct.Click += new System.EventHandler(this.TSMI_addProduct_Click);
+            // 
+            // TSMI_editProduct
+            // 
+            this.TSMI_editProduct.Name = "TSMI_editProduct";
+            this.TSMI_editProduct.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_editProduct.Text = "Edit";
+            this.TSMI_editProduct.Click += new System.EventHandler(this.TSMI_editProduct_Click);
+            // 
+            // TSMI_seperator
+            // 
+            this.TSMI_seperator.Name = "TSMI_seperator";
+            this.TSMI_seperator.Size = new System.Drawing.Size(248, 6);
             // 
             // TSMI_editSendToSubDealers
             // 
@@ -157,21 +204,21 @@
             // TSMI_listBrands
             // 
             this.TSMI_listBrands.Name = "TSMI_listBrands";
-            this.TSMI_listBrands.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_listBrands.Size = new System.Drawing.Size(163, 26);
             this.TSMI_listBrands.Text = "Brands";
             this.TSMI_listBrands.Click += new System.EventHandler(this.TSMI_listBrands_Click);
             // 
             // TSMI_listCategories
             // 
             this.TSMI_listCategories.Name = "TSMI_listCategories";
-            this.TSMI_listCategories.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_listCategories.Size = new System.Drawing.Size(163, 26);
             this.TSMI_listCategories.Text = "Categories";
             this.TSMI_listCategories.Click += new System.EventHandler(this.TSMI_listCategories_Click);
             // 
             // TSMI_listProducts
             // 
             this.TSMI_listProducts.Name = "TSMI_listProducts";
-            this.TSMI_listProducts.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_listProducts.Size = new System.Drawing.Size(163, 26);
             this.TSMI_listProducts.Text = "Products";
             this.TSMI_listProducts.Click += new System.EventHandler(this.TSMI_listProducts_Click);
             // 
@@ -214,53 +261,6 @@
             this.TSMI_settingDiscount.Text = "Discount Rates Settings";
             this.TSMI_settingDiscount.Click += new System.EventHandler(this.TSMI_settingDiscount_Click);
             // 
-            // TSMI_addBrand
-            // 
-            this.TSMI_addBrand.Name = "TSMI_addBrand";
-            this.TSMI_addBrand.Size = new System.Drawing.Size(224, 26);
-            this.TSMI_addBrand.Text = "Add";
-            this.TSMI_addBrand.Click += new System.EventHandler(this.TSMI_addBrand_Click);
-            // 
-            // TSMI_editBrand
-            // 
-            this.TSMI_editBrand.Name = "TSMI_editBrand";
-            this.TSMI_editBrand.Size = new System.Drawing.Size(224, 26);
-            this.TSMI_editBrand.Text = "Edit";
-            this.TSMI_editBrand.Click += new System.EventHandler(this.TSMI_editBrand_Click);
-            // 
-            // TSMI_addCategory
-            // 
-            this.TSMI_addCategory.Name = "TSMI_addCategory";
-            this.TSMI_addCategory.Size = new System.Drawing.Size(224, 26);
-            this.TSMI_addCategory.Text = "Add";
-            this.TSMI_addCategory.Click += new System.EventHandler(this.TSMI_addCategory_Click);
-            // 
-            // TSMI_editCategory
-            // 
-            this.TSMI_editCategory.Name = "TSMI_editCategory";
-            this.TSMI_editCategory.Size = new System.Drawing.Size(224, 26);
-            this.TSMI_editCategory.Text = "Edit";
-            this.TSMI_editCategory.Click += new System.EventHandler(this.TSMI_editCategory_Click);
-            // 
-            // TSMI_addProduct
-            // 
-            this.TSMI_addProduct.Name = "TSMI_addProduct";
-            this.TSMI_addProduct.Size = new System.Drawing.Size(224, 26);
-            this.TSMI_addProduct.Text = "Add";
-            this.TSMI_addProduct.Click += new System.EventHandler(this.TSMI_addProduct_Click);
-            // 
-            // TSMI_editProduct
-            // 
-            this.TSMI_editProduct.Name = "TSMI_editProduct";
-            this.TSMI_editProduct.Size = new System.Drawing.Size(224, 26);
-            this.TSMI_editProduct.Text = "Edit";
-            this.TSMI_editProduct.Click += new System.EventHandler(this.TSMI_editProduct_Click);
-            // 
-            // TSMI_seperator
-            // 
-            this.TSMI_seperator.Name = "TSMI_seperator";
-            this.TSMI_seperator.Size = new System.Drawing.Size(248, 6);
-            // 
             // otherToolStripMenuItem
             // 
             this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -274,21 +274,21 @@
             // TSMI_logOut
             // 
             this.TSMI_logOut.Name = "TSMI_logOut";
-            this.TSMI_logOut.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_logOut.Size = new System.Drawing.Size(145, 26);
             this.TSMI_logOut.Text = "Log Out";
             this.TSMI_logOut.Click += new System.EventHandler(this.TSMI_logOut_Click);
             // 
             // TSMI_close
             // 
             this.TSMI_close.Name = "TSMI_close";
-            this.TSMI_close.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_close.Size = new System.Drawing.Size(145, 26);
             this.TSMI_close.Text = "Close";
             this.TSMI_close.Click += new System.EventHandler(this.TSMI_close_Click);
             // 
             // TSMI_info
             // 
             this.TSMI_info.Name = "TSMI_info";
-            this.TSMI_info.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_info.Size = new System.Drawing.Size(145, 26);
             this.TSMI_info.Text = "Info";
             this.TSMI_info.Click += new System.EventHandler(this.TSMI_info_Click);
             // 
@@ -296,14 +296,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1900, 981);
             this.Controls.Add(this.lbl_welcomeTitle);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1024, 768);
-            this.MinimumSize = new System.Drawing.Size(1024, 768);
+            this.MaximumSize = new System.Drawing.Size(1918, 1028);
+            this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataModelWithADO
 {
-    internal class Categories
+    public class Categories
     {
         public int categoryID { get; set; }
         public int brandIDFK { get; set; }

@@ -41,7 +41,7 @@ namespace FormForDataModel
         private void tmr_welcomeTitle_Tick(object sender, EventArgs e)
         {
             counter++;
-            if (counter == 5)
+            if (counter == 3)
             {
                 lbl_welcomeTitle.Visible = false;
                 tmr_welcomeTitle.Stop();

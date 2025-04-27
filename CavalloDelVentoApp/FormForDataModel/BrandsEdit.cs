@@ -37,28 +37,9 @@ namespace FormForDataModel
 
             #region filePath active here
 
-            DataTable dgvVisualTable = new DataTable();
-            dgvVisualTable.Columns.Add("S/N", typeof(string));
-            dgvVisualTable.Columns.Add("Brand ID", typeof(int));
-            dgvVisualTable.Columns.Add("Brand Name", typeof(string));
-            dgvVisualTable.Columns.Add("Is Brand Active For Sale", typeof(string));
-            dgvVisualTable.Columns.Add("Brand Image", typeof(Image));
-            short sequenceNumber = 0;
-            foreach (DataRow row in dt.Rows)
-            {
-                sequenceNumber++;
-                string returnedBrandID = row["BrandID"].ToString();
-                string returnedBrandName = row["Brand Name"].ToString();
-                string returnedIsActiveForSale = row["Is Brand Active For Sale"].ToString();
-                string returnedImage = row["Brand Image"].ToString();
-                Image img = null;
-                if (File.Exists(returnedImage))
-                {
-                    img = Image.FromFile(returnedImage);
-                }
-                dgvVisualTable.Rows.Add(sequenceNumber, returnedBrandID, returnedBrandName, returnedIsActiveForSale, img);
-            }
-            dgv_editBrand.DataSource = dgvVisualTable;
+            dgv_editBrand.DataSource = dt;
+            dgv_editBrand.Columns["BrandID"].Visible = false;
+            dgv_editBrand.Columns["Brand Image Name"].Visible = false;
 
             foreach (DataGridViewColumn column in dgv_editBrand.Columns)
             {
@@ -184,82 +165,68 @@ namespace FormForDataModel
                     }
                     else
                     {
-                        MessageBox.Show("Brand name too long, it can be max 100 character!");
+                        MessageBox.Show("Brand name too long, it can be max 100 character!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    DialogResult choose = MessageBox.Show("Brand name has already been entered. Are you sure you want to continue?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (choose == DialogResult.Yes)
+                    if (!string.IsNullOrEmpty(imageName))
                     {
-                        if (tb_brandName.Text.Length < 100)
-                        {
-                            if (!string.IsNullOrEmpty(imageName))
-                            {
-                                brandName = tb_brandName.Text.ToUpper();
-                                isActive = cb_brandActive.Checked;
-                                dm.editBrand(brandID, brandName, isActive, imageName);
-                                destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageName);
-                                destinationImagePath = Path.GetFullPath(destinationImagePath);
-                                File.Copy(selectedImagePath, destinationImagePath, true);
-                                tb_brandName.Text = "";
-                                cb_brandActive.Checked = false;
-                                imageName = "";
-                                pb_brandImage.ImageLocation = "";
-                                BrandsEditLoad();
-                                //dgv_editBrand.ClearSelection();
-                                //dgv_editBrand.CurrentCell = null;
-                                tb_brandName.Enabled = false;
-                                cb_brandActive.Enabled = false;
-                                btn_clear.Enabled = false;
-                                btn_selectImage.Enabled = false;
-                                btn_save.Enabled = false;
-                                // Since the image has changed, the old image was deleted with this line of code;
-                                //string oldImage = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageForEdit);
-                                //oldImage = Path.GetFullPath(oldImage);
-                                //if (File.Exists(oldImage))
-                                //{
-                                //    try
-                                //    {
-                                //        File.Delete(oldImage);
-                                //        MessageBox.Show("Eski görsel başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                //    }
-                                //    catch (Exception ex)
-                                //    {
-                                //        MessageBox.Show($"Görsel silinirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                //    }
-                                //}
-                            }
-                            else
-                            {
-                                brandName = tb_brandName.Text.ToUpper();
-                                isActive = cb_brandActive.Checked;
-                                imageName = imageForEdit;
-                                dm.editBrand(brandID, brandName, isActive, imageName);
-                                tb_brandName.Text = "";
-                                cb_brandActive.Checked = false;
-                                imageName = "";
-                                pb_brandImage.ImageLocation = "";
-                                BrandsEditLoad();
-                                //dgv_editBrand.ClearSelection();
-                                //dgv_editBrand.CurrentCell = null;
-                                tb_brandName.Enabled = false;
-                                cb_brandActive.Enabled = false;
-                                btn_clear.Enabled = false;
-                                btn_selectImage.Enabled = false;
-                                btn_save.Enabled = false;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Brand name too long, it can be max 100 character!");
-                        }
+                        isActive = cb_brandActive.Checked;
+                        dm.editBrand(brandID, isActive, imageName);
+                        destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageName);
+                        destinationImagePath = Path.GetFullPath(destinationImagePath);
+                        File.Copy(selectedImagePath, destinationImagePath, true);
+                        tb_brandName.Text = "";
+                        cb_brandActive.Checked = false;
+                        imageName = "";
+                        pb_brandImage.ImageLocation = "";
+                        BrandsEditLoad();
+                        //dgv_editBrand.ClearSelection();
+                        //dgv_editBrand.CurrentCell = null;
+                        tb_brandName.Enabled = false;
+                        cb_brandActive.Enabled = false;
+                        btn_clear.Enabled = false;
+                        btn_selectImage.Enabled = false;
+                        btn_save.Enabled = false;
+                        // Since the image has changed, the old image was deleted with this line of code;
+                        //string oldImage = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageForEdit);
+                        //if (File.Exists(oldImage))
+                        //{
+                        //    try
+                        //    {
+                        //        File.Delete(oldImage);
+                        //        MessageBox.Show("Eski görsel başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+                        //        MessageBox.Show($"Görsel silinirken hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //    }
+                        //}
+                    }
+                    else
+                    {
+                        isActive = cb_brandActive.Checked;
+                        imageName = imageForEdit;
+                        dm.editBrand(brandID, isActive, imageName);
+                        tb_brandName.Text = "";
+                        cb_brandActive.Checked = false;
+                        imageName = "";
+                        pb_brandImage.ImageLocation = "";
+                        BrandsEditLoad();
+                        //dgv_editBrand.ClearSelection();
+                        //dgv_editBrand.CurrentCell = null;
+                        tb_brandName.Enabled = false;
+                        cb_brandActive.Enabled = false;
+                        btn_clear.Enabled = false;
+                        btn_selectImage.Enabled = false;
+                        btn_save.Enabled = false;
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Brand name cannot empty!");
+                MessageBox.Show("Brand name cannot empty!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void dgv_editBrand_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -273,8 +240,8 @@ namespace FormForDataModel
             DataGridViewRow selectedRow = dgv_editBrand.Rows[e.RowIndex];
             tb_brandName.Text = selectedRow.Cells["Brand Name"].Value.ToString();
             cb_brandActive.Checked = selectedRow.Cells["Is Brand Active For Sale"].Value.ToString() == "Yes" ? true : false;
-            imageForEdit = dm.listImageForEditBrands(selectedRow.Cells["Brand ID"].Value.ToString());
-            brandID = selectedRow.Cells["Brand ID"].Value.ToString();
+            imageForEdit = dm.listImageForEditBrands(selectedRow.Cells["BrandID"].Value.ToString());
+            brandID = selectedRow.Cells["BrandID"].Value.ToString();
             pb_brandImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageForEdit);
             pb_brandImage.SizeMode = PictureBoxSizeMode.Zoom;
         }

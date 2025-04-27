@@ -68,37 +68,10 @@ namespace FormForDataModel
 
             #region filePath active here
 
-            DataTable dgvVisualTable = new DataTable();
-            dgvVisualTable.Columns.Add("S/N", typeof(string));
-            dgvVisualTable.Columns.Add("Brand Name", typeof(string));
-            dgvVisualTable.Columns.Add("Is Brand Active For Sale", typeof(string));
-            dgvVisualTable.Columns.Add("Brand Image", typeof(Image));
-            short sequenceNumber = 0;
-            foreach (DataRow row in dt.Rows)
-            {
-                sequenceNumber++;
-                string returnedBrandName = row["Brand Name"].ToString();
-                string returnedIsActiveForSale = row["Is Brand Active For Sale"].ToString();
-                string returnedImage = row["Brand Image"].ToString();
-                Image img = null;
-                if (File.Exists(returnedImage))
-                {
-                    img = Image.FromFile(returnedImage);
-                }
-                dgvVisualTable.Rows.Add(sequenceNumber, returnedBrandName, returnedIsActiveForSale, img);
-            }
-            dgv_addBrand.DataSource = dgvVisualTable;
+            dgv_addBrand.DataSource = dt;
             dgv_addBrand.RowHeadersVisible = false;
-
-            //foreach (DataGridViewRow row in dgv_addBrand.Rows)
-            //{
-            //    if (dgv_addBrand.Columns["Brand Image"] is DataGridViewImageColumn imageCol)
-            //    {
-            //        imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            //        imageCol.Width = 100;
-            //        dgv_addBrand.RowTemplate.Height = 100;
-            //    }
-            //}
+            dgv_addBrand.Columns["BrandID"].Visible=false;
+            dgv_addBrand.Columns["Brand Image Name"].Visible=false;
 
             foreach (DataGridViewColumn column in dgv_addBrand.Columns)
             {
@@ -170,17 +143,17 @@ namespace FormForDataModel
                     }
                     else
                     {
-                        MessageBox.Show("Brand name too long, it can be max 100 character!");
+                        MessageBox.Show("Brand name too long, it can be max 100 character!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Brand name has already been entered, please check your information!");
+                    MessageBox.Show("Brand name has already been entered, please check your information!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("Brand name cannot empty!");
+                MessageBox.Show("Brand name cannot empty!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

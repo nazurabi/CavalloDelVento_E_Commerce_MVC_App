@@ -70,30 +70,12 @@ namespace FormForDataModel
         {
             DataTable dt = dm.categoryDataBind();
             #region filePath active here
-
-            DataTable dgvVisualTable = new DataTable();
-            dgvVisualTable.Columns.Add("S/N", typeof(string));
-            dgvVisualTable.Columns.Add("Brand Name", typeof(string));
-            dgvVisualTable.Columns.Add("Category Name", typeof(string));
-            dgvVisualTable.Columns.Add("Is Category Active For Sale", typeof(string));
-            dgvVisualTable.Columns.Add("Category Image", typeof(Image));
-            short sequenceNumber = 0;
-            foreach (DataRow row in dt.Rows)
-            {
-                sequenceNumber++;
-                string returnedBrandName = row["Brand Name"].ToString();
-                string returnedCategoryName = row["Category Name"].ToString();
-                string returnedIsActiveForSale = row["Is Category Active For Sale"].ToString();
-                string returnedImage = row["Category Image"].ToString();
-                Image img = null;
-                if (File.Exists(returnedImage))
-                {
-                    img = Image.FromFile(returnedImage);
-                }
-                dgvVisualTable.Rows.Add(sequenceNumber, returnedBrandName, returnedCategoryName, returnedIsActiveForSale, img);
-            }
-            dgv_addCategory.DataSource = dgvVisualTable;
+            
+            dgv_addCategory.DataSource = dt;
             dgv_addCategory.RowHeadersVisible = false;
+            dgv_addCategory.Columns["BrandIDFK"].Visible = false;
+            dgv_addCategory.Columns["CategoryID"].Visible = false;
+            dgv_addCategory.Columns["Category Image Name"].Visible = false;
 
             foreach (DataGridViewColumn column in dgv_addCategory.Columns)
             {
@@ -144,7 +126,7 @@ namespace FormForDataModel
             string brandIDFK = "";
             string categoryName = "";
             string description = "";
-            bool isDeleted = false; // In order for the brand to be active, its deleted status must be false.
+            bool isDeleted = false; // In order for the categories to be active, its deleted status must be false.
             bool isActive;
             if (selectedBrandID != -1)
             {
@@ -189,22 +171,22 @@ namespace FormForDataModel
                         }
                         else
                         {
-                            MessageBox.Show("Category name too long, it can be max 50 character!");
+                            MessageBox.Show("Category name too long, it can be max 50 character!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Category name has already been entered, please check your information!");
+                        MessageBox.Show("Category name has already been entered, please check your information!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Category name cannot empty!");
+                    MessageBox.Show("Category name cannot empty!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("You cannot select Brand, please select Brand!");
+                MessageBox.Show("You cannot select Brand, please select Brand!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
             }
 
         }

@@ -67,6 +67,7 @@
             // cb_categoryActive
             // 
             this.cb_categoryActive.AutoSize = true;
+            this.cb_categoryActive.Enabled = false;
             this.cb_categoryActive.Location = new System.Drawing.Point(319, 149);
             this.cb_categoryActive.Name = "cb_categoryActive";
             this.cb_categoryActive.Size = new System.Drawing.Size(18, 17);
@@ -91,17 +92,18 @@
             this.gb_addCategory.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gb_addCategory.Location = new System.Drawing.Point(12, 47);
             this.gb_addCategory.Name = "gb_addCategory";
-            this.gb_addCategory.Size = new System.Drawing.Size(982, 330);
+            this.gb_addCategory.Size = new System.Drawing.Size(1500, 330);
             this.gb_addCategory.TabIndex = 5;
             this.gb_addCategory.TabStop = false;
             this.gb_addCategory.Text = "Categories Information";
             // 
             // cbb_brandName
             // 
+            this.cbb_brandName.Enabled = false;
             this.cbb_brandName.FormattingEnabled = true;
             this.cbb_brandName.Location = new System.Drawing.Point(35, 89);
             this.cbb_brandName.Name = "cbb_brandName";
-            this.cbb_brandName.Size = new System.Drawing.Size(302, 36);
+            this.cbb_brandName.Size = new System.Drawing.Size(326, 36);
             this.cbb_brandName.TabIndex = 12;
             this.cbb_brandName.Text = "---Choose---";
             this.cbb_brandName.SelectedIndexChanged += new System.EventHandler(this.cbb_brandName_SelectedIndexChanged);
@@ -120,7 +122,7 @@
             // 
             this.pb_categoryImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pb_categoryImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pb_categoryImage.Location = new System.Drawing.Point(717, 76);
+            this.pb_categoryImage.Location = new System.Drawing.Point(732, 76);
             this.pb_categoryImage.Name = "pb_categoryImage";
             this.pb_categoryImage.Size = new System.Drawing.Size(230, 230);
             this.pb_categoryImage.TabIndex = 4;
@@ -128,9 +130,10 @@
             // 
             // btn_selectImage
             // 
-            this.btn_selectImage.Location = new System.Drawing.Point(197, 216);
+            this.btn_selectImage.Enabled = false;
+            this.btn_selectImage.Location = new System.Drawing.Point(199, 216);
             this.btn_selectImage.Name = "btn_selectImage";
-            this.btn_selectImage.Size = new System.Drawing.Size(140, 42);
+            this.btn_selectImage.Size = new System.Drawing.Size(162, 42);
             this.btn_selectImage.TabIndex = 6;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
@@ -138,9 +141,10 @@
             // 
             // btn_clear
             // 
+            this.btn_clear.Enabled = false;
             this.btn_clear.Location = new System.Drawing.Point(35, 216);
             this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(156, 42);
+            this.btn_clear.Size = new System.Drawing.Size(162, 42);
             this.btn_clear.TabIndex = 8;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
@@ -148,9 +152,10 @@
             // 
             // btn_save
             // 
+            this.btn_save.Enabled = false;
             this.btn_save.Location = new System.Drawing.Point(35, 264);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(302, 42);
+            this.btn_save.Size = new System.Drawing.Size(326, 42);
             this.btn_save.TabIndex = 9;
             this.btn_save.Text = "Edit Data";
             this.btn_save.UseVisualStyleBackColor = true;
@@ -158,7 +163,8 @@
             // 
             // tb_description
             // 
-            this.tb_description.Location = new System.Drawing.Point(352, 134);
+            this.tb_description.Enabled = false;
+            this.tb_description.Location = new System.Drawing.Point(367, 134);
             this.tb_description.Multiline = true;
             this.tb_description.Name = "tb_description";
             this.tb_description.Size = new System.Drawing.Size(350, 172);
@@ -166,7 +172,8 @@
             // 
             // tb_categoryName
             // 
-            this.tb_categoryName.Location = new System.Drawing.Point(352, 89);
+            this.tb_categoryName.Enabled = false;
+            this.tb_categoryName.Location = new System.Drawing.Point(367, 89);
             this.tb_categoryName.Name = "tb_categoryName";
             this.tb_categoryName.Size = new System.Drawing.Size(350, 36);
             this.tb_categoryName.TabIndex = 3;
@@ -175,7 +182,7 @@
             // 
             this.lbl_categoryImage.AutoSize = true;
             this.lbl_categoryImage.Font = new System.Drawing.Font("Calibri", 13.8F);
-            this.lbl_categoryImage.Location = new System.Drawing.Point(712, 45);
+            this.lbl_categoryImage.Location = new System.Drawing.Point(727, 45);
             this.lbl_categoryImage.Name = "lbl_categoryImage";
             this.lbl_categoryImage.Size = new System.Drawing.Size(266, 28);
             this.lbl_categoryImage.TabIndex = 7;
@@ -185,7 +192,7 @@
             // 
             this.lbl_categoryName.AutoSize = true;
             this.lbl_categoryName.Font = new System.Drawing.Font("Calibri", 13.8F);
-            this.lbl_categoryName.Location = new System.Drawing.Point(347, 45);
+            this.lbl_categoryName.Location = new System.Drawing.Point(362, 45);
             this.lbl_categoryName.Name = "lbl_categoryName";
             this.lbl_categoryName.Size = new System.Drawing.Size(155, 28);
             this.lbl_categoryName.TabIndex = 2;
@@ -211,7 +218,7 @@
             this.dgv_editCategory.ReadOnly = true;
             this.dgv_editCategory.RowHeadersWidth = 51;
             this.dgv_editCategory.RowTemplate.Height = 24;
-            this.dgv_editCategory.Size = new System.Drawing.Size(982, 326);
+            this.dgv_editCategory.Size = new System.Drawing.Size(1500, 500);
             this.dgv_editCategory.TabIndex = 6;
             this.dgv_editCategory.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editCategory_RowHeaderMouseClick);
             // 
@@ -219,11 +226,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1900, 981);
             this.ControlBox = false;
             this.Controls.Add(this.gb_addCategory);
             this.Controls.Add(this.dgv_editCategory);
             this.Controls.Add(this.lbl_editCategories);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximumSize = new System.Drawing.Size(1918, 1028);
+            this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "CategoriesEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Edit Categories";
