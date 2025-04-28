@@ -40,7 +40,6 @@ namespace DataModelWithADO
             {
                 con.Close();
             }
-
         }
 
         #region Brand Applications
@@ -256,6 +255,24 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
+
+        public bool isBrandDelete(string brandIDForCheck)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT IsDeleted FROM Brands WHERE BrandID=@brandID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@brandID", brandIDForCheck);
+                con.Open();
+                bool isDeleted = Convert.ToBoolean(cmd.ExecuteScalar());
+                return isDeleted;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
 
         #region Categories Applications
@@ -289,26 +306,27 @@ namespace DataModelWithADO
 
             foreach (DataRow row in temporaryDataTable.Rows)
             {
-                sequenceNumber++;
-                string brandIDFK = row["BrandIDFK"].ToString();
-                string categoryID = row["CategoryID"].ToString();
-                string brandName = getBrandNameForCategories(brandIDFK);
-                string categoryName = row["CategoryName"].ToString();
-                string description = row["Description"].ToString();
-                bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
-                bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
-                string imageFile = row["Image"].ToString();
-                string fullPath = Path.Combine(imagePath, imageFile);
-                System.Drawing.Image img = null;
-                if (File.Exists(fullPath))
+                if (!isBrandDelete(row["BrandIDFK"].ToString()))
                 {
-                    img = System.Drawing.Image.FromFile(fullPath);
+                    sequenceNumber++;
+                    string brandIDFK = row["BrandIDFK"].ToString();
+                    string categoryID = row["CategoryID"].ToString();
+                    string brandName = getBrandNameForCategories(brandIDFK);
+                    string categoryName = row["CategoryName"].ToString();
+                    string description = row["Description"].ToString();
+                    bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
+                    bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                    string imageFile = row["Image"].ToString();
+                    string fullPath = Path.Combine(imagePath, imageFile);
+                    System.Drawing.Image img = null;
+                    if (File.Exists(fullPath))
+                    {
+                        img = System.Drawing.Image.FromFile(fullPath);
+                    }
+                    returnToForm.Rows.Add(sequenceNumber, brandIDFK, categoryID, brandName, categoryName, description, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
                 }
-                returnToForm.Rows.Add(sequenceNumber, brandIDFK, categoryID, brandName, categoryName, description, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
             }
-
             return returnToForm;
-
         }
 
         public void addCategory(string brandIDFK, string categoryName, bool isDeleted, bool isActive, string description, string categoryImage)
@@ -434,6 +452,7 @@ namespace DataModelWithADO
             }
         }
 
+
         public List<Brands> getBrandsForCategories()
         {
             List<Brands> brands = new List<Brands>();
@@ -448,7 +467,11 @@ namespace DataModelWithADO
                     Brands brand = new Brands();
                     brand.brandID = reader.GetInt32(0);
                     brand.brandName = reader.GetString(1);
-                    brands.Add(brand);
+                    brand.isDeleted = reader.GetBoolean(3);
+                    if (!brand.isDeleted)
+                    {
+                        brands.Add(brand);
+                    }
                 }
                 return brands;
             }
@@ -468,6 +491,22 @@ namespace DataModelWithADO
                 con.Open();
                 string imageName = Convert.ToString(cmd.ExecuteScalar());
                 return imageName;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public bool isCategoryDelete(string categoryIDForCheck)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT IsDeleted FROM Categories WHERE CategoryID=@categoryID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@categoryID", categoryIDForCheck);
+                con.Open();
+                bool isDeleted = Convert.ToBoolean(cmd.ExecuteScalar());
+                return isDeleted;
             }
             finally
             {
@@ -517,33 +556,39 @@ namespace DataModelWithADO
 
             foreach (DataRow row in temporaryDataTable.Rows)
             {
-                sequenceNumber++;
-                string productID = row["ProductID"].ToString();
-                string brandIDFK = row["BrandIDFK"].ToString();
-                string brandName = getBrandNameForProducts(brandIDFK);
-                string categoryIDFK = row["CategoryIDFK"].ToString();
-                string categoryName = getCategoryNameForProducts(categoryIDFK);
-                string productName = row["ProductName"].ToString();
-                string description = row["Description"].ToString();
-                string quantityPerUnit = row["QuantityPerUnit"].ToString();
-                decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
-                string unitsInStock = row["UnitsInStock"].ToString();
-                string unitsOnOrder = row["UnitsOnOrder"].ToString();
-                string reorderLevel = row["ReorderLevel"].ToString();
-                bool discontinued = Convert.ToBoolean(row["Discontinued"]);
-                bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
-                bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
-                string imageFile = row["Image"].ToString();
-                string fullPath = Path.Combine(imagePath, imageFile);
-
-                System.Drawing.Image img = null;
-                if (File.Exists(fullPath))
+                if (!isBrandDelete(row["BrandIDFK"].ToString()))
                 {
-                    img = System.Drawing.Image.FromFile(fullPath);
+                    if (!isCategoryDelete(row["CategoryIDFK"].ToString()))
+                    {
+                        sequenceNumber++;
+                        string productID = row["ProductID"].ToString();
+                        string brandIDFK = row["BrandIDFK"].ToString();
+                        string brandName = getBrandNameForProducts(brandIDFK);
+                        string categoryIDFK = row["CategoryIDFK"].ToString();
+                        string categoryName = getCategoryNameForProducts(categoryIDFK);
+                        string productName = row["ProductName"].ToString();
+                        string description = row["Description"].ToString();
+                        string quantityPerUnit = row["QuantityPerUnit"].ToString();
+                        decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
+                        string unitsInStock = row["UnitsInStock"].ToString();
+                        string unitsOnOrder = row["UnitsOnOrder"].ToString();
+                        string reorderLevel = row["ReorderLevel"].ToString();
+                        bool discontinued = Convert.ToBoolean(row["Discontinued"]);
+                        bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
+                        bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                        string imageFile = row["Image"].ToString();
+                        string fullPath = Path.Combine(imagePath, imageFile);
 
+                        System.Drawing.Image img = null;
+                        if (File.Exists(fullPath))
+                        {
+                            img = System.Drawing.Image.FromFile(fullPath);
+
+                        }
+
+                        returnToForm.Rows.Add(sequenceNumber, productID, brandIDFK, brandName, categoryIDFK, categoryName, productName, description, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued ? "Yes" : "No", isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
+                    }
                 }
-
-                returnToForm.Rows.Add(sequenceNumber, productID, brandIDFK, brandName, categoryIDFK, categoryName, productName, description, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued ? "Yes" : "No", isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
             }
             return returnToForm;
 
@@ -711,21 +756,26 @@ namespace DataModelWithADO
             }
         }
 
-        public List<Categories> getCategoriesForProducts()
+        public List<Categories> getCategoriesForProducts(string brandIDFK)
         {
             List<Categories> categories = new List<Categories>();
             try
             {
-                cmd.CommandText = "SELECT * FROM Categories";
+                cmd.CommandText = "SELECT CategoryID, CategoryName, IsDeleted FROM Categories WHERE BrandIDFK=@brandIDFK";
                 cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     Categories category = new Categories();
                     category.categoryID = reader.GetInt32(0);
-                    category.categoryName = reader.GetString(2);
-                    categories.Add(category);
+                    category.categoryName = reader.GetString(1);
+                    category.isDeleted = reader.GetBoolean(2);
+                    if (!category.isDeleted)
+                    {
+                        categories.Add(category);
+                    }
                 }
                 return categories;
             }
@@ -749,7 +799,11 @@ namespace DataModelWithADO
                     Brands brand = new Brands();
                     brand.brandID = reader.GetInt32(0);
                     brand.brandName = reader.GetString(1);
-                    brands.Add(brand);
+                    brand.isDeleted = reader.GetBoolean(3);
+                    if (!brand.isDeleted)
+                    {
+                        brands.Add(brand);
+                    }
                 }
                 return brands;
             }
@@ -758,31 +812,6 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
-
-        //public List<Brands> getBrandsForProducts()
-        //{
-        //    List<Brands> brands = new List<Brands>();
-        //    try
-        //    {
-        //        cmd.CommandText = "SELECT * FROM Brands";
-        //        cmd.Parameters.Clear();
-        //        con.Open();
-        //        SqlDataReader reader = cmd.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            Brands brand = new Brands();
-        //            brand.brandID = reader.GetInt32(0);
-        //            brand.brandName = reader.GetString(1);
-        //            brands.Add(brand);
-        //        }
-        //        return brands;
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-
-        //}
 
         public string listImageForEditProducts(string productIDForCheck)
         {
@@ -802,5 +831,187 @@ namespace DataModelWithADO
         }
 
         #endregion
+
+        #region Discount Rates
+
+        public DataTable discountDataBind()
+        {
+
+            cmd.CommandText = "SELECT * FROM DiscountRatesSettings";
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+            commandBuilder.DataAdapter = da;
+            da.SelectCommand = cmd;
+
+            DataTable temporaryDataTable = new DataTable();
+            da.Fill(temporaryDataTable);
+
+            DataTable returnToForm = new DataTable();
+            returnToForm.Columns.Add("S/N", typeof(string));
+            returnToForm.Columns.Add("DiscountID", typeof(int));
+            returnToForm.Columns.Add("Discount Type", typeof(string));
+            returnToForm.Columns.Add("Discount Amount", typeof(string));
+            returnToForm.Columns.Add("Discount Image", typeof(System.Drawing.Image));
+            short sequenceNumber = 0;
+
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages");
+            imagePath = Path.GetFullPath(imagePath);
+
+            foreach (DataRow row in temporaryDataTable.Rows)
+            {
+                sequenceNumber++;
+                string discountID = row["DiscountID"].ToString();
+                string discountType = row["DiscountType"].ToString();
+                string discountAmount = row["DiscountAmount"].ToString();
+                string imageFile;
+                if("Gold"== row["DiscountType"].ToString())
+                {
+                    imageFile = "Gold.png";
+                }
+                else if("Silver"== row["DiscountType"].ToString())
+                {
+                    imageFile = "Silver.png";
+                }
+                else
+                {
+                    imageFile = "Bronze.png";
+                }
+          
+
+                string fullPath = Path.Combine(imagePath, imageFile);
+                System.Drawing.Image img = null;
+                if (File.Exists(fullPath))
+                {
+                    img = System.Drawing.Image.FromFile(fullPath);
+                }
+
+                returnToForm.Rows.Add(sequenceNumber, discountID, discountType, discountAmount, img);
+            }
+
+            return returnToForm;
+        }
+
+        public void editDiscountRates(string discountID, byte discountRates)
+        {
+            cmd.CommandText = "UPDATE DiscountRatesSettings SET DiscountAmount=@discountAmount WHERE DiscountID=@discountID";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@discountID", discountID);
+            cmd.Parameters.AddWithValue("@discountAmount", discountRates);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Discount amount edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit discount amount, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+        #endregion
+
+        //#region SubDealers
+        //public DataTable brandDataBind()
+        //{
+           
+        //    cmd.CommandText = "SELECT * FROM Brands";
+        //    SqlDataAdapter da = new SqlDataAdapter();
+        //    SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+        //    commandBuilder.DataAdapter = da;
+        //    da.SelectCommand = cmd;
+
+        //    DataTable temporaryDataTable = new DataTable();
+        //    da.Fill(temporaryDataTable);
+
+        //    DataTable returnToForm = new DataTable();
+        //    returnToForm.Columns.Add("S/N", typeof(string));
+        //    returnToForm.Columns.Add("BrandID", typeof(int));
+        //    returnToForm.Columns.Add("Brand Name", typeof(string));
+        //    returnToForm.Columns.Add("Is Brand Active For Sale", typeof(string));
+        //    returnToForm.Columns.Add("Is Deleted", typeof(string));
+        //    returnToForm.Columns.Add("Brand Image Name", typeof(string));
+        //    returnToForm.Columns.Add("Brand Image", typeof(System.Drawing.Image));
+        //    short sequenceNumber = 0;
+
+        //    string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages");
+        //    imagePath = Path.GetFullPath(imagePath);
+
+        //    foreach (DataRow row in temporaryDataTable.Rows)
+        //    {
+        //        sequenceNumber++;
+        //        string brandID = row["BrandID"].ToString();
+        //        string brandName = row["BrandName"].ToString();
+        //        bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
+        //        bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
+        //        string imageFile = row["Image"].ToString();
+        //        string fullPath = Path.Combine(imagePath, imageFile);
+        //        System.Drawing.Image img = null;
+        //        if (File.Exists(fullPath))
+        //        {
+        //            img = System.Drawing.Image.FromFile(fullPath);
+        //        }
+
+        //        returnToForm.Rows.Add(sequenceNumber, brandID, brandName, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
+        //    }
+
+        //    return returnToForm;
+        //}
+
+        ////public void addBrand(string brandName, bool isDeleted, bool isActive, string brandImage)
+        ////{
+        ////    cmd.CommandText = "INSERT INTO Brands(BrandName, Image, IsDeleted, IsActive) VALUES (@brandName, @brandImage, @isDeleted, @isActive)";
+        ////    cmd.Parameters.Clear();
+        ////    cmd.Parameters.AddWithValue("@brandName", brandName);
+        ////    cmd.Parameters.AddWithValue("@brandImage", brandImage);
+        ////    cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+        ////    cmd.Parameters.AddWithValue("@isActive", isActive);
+        ////    try
+        ////    {
+        ////        con.Open();
+        ////        cmd.ExecuteNonQuery();
+        ////        MessageBox.Show("Brand added successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        ////    }
+        ////    catch (Exception)
+        ////    {
+        ////        MessageBox.Show("Unable to add brand, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        ////    }
+        ////    finally
+        ////    {
+        ////        con.Close();
+        ////    }
+        ////}
+
+        ////public void editBrand(string brandID, string brandName, bool isActive, bool isDeleted, string brandImage)
+        ////{
+        ////    cmd.CommandText = "UPDATE Brands SET BrandName=@brandName, IsActive=@isActive, IsDeleted=@isDeleted, Image=@brandImage WHERE BrandID=@brandID";
+        ////    cmd.Parameters.Clear();
+        ////    cmd.Parameters.AddWithValue("@brandID", brandID);
+        ////    cmd.Parameters.AddWithValue("@brandName", brandName);
+        ////    cmd.Parameters.AddWithValue("@isActive", isActive);
+        ////    cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+        ////    cmd.Parameters.AddWithValue("@brandImage", brandImage);
+
+        ////    try
+        ////    {
+        ////        con.Open();
+        ////        cmd.ExecuteNonQuery();
+        ////        MessageBox.Show("Brand edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        ////    }
+        ////    catch (Exception)
+        ////    {
+        ////        MessageBox.Show("Unable to edit brand, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        ////    }
+        ////    finally
+        ////    {
+        ////        con.Close();
+        ////    }
+        ////}
+
+        //#endregion
     }
 }

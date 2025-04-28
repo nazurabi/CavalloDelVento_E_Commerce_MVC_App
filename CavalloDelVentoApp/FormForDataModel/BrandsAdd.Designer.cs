@@ -174,6 +174,7 @@
             this.dgv_addBrand.RowTemplate.Height = 24;
             this.dgv_addBrand.Size = new System.Drawing.Size(1500, 500);
             this.dgv_addBrand.TabIndex = 2;
+            this.dgv_addBrand.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_addBrand_DataBindingComplete);
             // 
             // openFileDialog1
             // 

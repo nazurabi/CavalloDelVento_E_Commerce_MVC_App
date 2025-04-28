@@ -53,9 +53,9 @@
             this.cbb_categoryName = new System.Windows.Forms.ComboBox();
             this.nud_products = new System.Windows.Forms.NumericUpDown();
             this.gb_addProduct = new System.Windows.Forms.GroupBox();
-            this.dgv_addProduct = new System.Windows.Forms.DataGridView();
-            this.lbl_reorderLevel = new System.Windows.Forms.Label();
             this.tb_reorderLevel = new System.Windows.Forms.TextBox();
+            this.lbl_reorderLevel = new System.Windows.Forms.Label();
+            this.dgv_addProduct = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pb_productImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_products)).BeginInit();
             this.gb_addProduct.SuspendLayout();
@@ -313,23 +313,17 @@
             this.gb_addProduct.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gb_addProduct.Location = new System.Drawing.Point(12, 47);
             this.gb_addProduct.Name = "gb_addProduct";
-            this.gb_addProduct.Size = new System.Drawing.Size(1500, 397);
+            this.gb_addProduct.Size = new System.Drawing.Size(1863, 397);
             this.gb_addProduct.TabIndex = 5;
             this.gb_addProduct.TabStop = false;
             this.gb_addProduct.Text = "Products Information";
             // 
-            // dgv_addProduct
+            // tb_reorderLevel
             // 
-            this.dgv_addProduct.AllowUserToAddRows = false;
-            this.dgv_addProduct.AllowUserToDeleteRows = false;
-            this.dgv_addProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_addProduct.Location = new System.Drawing.Point(12, 450);
-            this.dgv_addProduct.Name = "dgv_addProduct";
-            this.dgv_addProduct.ReadOnly = true;
-            this.dgv_addProduct.RowHeadersWidth = 51;
-            this.dgv_addProduct.RowTemplate.Height = 24;
-            this.dgv_addProduct.Size = new System.Drawing.Size(1500, 350);
-            this.dgv_addProduct.TabIndex = 6;
+            this.tb_reorderLevel.Location = new System.Drawing.Point(387, 304);
+            this.tb_reorderLevel.Name = "tb_reorderLevel";
+            this.tb_reorderLevel.Size = new System.Drawing.Size(326, 36);
+            this.tb_reorderLevel.TabIndex = 3;
             // 
             // lbl_reorderLevel
             // 
@@ -341,12 +335,19 @@
             this.lbl_reorderLevel.TabIndex = 2;
             this.lbl_reorderLevel.Text = "Reorder Level";
             // 
-            // tb_reorderLevel
+            // dgv_addProduct
             // 
-            this.tb_reorderLevel.Location = new System.Drawing.Point(387, 304);
-            this.tb_reorderLevel.Name = "tb_reorderLevel";
-            this.tb_reorderLevel.Size = new System.Drawing.Size(326, 36);
-            this.tb_reorderLevel.TabIndex = 3;
+            this.dgv_addProduct.AllowUserToAddRows = false;
+            this.dgv_addProduct.AllowUserToDeleteRows = false;
+            this.dgv_addProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_addProduct.Location = new System.Drawing.Point(12, 450);
+            this.dgv_addProduct.Name = "dgv_addProduct";
+            this.dgv_addProduct.ReadOnly = true;
+            this.dgv_addProduct.RowHeadersWidth = 51;
+            this.dgv_addProduct.RowTemplate.Height = 24;
+            this.dgv_addProduct.Size = new System.Drawing.Size(1863, 475);
+            this.dgv_addProduct.TabIndex = 6;
+            this.dgv_addProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_addProduct_DataBindingComplete);
             // 
             // ProductsAdd
             // 

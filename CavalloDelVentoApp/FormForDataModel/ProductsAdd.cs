@@ -56,11 +56,11 @@ namespace FormForDataModel
                 }
                 if (column.Name == "Brand Name")
                 {
-                    column.Width = 200;
+                    column.Width = 150;
                 }
                 if (column.Name == "Category Name")
                 {
-                    column.Width = 200;
+                    column.Width = 150;
                 }
                 if (column.Name == "Product Name")
                 {
@@ -72,35 +72,35 @@ namespace FormForDataModel
                 }
                 if (column.Name == "Quantity Per Unit")
                 {
-                    column.Width = 200;
+                    column.Width = 100;
                 }
                 if (column.Name == "Unit Price")
                 {
-                    column.Width = 200;
+                    column.Width = 100;
                 }
                 if (column.Name == "Units In Stock")
                 {
-                    column.Width = 200;
+                    column.Width = 100;
                 }
                 if (column.Name == "Units On Order")
                 {
-                    column.Width = 200;
+                    column.Width = 100;
                 }
                 if (column.Name == "Reorder Level")
                 {
-                    column.Width = 200;
+                    column.Width = 100;
                 }
                 if (column.Name == "Discontinued")
                 {
-                    column.Width = 150;
+                    column.Width = 100;
                 }
                 if (column.Name == "Is Product Active For Sale")
                 {
-                    column.Width = 150;
+                    column.Width = 100;
                 }
                 if (column.Name == "Is Deleted")
                 {
-                    column.Width = 150;
+                    column.Width = 100;
                 }
                 if (column.Name == "Product Image")
                 {
@@ -116,7 +116,7 @@ namespace FormForDataModel
 
         private void comboBoxCategoriesLoad()
         {
-            List<Categories> categories = dm.getCategoriesForProducts();
+            List<Categories> categories = dm.getCategoriesForProducts(selectedBrandID.ToString());
             categories.Insert(0, new Categories { categoryID = 0, categoryName = "---Choose---" });
             cbb_categoryName.DataSource = categories;
             cbb_categoryName.DisplayMember = "CategoryName";
@@ -156,7 +156,7 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
                 {
                     selectedBrandID = id;
-                    MessageBox.Show(selectedBrandID.ToString());
+                    comboBoxCategoriesLoad();
                 }
             }
         }
@@ -168,7 +168,6 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_categoryName.SelectedValue.ToString(), out int id))
                 {
                     selectedCategoryID = id;
-                    MessageBox.Show(selectedCategoryID.ToString());
                 }
             }
         }
@@ -279,6 +278,17 @@ namespace FormForDataModel
             else
             {
                 MessageBox.Show("You cannot select Brand or Category, please select them!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+            }
+        }
+
+        private void dgv_addProduct_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_addProduct.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
             }
         }
     }

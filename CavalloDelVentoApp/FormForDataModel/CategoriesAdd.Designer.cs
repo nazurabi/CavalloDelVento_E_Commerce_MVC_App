@@ -76,6 +76,7 @@
             this.dgv_addCategory.RowTemplate.Height = 24;
             this.dgv_addCategory.Size = new System.Drawing.Size(1500, 500);
             this.dgv_addCategory.TabIndex = 4;
+            this.dgv_addCategory.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_addCategory_DataBindingComplete);
             // 
             // lbl_categoryImage
             // 

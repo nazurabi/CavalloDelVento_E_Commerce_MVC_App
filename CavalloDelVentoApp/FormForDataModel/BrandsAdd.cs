@@ -100,7 +100,17 @@ namespace FormForDataModel
                 }
             }
             #endregion
+        }
 
+        private void dgv_addBrand_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_addBrand.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
         }
         private void btn_save_Click(object sender, EventArgs e)
         {
@@ -166,5 +176,7 @@ namespace FormForDataModel
             destinationImagePath = "";
             pb_brandImage.ImageLocation = "";
         }
+
+       
     }
 }

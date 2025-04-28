@@ -204,6 +204,7 @@
             this.dgv_editBrand.RowTemplate.Height = 24;
             this.dgv_editBrand.Size = new System.Drawing.Size(1500, 500);
             this.dgv_editBrand.TabIndex = 4;
+            this.dgv_editBrand.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editBrand_DataBindingComplete);
             this.dgv_editBrand.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editBrand_RowHeaderMouseClick);
             // 
             // openFileDialog1

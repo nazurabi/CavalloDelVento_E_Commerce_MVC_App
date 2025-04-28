@@ -50,7 +50,7 @@ namespace FormForDataModel
 
         private void comboBoxCategoriesLoad()
         {
-            List<Categories> categories = dm.getCategoriesForProducts();
+            List<Categories> categories = dm.getCategoriesForProducts(selectedBrandID.ToString());
             categories.Insert(0, new Categories { categoryID = 0, categoryName = "---Choose---" });
             cbb_categoryName.DataSource = categories;
             cbb_categoryName.DisplayMember = "CategoryName";
@@ -175,9 +175,9 @@ namespace FormForDataModel
                             unitPrice = nud_products.Value;
                             unitInStock = tb_unitsInStock.Text;
                             reorderLevel = tb_reorderLevel.Text;
-                            isActive = cb_productActive.Checked;
-                            discontinued = cb_productDiscontinued.Checked;
                             isDeleted = cb_productDeleted.Checked;
+                            isActive = isDeleted? false:cb_productActive.Checked;
+                            discontinued = cb_productDiscontinued.Checked;
                             brandIDFK = cbb_brandName.SelectedValue.ToString();
                             categoryIDFK = cbb_categoryName.SelectedValue.ToString();
                             description = tb_description.Text;
@@ -220,9 +220,9 @@ namespace FormForDataModel
                             unitPrice = nud_products.Value;
                             unitInStock = tb_unitsInStock.Text;
                             reorderLevel = tb_reorderLevel.Text;
-                            isActive = cb_productActive.Checked;
-                            discontinued = cb_productDiscontinued.Checked;
                             isDeleted = cb_productDeleted.Checked;
+                            isActive = isDeleted ? false : cb_productActive.Checked;
+                            discontinued = cb_productDiscontinued.Checked;
                             brandIDFK = cbb_brandName.SelectedValue.ToString();
                             categoryIDFK = cbb_categoryName.SelectedValue.ToString();
                             description = tb_description.Text;
@@ -270,9 +270,9 @@ namespace FormForDataModel
                         unitPrice = nud_products.Value;
                         unitInStock = tb_unitsInStock.Text;
                         reorderLevel = tb_reorderLevel.Text;
-                        isActive = cb_productActive.Checked;
-                        discontinued = cb_productDiscontinued.Checked;
                         isDeleted = cb_productDeleted.Checked;
+                        isActive = isDeleted ? false : cb_productActive.Checked;
+                        discontinued = cb_productDiscontinued.Checked;
                         brandIDFK = cbb_brandName.SelectedValue.ToString();
                         categoryIDFK = cbb_categoryName.SelectedValue.ToString();
                         description = tb_description.Text;
@@ -313,9 +313,9 @@ namespace FormForDataModel
                         unitPrice = nud_products.Value;
                         unitInStock = tb_unitsInStock.Text;
                         reorderLevel = tb_reorderLevel.Text;
-                        isActive = cb_productActive.Checked;
-                        discontinued = cb_productDiscontinued.Checked;
                         isDeleted = cb_productDeleted.Checked;
+                        isActive = isDeleted ? false : cb_productActive.Checked;
+                        discontinued = cb_productDiscontinued.Checked;
                         brandIDFK = cbb_brandName.SelectedValue.ToString();
                         categoryIDFK = cbb_categoryName.SelectedValue.ToString();
                         description = tb_description.Text;
@@ -388,7 +388,7 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
                 {
                     selectedBrandID = id;
-                    MessageBox.Show(selectedBrandID.ToString());
+                    comboBoxCategoriesLoad();
                 }
             }
         }
@@ -400,7 +400,6 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_categoryName.SelectedValue.ToString(), out int id))
                 {
                     selectedCategoryID = id;
-                    MessageBox.Show(selectedCategoryID.ToString());
                 }
             }
         }
@@ -440,6 +439,17 @@ namespace FormForDataModel
             imageForEdit = dm.listImageForEditProducts(selectedRow.Cells["ProductID"].Value.ToString());
             pb_productImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageForEdit);
             pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void dgv_editProduct_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_editProduct.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

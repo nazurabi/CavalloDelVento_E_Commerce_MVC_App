@@ -167,8 +167,8 @@ namespace FormForDataModel
                         if (!string.IsNullOrEmpty(imageName))
                         {
                             categoryName = tb_categoryName.Text.ToUpper();
-                            isActive = cb_categoryActive.Checked;
                             isDeleted = cb_categoryDelete.Checked;
+                            isActive = isDeleted ? false : cb_categoryActive.Checked;
                             brandIDFK = cbb_brandName.SelectedValue.ToString();
                             description = tb_description.Text;
                             dm.editCategory(categoryID, brandIDFK, categoryName, description, isActive,isDeleted, imageName);
@@ -193,8 +193,8 @@ namespace FormForDataModel
                         else
                         {
                             categoryName = tb_categoryName.Text.ToUpper();
-                            isActive = cb_categoryActive.Checked;
                             isDeleted = cb_categoryDelete.Checked;
+                            isActive = isDeleted ? false : cb_categoryActive.Checked;
                             brandIDFK = cbb_brandName.SelectedValue.ToString();
                             description = tb_description.Text;
                             imageName = imageForEdit;
@@ -225,9 +225,9 @@ namespace FormForDataModel
 
                     if (!string.IsNullOrEmpty(imageName))
                     {
-               
-                        isActive = cb_categoryActive.Checked;
+
                         isDeleted = cb_categoryDelete.Checked;
+                        isActive = isDeleted ? false : cb_categoryActive.Checked;
                         brandIDFK = cbb_brandName.SelectedValue.ToString();
                         description = tb_description.Text;
                         dm.editCategory(categoryID, brandIDFK, description, isActive,isDeleted, imageName);
@@ -251,9 +251,8 @@ namespace FormForDataModel
                     }
                     else
                     {
-                     
-                        isActive = cb_categoryActive.Checked;
                         isDeleted = cb_categoryDelete.Checked;
+                        isActive = isDeleted ? false : cb_categoryActive.Checked;
                         brandIDFK = cbb_brandName.SelectedValue.ToString();
                         description = tb_description.Text;
                         imageName = imageForEdit;
@@ -278,6 +277,17 @@ namespace FormForDataModel
             else
             {
                 MessageBox.Show("Category name cannot empty!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgv_editCategory_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_editCategory.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
             }
         }
     }

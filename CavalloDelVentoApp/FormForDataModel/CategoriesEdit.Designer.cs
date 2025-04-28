@@ -41,12 +41,12 @@
             this.btn_save = new System.Windows.Forms.Button();
             this.tb_description = new System.Windows.Forms.TextBox();
             this.tb_categoryName = new System.Windows.Forms.TextBox();
+            this.cb_categoryDelete = new System.Windows.Forms.CheckBox();
             this.lbl_categoryImage = new System.Windows.Forms.Label();
             this.lbl_categoryName = new System.Windows.Forms.Label();
+            this.lbl_categoryDelete = new System.Windows.Forms.Label();
             this.lbl_categoryActive = new System.Windows.Forms.Label();
             this.dgv_editCategory = new System.Windows.Forms.DataGridView();
-            this.lbl_categoryDelete = new System.Windows.Forms.Label();
-            this.cb_categoryDelete = new System.Windows.Forms.CheckBox();
             this.gb_addCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_categoryImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_editCategory)).BeginInit();
@@ -182,6 +182,16 @@
             this.tb_categoryName.Size = new System.Drawing.Size(350, 36);
             this.tb_categoryName.TabIndex = 3;
             // 
+            // cb_categoryDelete
+            // 
+            this.cb_categoryDelete.AutoSize = true;
+            this.cb_categoryDelete.Enabled = false;
+            this.cb_categoryDelete.Location = new System.Drawing.Point(319, 183);
+            this.cb_categoryDelete.Name = "cb_categoryDelete";
+            this.cb_categoryDelete.Size = new System.Drawing.Size(18, 17);
+            this.cb_categoryDelete.TabIndex = 5;
+            this.cb_categoryDelete.UseVisualStyleBackColor = true;
+            // 
             // lbl_categoryImage
             // 
             this.lbl_categoryImage.AutoSize = true;
@@ -201,6 +211,17 @@
             this.lbl_categoryName.Size = new System.Drawing.Size(155, 28);
             this.lbl_categoryName.TabIndex = 2;
             this.lbl_categoryName.Text = "Category Name";
+            // 
+            // lbl_categoryDelete
+            // 
+            this.lbl_categoryDelete.AutoSize = true;
+            this.lbl_categoryDelete.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.lbl_categoryDelete.ForeColor = System.Drawing.Color.Red;
+            this.lbl_categoryDelete.Location = new System.Drawing.Point(30, 176);
+            this.lbl_categoryDelete.Name = "lbl_categoryDelete";
+            this.lbl_categoryDelete.Size = new System.Drawing.Size(72, 28);
+            this.lbl_categoryDelete.TabIndex = 4;
+            this.lbl_categoryDelete.Text = "Delete";
             // 
             // lbl_categoryActive
             // 
@@ -224,28 +245,8 @@
             this.dgv_editCategory.RowTemplate.Height = 24;
             this.dgv_editCategory.Size = new System.Drawing.Size(1500, 500);
             this.dgv_editCategory.TabIndex = 6;
+            this.dgv_editCategory.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editCategory_DataBindingComplete);
             this.dgv_editCategory.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editCategory_RowHeaderMouseClick);
-            // 
-            // lbl_categoryDelete
-            // 
-            this.lbl_categoryDelete.AutoSize = true;
-            this.lbl_categoryDelete.Font = new System.Drawing.Font("Calibri", 13.8F);
-            this.lbl_categoryDelete.ForeColor = System.Drawing.Color.Red;
-            this.lbl_categoryDelete.Location = new System.Drawing.Point(30, 176);
-            this.lbl_categoryDelete.Name = "lbl_categoryDelete";
-            this.lbl_categoryDelete.Size = new System.Drawing.Size(72, 28);
-            this.lbl_categoryDelete.TabIndex = 4;
-            this.lbl_categoryDelete.Text = "Delete";
-            // 
-            // cb_categoryDelete
-            // 
-            this.cb_categoryDelete.AutoSize = true;
-            this.cb_categoryDelete.Enabled = false;
-            this.cb_categoryDelete.Location = new System.Drawing.Point(319, 183);
-            this.cb_categoryDelete.Name = "cb_categoryDelete";
-            this.cb_categoryDelete.Size = new System.Drawing.Size(18, 17);
-            this.cb_categoryDelete.TabIndex = 5;
-            this.cb_categoryDelete.UseVisualStyleBackColor = true;
             // 
             // CategoriesEdit
             // 

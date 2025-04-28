@@ -81,13 +81,14 @@
             this.dgv_editProduct.AllowUserToAddRows = false;
             this.dgv_editProduct.AllowUserToDeleteRows = false;
             this.dgv_editProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_editProduct.Location = new System.Drawing.Point(18, 450);
+            this.dgv_editProduct.Location = new System.Drawing.Point(12, 450);
             this.dgv_editProduct.Name = "dgv_editProduct";
             this.dgv_editProduct.ReadOnly = true;
             this.dgv_editProduct.RowHeadersWidth = 51;
             this.dgv_editProduct.RowTemplate.Height = 24;
-            this.dgv_editProduct.Size = new System.Drawing.Size(1500, 350);
+            this.dgv_editProduct.Size = new System.Drawing.Size(1863, 475);
             this.dgv_editProduct.TabIndex = 8;
+            this.dgv_editProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editProduct_DataBindingComplete);
             this.dgv_editProduct.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_addProduct_RowHeaderMouseClick);
             // 
             // gb_addProduct
@@ -121,9 +122,9 @@
             this.gb_addProduct.Controls.Add(this.lbl_productActive);
             this.gb_addProduct.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gb_addProduct.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.gb_addProduct.Location = new System.Drawing.Point(18, 47);
+            this.gb_addProduct.Location = new System.Drawing.Point(12, 47);
             this.gb_addProduct.Name = "gb_addProduct";
-            this.gb_addProduct.Size = new System.Drawing.Size(1500, 397);
+            this.gb_addProduct.Size = new System.Drawing.Size(1863, 397);
             this.gb_addProduct.TabIndex = 7;
             this.gb_addProduct.TabStop = false;
             this.gb_addProduct.Text = "Products Information";
