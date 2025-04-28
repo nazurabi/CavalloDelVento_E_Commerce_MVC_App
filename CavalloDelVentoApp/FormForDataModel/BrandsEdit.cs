@@ -55,6 +55,10 @@ namespace FormForDataModel
                 {
                     column.Width = 150;
                 }
+                if (column.Name == "Is Deleted")
+                {
+                    column.Width = 150;
+                }
 
                 if (column.Name == "Brand Image")
                 {
@@ -74,6 +78,7 @@ namespace FormForDataModel
         {
             tb_brandName.Text = "";
             cb_brandActive.Checked = false;
+            cb_brandDelete.Checked = false;
             imageName = "";
             selectedImagePath = "";
             destinationImagePath = "";
@@ -99,7 +104,7 @@ namespace FormForDataModel
         private void btn_save_Click(object sender, EventArgs e)
         {
             string brandName = "";
-            //bool isDeleted = false; // In order for the brand to be active, its deleted status must be false.
+            bool isDeleted;
             bool isActive;
             if (!string.IsNullOrEmpty(tb_brandName.Text))
             {
@@ -112,12 +117,14 @@ namespace FormForDataModel
                         {
                             brandName = tb_brandName.Text.ToUpper();
                             isActive = cb_brandActive.Checked;
-                            dm.editBrand(brandID, brandName, isActive, imageName);
+                            isDeleted = cb_brandDelete.Checked;
+                            dm.editBrand(brandID, brandName, isActive, isDeleted, imageName);
                             destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageName);
                             destinationImagePath = Path.GetFullPath(destinationImagePath);
                             File.Copy(selectedImagePath, destinationImagePath, true);
                             tb_brandName.Text = "";
                             cb_brandActive.Checked = false;
+                            cb_brandDelete.Checked = false;
                             imageName = "";
                             pb_brandImage.ImageLocation = "";
                             BrandsEditLoad();
@@ -125,6 +132,7 @@ namespace FormForDataModel
                             //dgv_editBrand.CurrentCell = null;
                             tb_brandName.Enabled = false;
                             cb_brandActive.Enabled = false;
+                            cb_brandDelete.Enabled = false;
                             btn_clear.Enabled = false;
                             btn_selectImage.Enabled = false;
                             btn_save.Enabled = false;
@@ -147,10 +155,12 @@ namespace FormForDataModel
                         {
                             brandName = tb_brandName.Text.ToUpper();
                             isActive = cb_brandActive.Checked;
+                            isDeleted = cb_brandDelete.Checked;
                             imageName = imageForEdit;
-                            dm.editBrand(brandID, brandName, isActive, imageName);
+                            dm.editBrand(brandID, brandName, isActive,isDeleted, imageName);
                             tb_brandName.Text = "";
                             cb_brandActive.Checked = false;
+                            cb_brandDelete.Checked = false;
                             imageName = "";
                             pb_brandImage.ImageLocation = "";
                             BrandsEditLoad();
@@ -158,6 +168,7 @@ namespace FormForDataModel
                             //dgv_editBrand.CurrentCell = null;
                             tb_brandName.Enabled = false;
                             cb_brandActive.Enabled = false;
+                            cb_brandDelete.Enabled = false;
                             btn_clear.Enabled = false;
                             btn_selectImage.Enabled = false;
                             btn_save.Enabled = false;
@@ -173,12 +184,14 @@ namespace FormForDataModel
                     if (!string.IsNullOrEmpty(imageName))
                     {
                         isActive = cb_brandActive.Checked;
-                        dm.editBrand(brandID, isActive, imageName);
+                        isDeleted = cb_brandDelete.Checked;
+                        dm.editBrand(brandID, isActive,isDeleted, imageName);
                         destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageName);
                         destinationImagePath = Path.GetFullPath(destinationImagePath);
                         File.Copy(selectedImagePath, destinationImagePath, true);
                         tb_brandName.Text = "";
                         cb_brandActive.Checked = false;
+                        cb_brandDelete.Checked = false;
                         imageName = "";
                         pb_brandImage.ImageLocation = "";
                         BrandsEditLoad();
@@ -186,6 +199,7 @@ namespace FormForDataModel
                         //dgv_editBrand.CurrentCell = null;
                         tb_brandName.Enabled = false;
                         cb_brandActive.Enabled = false;
+                        cb_brandDelete.Enabled = false;
                         btn_clear.Enabled = false;
                         btn_selectImage.Enabled = false;
                         btn_save.Enabled = false;
@@ -207,10 +221,12 @@ namespace FormForDataModel
                     else
                     {
                         isActive = cb_brandActive.Checked;
+                        isDeleted = cb_brandDelete.Checked;
                         imageName = imageForEdit;
-                        dm.editBrand(brandID, isActive, imageName);
+                        dm.editBrand(brandID, isActive, isDeleted, imageName);
                         tb_brandName.Text = "";
                         cb_brandActive.Checked = false;
+                        cb_brandDelete.Checked = false;
                         imageName = "";
                         pb_brandImage.ImageLocation = "";
                         BrandsEditLoad();
@@ -218,6 +234,7 @@ namespace FormForDataModel
                         //dgv_editBrand.CurrentCell = null;
                         tb_brandName.Enabled = false;
                         cb_brandActive.Enabled = false;
+                        cb_brandDelete.Enabled = false;
                         btn_clear.Enabled = false;
                         btn_selectImage.Enabled = false;
                         btn_save.Enabled = false;
@@ -233,6 +250,7 @@ namespace FormForDataModel
         {
             tb_brandName.Enabled = true;
             cb_brandActive.Enabled = true;
+            cb_brandDelete.Enabled = true;
             btn_clear.Enabled = true;
             btn_selectImage.Enabled = true;
             btn_save.Enabled = true;
@@ -240,6 +258,7 @@ namespace FormForDataModel
             DataGridViewRow selectedRow = dgv_editBrand.Rows[e.RowIndex];
             tb_brandName.Text = selectedRow.Cells["Brand Name"].Value.ToString();
             cb_brandActive.Checked = selectedRow.Cells["Is Brand Active For Sale"].Value.ToString() == "Yes" ? true : false;
+            cb_brandDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
             imageForEdit = dm.listImageForEditBrands(selectedRow.Cells["BrandID"].Value.ToString());
             brandID = selectedRow.Cells["BrandID"].Value.ToString();
             pb_brandImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageForEdit);

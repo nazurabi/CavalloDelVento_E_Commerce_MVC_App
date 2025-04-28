@@ -79,6 +79,10 @@ namespace FormForDataModel
                 {
                     column.Width = 150;
                 }
+                if (column.Name == "Is Deleted")
+                {
+                    column.Width = 150;
+                }
 
                 if (column.Name == "Category Image")
                 {
@@ -99,6 +103,7 @@ namespace FormForDataModel
             tb_categoryName.Enabled = true;
             cbb_brandName.Enabled = true;
             cb_categoryActive.Enabled = true;
+            cb_categoryDelete.Enabled = true;
             tb_description.Enabled = true;
             btn_clear.Enabled = true;
             btn_selectImage.Enabled = true;
@@ -110,6 +115,7 @@ namespace FormForDataModel
             categoryID = selectedRow.Cells["CategoryID"].Value.ToString();
             tb_categoryName.Text = selectedRow.Cells["Category Name"].Value.ToString();
             cb_categoryActive.Checked = selectedRow.Cells["Is Category Active For Sale"].Value.ToString() == "Yes" ? true : false;
+            cb_categoryDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
             tb_description.Text = selectedRow.Cells["Description"].Value.ToString();
             imageForEdit = dm.listImageForEditCategories(selectedRow.Cells["CategoryID"].Value.ToString());
             pb_categoryImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\CategoriesImages", imageForEdit);
@@ -137,6 +143,7 @@ namespace FormForDataModel
             tb_categoryName.Text = "";
             tb_description.Text = "";
             cb_categoryActive.Checked = false;
+            cb_categoryDelete.Checked = false;
             imageName = "";
             selectedImagePath = "";
             destinationImagePath = "";
@@ -147,7 +154,7 @@ namespace FormForDataModel
         {
             string categoryName = "";
             string description = "";
-            //bool isDeleted = false; // In order for the categories to be active, its deleted status must be false.
+            bool isDeleted;
             bool isActive;
 
             if (!string.IsNullOrEmpty(tb_categoryName.Text))
@@ -161,20 +168,23 @@ namespace FormForDataModel
                         {
                             categoryName = tb_categoryName.Text.ToUpper();
                             isActive = cb_categoryActive.Checked;
+                            isDeleted = cb_categoryDelete.Checked;
                             brandIDFK = cbb_brandName.SelectedValue.ToString();
                             description = tb_description.Text;
-                            dm.editCategory(categoryID, brandIDFK, categoryName, description, isActive, imageName);
+                            dm.editCategory(categoryID, brandIDFK, categoryName, description, isActive,isDeleted, imageName);
                             destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\CategoriesImages", imageName);
                             destinationImagePath = Path.GetFullPath(destinationImagePath);
                             File.Copy(selectedImagePath, destinationImagePath, true);
                             tb_categoryName.Text = "";
                             cb_categoryActive.Checked = false;
+                            cb_categoryDelete.Checked = false;
                             imageName = "";
                             pb_categoryImage.ImageLocation = "";
                             CategoriesEditLoad();
                             tb_categoryName.Enabled = false;
                             cbb_brandName.Enabled = false;
                             cb_categoryActive.Enabled = false;
+                            cb_categoryDelete.Enabled = false;
                             tb_description.Enabled = false;
                             btn_clear.Enabled = false;
                             btn_selectImage.Enabled = false;
@@ -184,18 +194,21 @@ namespace FormForDataModel
                         {
                             categoryName = tb_categoryName.Text.ToUpper();
                             isActive = cb_categoryActive.Checked;
+                            isDeleted = cb_categoryDelete.Checked;
                             brandIDFK = cbb_brandName.SelectedValue.ToString();
                             description = tb_description.Text;
                             imageName = imageForEdit;
-                            dm.editCategory(categoryID, brandIDFK, categoryName, description, isActive, imageName);
+                            dm.editCategory(categoryID, brandIDFK, categoryName, description, isActive,isDeleted, imageName);
                             tb_categoryName.Text = "";
                             cb_categoryActive.Checked = false;
+                            cb_categoryDelete.Checked = false;
                             imageName = "";
                             pb_categoryImage.ImageLocation = "";
                             CategoriesEditLoad();
                             tb_categoryName.Enabled = false;
                             cbb_brandName.Enabled = false;
                             cb_categoryActive.Enabled = false;
+                            cb_categoryDelete.Enabled = false;
                             tb_description.Enabled = false;
                             btn_clear.Enabled = false;
                             btn_selectImage.Enabled = false;
@@ -214,20 +227,23 @@ namespace FormForDataModel
                     {
                
                         isActive = cb_categoryActive.Checked;
+                        isDeleted = cb_categoryDelete.Checked;
                         brandIDFK = cbb_brandName.SelectedValue.ToString();
                         description = tb_description.Text;
-                        dm.editCategory(categoryID, brandIDFK, description, isActive, imageName);
+                        dm.editCategory(categoryID, brandIDFK, description, isActive,isDeleted, imageName);
                         destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\CategoriesImages", imageName);
                         destinationImagePath = Path.GetFullPath(destinationImagePath);
                         File.Copy(selectedImagePath, destinationImagePath, true);
                         tb_categoryName.Text = "";
                         cb_categoryActive.Checked = false;
+                        cb_categoryDelete.Checked = false;
                         imageName = "";
                         pb_categoryImage.ImageLocation = "";
                         CategoriesEditLoad();
                         tb_categoryName.Enabled = false;
                         cbb_brandName.Enabled = false;
                         cb_categoryActive.Enabled = false;
+                        cb_categoryDelete.Enabled = false;
                         tb_description.Enabled = false;
                         btn_clear.Enabled = false;
                         btn_selectImage.Enabled = false;
@@ -237,31 +253,32 @@ namespace FormForDataModel
                     {
                      
                         isActive = cb_categoryActive.Checked;
+                        isDeleted = cb_categoryDelete.Checked;
                         brandIDFK = cbb_brandName.SelectedValue.ToString();
                         description = tb_description.Text;
                         imageName = imageForEdit;
-                        dm.editCategory(categoryID, brandIDFK, description, isActive, imageName);
+                        dm.editCategory(categoryID, brandIDFK, description, isActive,isDeleted, imageName);
                         tb_categoryName.Text = "";
                         cb_categoryActive.Checked = false;
+                        cb_categoryDelete.Checked = false;
                         imageName = "";
                         pb_categoryImage.ImageLocation = "";
                         CategoriesEditLoad();
                         tb_categoryName.Enabled = false;
                         cbb_brandName.Enabled = false;
                         cb_categoryActive.Enabled = false;
+                        cb_categoryDelete.Enabled = false;
                         tb_description.Enabled = false;
                         btn_clear.Enabled = false;
                         btn_selectImage.Enabled = false;
                         btn_save.Enabled = false;
                     }
-
                 }
             }
             else
             {
                 MessageBox.Show("Category name cannot empty!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }

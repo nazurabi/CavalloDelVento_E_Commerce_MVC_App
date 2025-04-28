@@ -54,25 +54,13 @@ namespace FormForDataModel
                 {
                     column.Width = 50;
                 }
-                if (column.Name == "BrandIDFK")
-                {
-                    column.Width = 50;
-                }
                 if (column.Name == "Brand Name")
                 {
                     column.Width = 200;
                 }
-                if (column.Name == "CategoryIDFK")
-                {
-                    column.Width = 50;
-                }
                 if (column.Name == "Category Name")
                 {
                     column.Width = 200;
-                }
-                if (column.Name == "ProductID")
-                {
-                    column.Width = 50;
                 }
                 if (column.Name == "Product Name")
                 {
@@ -104,7 +92,7 @@ namespace FormForDataModel
                 }
                 if (column.Name == "Discontinued")
                 {
-                    column.Width = 200;
+                    column.Width = 150;
                 }
                 if (column.Name == "Is Product Active For Sale")
                 {
@@ -199,6 +187,7 @@ namespace FormForDataModel
             tb_description.Text = "";
             tb_quentityPerUnit.Text = "";
             tb_unitsInStock.Text = "";
+            tb_reorderLevel.Text = "";
             nud_products.Value = 0;
             cb_productActive.Checked = false;
             imageName = "";
@@ -236,6 +225,7 @@ namespace FormForDataModel
                                 quantityPerUnit = tb_quentityPerUnit.Text;
                                 unitPrice = nud_products.Value;
                                 unitInStock = tb_unitsInStock.Text;
+                                reorderLevel = tb_reorderLevel.Text;
                                 isActive = cb_productActive.Checked;
                                 brandIDFK = cbb_brandName.SelectedValue.ToString();
                                 categoryIDFK = cbb_categoryName.SelectedValue.ToString();
@@ -256,6 +246,7 @@ namespace FormForDataModel
                                 quantityPerUnit = tb_quentityPerUnit.Text;
                                 unitPrice = nud_products.Value;
                                 unitInStock = tb_unitsInStock.Text;
+                                reorderLevel = tb_reorderLevel.Text;
                                 isActive = cb_productActive.Checked;
                                 brandIDFK = cbb_brandName.SelectedValue.ToString();
                                 categoryIDFK = cbb_categoryName.SelectedValue.ToString();
@@ -289,12 +280,6 @@ namespace FormForDataModel
             {
                 MessageBox.Show("You cannot select Brand or Category, please select them!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
             }
-
-
-
-
-
-
         }
     }
 }

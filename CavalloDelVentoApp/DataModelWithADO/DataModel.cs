@@ -164,14 +164,16 @@ namespace DataModelWithADO
             }
         }
 
-        public void editBrand(string brandID, string brandName, bool isActive, string brandImage)
+        public void editBrand(string brandID, string brandName, bool isActive, bool isDeleted, string brandImage)
         {
-            cmd.CommandText = "UPDATE Brands SET BrandName=@brandName, IsActive=@isActive, Image=@brandImage WHERE BrandID=@brandID";
+            cmd.CommandText = "UPDATE Brands SET BrandName=@brandName, IsActive=@isActive, IsDeleted=@isDeleted, Image=@brandImage WHERE BrandID=@brandID";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@brandID", brandID);
             cmd.Parameters.AddWithValue("@brandName", brandName);
-            cmd.Parameters.AddWithValue("@brandImage", brandImage);
             cmd.Parameters.AddWithValue("@isActive", isActive);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            cmd.Parameters.AddWithValue("@brandImage", brandImage);
+
             try
             {
                 con.Open();
@@ -188,13 +190,15 @@ namespace DataModelWithADO
             }
         }
 
-        public void editBrand(string brandID, bool isActive, string brandImage)
+        public void editBrand(string brandID, bool isActive, bool isDeleted, string brandImage)
         {
-            cmd.CommandText = "UPDATE Brands SET IsActive=@isActive, Image=@brandImage WHERE BrandID=@brandID";
+            cmd.CommandText = "UPDATE Brands SET IsActive=@isActive, IsDeleted=@isDeleted, Image=@brandImage WHERE BrandID=@brandID";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@brandID", brandID);
-            cmd.Parameters.AddWithValue("@brandImage", brandImage);
             cmd.Parameters.AddWithValue("@isActive", isActive);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            cmd.Parameters.AddWithValue("@brandImage", brandImage);
+
             try
             {
                 con.Open();
@@ -258,8 +262,6 @@ namespace DataModelWithADO
 
         public DataTable categoryDataBind()
         {
-            #region With fullPath (Image pulls database by string)
-
             cmd.CommandText = "SELECT * FROM Categories";
             SqlDataAdapter da = new SqlDataAdapter();
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
@@ -302,12 +304,11 @@ namespace DataModelWithADO
                 {
                     img = System.Drawing.Image.FromFile(fullPath);
                 }
-                returnToForm.Rows.Add(sequenceNumber,brandIDFK, categoryID, brandName, categoryName, description, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath,img);
+                returnToForm.Rows.Add(sequenceNumber, brandIDFK, categoryID, brandName, categoryName, description, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
             }
 
             return returnToForm;
 
-            #endregion
         }
 
         public void addCategory(string brandIDFK, string categoryName, bool isDeleted, bool isActive, string description, string categoryImage)
@@ -336,15 +337,16 @@ namespace DataModelWithADO
             }
         }
 
-        public void editCategory(string categoryID, string brandIDFK, string categoryName, string description, bool isActive, string categoryImage)
+        public void editCategory(string categoryID, string brandIDFK, string categoryName, string description, bool isActive, bool isDeleted, string categoryImage)
         {
-            cmd.CommandText = "UPDATE Categories SET BrandIDFK=@brandIDFK, CategoryName=@categoryName, Description=@description, IsActive=@isActive, Image=@categoryImage WHERE CategoryID=@categoryID";
+            cmd.CommandText = "UPDATE Categories SET BrandIDFK=@brandIDFK, CategoryName=@categoryName, Description=@description, IsActive=@isActive,IsDeleted=@isDeleted, Image=@categoryImage WHERE CategoryID=@categoryID";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@categoryID", categoryID);
             cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
             cmd.Parameters.AddWithValue("@categoryName", categoryName);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@isActive", isActive);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
             cmd.Parameters.AddWithValue("@categoryImage", categoryImage);
             try
             {
@@ -362,14 +364,15 @@ namespace DataModelWithADO
             }
         }
 
-        public void editCategory(string categoryID, string brandIDFK, string description, bool isActive, string categoryImage)
+        public void editCategory(string categoryID, string brandIDFK, string description, bool isActive, bool isDeleted, string categoryImage)
         {
-            cmd.CommandText = "UPDATE Categories SET BrandIDFK=@brandIDFK, Description=@description, IsActive=@isActive, Image=@categoryImage WHERE CategoryID=@categoryID";
+            cmd.CommandText = "UPDATE Categories SET BrandIDFK=@brandIDFK, Description=@description, IsActive=@isActive,IsDeleted=@isDeleted, Image=@categoryImage WHERE CategoryID=@categoryID";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@categoryID", categoryID);
             cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@isActive", isActive);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
             cmd.Parameters.AddWithValue("@categoryImage", categoryImage);
             try
             {
@@ -580,56 +583,70 @@ namespace DataModelWithADO
             }
         }
 
-        //public void editProduct(string categoryID, string brandIDFK, string categoryName, string description, bool isActive, string categoryImage)
-        //{
-        //    cmd.CommandText = "UPDATE Categories SET BrandIDFK=@brandIDFK, CategoryName=@categoryName, Description=@description, IsActive=@isActive, Image=@categoryImage WHERE CategoryID=@categoryID";
-        //    cmd.Parameters.Clear();
-        //    cmd.Parameters.AddWithValue("@categoryID", categoryID);
-        //    cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
-        //    cmd.Parameters.AddWithValue("@categoryName", categoryName);
-        //    cmd.Parameters.AddWithValue("@description", description);
-        //    cmd.Parameters.AddWithValue("@isActive", isActive);
-        //    cmd.Parameters.AddWithValue("@categoryImage", categoryImage);
-        //    try
-        //    {
-        //        con.Open();
-        //        cmd.ExecuteNonQuery();
-        //        MessageBox.Show("Category edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("Unable to edit category, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+        public void editProduct(string productID, string brandIDFK, string categoryIDFK, string productName, string description, string productImage, string quantityPerUnit, decimal unitPrice, string unitInStock, string reorderLevel, bool discontinued, bool isDeleted, bool isActive)
+        {
+            cmd.CommandText = "UPDATE Products SET BrandIDFK=@brandIDFK, CategoryIDFK=@categoryIDFK, ProductName=@productName, Description=@description, Image=@productImage, QuantityPerUnit=@quantityPerUnit, UnitPrice=@unitPrice, UnitsInStock=@unitInStock, ReorderLevel=@reorderLevel, Discontinued=@discontinued, IsDeleted=@isDeleted, IsActive=@isActive WHERE ProductID=@productID";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@productID", productID);
+            cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
+            cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
+            cmd.Parameters.AddWithValue("@productName", productName);
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@productImage", productImage);
+            cmd.Parameters.AddWithValue("@quantityPerUnit", quantityPerUnit);
+            cmd.Parameters.AddWithValue("@unitPrice", unitPrice);
+            cmd.Parameters.AddWithValue("@unitInStock", unitInStock);
+            cmd.Parameters.AddWithValue("@reorderLevel", reorderLevel);
+            cmd.Parameters.AddWithValue("@discontinued", discontinued);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            cmd.Parameters.AddWithValue("@isActive", isActive);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Product edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit product, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
-        //public void editProduct(string categoryID, string brandIDFK, string description, bool isActive, string categoryImage)
-        //{
-        //    cmd.CommandText = "UPDATE Categories SET BrandIDFK=@brandIDFK, Description=@description, IsActive=@isActive, Image=@categoryImage WHERE CategoryID=@categoryID";
-        //    cmd.Parameters.Clear();
-        //    cmd.Parameters.AddWithValue("@categoryID", categoryID);
-        //    cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
-        //    cmd.Parameters.AddWithValue("@description", description);
-        //    cmd.Parameters.AddWithValue("@isActive", isActive);
-        //    cmd.Parameters.AddWithValue("@categoryImage", categoryImage);
-        //    try
-        //    {
-        //        con.Open();
-        //        cmd.ExecuteNonQuery();
-        //        MessageBox.Show("Category edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("Unable to edit category, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+        public void editProduct(string productID, string brandIDFK, string categoryIDFK, string description, string productImage, string quantityPerUnit, decimal unitPrice, string unitInStock, string reorderLevel, bool discontinued, bool isDeleted, bool isActive)
+        {
+            cmd.CommandText = "UPDATE Products SET BrandIDFK=@brandIDFK, CategoryIDFK=@categoryIDFK, Description=@description, Image=@productImage, QuantityPerUnit=@quantityPerUnit, UnitPrice=@unitPrice, UnitsInStock=@unitInStock, ReorderLevel=@reorderLevel, Discontinued=@discontinued, IsDeleted=@isDeleted, IsActive=@isActive WHERE ProductID=@productID";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@productID", productID);
+            cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
+            cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@productImage", productImage);
+            cmd.Parameters.AddWithValue("@quantityPerUnit", quantityPerUnit);
+            cmd.Parameters.AddWithValue("@unitPrice", unitPrice);
+            cmd.Parameters.AddWithValue("@unitInStock", unitInStock);
+            cmd.Parameters.AddWithValue("@reorderLevel", reorderLevel);
+            cmd.Parameters.AddWithValue("@discontinued", discontinued);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            cmd.Parameters.AddWithValue("@isActive", isActive);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Product edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit product, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         public byte listProducts(string checkProductName, string checkBrandIDFKForProduct, string checkCategoryIDFKForProduct)
         {
@@ -643,9 +660,9 @@ namespace DataModelWithADO
                 while (reader.Read())
                 {
                     Product products = new Product();
-                    products.brandIDFK = reader.GetInt32(1);
-                    products.categoryIDFK = reader.GetInt32(2);
-                    products.productName = reader.GetString(3);
+                    products.brandIDFK = reader.GetInt32(0);
+                    products.categoryIDFK = reader.GetInt32(1);
+                    products.productName = reader.GetString(2);
 
                     if (checkProductName == products.productName && Convert.ToInt32(checkBrandIDFKForProduct) == products.brandIDFK && Convert.ToInt32(checkCategoryIDFKForProduct) == products.categoryIDFK)
                     {
@@ -767,22 +784,22 @@ namespace DataModelWithADO
 
         //}
 
-        //public string listImageForEditProducts(string categoryIDForCheck)
-        //{
-        //    try
-        //    {
-        //        cmd.CommandText = "SELECT Image FROM Categories WHERE CategoryID=@categoryID";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@categoryID", categoryIDForCheck);
-        //        con.Open();
-        //        string imageName = Convert.ToString(cmd.ExecuteScalar());
-        //        return imageName;
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+        public string listImageForEditProducts(string productIDForCheck)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT Image FROM Products WHERE ProductID=@productID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@productID", productIDForCheck);
+                con.Open();
+                string imageName = Convert.ToString(cmd.ExecuteScalar());
+                return imageName;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         #endregion
     }

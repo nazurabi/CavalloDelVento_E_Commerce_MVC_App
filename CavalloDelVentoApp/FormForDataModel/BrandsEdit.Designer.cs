@@ -37,8 +37,10 @@
             this.btn_selectImage = new System.Windows.Forms.Button();
             this.btn_save = new System.Windows.Forms.Button();
             this.tb_brandName = new System.Windows.Forms.TextBox();
+            this.cb_brandDelete = new System.Windows.Forms.CheckBox();
             this.cb_brandActive = new System.Windows.Forms.CheckBox();
             this.lbl_brandImage = new System.Windows.Forms.Label();
+            this.lbl_brandDelete = new System.Windows.Forms.Label();
             this.dgv_editBrand = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.gb_addBrand.SuspendLayout();
@@ -59,9 +61,9 @@
             // btn_clear
             // 
             this.btn_clear.Enabled = false;
-            this.btn_clear.Location = new System.Drawing.Point(27, 216);
+            this.btn_clear.Location = new System.Drawing.Point(35, 216);
             this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(165, 42);
+            this.btn_clear.Size = new System.Drawing.Size(162, 42);
             this.btn_clear.TabIndex = 8;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
@@ -94,9 +96,11 @@
             this.gb_addBrand.Controls.Add(this.btn_clear);
             this.gb_addBrand.Controls.Add(this.btn_save);
             this.gb_addBrand.Controls.Add(this.tb_brandName);
+            this.gb_addBrand.Controls.Add(this.cb_brandDelete);
             this.gb_addBrand.Controls.Add(this.cb_brandActive);
             this.gb_addBrand.Controls.Add(this.lbl_brandImage);
             this.gb_addBrand.Controls.Add(this.lbl_brandName);
+            this.gb_addBrand.Controls.Add(this.lbl_brandDelete);
             this.gb_addBrand.Controls.Add(this.lbl_brandActive);
             this.gb_addBrand.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gb_addBrand.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -120,9 +124,9 @@
             // btn_selectImage
             // 
             this.btn_selectImage.Enabled = false;
-            this.btn_selectImage.Location = new System.Drawing.Point(198, 216);
+            this.btn_selectImage.Location = new System.Drawing.Point(199, 216);
             this.btn_selectImage.Name = "btn_selectImage";
-            this.btn_selectImage.Size = new System.Drawing.Size(165, 42);
+            this.btn_selectImage.Size = new System.Drawing.Size(162, 42);
             this.btn_selectImage.TabIndex = 6;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
@@ -131,9 +135,9 @@
             // btn_save
             // 
             this.btn_save.Enabled = false;
-            this.btn_save.Location = new System.Drawing.Point(27, 264);
+            this.btn_save.Location = new System.Drawing.Point(35, 264);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(336, 42);
+            this.btn_save.Size = new System.Drawing.Size(326, 42);
             this.btn_save.TabIndex = 9;
             this.btn_save.Text = "Edit Data";
             this.btn_save.UseVisualStyleBackColor = true;
@@ -144,8 +148,18 @@
             this.tb_brandName.Enabled = false;
             this.tb_brandName.Location = new System.Drawing.Point(35, 89);
             this.tb_brandName.Name = "tb_brandName";
-            this.tb_brandName.Size = new System.Drawing.Size(350, 36);
+            this.tb_brandName.Size = new System.Drawing.Size(326, 36);
             this.tb_brandName.TabIndex = 3;
+            // 
+            // cb_brandDelete
+            // 
+            this.cb_brandDelete.AutoSize = true;
+            this.cb_brandDelete.Enabled = false;
+            this.cb_brandDelete.Location = new System.Drawing.Point(345, 184);
+            this.cb_brandDelete.Name = "cb_brandDelete";
+            this.cb_brandDelete.Size = new System.Drawing.Size(18, 17);
+            this.cb_brandDelete.TabIndex = 5;
+            this.cb_brandDelete.UseVisualStyleBackColor = true;
             // 
             // cb_brandActive
             // 
@@ -166,6 +180,17 @@
             this.lbl_brandImage.Size = new System.Drawing.Size(234, 28);
             this.lbl_brandImage.TabIndex = 7;
             this.lbl_brandImage.Text = "Brand\'s Image Selection";
+            // 
+            // lbl_brandDelete
+            // 
+            this.lbl_brandDelete.AutoSize = true;
+            this.lbl_brandDelete.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.lbl_brandDelete.ForeColor = System.Drawing.Color.Red;
+            this.lbl_brandDelete.Location = new System.Drawing.Point(30, 177);
+            this.lbl_brandDelete.Name = "lbl_brandDelete";
+            this.lbl_brandDelete.Size = new System.Drawing.Size(72, 28);
+            this.lbl_brandDelete.TabIndex = 4;
+            this.lbl_brandDelete.Text = "Delete";
             // 
             // dgv_editBrand
             // 
@@ -225,5 +250,7 @@
         private System.Windows.Forms.Label lbl_brandImage;
         private System.Windows.Forms.DataGridView dgv_editBrand;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.CheckBox cb_brandDelete;
+        private System.Windows.Forms.Label lbl_brandDelete;
     }
 }
