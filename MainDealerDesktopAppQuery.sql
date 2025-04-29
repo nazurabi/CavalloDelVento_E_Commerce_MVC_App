@@ -40,6 +40,7 @@ GO
 INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Gold',10)
 INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Silver',5)
 INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Bronze',2)
+INSERT INTO DiscountRatesSettings(DiscountType,DiscountAmount) VALUES ('Normal',0)
 GO
 CREATE TABLE SubDealerUsers(
 SubDealerUserID int IDENTITY(1,1),
@@ -54,6 +55,9 @@ IsDeleted bit,
 CONSTRAINT pk_subDealer PRIMARY KEY (SubDealerUserID),
 CONSTRAINT fk_discount FOREIGN KEY (DiscountIDFK) REFERENCES DiscountRatesSettings(DiscountID)
 )
+GO
+INSERT INTO SubDealerUsers(DealerName, DealerMail, DiscountIDFK, DealerAddress, DealerCity, DealerPostalCode,DealerCountry,IsDeleted)
+ VALUES ('Gold Bike','goldbike@gmail.com',1,'Viale Gran Sasso 520','Cheiti','66022','Italy',0)
 GO
 CREATE TABLE Brands (
 BrandID int IDENTITY (1,1),

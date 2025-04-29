@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataModelWithADO
 {
-    internal class DiscountRates
+    public class DiscountRates
     {
         public int discountID { get; set; }
         public string discountType { get; set; }

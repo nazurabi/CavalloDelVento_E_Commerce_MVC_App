@@ -29,24 +29,32 @@
         private void InitializeComponent()
         {
             this.lbl_subDealerSettings = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.gb_addSubDealers = new System.Windows.Forms.GroupBox();
+            this.cbb_subDealers = new System.Windows.Forms.ComboBox();
+            this.btn_cancelEdit = new System.Windows.Forms.Button();
+            this.btn_clear = new System.Windows.Forms.Button();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.tb_dealerCountry = new System.Windows.Forms.TextBox();
+            this.tb_dealerPostalCode = new System.Windows.Forms.TextBox();
+            this.tb_dealerCity = new System.Windows.Forms.TextBox();
+            this.tb_dealerAdress = new System.Windows.Forms.TextBox();
+            this.tb_dealerMail = new System.Windows.Forms.TextBox();
+            this.tb_dealerName = new System.Windows.Forms.TextBox();
+            this.tb_subDealerUserID = new System.Windows.Forms.TextBox();
+            this.cb_subDealerUser = new System.Windows.Forms.CheckBox();
+            this.lbl_dealerCountry = new System.Windows.Forms.Label();
+            this.lbl_dealerPostalCode = new System.Windows.Forms.Label();
+            this.lbl_dealerCity = new System.Windows.Forms.Label();
+            this.lbl_dealerAdress = new System.Windows.Forms.Label();
+            this.lbl_discountAmountType = new System.Windows.Forms.Label();
+            this.lbl_dealerMail = new System.Windows.Forms.Label();
+            this.lbl_dealerName = new System.Windows.Forms.Label();
+            this.lbl_dealerUserID = new System.Windows.Forms.Label();
+            this.lbl_brandDelete = new System.Windows.Forms.Label();
+            this.btn_editSubDealers = new System.Windows.Forms.Button();
+            this.dgv_editSubDealers = new System.Windows.Forms.DataGridView();
+            this.gb_addSubDealers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_editSubDealers)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_subDealerSettings
@@ -59,150 +67,262 @@
             this.lbl_subDealerSettings.TabIndex = 3;
             this.lbl_subDealerSettings.Text = "Sub Dealer Settings";
             // 
-            // textBox1
+            // gb_addSubDealers
             // 
-            this.textBox1.Location = new System.Drawing.Point(293, 66);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 4;
+            this.gb_addSubDealers.Controls.Add(this.cbb_subDealers);
+            this.gb_addSubDealers.Controls.Add(this.btn_cancelEdit);
+            this.gb_addSubDealers.Controls.Add(this.btn_clear);
+            this.gb_addSubDealers.Controls.Add(this.btn_save);
+            this.gb_addSubDealers.Controls.Add(this.tb_dealerCountry);
+            this.gb_addSubDealers.Controls.Add(this.tb_dealerPostalCode);
+            this.gb_addSubDealers.Controls.Add(this.tb_dealerCity);
+            this.gb_addSubDealers.Controls.Add(this.tb_dealerAdress);
+            this.gb_addSubDealers.Controls.Add(this.tb_dealerMail);
+            this.gb_addSubDealers.Controls.Add(this.tb_dealerName);
+            this.gb_addSubDealers.Controls.Add(this.tb_subDealerUserID);
+            this.gb_addSubDealers.Controls.Add(this.cb_subDealerUser);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerCountry);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerPostalCode);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerCity);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerAdress);
+            this.gb_addSubDealers.Controls.Add(this.lbl_discountAmountType);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerMail);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerName);
+            this.gb_addSubDealers.Controls.Add(this.lbl_dealerUserID);
+            this.gb_addSubDealers.Controls.Add(this.lbl_brandDelete);
+            this.gb_addSubDealers.Controls.Add(this.btn_editSubDealers);
+            this.gb_addSubDealers.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.gb_addSubDealers.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.gb_addSubDealers.Location = new System.Drawing.Point(12, 47);
+            this.gb_addSubDealers.Name = "gb_addSubDealers";
+            this.gb_addSubDealers.Size = new System.Drawing.Size(1546, 273);
+            this.gb_addSubDealers.TabIndex = 7;
+            this.gb_addSubDealers.TabStop = false;
+            this.gb_addSubDealers.Text = "Sub Dealers Information";
             // 
-            // textBox2
+            // cbb_subDealers
             // 
-            this.textBox2.Location = new System.Drawing.Point(422, 66);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 4;
+            this.cbb_subDealers.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cbb_subDealers.FormattingEnabled = true;
+            this.cbb_subDealers.Location = new System.Drawing.Point(486, 89);
+            this.cbb_subDealers.Name = "cbb_subDealers";
+            this.cbb_subDealers.Size = new System.Drawing.Size(161, 32);
+            this.cbb_subDealers.TabIndex = 10;
+            this.cbb_subDealers.SelectedIndexChanged += new System.EventHandler(this.cbb_subDealers_SelectedIndexChanged);
             // 
-            // textBox3
+            // btn_cancelEdit
             // 
-            this.textBox3.Location = new System.Drawing.Point(542, 66);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 4;
+            this.btn_cancelEdit.Location = new System.Drawing.Point(320, 225);
+            this.btn_cancelEdit.Name = "btn_cancelEdit";
+            this.btn_cancelEdit.Size = new System.Drawing.Size(142, 42);
+            this.btn_cancelEdit.TabIndex = 8;
+            this.btn_cancelEdit.Text = "Cancel Edit";
+            this.btn_cancelEdit.UseVisualStyleBackColor = true;
+            this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
             // 
-            // textBox5
+            // btn_clear
             // 
-            this.textBox5.Location = new System.Drawing.Point(781, 66);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 22);
-            this.textBox5.TabIndex = 4;
+            this.btn_clear.Location = new System.Drawing.Point(463, 225);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(142, 42);
+            this.btn_clear.TabIndex = 8;
+            this.btn_clear.Text = "Clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // textBox6
+            // btn_save
             // 
-            this.textBox6.Location = new System.Drawing.Point(887, 66);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 22);
-            this.textBox6.TabIndex = 4;
+            this.btn_save.Location = new System.Drawing.Point(34, 225);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(142, 42);
+            this.btn_save.TabIndex = 9;
+            this.btn_save.Text = "Add";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
-            // textBox7
+            // tb_dealerCountry
             // 
-            this.textBox7.Location = new System.Drawing.Point(993, 66);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 22);
-            this.textBox7.TabIndex = 4;
+            this.tb_dealerCountry.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_dealerCountry.Location = new System.Drawing.Point(1236, 89);
+            this.tb_dealerCountry.Name = "tb_dealerCountry";
+            this.tb_dealerCountry.Size = new System.Drawing.Size(161, 32);
+            this.tb_dealerCountry.TabIndex = 3;
             // 
-            // textBox8
+            // tb_dealerPostalCode
             // 
-            this.textBox8.Location = new System.Drawing.Point(1099, 66);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
-            this.textBox8.TabIndex = 4;
+            this.tb_dealerPostalCode.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_dealerPostalCode.Location = new System.Drawing.Point(1069, 89);
+            this.tb_dealerPostalCode.Name = "tb_dealerPostalCode";
+            this.tb_dealerPostalCode.Size = new System.Drawing.Size(161, 32);
+            this.tb_dealerPostalCode.TabIndex = 3;
             // 
-            // textBox9
+            // tb_dealerCity
             // 
-            this.textBox9.Location = new System.Drawing.Point(1205, 66);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 22);
-            this.textBox9.TabIndex = 4;
+            this.tb_dealerCity.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_dealerCity.Location = new System.Drawing.Point(902, 89);
+            this.tb_dealerCity.Name = "tb_dealerCity";
+            this.tb_dealerCity.Size = new System.Drawing.Size(161, 32);
+            this.tb_dealerCity.TabIndex = 3;
             // 
-            // label1
+            // tb_dealerAdress
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(290, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 16);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "SubDealerUserID";
+            this.tb_dealerAdress.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_dealerAdress.Location = new System.Drawing.Point(653, 89);
+            this.tb_dealerAdress.Multiline = true;
+            this.tb_dealerAdress.Name = "tb_dealerAdress";
+            this.tb_dealerAdress.Size = new System.Drawing.Size(243, 32);
+            this.tb_dealerAdress.TabIndex = 3;
             // 
-            // label2
+            // tb_dealerMail
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(419, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "DealerName";
+            this.tb_dealerMail.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_dealerMail.Location = new System.Drawing.Point(319, 89);
+            this.tb_dealerMail.Name = "tb_dealerMail";
+            this.tb_dealerMail.Size = new System.Drawing.Size(161, 32);
+            this.tb_dealerMail.TabIndex = 3;
             // 
-            // label3
+            // tb_dealerName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(539, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "DealerMail";
+            this.tb_dealerName.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_dealerName.Location = new System.Drawing.Point(152, 89);
+            this.tb_dealerName.MinimumSize = new System.Drawing.Size(161, 36);
+            this.tb_dealerName.Name = "tb_dealerName";
+            this.tb_dealerName.Size = new System.Drawing.Size(161, 32);
+            this.tb_dealerName.TabIndex = 3;
             // 
-            // label4
+            // tb_subDealerUserID
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(658, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "DiscountIDFK";
+            this.tb_subDealerUserID.Enabled = false;
+            this.tb_subDealerUserID.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tb_subDealerUserID.Location = new System.Drawing.Point(34, 89);
+            this.tb_subDealerUserID.Name = "tb_subDealerUserID";
+            this.tb_subDealerUserID.Size = new System.Drawing.Size(112, 32);
+            this.tb_subDealerUserID.TabIndex = 3;
             // 
-            // label5
+            // cb_subDealerUser
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(778, 36);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 16);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "DealerAddress";
+            this.cb_subDealerUser.AutoSize = true;
+            this.cb_subDealerUser.Location = new System.Drawing.Point(128, 175);
+            this.cb_subDealerUser.Name = "cb_subDealerUser";
+            this.cb_subDealerUser.Size = new System.Drawing.Size(18, 17);
+            this.cb_subDealerUser.TabIndex = 5;
+            this.cb_subDealerUser.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // lbl_dealerCountry
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(884, 36);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 16);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "DealerCity";
+            this.lbl_dealerCountry.AutoSize = true;
+            this.lbl_dealerCountry.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerCountry.Location = new System.Drawing.Point(1232, 45);
+            this.lbl_dealerCountry.Name = "lbl_dealerCountry";
+            this.lbl_dealerCountry.Size = new System.Drawing.Size(136, 24);
+            this.lbl_dealerCountry.TabIndex = 2;
+            this.lbl_dealerCountry.Text = "Dealer Country";
             // 
-            // label7
+            // lbl_dealerPostalCode
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(990, 36);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(119, 16);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "DealerPostalCode";
+            this.lbl_dealerPostalCode.AutoSize = true;
+            this.lbl_dealerPostalCode.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerPostalCode.Location = new System.Drawing.Point(1065, 45);
+            this.lbl_dealerPostalCode.Name = "lbl_dealerPostalCode";
+            this.lbl_dealerPostalCode.Size = new System.Drawing.Size(124, 24);
+            this.lbl_dealerPostalCode.TabIndex = 2;
+            this.lbl_dealerPostalCode.Text = "Dealer P.Code";
             // 
-            // label8
+            // lbl_dealerCity
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1096, 36);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 16);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "DealerCountry";
+            this.lbl_dealerCity.AutoSize = true;
+            this.lbl_dealerCity.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerCity.Location = new System.Drawing.Point(898, 45);
+            this.lbl_dealerCity.Name = "lbl_dealerCity";
+            this.lbl_dealerCity.Size = new System.Drawing.Size(101, 24);
+            this.lbl_dealerCity.TabIndex = 2;
+            this.lbl_dealerCity.Text = "Dealer City";
             // 
-            // label9
+            // lbl_dealerAdress
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1202, 36);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 16);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "IsDeleted";
+            this.lbl_dealerAdress.AutoSize = true;
+            this.lbl_dealerAdress.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerAdress.Location = new System.Drawing.Point(649, 45);
+            this.lbl_dealerAdress.Name = "lbl_dealerAdress";
+            this.lbl_dealerAdress.Size = new System.Drawing.Size(136, 24);
+            this.lbl_dealerAdress.TabIndex = 2;
+            this.lbl_dealerAdress.Text = "Dealer Address";
             // 
-            // comboBox1
+            // lbl_discountAmountType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(661, 63);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(98, 24);
-            this.comboBox1.TabIndex = 6;
+            this.lbl_discountAmountType.AutoSize = true;
+            this.lbl_discountAmountType.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_discountAmountType.Location = new System.Drawing.Point(482, 45);
+            this.lbl_discountAmountType.Name = "lbl_discountAmountType";
+            this.lbl_discountAmountType.Size = new System.Drawing.Size(127, 24);
+            this.lbl_discountAmountType.TabIndex = 2;
+            this.lbl_discountAmountType.Text = "Discount Type";
+            // 
+            // lbl_dealerMail
+            // 
+            this.lbl_dealerMail.AutoSize = true;
+            this.lbl_dealerMail.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerMail.Location = new System.Drawing.Point(315, 45);
+            this.lbl_dealerMail.Name = "lbl_dealerMail";
+            this.lbl_dealerMail.Size = new System.Drawing.Size(106, 24);
+            this.lbl_dealerMail.TabIndex = 2;
+            this.lbl_dealerMail.Text = "Dealer Mail";
+            // 
+            // lbl_dealerName
+            // 
+            this.lbl_dealerName.AutoSize = true;
+            this.lbl_dealerName.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerName.Location = new System.Drawing.Point(148, 45);
+            this.lbl_dealerName.Name = "lbl_dealerName";
+            this.lbl_dealerName.Size = new System.Drawing.Size(118, 24);
+            this.lbl_dealerName.TabIndex = 2;
+            this.lbl_dealerName.Text = "Dealer Name";
+            // 
+            // lbl_dealerUserID
+            // 
+            this.lbl_dealerUserID.AutoSize = true;
+            this.lbl_dealerUserID.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_dealerUserID.Location = new System.Drawing.Point(30, 45);
+            this.lbl_dealerUserID.Name = "lbl_dealerUserID";
+            this.lbl_dealerUserID.Size = new System.Drawing.Size(70, 24);
+            this.lbl_dealerUserID.TabIndex = 2;
+            this.lbl_dealerUserID.Text = "User ID";
+            // 
+            // lbl_brandDelete
+            // 
+            this.lbl_brandDelete.AutoSize = true;
+            this.lbl_brandDelete.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.lbl_brandDelete.ForeColor = System.Drawing.Color.Red;
+            this.lbl_brandDelete.Location = new System.Drawing.Point(33, 168);
+            this.lbl_brandDelete.Name = "lbl_brandDelete";
+            this.lbl_brandDelete.Size = new System.Drawing.Size(72, 28);
+            this.lbl_brandDelete.TabIndex = 4;
+            this.lbl_brandDelete.Text = "Delete";
+            // 
+            // btn_editSubDealers
+            // 
+            this.btn_editSubDealers.Location = new System.Drawing.Point(177, 225);
+            this.btn_editSubDealers.Name = "btn_editSubDealers";
+            this.btn_editSubDealers.Size = new System.Drawing.Size(142, 42);
+            this.btn_editSubDealers.TabIndex = 9;
+            this.btn_editSubDealers.Text = "Edit";
+            this.btn_editSubDealers.UseVisualStyleBackColor = true;
+            this.btn_editSubDealers.Click += new System.EventHandler(this.btn_editSubDealers_Click);
+            // 
+            // dgv_editSubDealers
+            // 
+            this.dgv_editSubDealers.AllowUserToAddRows = false;
+            this.dgv_editSubDealers.AllowUserToDeleteRows = false;
+            this.dgv_editSubDealers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_editSubDealers.Location = new System.Drawing.Point(12, 326);
+            this.dgv_editSubDealers.Name = "dgv_editSubDealers";
+            this.dgv_editSubDealers.ReadOnly = true;
+            this.dgv_editSubDealers.RowHeadersWidth = 51;
+            this.dgv_editSubDealers.RowTemplate.Height = 24;
+            this.dgv_editSubDealers.Size = new System.Drawing.Size(1546, 557);
+            this.dgv_editSubDealers.TabIndex = 8;
+            this.dgv_editSubDealers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editSubDealers_DataBindingComplete);
+            this.dgv_editSubDealers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editSubDealers_RowHeaderMouseClick);
             // 
             // SubDealerSettings
             // 
@@ -210,31 +330,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1900, 981);
             this.ControlBox = false;
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lbl_subDealerSettings);
+            this.Controls.Add(this.gb_addSubDealers);
+            this.Controls.Add(this.dgv_editSubDealers);
             this.MaximumSize = new System.Drawing.Size(1918, 1028);
             this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "SubDealerSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Sub Dealer Settings";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.SubDealerSettings_Load);
+            this.gb_addSubDealers.ResumeLayout(false);
+            this.gb_addSubDealers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_editSubDealers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,23 +351,29 @@
         #endregion
 
         private System.Windows.Forms.Label lbl_subDealerSettings;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox gb_addSubDealers;
+        private System.Windows.Forms.Button btn_clear;
+        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.TextBox tb_subDealerUserID;
+        private System.Windows.Forms.CheckBox cb_subDealerUser;
+        private System.Windows.Forms.Label lbl_dealerUserID;
+        private System.Windows.Forms.Label lbl_brandDelete;
+        private System.Windows.Forms.DataGridView dgv_editSubDealers;
+        private System.Windows.Forms.Button btn_editSubDealers;
+        private System.Windows.Forms.TextBox tb_dealerCountry;
+        private System.Windows.Forms.TextBox tb_dealerPostalCode;
+        private System.Windows.Forms.TextBox tb_dealerCity;
+        private System.Windows.Forms.TextBox tb_dealerAdress;
+        private System.Windows.Forms.TextBox tb_dealerMail;
+        private System.Windows.Forms.TextBox tb_dealerName;
+        private System.Windows.Forms.Label lbl_dealerCountry;
+        private System.Windows.Forms.Label lbl_dealerPostalCode;
+        private System.Windows.Forms.Label lbl_dealerCity;
+        private System.Windows.Forms.Label lbl_dealerAdress;
+        private System.Windows.Forms.Label lbl_discountAmountType;
+        private System.Windows.Forms.Label lbl_dealerMail;
+        private System.Windows.Forms.Label lbl_dealerName;
+        private System.Windows.Forms.Button btn_cancelEdit;
+        private System.Windows.Forms.ComboBox cbb_subDealers;
     }
 }

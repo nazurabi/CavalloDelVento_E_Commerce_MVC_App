@@ -93,11 +93,15 @@ namespace FormForDataModel
             {
                 imageForEdit = "Silver.png";
             }
-            else
+            else if(3 == Convert.ToByte(selectedRow.Cells["DiscountID"].Value))
             {
                 imageForEdit = "Bronze.png";
             }
-            pb_discountRates.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageForEdit);
+            else
+            {
+                imageForEdit = "Normaluser.png";
+            }
+                pb_discountRates.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageForEdit);
             pb_discountRates.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }

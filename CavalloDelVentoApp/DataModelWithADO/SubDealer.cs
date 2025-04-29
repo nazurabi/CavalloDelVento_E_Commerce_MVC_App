@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataModelWithADO
 {
-    internal class SubDealer
+    public class SubDealer
     {
         public int subDealerUserID { get; set; }
         public string subDealerName { get; set; }

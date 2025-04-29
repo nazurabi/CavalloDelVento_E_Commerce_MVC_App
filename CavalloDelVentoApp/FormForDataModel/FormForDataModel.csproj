@@ -227,7 +227,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Images\ApplicationImages\Bronze.png" />
+    <Content Include="Images\ApplicationImages\cavallodelventologo.png" />
     <Content Include="Images\ApplicationImages\Gold.png" />
+    <Content Include="Images\ApplicationImages\Normaluser.png" />
     <Content Include="Images\ApplicationImages\Silver.png" />
     <Content Include="Images\BrandImages\none.jpg" />
     <Content Include="Images\CategoriesImages\none.jpg" />

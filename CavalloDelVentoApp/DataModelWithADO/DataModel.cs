@@ -42,6 +42,89 @@ namespace DataModelWithADO
             }
         }
 
+        public bool isTextBoxesEmpty(Control checkTextBoxes, string nullableTextBoxName)
+        {
+            bool empty = false;
+            foreach (Control controller in checkTextBoxes.Controls)
+            {
+                if (controller is TextBox tb)
+                {
+                    if (string.IsNullOrWhiteSpace(tb.Text))
+                    {
+                        if (tb.Name != nullableTextBoxName)
+                        {
+                            empty = true;
+                        }
+                    }
+                }
+            }
+            return empty;
+        }
+        public bool isTextBoxesEmpty(Control checkTextBoxes)
+        {
+            bool empty = false;
+            foreach (Control controller in checkTextBoxes.Controls)
+            {
+                if (controller is TextBox tb)
+                {
+                    if (string.IsNullOrWhiteSpace(tb.Text) && tb.Name != "tb_subDealerUserID")
+                    {
+                        empty = true;
+                    }
+                }
+            }
+            return empty;
+        }
+
+
+        public void enableControls(Control checkTextBoxes)
+        {
+            foreach (Control controller in checkTextBoxes.Controls)
+            {
+                //if (controller is TextBox tb)
+                //{
+                //    tb.Enabled = true;
+                //}
+                if (!(controller is Label) && !(controller is DataGridView) && !(controller is Button))
+                {
+                    controller.Enabled = true;
+                }
+            }
+        }
+        public void disableControls(Control checkTextBoxes)
+        {
+            foreach (Control controller in checkTextBoxes.Controls)
+            {
+                if (!(controller is Label) && !(controller is DataGridView) && !(controller is Button))
+                {
+                    controller.Enabled = false;
+                }
+            }
+        }
+
+        public void clearControls(Control checkTextBoxes)
+        {
+            foreach (Control controller in checkTextBoxes.Controls)
+            {
+                if (controller is TextBox tb)
+                {
+                    tb.Text = string.Empty;
+                }
+                else if (controller is PictureBox pb)
+                {
+                    pb.ImageLocation = "";
+                }
+                else if (controller is CheckBox cb)
+                {
+                    cb.Checked = false;
+                }
+                else if (controller is ComboBox cbb)
+                {
+                    cbb.SelectedIndex = 0;
+                }
+            }
+        }
+
         #region Brand Applications
 
         public DataTable brandDataBind()
@@ -864,19 +947,23 @@ namespace DataModelWithADO
                 string discountType = row["DiscountType"].ToString();
                 string discountAmount = row["DiscountAmount"].ToString();
                 string imageFile;
-                if("Gold"== row["DiscountType"].ToString())
+                if ("Gold" == row["DiscountType"].ToString())
                 {
                     imageFile = "Gold.png";
                 }
-                else if("Silver"== row["DiscountType"].ToString())
+                else if ("Silver" == row["DiscountType"].ToString())
                 {
                     imageFile = "Silver.png";
                 }
-                else
+                else if ("Bronze" == row["DiscountType"].ToString())
                 {
                     imageFile = "Bronze.png";
                 }
-          
+                else
+                {
+                    imageFile = "Normaluser.png";
+                }
+
 
                 string fullPath = Path.Combine(imagePath, imageFile);
                 System.Drawing.Image img = null;
@@ -913,105 +1000,300 @@ namespace DataModelWithADO
             }
 
         }
+
+        public List<DiscountRates> getDiscountRates()
+        {
+            List<DiscountRates> drates = new List<DiscountRates>();
+            try
+            {
+                cmd.CommandText = "SELECT * FROM DiscountRatesSettings";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DiscountRates dr = new DiscountRates();
+                    dr.discountID = reader.GetInt32(0);
+                    dr.discountType = reader.GetString(1);
+                    dr.discountAmount = reader.GetByte(2);
+                    drates.Add(dr);
+                }
+                return drates;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public string getDiscountType(string checkDiscountID)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT DiscountType FROM DiscountRatesSettings WHERE DiscountID=@discountID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@discountID", checkDiscountID);
+                con.Open();
+                string discountType = Convert.ToString(cmd.ExecuteScalar());
+                return discountType;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
 
-        //#region SubDealers
-        //public DataTable brandDataBind()
-        //{
-           
-        //    cmd.CommandText = "SELECT * FROM Brands";
-        //    SqlDataAdapter da = new SqlDataAdapter();
-        //    SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
-        //    commandBuilder.DataAdapter = da;
-        //    da.SelectCommand = cmd;
+        #region SubDealers
+        public DataTable subDealerDataBind()
+        {
+            cmd.CommandText = "SELECT * FROM SubDealerUsers";
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+            commandBuilder.DataAdapter = da;
+            da.SelectCommand = cmd;
 
-        //    DataTable temporaryDataTable = new DataTable();
-        //    da.Fill(temporaryDataTable);
+            DataTable temporaryDataTable = new DataTable();
+            da.Fill(temporaryDataTable);
 
-        //    DataTable returnToForm = new DataTable();
-        //    returnToForm.Columns.Add("S/N", typeof(string));
-        //    returnToForm.Columns.Add("BrandID", typeof(int));
-        //    returnToForm.Columns.Add("Brand Name", typeof(string));
-        //    returnToForm.Columns.Add("Is Brand Active For Sale", typeof(string));
-        //    returnToForm.Columns.Add("Is Deleted", typeof(string));
-        //    returnToForm.Columns.Add("Brand Image Name", typeof(string));
-        //    returnToForm.Columns.Add("Brand Image", typeof(System.Drawing.Image));
-        //    short sequenceNumber = 0;
+            DataTable returnToForm = new DataTable();
+            returnToForm.Columns.Add("S/N", typeof(string));
+            returnToForm.Columns.Add("User ID", typeof(int));
+            returnToForm.Columns.Add("Dealer Name", typeof(string));
+            returnToForm.Columns.Add("Dealer Mail", typeof(string));
+            returnToForm.Columns.Add("DiscountIDFK", typeof(string));
+            returnToForm.Columns.Add("User Type", typeof(string));
+            returnToForm.Columns.Add("Dealer Address", typeof(string));
+            returnToForm.Columns.Add("Dealer City", typeof(string));
+            returnToForm.Columns.Add("Dealer Postal Code", typeof(string));
+            returnToForm.Columns.Add("Dealer Country", typeof(string));
+            returnToForm.Columns.Add("Is Deleted", typeof(string));
+            short sequenceNumber = 0;
+            foreach (DataRow row in temporaryDataTable.Rows)
+            {
+                sequenceNumber++;
+                string userID = row["SubDealerUserID"].ToString();
+                string dealerName = row["DealerName"].ToString();
+                string dealerMail = row["DealerMail"].ToString();
+                string discountIDFK = row["DiscountIDFK"].ToString();
+                string userType = getDiscountType(discountIDFK);
+                string dealerAdress = row["DealerAddress"].ToString();
+                string dealerCity = row["DealerCity"].ToString();
+                string dealerPostalCode = row["DealerPostalCode"].ToString();
+                string dealerCountry = row["DealerCountry"].ToString();
+                bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
 
-        //    string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages");
-        //    imagePath = Path.GetFullPath(imagePath);
+                returnToForm.Rows.Add(sequenceNumber, userID, dealerName, dealerMail, discountIDFK, userType, dealerAdress, dealerCity, dealerPostalCode, dealerCountry, isDeleted ? "Yes" : "No");
+            }
+            return returnToForm;
+        }
 
-        //    foreach (DataRow row in temporaryDataTable.Rows)
-        //    {
-        //        sequenceNumber++;
-        //        string brandID = row["BrandID"].ToString();
-        //        string brandName = row["BrandName"].ToString();
-        //        bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
-        //        bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
-        //        string imageFile = row["Image"].ToString();
-        //        string fullPath = Path.Combine(imagePath, imageFile);
-        //        System.Drawing.Image img = null;
-        //        if (File.Exists(fullPath))
-        //        {
-        //            img = System.Drawing.Image.FromFile(fullPath);
-        //        }
+        public byte listSubDealer(string checkSubDealerName, string checkSubDealerMail)
+        {
+            byte checkCounter = 0;
+            try
+            {
+                cmd.CommandText = "SELECT DealerName, DealerMail FROM SubDealerUsers";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    SubDealer sd = new SubDealer();
+                    sd.subDealerName = reader.GetString(0);
+                    sd.subDealerMail = reader.GetString(1);
 
-        //        returnToForm.Rows.Add(sequenceNumber, brandID, brandName, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
-        //    }
+                    if (checkSubDealerName == sd.subDealerName && checkSubDealerMail == sd.subDealerMail)
+                    {
+                        checkCounter++;
+                    }
+                }
+                return checkCounter;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
-        //    return returnToForm;
-        //}
+        public void addSubDealers(string dealerName, string dealerMail, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
+        {
+            cmd.CommandText = "INSERT INTO SubDealerUsers(DealerName, DealerMail, DealerAddress,DealerCity,DealerPostalCode,DealerCountry,DiscountIDFK,IsDeleted) VALUES (@dealerName, @dealerMail, @dealerAddress,@dealerCity,@dealerPostalCode,@dealerCountry,@discountIDFK,@isDeleted)";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@dealerName", dealerName);
+            cmd.Parameters.AddWithValue("@dealerMail", dealerMail);
+            cmd.Parameters.AddWithValue("@dealerAddress", dealerAddress);
+            cmd.Parameters.AddWithValue("@dealerCity", dealerCity);
+            cmd.Parameters.AddWithValue("@dealerPostalCode", dealerPostalCode);
+            cmd.Parameters.AddWithValue("@dealerCountry", dealerCountry);
+            cmd.Parameters.AddWithValue("@discountIDFK", selectedDiscountID);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Sub Dealer added successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to add sub dealer, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
-        ////public void addBrand(string brandName, bool isDeleted, bool isActive, string brandImage)
-        ////{
-        ////    cmd.CommandText = "INSERT INTO Brands(BrandName, Image, IsDeleted, IsActive) VALUES (@brandName, @brandImage, @isDeleted, @isActive)";
-        ////    cmd.Parameters.Clear();
-        ////    cmd.Parameters.AddWithValue("@brandName", brandName);
-        ////    cmd.Parameters.AddWithValue("@brandImage", brandImage);
-        ////    cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
-        ////    cmd.Parameters.AddWithValue("@isActive", isActive);
-        ////    try
-        ////    {
-        ////        con.Open();
-        ////        cmd.ExecuteNonQuery();
-        ////        MessageBox.Show("Brand added successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        ////    }
-        ////    catch (Exception)
-        ////    {
-        ////        MessageBox.Show("Unable to add brand, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        ////    }
-        ////    finally
-        ////    {
-        ////        con.Close();
-        ////    }
-        ////}
+        public void editSubDealers(string subDealerID, string dealerName, string dealerMail, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
+        {
+            cmd.CommandText = "UPDATE SubDealerUsers SET DealerName=@dealerName, DealerMail=@dealerMail, DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted WHERE SubDealerUserID=@subDealerID";
 
-        ////public void editBrand(string brandID, string brandName, bool isActive, bool isDeleted, string brandImage)
-        ////{
-        ////    cmd.CommandText = "UPDATE Brands SET BrandName=@brandName, IsActive=@isActive, IsDeleted=@isDeleted, Image=@brandImage WHERE BrandID=@brandID";
-        ////    cmd.Parameters.Clear();
-        ////    cmd.Parameters.AddWithValue("@brandID", brandID);
-        ////    cmd.Parameters.AddWithValue("@brandName", brandName);
-        ////    cmd.Parameters.AddWithValue("@isActive", isActive);
-        ////    cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
-        ////    cmd.Parameters.AddWithValue("@brandImage", brandImage);
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@subDealerID", subDealerID);
+            cmd.Parameters.AddWithValue("@dealerName", dealerName);
+            cmd.Parameters.AddWithValue("@dealerMail", dealerMail);
+            cmd.Parameters.AddWithValue("@dealerAddress", dealerAddress);
+            cmd.Parameters.AddWithValue("@dealerCity", dealerCity);
+            cmd.Parameters.AddWithValue("@dealerPostalCode", dealerPostalCode);
+            cmd.Parameters.AddWithValue("@dealerCountry", dealerCountry);
+            cmd.Parameters.AddWithValue("@discountIDFK", selectedDiscountID);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Sub Dealer edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit sub dealer, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
-        ////    try
-        ////    {
-        ////        con.Open();
-        ////        cmd.ExecuteNonQuery();
-        ////        MessageBox.Show("Brand edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        ////    }
-        ////    catch (Exception)
-        ////    {
-        ////        MessageBox.Show("Unable to edit brand, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        ////    }
-        ////    finally
-        ////    {
-        ////        con.Close();
-        ////    }
-        ////}
+        public void editSubDealers(string subDealerID, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
+        {
+            cmd.CommandText = "UPDATE SubDealerUsers SET DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted   WHERE SubDealerUserID=@subDealerID";
 
-        //#endregion
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@subDealerID", subDealerID);
+            cmd.Parameters.AddWithValue("@dealerAddress", dealerAddress);
+            cmd.Parameters.AddWithValue("@dealerCity", dealerCity);
+            cmd.Parameters.AddWithValue("@dealerPostalCode", dealerPostalCode);
+            cmd.Parameters.AddWithValue("@dealerCountry", dealerCountry);
+            cmd.Parameters.AddWithValue("@discountIDFK", selectedDiscountID);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Sub Dealer edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit sub dealer, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        #endregion
+
+        #region MainDealer
+
+
+        //public int settingID { get; set; }
+        //public string dealerName { get; set; }
+        //public string mail { get; set; }
+        //public string adress { get; set; }
+        //public string city { get; set; }
+        //public string postalCode { get; set; }
+        //public string country { get; set; }
+        //public byte invoiceTaxAmount { get; set; }
+        //public string image { get; set; }
+        public DataTable subMainDealerDataBind()
+        {
+            cmd.CommandText = "SELECT * FROM MainDealerSettings";
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+            commandBuilder.DataAdapter = da;
+            da.SelectCommand = cmd;
+
+            DataTable temporaryDataTable = new DataTable();
+            da.Fill(temporaryDataTable);
+
+            DataTable returnToForm = new DataTable();
+            returnToForm.Columns.Add("User ID", typeof(int));
+            returnToForm.Columns.Add("Dealer Name", typeof(string));
+            returnToForm.Columns.Add("Dealer Mail", typeof(string));
+            returnToForm.Columns.Add("Dealer Address", typeof(string));
+            returnToForm.Columns.Add("Dealer City", typeof(string));
+            returnToForm.Columns.Add("Dealer Postal Code", typeof(string));
+            returnToForm.Columns.Add("Dealer Country", typeof(string));
+            returnToForm.Columns.Add("Invoice Tax Amount", typeof(string));
+            returnToForm.Columns.Add("Image", typeof(System.Drawing.Image));
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages");
+            imagePath = Path.GetFullPath(imagePath);
+            foreach (DataRow row in temporaryDataTable.Rows)
+            {
+                string userID = row["SettingID"].ToString();
+                string dealerName = row["DealerName"].ToString();
+                string dealerMail = row["Mail"].ToString();
+                string dealerAdress = row["Adress"].ToString();
+                string dealerCity = row["City"].ToString();
+                string dealerPostalCode = row["PostalCode"].ToString();
+                string dealerCountry = row["Country"].ToString();
+                string invoiceTaxAmount = row["InvoiceTaxAmount"].ToString();
+                string dealerImage = row["Image"].ToString();
+                string fullPath = Path.Combine(imagePath, dealerImage);
+
+                System.Drawing.Image img = null;
+                if (File.Exists(fullPath))
+                {
+                    img = System.Drawing.Image.FromFile(fullPath);
+
+                }
+                returnToForm.Rows.Add(userID, dealerName, dealerMail, dealerAdress, dealerCity, dealerPostalCode, dealerCountry, invoiceTaxAmount, img);
+            }
+            return returnToForm;
+        }
+
+        public void editMainDealers(string subDealerID, string dealerName, string dealerMail, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
+        {
+            cmd.CommandText = "UPDATE SubDealerUsers SET DealerName=@dealerName, DealerMail=@dealerMail, DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted WHERE SubDealerUserID=@subDealerID";
+
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@subDealerID", subDealerID);
+            cmd.Parameters.AddWithValue("@dealerName", dealerName);
+            cmd.Parameters.AddWithValue("@dealerMail", dealerMail);
+            cmd.Parameters.AddWithValue("@dealerAddress", dealerAddress);
+            cmd.Parameters.AddWithValue("@dealerCity", dealerCity);
+            cmd.Parameters.AddWithValue("@dealerPostalCode", dealerPostalCode);
+            cmd.Parameters.AddWithValue("@dealerCountry", dealerCountry);
+            cmd.Parameters.AddWithValue("@discountIDFK", selectedDiscountID);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Sub Dealer edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit sub dealer, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        #endregion
+
     }
 }
