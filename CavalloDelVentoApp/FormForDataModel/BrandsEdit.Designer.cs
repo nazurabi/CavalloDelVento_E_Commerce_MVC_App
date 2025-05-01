@@ -55,7 +55,7 @@
             this.lbl_editBrand.Location = new System.Drawing.Point(12, 9);
             this.lbl_editBrand.Name = "lbl_editBrand";
             this.lbl_editBrand.Size = new System.Drawing.Size(136, 35);
-            this.lbl_editBrand.TabIndex = 1;
+            this.lbl_editBrand.TabIndex = 0;
             this.lbl_editBrand.Text = "Edit Brand";
             // 
             // btn_clear
@@ -64,7 +64,7 @@
             this.btn_clear.Location = new System.Drawing.Point(35, 216);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(162, 42);
-            this.btn_clear.TabIndex = 8;
+            this.btn_clear.TabIndex = 10;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -86,7 +86,7 @@
             this.lbl_brandActive.Location = new System.Drawing.Point(30, 142);
             this.lbl_brandActive.Name = "lbl_brandActive";
             this.lbl_brandActive.Size = new System.Drawing.Size(229, 28);
-            this.lbl_brandActive.TabIndex = 4;
+            this.lbl_brandActive.TabIndex = 6;
             this.lbl_brandActive.Text = "Is Brand Active For Sale";
             // 
             // gb_addBrand
@@ -107,7 +107,7 @@
             this.gb_addBrand.Location = new System.Drawing.Point(12, 47);
             this.gb_addBrand.Name = "gb_addBrand";
             this.gb_addBrand.Size = new System.Drawing.Size(1500, 330);
-            this.gb_addBrand.TabIndex = 3;
+            this.gb_addBrand.TabIndex = 1;
             this.gb_addBrand.TabStop = false;
             this.gb_addBrand.Text = "Brands Information";
             // 
@@ -127,7 +127,7 @@
             this.btn_selectImage.Location = new System.Drawing.Point(199, 216);
             this.btn_selectImage.Name = "btn_selectImage";
             this.btn_selectImage.Size = new System.Drawing.Size(162, 42);
-            this.btn_selectImage.TabIndex = 6;
+            this.btn_selectImage.TabIndex = 11;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
             this.btn_selectImage.Click += new System.EventHandler(this.btn_selectImage_Click);
@@ -138,7 +138,7 @@
             this.btn_save.Location = new System.Drawing.Point(35, 264);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(326, 42);
-            this.btn_save.TabIndex = 9;
+            this.btn_save.TabIndex = 12;
             this.btn_save.Text = "Edit Data";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -158,7 +158,7 @@
             this.cb_brandDelete.Location = new System.Drawing.Point(345, 184);
             this.cb_brandDelete.Name = "cb_brandDelete";
             this.cb_brandDelete.Size = new System.Drawing.Size(18, 17);
-            this.cb_brandDelete.TabIndex = 5;
+            this.cb_brandDelete.TabIndex = 9;
             this.cb_brandDelete.UseVisualStyleBackColor = true;
             // 
             // cb_brandActive
@@ -168,7 +168,7 @@
             this.cb_brandActive.Location = new System.Drawing.Point(345, 149);
             this.cb_brandActive.Name = "cb_brandActive";
             this.cb_brandActive.Size = new System.Drawing.Size(18, 17);
-            this.cb_brandActive.TabIndex = 5;
+            this.cb_brandActive.TabIndex = 7;
             this.cb_brandActive.UseVisualStyleBackColor = true;
             // 
             // lbl_brandImage
@@ -178,7 +178,7 @@
             this.lbl_brandImage.Location = new System.Drawing.Point(395, 45);
             this.lbl_brandImage.Name = "lbl_brandImage";
             this.lbl_brandImage.Size = new System.Drawing.Size(234, 28);
-            this.lbl_brandImage.TabIndex = 7;
+            this.lbl_brandImage.TabIndex = 4;
             this.lbl_brandImage.Text = "Brand\'s Image Selection";
             // 
             // lbl_brandDelete
@@ -189,7 +189,7 @@
             this.lbl_brandDelete.Location = new System.Drawing.Point(30, 177);
             this.lbl_brandDelete.Name = "lbl_brandDelete";
             this.lbl_brandDelete.Size = new System.Drawing.Size(72, 28);
-            this.lbl_brandDelete.TabIndex = 4;
+            this.lbl_brandDelete.TabIndex = 8;
             this.lbl_brandDelete.Text = "Delete";
             // 
             // dgv_editBrand
@@ -203,7 +203,7 @@
             this.dgv_editBrand.RowHeadersWidth = 51;
             this.dgv_editBrand.RowTemplate.Height = 24;
             this.dgv_editBrand.Size = new System.Drawing.Size(1500, 500);
-            this.dgv_editBrand.TabIndex = 4;
+            this.dgv_editBrand.TabIndex = 13;
             this.dgv_editBrand.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editBrand_DataBindingComplete);
             this.dgv_editBrand.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editBrand_RowHeaderMouseClick);
             // 

@@ -151,6 +151,7 @@ namespace FormForDataModel
                                 cb_categoryActive.Checked = false;
                                 imageName = "";
                                 pb_categoryImage.ImageLocation = "";
+                                tb_description.Text = "";
                                 CategoriesAddLoad();
                             }
                             else
@@ -165,6 +166,7 @@ namespace FormForDataModel
                                 cb_categoryActive.Checked = false;
                                 imageName = "";
                                 pb_categoryImage.ImageLocation = "";
+                                tb_description.Text = "";
                                 CategoriesAddLoad();
 
                             }

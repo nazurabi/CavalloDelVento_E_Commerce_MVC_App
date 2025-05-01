@@ -159,6 +159,7 @@ namespace FormForDataModel
                                 btn_cancelEdit.Enabled = false;
                                 btn_editSubDealers.Enabled = false;
                                 btn_save.Enabled = true;
+                                cb_subDealerUser.Enabled = false;
                             }
                             else
                             {
@@ -195,6 +196,8 @@ namespace FormForDataModel
                                 btn_cancelEdit.Enabled = false;
                                 btn_editSubDealers.Enabled = false;
                                 btn_save.Enabled = true;
+                                cb_subDealerUser.Enabled = false;
+
                             }
                             else
                             {
@@ -228,6 +231,7 @@ namespace FormForDataModel
             btn_save.Enabled = true;
             btn_cancelEdit.Enabled = false;
             btn_editSubDealers.Enabled = false;
+            cb_subDealerUser.Enabled = false;
             SubDealersLoad();
             dm.clearControls(gb_addSubDealers);
         }

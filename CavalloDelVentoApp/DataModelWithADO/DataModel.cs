@@ -108,7 +108,10 @@ namespace DataModelWithADO
             {
                 if (controller is TextBox tb)
                 {
-                    tb.Text = string.Empty;
+                    if (tb.Name != "tb_tax")
+                    {
+                        tb.Text = string.Empty;
+                    }
                 }
                 else if (controller is PictureBox pb)
                 {
@@ -128,6 +131,9 @@ namespace DataModelWithADO
                 }
             }
         }
+
+
+
 
         #region Brand Applications
 
@@ -643,7 +649,7 @@ namespace DataModelWithADO
                     Categories category = new Categories();
                     category.isDeleted = reader.GetBoolean(0);
                     category.isActive = reader.GetBoolean(1);
-                    if (category.isDeleted == true || category.isActive == true)
+                    if (category.isDeleted == true || category.isActive == false)
                     {
                         isDeleteOrDeactive = true;
                     }
@@ -929,6 +935,36 @@ namespace DataModelWithADO
             }
         }
 
+        public List<Categories> getCategoryForSendToSubDealer(string brandIDFK)
+        {
+            List<Categories> categories = new List<Categories>();
+            try
+            {
+                cmd.CommandText = "SELECT CategoryID, CategoryName, IsDeleted, IsActive FROM Categories WHERE BrandIDFK=@brandIDFK";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Categories category = new Categories();
+                    category.categoryID = reader.GetInt32(0);
+                    category.categoryName = reader.GetString(1);
+                    category.isDeleted = reader.GetBoolean(2);
+                    category.isActive = reader.GetBoolean(3);
+                    if (!category.isDeleted && category.isActive)
+                    {
+                        categories.Add(category);
+                    }
+                }
+                return categories;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public List<Brands> getBrandsForProducts()
         {
             List<Brands> brands = new List<Brands>();
@@ -956,13 +992,41 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
+        public List<Brands> getBrandsForSendToSubDealer()
+        {
+            List<Brands> brands = new List<Brands>();
+            try
+            {
+                cmd.CommandText = "SELECT * FROM Brands";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Brands brand = new Brands();
+                    brand.brandID = reader.GetInt32(0);
+                    brand.brandName = reader.GetString(1);
+                    brand.isDeleted = reader.GetBoolean(3);
+                    brand.isActive = reader.GetBoolean(4);
+                    if (!brand.isDeleted && brand.isActive)
+                    {
+                        brands.Add(brand);
+                    }
+                }
+                return brands;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         public List<Product> getProductForSendToSubDealers(string categoryIDFK)
         {
             List<Product> products = new List<Product>();
             try
             {
-                cmd.CommandText = "SELECT ProductID, ProductName FROM Products WHERE CategoryIDFK=@categoryIDFK";
+                cmd.CommandText = "SELECT ProductID, ProductName,IsDeleted, IsActive FROM Products WHERE CategoryIDFK=@categoryIDFK";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
                 con.Open();
@@ -972,7 +1036,12 @@ namespace DataModelWithADO
                     Product product = new Product();
                     product.productID = reader.GetInt32(0);
                     product.productName = reader.GetString(1);
-                    products.Add(product);
+                    product.isDeleted = reader.GetBoolean(2);
+                    product.isActive = reader.GetBoolean(3);
+                    if (!product.isDeleted && product.isActive)
+                    {
+                        products.Add(product);
+                    }
                 }
                 return products;
             }
@@ -981,6 +1050,7 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
+
 
         public string listImageForEditProducts(string productIDForCheck)
         {
@@ -1014,7 +1084,7 @@ namespace DataModelWithADO
                     Product product = new Product();
                     product.isDeleted = reader.GetBoolean(0);
                     product.isActive = reader.GetBoolean(1);
-                    if (product.isDeleted == true || product.isActive == true)
+                    if (product.isDeleted == true || product.isActive == false)
                     {
                         isDeleteOrDeactive = true;
                     }
@@ -1307,7 +1377,7 @@ namespace DataModelWithADO
 
         public void editSubDealers(string subDealerID, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
         {
-            cmd.CommandText = "UPDATE SubDealerUsers SET DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted   WHERE SubDealerUserID=@subDealerID";
+            cmd.CommandText = "UPDATE SubDealerUsers SET DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted WHERE SubDealerUserID=@subDealerID";
 
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@subDealerID", subDealerID);
@@ -1646,7 +1716,8 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("Brand Name", typeof(string));
             returnToForm.Columns.Add("CategoryIDFK", typeof(string));
             returnToForm.Columns.Add("Category Name", typeof(string));
-            returnToForm.Columns.Add("Product Item Number", typeof(string)); // this is ProductIDFK
+            returnToForm.Columns.Add("ProductIDFK", typeof(string));
+            returnToForm.Columns.Add("Product Item Number", typeof(string));
             returnToForm.Columns.Add("Product Name", typeof(string));
             returnToForm.Columns.Add("Product Description", typeof(string));
             returnToForm.Columns.Add("MainUserIDFK", typeof(string));
@@ -1660,6 +1731,7 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("Sub Total Price", typeof(decimal));
             returnToForm.Columns.Add("Tax", typeof(decimal));
             returnToForm.Columns.Add("Total Price", typeof(decimal));
+            returnToForm.Columns.Add("Discounted Price", typeof(decimal));
             returnToForm.Columns.Add("Description", typeof(string));
             returnToForm.Columns.Add("Is Deleted", typeof(string));
             returnToForm.Columns.Add("Product Image", typeof(System.Drawing.Image));
@@ -1675,40 +1747,46 @@ namespace DataModelWithADO
                     {
                         if (!isProductDeleteOrDeactive(row["ProductIDFK"].ToString()))
                         {
-                            sequenceNumber++;
-                            string shipmenNumber = row["SendID"].ToString();
-                            string brandIDFK = row["BrandIDFK"].ToString();
-                            string brandName = getBrandNameForProducts(brandIDFK);
-                            string categoryIDFK = row["CategoryIDFK"].ToString();
-                            string categoryName = getCategoryNameForProducts(categoryIDFK);
-                            string productItemNumber = row["ProductIDFK"].ToString();
-                            string productName = getProductNameForSendToSubDealer(productItemNumber);
-                            string productDescription = getProductDescription(productItemNumber);
-                            string mainUserIDFK = row["MainUserIDFK"].ToString();
-                            string subDealerIDFK = row["SubDealerIDFK"].ToString();
-                            string subDealerName = getSubDealerName(subDealerIDFK);
-                            string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
-                            string subDealerDiscountType = getDiscountType(subDealerDiscountIDFK);
-                            string subDealerDiscountAmount = getDiscountAmount(subDealerDiscountIDFK);
-                            DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
-                            short sendQuantity = Convert.ToInt16(row["SendQuantity"]);
-                            decimal unitPrice = Convert.ToDecimal(getUnitPrice(productItemNumber));
-                            decimal subTotalPrice = Convert.ToDecimal(row["SubTotalPrice"]);
-                            decimal tax = Convert.ToDecimal(getTax("1"));
-                            decimal totalPrice = Convert.ToDecimal(row["UnitPrice"]);
-                            string description = row["Description"].ToString();
-                            bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
-                            string imageFile = listImageForEditProducts(productItemNumber);
-                            string fullPath = Path.Combine(imagePath, imageFile);
-
-                            System.Drawing.Image img = null;
-                            if (File.Exists(fullPath))
+                            bool checkDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                            if (!checkDeleted)
                             {
-                                img = System.Drawing.Image.FromFile(fullPath);
+                                sequenceNumber++;
+                                string shipmenNumber = row["SendID"].ToString();
+                                string brandIDFK = row["BrandIDFK"].ToString();
+                                string brandName = getBrandNameForProducts(brandIDFK);
+                                string categoryIDFK = row["CategoryIDFK"].ToString();
+                                string categoryName = getCategoryNameForProducts(categoryIDFK);
+                                string productIDFK = row["ProductIDFK"].ToString();
+                                string productItemNumber = row["ProductItemNumber"].ToString();
+                                string productName = getProductNameForSendToSubDealer(row["ProductIDFK"].ToString());
+                                string productDescription = getProductDescription(row["ProductIDFK"].ToString());
+                                string mainUserIDFK = row["MainUserIDFK"].ToString();
+                                string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
+                                string subDealerName = getSubDealerName(subDealerIDFK);
+                                string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
+                                string subDealerDiscountType = getDiscountType(subDealerDiscountIDFK);
+                                string subDealerDiscountAmount = getDiscountAmount(subDealerDiscountIDFK);
+                                DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
+                                short sendQuantity = Convert.ToInt16(row["SendQuantity"]);
+                                decimal unitPrice = Convert.ToDecimal(getUnitPrice(productIDFK));
+                                decimal subTotalPrice = Convert.ToDecimal(row["SubTotalPrice"]);
+                                decimal tax = Convert.ToDecimal(getTax("1"));
+                                decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                                decimal discountedPrice = Convert.ToDecimal(row["DiscountedPrice"]);
+                                string description = row["Description"].ToString();
+                                bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                                string imageFile = listImageForEditProducts(productIDFK);
+                                string fullPath = Path.Combine(imagePath, imageFile);
 
+                                System.Drawing.Image img = null;
+                                if (File.Exists(fullPath))
+                                {
+                                    img = System.Drawing.Image.FromFile(fullPath);
+
+                                }
+
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img);
                             }
-
-                            returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, description, isDeleted ? "Yes" : "No", img);
                         }
                     }
                 }
@@ -1830,7 +1908,12 @@ namespace DataModelWithADO
                     SubDealer sd = new SubDealer();
                     sd.subDealerUserID = reader.GetInt32(0);
                     sd.subDealerName = reader.GetString(1);
-                    subDealers.Add(sd);
+                    sd.discountIDFK = reader.GetInt32(3);
+                    sd.isDeleted = reader.GetBoolean(8);
+                    if (!sd.isDeleted)
+                    {
+                        subDealers.Add(sd);
+                    }
                 }
                 return subDealers;
             }
@@ -1840,13 +1923,14 @@ namespace DataModelWithADO
             }
         }
 
-        public void sendToSubDealers(string brandIDFK, string categoryIDFK, string productIDFK, string mainUserIDFK, string subDealerUserIDFK, DateTime sendDate, short sendQuantity, decimal unitPrice, decimal subTotalPrice, decimal tax, decimal totalPrice, string description, bool isDeleted)
+        public void sendToSubDealers(string brandIDFK, string categoryIDFK, string productIDFK, string productItemNumber, string mainUserIDFK, string subDealerUserIDFK, DateTime sendDate, short sendQuantity, decimal unitPrice, decimal subTotalPrice, decimal tax, decimal totalPrice, decimal discountedPrice, string description, bool isDeleted)
         {
-            cmd.CommandText = "INSERT INTO SendToSubDealers(BrandIDFK, CategoryIDFK, ProductIDFK,MainUserIDFK,SubDealerUserIDFK,SendDate,SendQuantity,UnitPrice,SubTotalPrice,Tax,TotalPrice,Description,IsDeleted) VALUES (@brandIDFK, @categoryIDFK, @productIDFK, @mainUserIDFK, @subDealerUserIDFK, @sendDate, @sendQuantity, @unitPrice, @subTotalPrice, @tax, @totalPrice, @description, @isDeleted)";
+            cmd.CommandText = "INSERT INTO SendToSubDealers(BrandIDFK, CategoryIDFK, ProductIDFK,ProductItemNumber, MainUserIDFK,SubDealerUserIDFK,SendDate,SendQuantity,UnitPrice,SubTotalPrice,Tax,TotalPrice,DiscountedPrice,Description,IsDeleted) VALUES (@brandIDFK, @categoryIDFK, @productIDFK ,@productItemNumber ,@mainUserIDFK, @subDealerUserIDFK, @sendDate, @sendQuantity, @unitPrice, @subTotalPrice, @tax, @totalPrice, @discountedPrice, @description, @isDeleted)";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
             cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
             cmd.Parameters.AddWithValue("@productIDFK", productIDFK);
+            cmd.Parameters.AddWithValue("@productItemNumber", productItemNumber);
             cmd.Parameters.AddWithValue("@mainUserIDFK", mainUserIDFK);
             cmd.Parameters.AddWithValue("@subDealerUserIDFK", subDealerUserIDFK);
             cmd.Parameters.AddWithValue("@sendDate", sendDate);
@@ -1855,6 +1939,7 @@ namespace DataModelWithADO
             cmd.Parameters.AddWithValue("@subTotalPrice", subTotalPrice);
             cmd.Parameters.AddWithValue("@tax", tax);
             cmd.Parameters.AddWithValue("@totalPrice", totalPrice);
+            cmd.Parameters.AddWithValue("@discountedPrice", discountedPrice);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
             try
@@ -1873,63 +1958,66 @@ namespace DataModelWithADO
             }
         }
 
-        //public void editSubDealers(string subDealerID, string dealerName, string dealerMail, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
-        //{
-        //    cmd.CommandText = "UPDATE SubDealerUsers SET DealerName=@dealerName, DealerMail=@dealerMail, DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted WHERE SubDealerUserID=@subDealerID";
+        public void editSendToSubDealers(string sendID, string brandIDFK, string categoryIDFK, string productIDFK, string productItemNumber, string mainUserIDFK, string subDealerUserIDFK, short sendQuantity, decimal unitPrice, decimal subTotalPrice, decimal tax, decimal totalPrice, decimal discountedPrice, string description)
+        {
+            cmd.CommandText = "UPDATE SendToSubDealers SET BrandIDFK=@brandIDFK, CategoryIDFK=@categoryIDFK, ProductIDFK=@productIDFK, ProductItemNumber=@productItemNumber, MainUserIDFK=@mainUserIDFK, SubDealerUserIDFK=@subDealerUserIDFK, SendQuantity=@sendQuantity, UnitPrice=@unitPrice, SubTotalPrice=@subTotalPrice, Tax=@tax, TotalPrice=@totalPrice, DiscountedPrice=@discountedPrice, Description=@description WHERE SendID=@sendID";
 
-        //    cmd.Parameters.Clear();
-        //    cmd.Parameters.AddWithValue("@subDealerID", subDealerID);
-        //    cmd.Parameters.AddWithValue("@dealerName", dealerName);
-        //    cmd.Parameters.AddWithValue("@dealerMail", dealerMail);
-        //    cmd.Parameters.AddWithValue("@dealerAddress", dealerAddress);
-        //    cmd.Parameters.AddWithValue("@dealerCity", dealerCity);
-        //    cmd.Parameters.AddWithValue("@dealerPostalCode", dealerPostalCode);
-        //    cmd.Parameters.AddWithValue("@dealerCountry", dealerCountry);
-        //    cmd.Parameters.AddWithValue("@discountIDFK", selectedDiscountID);
-        //    cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
-        //    try
-        //    {
-        //        con.Open();
-        //        cmd.ExecuteNonQuery();
-        //        MessageBox.Show("Sub Dealer edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("Unable to edit sub dealer, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@sendID", sendID);
+            cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
+            cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
+            cmd.Parameters.AddWithValue("@productIDFK", productIDFK);
+            cmd.Parameters.AddWithValue("@productItemNumber", productItemNumber);
+            cmd.Parameters.AddWithValue("@mainUserIDFK", mainUserIDFK);
+            cmd.Parameters.AddWithValue("@subDealerUserIDFK", subDealerUserIDFK);
+            cmd.Parameters.AddWithValue("@sendQuantity", sendQuantity);
+            cmd.Parameters.AddWithValue("@unitPrice", unitPrice);
+            cmd.Parameters.AddWithValue("@subTotalPrice", subTotalPrice);
+            cmd.Parameters.AddWithValue("@tax", tax);
+            cmd.Parameters.AddWithValue("@totalPrice", totalPrice);
+            cmd.Parameters.AddWithValue("@discountedPrice", discountedPrice);
+            cmd.Parameters.AddWithValue("@description", description);
 
-        //public void editSubDealers(string subDealerID, string dealerAddress, string dealerCity, string dealerPostalCode, string dealerCountry, string selectedDiscountID, bool isDeleted)
-        //{
-        //    cmd.CommandText = "UPDATE SubDealerUsers SET DealerAddress=@dealerAddress, DealerCity=@dealerCity, DealerPostalCode=@dealerPostalCode, DealerCountry=@dealerCountry, DiscountIDFK=@discountIDFK, IsDeleted=@isDeleted   WHERE SubDealerUserID=@subDealerID";
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Shipment list edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit shipment list, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
-        //    cmd.Parameters.Clear();
-        //    cmd.Parameters.AddWithValue("@subDealerID", subDealerID);
-        //    cmd.Parameters.AddWithValue("@dealerAddress", dealerAddress);
-        //    cmd.Parameters.AddWithValue("@dealerCity", dealerCity);
-        //    cmd.Parameters.AddWithValue("@dealerPostalCode", dealerPostalCode);
-        //    cmd.Parameters.AddWithValue("@dealerCountry", dealerCountry);
-        //    cmd.Parameters.AddWithValue("@discountIDFK", selectedDiscountID);
-        //    cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
-        //    try
-        //    {
-        //        con.Open();
-        //        cmd.ExecuteNonQuery();
-        //        MessageBox.Show("Sub Dealer edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("Unable to edit sub dealer, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+        public void editSendToSubDealers(string sendID, string description, bool isDeleted)
+        {
+            cmd.CommandText = "UPDATE SendToSubDealers SET Description=@description, IsDeleted=@isDeleted WHERE SendID=@sendID";
+
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@sendID", sendID);
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@isDeleted", isDeleted);
+
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Shipment list edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit shipment list, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         #endregion
     }

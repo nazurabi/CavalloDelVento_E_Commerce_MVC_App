@@ -67,61 +67,10 @@ namespace FormForDataModel
             dgv_editProduct.Columns["CategoryIDFK"].Visible = false;
             dgv_editProduct.Columns["ProductID"].Visible = false;
             dgv_editProduct.Columns["Product Image Name"].Visible = false;
+            dgv_editProduct.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             foreach (DataGridViewColumn column in dgv_editProduct.Columns)
             {
-                if (column.Name == "S/N")
-                {
-                    column.Width = 50;
-                }
-                if (column.Name == "Brand Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Category Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Product Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Description")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Quantity Per Unit")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Unit Price")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Units In Stock")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Units On Order")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Reorder Level")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Discontinued")
-                {
-                    column.Width = 150;
-                }
-                if (column.Name == "Is Product Active For Sale")
-                {
-                    column.Width = 150;
-                }
-                if (column.Name == "Is Deleted")
-                {
-                    column.Width = 150;
-                }
                 if (column.Name == "Product Image")
                 {
                     if (dgv_editProduct.Columns["Product Image"] is DataGridViewImageColumn imageCol)
@@ -277,7 +226,7 @@ namespace FormForDataModel
                         categoryIDFK = cbb_categoryName.SelectedValue.ToString();
                         description = tb_description.Text;
                         dm.editProduct(productID,brandIDFK, categoryIDFK, description, imageName, quantityPerUnit, unitPrice, unitInStock, reorderLevel, discontinued, isDeleted, isActive);
-                        destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageName);
+                        destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageName);
                         destinationImagePath = Path.GetFullPath(destinationImagePath);
                         File.Copy(selectedImagePath, destinationImagePath, true);
                         tb_productName.Text = "";

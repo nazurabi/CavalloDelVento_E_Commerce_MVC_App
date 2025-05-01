@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.lbl_levelIntegrationOrders = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_levelIntegrationOrders
@@ -41,13 +42,26 @@
             this.lbl_levelIntegrationOrders.TabIndex = 1;
             this.lbl_levelIntegrationOrders.Text = "Level Integration Orders";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(15, 59);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(806, 29);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Bu kısım kodlanacak (Stok miktarı biten ürün için sipariş takip kısmı olucak)";
+            // 
             // LevelIntegrationOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1900, 981);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_levelIntegrationOrders);
+            this.MaximumSize = new System.Drawing.Size(1918, 1028);
+            this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "LevelIntegrationOrders";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Level Integration Orders";
@@ -60,5 +74,6 @@
         #endregion
 
         private System.Windows.Forms.Label lbl_levelIntegrationOrders;
+        private System.Windows.Forms.Label label1;
     }
 }

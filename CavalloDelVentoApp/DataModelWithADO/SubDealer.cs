@@ -16,6 +16,7 @@ namespace DataModelWithADO
         public string subDealerCity { get; set; }
         public string subDealerPostalCode { get; set; }
         public string subDealerCountry { get; set; }
+        public bool isDeleted { get; set; }
 
     }
 }

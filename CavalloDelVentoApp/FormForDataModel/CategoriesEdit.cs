@@ -176,6 +176,7 @@ namespace FormForDataModel
                             destinationImagePath = Path.GetFullPath(destinationImagePath);
                             File.Copy(selectedImagePath, destinationImagePath, true);
                             tb_categoryName.Text = "";
+                            tb_description.Text = "";
                             cb_categoryActive.Checked = false;
                             cb_categoryDelete.Checked = false;
                             imageName = "";
@@ -200,10 +201,12 @@ namespace FormForDataModel
                             imageName = imageForEdit;
                             dm.editCategory(categoryID, brandIDFK, categoryName, description, isActive,isDeleted, imageName);
                             tb_categoryName.Text = "";
+                            tb_description.Text = "";
                             cb_categoryActive.Checked = false;
                             cb_categoryDelete.Checked = false;
                             imageName = "";
                             pb_categoryImage.ImageLocation = "";
+                         
                             CategoriesEditLoad();
                             tb_categoryName.Enabled = false;
                             cbb_brandName.Enabled = false;
@@ -235,6 +238,7 @@ namespace FormForDataModel
                         destinationImagePath = Path.GetFullPath(destinationImagePath);
                         File.Copy(selectedImagePath, destinationImagePath, true);
                         tb_categoryName.Text = "";
+                        tb_description.Text = "";
                         cb_categoryActive.Checked = false;
                         cb_categoryDelete.Checked = false;
                         imageName = "";
@@ -258,6 +262,7 @@ namespace FormForDataModel
                         imageName = imageForEdit;
                         dm.editCategory(categoryID, brandIDFK, description, isActive,isDeleted, imageName);
                         tb_categoryName.Text = "";
+                        tb_description.Text = "";
                         cb_categoryActive.Checked = false;
                         cb_categoryDelete.Checked = false;
                         imageName = "";

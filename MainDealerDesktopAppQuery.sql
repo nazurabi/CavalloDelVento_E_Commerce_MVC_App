@@ -16,7 +16,7 @@ CONSTRAINT pk_mainDealer PRIMARY KEY (SettingID)
 )
 GO
 INSERT INTO MainDealerSettings(DealerName,Mail,Adress,City,PostalCode,Country,Image,InvoiceTaxAmount)
-VALUES ('Cavallo Del Vento','cavallodelvento@gmail.com','Strada Statale 524','Cheiti','66022','Italy','cavallodelvento.jpeg',20)
+VALUES ('Cavallo Del Vento','cavallodelvento@gmail.com','Strada Statale 524','Cheiti','66022','Italy','cavallodelventologo.png	',20)
 GO
 CREATE TABLE MainDealerUsers(
 MainUserID int IDENTITY(1,1),
@@ -105,6 +105,7 @@ SendID int IDENTITY (1,1),
 BrandIDFK int,
 CategoryIDFK int,
 ProductIDFK int,
+ProductItemNumber nvarchar(50),
 MainUserIDFK int,
 SubDealerUserIDFK int,
 SendDate datetime,
@@ -113,6 +114,7 @@ UnitPrice decimal (18,2),
 SubTotalPrice decimal(18,2),
 Tax decimal(18,2),
 TotalPrice decimal(18,2),
+DiscountedPrice decimal(18,2),
 Description nvarchar(max),
 IsDeleted bit,
 CONSTRAINT pk_send PRIMARY KEY (SendID),

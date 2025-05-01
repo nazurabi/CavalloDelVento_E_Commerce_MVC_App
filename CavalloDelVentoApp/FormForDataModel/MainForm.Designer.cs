@@ -65,11 +65,11 @@
             // 
             this.lbl_welcomeTitle.AutoSize = true;
             this.lbl_welcomeTitle.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_welcomeTitle.Location = new System.Drawing.Point(890, 466);
+            this.lbl_welcomeTitle.Location = new System.Drawing.Point(830, 466);
             this.lbl_welcomeTitle.Name = "lbl_welcomeTitle";
-            this.lbl_welcomeTitle.Size = new System.Drawing.Size(120, 49);
+            this.lbl_welcomeTitle.Size = new System.Drawing.Size(240, 49);
             this.lbl_welcomeTitle.TabIndex = 1;
-            this.lbl_welcomeTitle.Text = "label1";
+            this.lbl_welcomeTitle.Text = "Welcome Tag";
             // 
             // tmr_welcomeTitle
             // 
@@ -115,14 +115,14 @@
             // TSMI_addBrand
             // 
             this.TSMI_addBrand.Name = "TSMI_addBrand";
-            this.TSMI_addBrand.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_addBrand.Size = new System.Drawing.Size(224, 26);
             this.TSMI_addBrand.Text = "Add";
             this.TSMI_addBrand.Click += new System.EventHandler(this.TSMI_addBrand_Click);
             // 
             // TSMI_editBrand
             // 
             this.TSMI_editBrand.Name = "TSMI_editBrand";
-            this.TSMI_editBrand.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_editBrand.Size = new System.Drawing.Size(224, 26);
             this.TSMI_editBrand.Text = "Edit";
             this.TSMI_editBrand.Click += new System.EventHandler(this.TSMI_editBrand_Click);
             // 
@@ -138,14 +138,14 @@
             // TSMI_addCategory
             // 
             this.TSMI_addCategory.Name = "TSMI_addCategory";
-            this.TSMI_addCategory.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_addCategory.Size = new System.Drawing.Size(224, 26);
             this.TSMI_addCategory.Text = "Add";
             this.TSMI_addCategory.Click += new System.EventHandler(this.TSMI_addCategory_Click);
             // 
             // TSMI_editCategory
             // 
             this.TSMI_editCategory.Name = "TSMI_editCategory";
-            this.TSMI_editCategory.Size = new System.Drawing.Size(120, 26);
+            this.TSMI_editCategory.Size = new System.Drawing.Size(224, 26);
             this.TSMI_editCategory.Text = "Edit";
             this.TSMI_editCategory.Click += new System.EventHandler(this.TSMI_editCategory_Click);
             // 

@@ -59,7 +59,7 @@
             this.lbl_editCategories.Location = new System.Drawing.Point(12, 9);
             this.lbl_editCategories.Name = "lbl_editCategories";
             this.lbl_editCategories.Size = new System.Drawing.Size(190, 35);
-            this.lbl_editCategories.TabIndex = 1;
+            this.lbl_editCategories.TabIndex = 0;
             this.lbl_editCategories.Text = "Edit Categories";
             // 
             // openFileDialog1
@@ -97,7 +97,7 @@
             this.gb_addCategory.Location = new System.Drawing.Point(12, 47);
             this.gb_addCategory.Name = "gb_addCategory";
             this.gb_addCategory.Size = new System.Drawing.Size(1500, 330);
-            this.gb_addCategory.TabIndex = 5;
+            this.gb_addCategory.TabIndex = 1;
             this.gb_addCategory.TabStop = false;
             this.gb_addCategory.Text = "Categories Information";
             // 
@@ -108,7 +108,7 @@
             this.cbb_brandName.Location = new System.Drawing.Point(35, 89);
             this.cbb_brandName.Name = "cbb_brandName";
             this.cbb_brandName.Size = new System.Drawing.Size(326, 36);
-            this.cbb_brandName.TabIndex = 12;
+            this.cbb_brandName.TabIndex = 3;
             this.cbb_brandName.Text = "---Choose---";
             this.cbb_brandName.SelectedIndexChanged += new System.EventHandler(this.cbb_brandName_SelectedIndexChanged);
             // 
@@ -119,7 +119,7 @@
             this.lbl_brandName.Location = new System.Drawing.Point(30, 45);
             this.lbl_brandName.Name = "lbl_brandName";
             this.lbl_brandName.Size = new System.Drawing.Size(128, 28);
-            this.lbl_brandName.TabIndex = 10;
+            this.lbl_brandName.TabIndex = 2;
             this.lbl_brandName.Text = "Brand Name";
             // 
             // pb_categoryImage
@@ -138,7 +138,7 @@
             this.btn_selectImage.Location = new System.Drawing.Point(199, 216);
             this.btn_selectImage.Name = "btn_selectImage";
             this.btn_selectImage.Size = new System.Drawing.Size(162, 42);
-            this.btn_selectImage.TabIndex = 6;
+            this.btn_selectImage.TabIndex = 14;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
             this.btn_selectImage.Click += new System.EventHandler(this.btn_selectImage_Click);
@@ -149,7 +149,7 @@
             this.btn_clear.Location = new System.Drawing.Point(35, 216);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(162, 42);
-            this.btn_clear.TabIndex = 8;
+            this.btn_clear.TabIndex = 13;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -160,7 +160,7 @@
             this.btn_save.Location = new System.Drawing.Point(35, 264);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(326, 42);
-            this.btn_save.TabIndex = 9;
+            this.btn_save.TabIndex = 15;
             this.btn_save.Text = "Edit Data";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -172,7 +172,7 @@
             this.tb_description.Multiline = true;
             this.tb_description.Name = "tb_description";
             this.tb_description.Size = new System.Drawing.Size(350, 172);
-            this.tb_description.TabIndex = 3;
+            this.tb_description.TabIndex = 10;
             // 
             // tb_categoryName
             // 
@@ -180,7 +180,7 @@
             this.tb_categoryName.Location = new System.Drawing.Point(367, 89);
             this.tb_categoryName.Name = "tb_categoryName";
             this.tb_categoryName.Size = new System.Drawing.Size(350, 36);
-            this.tb_categoryName.TabIndex = 3;
+            this.tb_categoryName.TabIndex = 9;
             // 
             // cb_categoryDelete
             // 
@@ -189,7 +189,7 @@
             this.cb_categoryDelete.Location = new System.Drawing.Point(319, 183);
             this.cb_categoryDelete.Name = "cb_categoryDelete";
             this.cb_categoryDelete.Size = new System.Drawing.Size(18, 17);
-            this.cb_categoryDelete.TabIndex = 5;
+            this.cb_categoryDelete.TabIndex = 7;
             this.cb_categoryDelete.UseVisualStyleBackColor = true;
             // 
             // lbl_categoryImage
@@ -199,7 +199,7 @@
             this.lbl_categoryImage.Location = new System.Drawing.Point(727, 45);
             this.lbl_categoryImage.Name = "lbl_categoryImage";
             this.lbl_categoryImage.Size = new System.Drawing.Size(266, 28);
-            this.lbl_categoryImage.TabIndex = 7;
+            this.lbl_categoryImage.TabIndex = 11;
             this.lbl_categoryImage.Text = "Categoriy\'s Image Selection";
             // 
             // lbl_categoryName
@@ -209,7 +209,7 @@
             this.lbl_categoryName.Location = new System.Drawing.Point(362, 45);
             this.lbl_categoryName.Name = "lbl_categoryName";
             this.lbl_categoryName.Size = new System.Drawing.Size(155, 28);
-            this.lbl_categoryName.TabIndex = 2;
+            this.lbl_categoryName.TabIndex = 8;
             this.lbl_categoryName.Text = "Category Name";
             // 
             // lbl_categoryDelete
@@ -220,7 +220,7 @@
             this.lbl_categoryDelete.Location = new System.Drawing.Point(30, 176);
             this.lbl_categoryDelete.Name = "lbl_categoryDelete";
             this.lbl_categoryDelete.Size = new System.Drawing.Size(72, 28);
-            this.lbl_categoryDelete.TabIndex = 4;
+            this.lbl_categoryDelete.TabIndex = 6;
             this.lbl_categoryDelete.Text = "Delete";
             // 
             // lbl_categoryActive
@@ -244,7 +244,7 @@
             this.dgv_editCategory.RowHeadersWidth = 51;
             this.dgv_editCategory.RowTemplate.Height = 24;
             this.dgv_editCategory.Size = new System.Drawing.Size(1500, 500);
-            this.dgv_editCategory.TabIndex = 6;
+            this.dgv_editCategory.TabIndex = 16;
             this.dgv_editCategory.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editCategory_DataBindingComplete);
             this.dgv_editCategory.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editCategory_RowHeaderMouseClick);
             // 

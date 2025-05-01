@@ -45,9 +45,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1900, 981);
             this.ControlBox = false;
             this.Controls.Add(this.lbl_listCategories);
+            this.MaximumSize = new System.Drawing.Size(1918, 1028);
+            this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "CategoriesList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "List Categories";

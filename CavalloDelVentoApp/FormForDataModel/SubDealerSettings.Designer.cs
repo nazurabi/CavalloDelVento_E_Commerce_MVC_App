@@ -64,7 +64,7 @@
             this.lbl_subDealerSettings.Location = new System.Drawing.Point(12, 9);
             this.lbl_subDealerSettings.Name = "lbl_subDealerSettings";
             this.lbl_subDealerSettings.Size = new System.Drawing.Size(238, 35);
-            this.lbl_subDealerSettings.TabIndex = 3;
+            this.lbl_subDealerSettings.TabIndex = 0;
             this.lbl_subDealerSettings.Text = "Sub Dealer Settings";
             // 
             // gb_addSubDealers
@@ -96,7 +96,7 @@
             this.gb_addSubDealers.Location = new System.Drawing.Point(12, 47);
             this.gb_addSubDealers.Name = "gb_addSubDealers";
             this.gb_addSubDealers.Size = new System.Drawing.Size(1546, 273);
-            this.gb_addSubDealers.TabIndex = 7;
+            this.gb_addSubDealers.TabIndex = 1;
             this.gb_addSubDealers.TabStop = false;
             this.gb_addSubDealers.Text = "Sub Dealers Information";
             // 
@@ -107,7 +107,7 @@
             this.cbb_subDealers.Location = new System.Drawing.Point(486, 89);
             this.cbb_subDealers.Name = "cbb_subDealers";
             this.cbb_subDealers.Size = new System.Drawing.Size(161, 32);
-            this.cbb_subDealers.TabIndex = 10;
+            this.cbb_subDealers.TabIndex = 9;
             this.cbb_subDealers.SelectedIndexChanged += new System.EventHandler(this.cbb_subDealers_SelectedIndexChanged);
             // 
             // btn_cancelEdit
@@ -115,7 +115,7 @@
             this.btn_cancelEdit.Location = new System.Drawing.Point(320, 225);
             this.btn_cancelEdit.Name = "btn_cancelEdit";
             this.btn_cancelEdit.Size = new System.Drawing.Size(142, 42);
-            this.btn_cancelEdit.TabIndex = 8;
+            this.btn_cancelEdit.TabIndex = 22;
             this.btn_cancelEdit.Text = "Cancel Edit";
             this.btn_cancelEdit.UseVisualStyleBackColor = true;
             this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
@@ -125,7 +125,7 @@
             this.btn_clear.Location = new System.Drawing.Point(463, 225);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(142, 42);
-            this.btn_clear.TabIndex = 8;
+            this.btn_clear.TabIndex = 23;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -135,7 +135,7 @@
             this.btn_save.Location = new System.Drawing.Point(34, 225);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(142, 42);
-            this.btn_save.TabIndex = 9;
+            this.btn_save.TabIndex = 20;
             this.btn_save.Text = "Add";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -146,7 +146,7 @@
             this.tb_dealerCountry.Location = new System.Drawing.Point(1236, 89);
             this.tb_dealerCountry.Name = "tb_dealerCountry";
             this.tb_dealerCountry.Size = new System.Drawing.Size(161, 32);
-            this.tb_dealerCountry.TabIndex = 3;
+            this.tb_dealerCountry.TabIndex = 17;
             // 
             // tb_dealerPostalCode
             // 
@@ -154,7 +154,7 @@
             this.tb_dealerPostalCode.Location = new System.Drawing.Point(1069, 89);
             this.tb_dealerPostalCode.Name = "tb_dealerPostalCode";
             this.tb_dealerPostalCode.Size = new System.Drawing.Size(161, 32);
-            this.tb_dealerPostalCode.TabIndex = 3;
+            this.tb_dealerPostalCode.TabIndex = 15;
             // 
             // tb_dealerCity
             // 
@@ -162,7 +162,7 @@
             this.tb_dealerCity.Location = new System.Drawing.Point(902, 89);
             this.tb_dealerCity.Name = "tb_dealerCity";
             this.tb_dealerCity.Size = new System.Drawing.Size(161, 32);
-            this.tb_dealerCity.TabIndex = 3;
+            this.tb_dealerCity.TabIndex = 13;
             // 
             // tb_dealerAdress
             // 
@@ -171,7 +171,7 @@
             this.tb_dealerAdress.Multiline = true;
             this.tb_dealerAdress.Name = "tb_dealerAdress";
             this.tb_dealerAdress.Size = new System.Drawing.Size(243, 32);
-            this.tb_dealerAdress.TabIndex = 3;
+            this.tb_dealerAdress.TabIndex = 11;
             // 
             // tb_dealerMail
             // 
@@ -179,7 +179,7 @@
             this.tb_dealerMail.Location = new System.Drawing.Point(319, 89);
             this.tb_dealerMail.Name = "tb_dealerMail";
             this.tb_dealerMail.Size = new System.Drawing.Size(161, 32);
-            this.tb_dealerMail.TabIndex = 3;
+            this.tb_dealerMail.TabIndex = 7;
             // 
             // tb_dealerName
             // 
@@ -188,7 +188,7 @@
             this.tb_dealerName.MinimumSize = new System.Drawing.Size(161, 36);
             this.tb_dealerName.Name = "tb_dealerName";
             this.tb_dealerName.Size = new System.Drawing.Size(161, 32);
-            this.tb_dealerName.TabIndex = 3;
+            this.tb_dealerName.TabIndex = 5;
             // 
             // tb_subDealerUserID
             // 
@@ -202,10 +202,11 @@
             // cb_subDealerUser
             // 
             this.cb_subDealerUser.AutoSize = true;
+            this.cb_subDealerUser.Enabled = false;
             this.cb_subDealerUser.Location = new System.Drawing.Point(128, 175);
             this.cb_subDealerUser.Name = "cb_subDealerUser";
             this.cb_subDealerUser.Size = new System.Drawing.Size(18, 17);
-            this.cb_subDealerUser.TabIndex = 5;
+            this.cb_subDealerUser.TabIndex = 19;
             this.cb_subDealerUser.UseVisualStyleBackColor = true;
             // 
             // lbl_dealerCountry
@@ -215,7 +216,7 @@
             this.lbl_dealerCountry.Location = new System.Drawing.Point(1232, 45);
             this.lbl_dealerCountry.Name = "lbl_dealerCountry";
             this.lbl_dealerCountry.Size = new System.Drawing.Size(136, 24);
-            this.lbl_dealerCountry.TabIndex = 2;
+            this.lbl_dealerCountry.TabIndex = 16;
             this.lbl_dealerCountry.Text = "Dealer Country";
             // 
             // lbl_dealerPostalCode
@@ -225,7 +226,7 @@
             this.lbl_dealerPostalCode.Location = new System.Drawing.Point(1065, 45);
             this.lbl_dealerPostalCode.Name = "lbl_dealerPostalCode";
             this.lbl_dealerPostalCode.Size = new System.Drawing.Size(124, 24);
-            this.lbl_dealerPostalCode.TabIndex = 2;
+            this.lbl_dealerPostalCode.TabIndex = 14;
             this.lbl_dealerPostalCode.Text = "Dealer P.Code";
             // 
             // lbl_dealerCity
@@ -235,7 +236,7 @@
             this.lbl_dealerCity.Location = new System.Drawing.Point(898, 45);
             this.lbl_dealerCity.Name = "lbl_dealerCity";
             this.lbl_dealerCity.Size = new System.Drawing.Size(101, 24);
-            this.lbl_dealerCity.TabIndex = 2;
+            this.lbl_dealerCity.TabIndex = 12;
             this.lbl_dealerCity.Text = "Dealer City";
             // 
             // lbl_dealerAdress
@@ -245,7 +246,7 @@
             this.lbl_dealerAdress.Location = new System.Drawing.Point(649, 45);
             this.lbl_dealerAdress.Name = "lbl_dealerAdress";
             this.lbl_dealerAdress.Size = new System.Drawing.Size(136, 24);
-            this.lbl_dealerAdress.TabIndex = 2;
+            this.lbl_dealerAdress.TabIndex = 10;
             this.lbl_dealerAdress.Text = "Dealer Address";
             // 
             // lbl_discountAmountType
@@ -255,7 +256,7 @@
             this.lbl_discountAmountType.Location = new System.Drawing.Point(482, 45);
             this.lbl_discountAmountType.Name = "lbl_discountAmountType";
             this.lbl_discountAmountType.Size = new System.Drawing.Size(127, 24);
-            this.lbl_discountAmountType.TabIndex = 2;
+            this.lbl_discountAmountType.TabIndex = 8;
             this.lbl_discountAmountType.Text = "Discount Type";
             // 
             // lbl_dealerMail
@@ -265,7 +266,7 @@
             this.lbl_dealerMail.Location = new System.Drawing.Point(315, 45);
             this.lbl_dealerMail.Name = "lbl_dealerMail";
             this.lbl_dealerMail.Size = new System.Drawing.Size(106, 24);
-            this.lbl_dealerMail.TabIndex = 2;
+            this.lbl_dealerMail.TabIndex = 6;
             this.lbl_dealerMail.Text = "Dealer Mail";
             // 
             // lbl_dealerName
@@ -275,7 +276,7 @@
             this.lbl_dealerName.Location = new System.Drawing.Point(148, 45);
             this.lbl_dealerName.Name = "lbl_dealerName";
             this.lbl_dealerName.Size = new System.Drawing.Size(118, 24);
-            this.lbl_dealerName.TabIndex = 2;
+            this.lbl_dealerName.TabIndex = 4;
             this.lbl_dealerName.Text = "Dealer Name";
             // 
             // lbl_dealerUserID
@@ -296,7 +297,7 @@
             this.lbl_brandDelete.Location = new System.Drawing.Point(33, 168);
             this.lbl_brandDelete.Name = "lbl_brandDelete";
             this.lbl_brandDelete.Size = new System.Drawing.Size(72, 28);
-            this.lbl_brandDelete.TabIndex = 4;
+            this.lbl_brandDelete.TabIndex = 18;
             this.lbl_brandDelete.Text = "Delete";
             // 
             // btn_editSubDealers
@@ -304,7 +305,7 @@
             this.btn_editSubDealers.Location = new System.Drawing.Point(177, 225);
             this.btn_editSubDealers.Name = "btn_editSubDealers";
             this.btn_editSubDealers.Size = new System.Drawing.Size(142, 42);
-            this.btn_editSubDealers.TabIndex = 9;
+            this.btn_editSubDealers.TabIndex = 21;
             this.btn_editSubDealers.Text = "Edit";
             this.btn_editSubDealers.UseVisualStyleBackColor = true;
             this.btn_editSubDealers.Click += new System.EventHandler(this.btn_editSubDealers_Click);
@@ -320,7 +321,7 @@
             this.dgv_editSubDealers.RowHeadersWidth = 51;
             this.dgv_editSubDealers.RowTemplate.Height = 24;
             this.dgv_editSubDealers.Size = new System.Drawing.Size(1546, 557);
-            this.dgv_editSubDealers.TabIndex = 8;
+            this.dgv_editSubDealers.TabIndex = 24;
             this.dgv_editSubDealers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editSubDealers_DataBindingComplete);
             this.dgv_editSubDealers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editSubDealers_RowHeaderMouseClick);
             // 

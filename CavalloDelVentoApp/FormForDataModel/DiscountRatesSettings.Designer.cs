@@ -50,7 +50,7 @@
             this.lbl_discountRates.Location = new System.Drawing.Point(12, 9);
             this.lbl_discountRates.Name = "lbl_discountRates";
             this.lbl_discountRates.Size = new System.Drawing.Size(189, 35);
-            this.lbl_discountRates.TabIndex = 3;
+            this.lbl_discountRates.TabIndex = 0;
             this.lbl_discountRates.Text = "Discount Rates";
             // 
             // dgv_discountRates
@@ -64,7 +64,7 @@
             this.dgv_discountRates.RowHeadersWidth = 51;
             this.dgv_discountRates.RowTemplate.Height = 24;
             this.dgv_discountRates.Size = new System.Drawing.Size(600, 330);
-            this.dgv_discountRates.TabIndex = 6;
+            this.dgv_discountRates.TabIndex = 8;
             this.dgv_discountRates.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_discountRates_RowHeaderMouseClick);
             // 
             // gb_discountRates
@@ -80,7 +80,7 @@
             this.gb_discountRates.Location = new System.Drawing.Point(18, 47);
             this.gb_discountRates.Name = "gb_discountRates";
             this.gb_discountRates.Size = new System.Drawing.Size(600, 330);
-            this.gb_discountRates.TabIndex = 5;
+            this.gb_discountRates.TabIndex = 1;
             this.gb_discountRates.TabStop = false;
             this.gb_discountRates.Text = "Discount Rates Settings";
             // 
@@ -98,7 +98,7 @@
             this.nud_discountRates.Location = new System.Drawing.Point(189, 76);
             this.nud_discountRates.Name = "nud_discountRates";
             this.nud_discountRates.Size = new System.Drawing.Size(120, 36);
-            this.nud_discountRates.TabIndex = 10;
+            this.nud_discountRates.TabIndex = 5;
             this.nud_discountRates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_discountRates_KeyPress);
             // 
             // btn_clear
@@ -107,7 +107,7 @@
             this.btn_clear.Location = new System.Drawing.Point(189, 182);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(149, 42);
-            this.btn_clear.TabIndex = 8;
+            this.btn_clear.TabIndex = 7;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -118,7 +118,7 @@
             this.btn_save.Location = new System.Drawing.Point(34, 182);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(149, 42);
-            this.btn_save.TabIndex = 9;
+            this.btn_save.TabIndex = 6;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -130,7 +130,7 @@
             this.lbl_discountSign.Location = new System.Drawing.Point(30, 45);
             this.lbl_discountSign.Name = "lbl_discountSign";
             this.lbl_discountSign.Size = new System.Drawing.Size(138, 28);
-            this.lbl_discountSign.TabIndex = 7;
+            this.lbl_discountSign.TabIndex = 2;
             this.lbl_discountSign.Text = "Discount Sign";
             // 
             // lbl_discountAmount
@@ -140,7 +140,7 @@
             this.lbl_discountAmount.Location = new System.Drawing.Point(184, 45);
             this.lbl_discountAmount.Name = "lbl_discountAmount";
             this.lbl_discountAmount.Size = new System.Drawing.Size(150, 28);
-            this.lbl_discountAmount.TabIndex = 2;
+            this.lbl_discountAmount.TabIndex = 4;
             this.lbl_discountAmount.Text = "Discount Rates";
             // 
             // DiscountRatesSettings

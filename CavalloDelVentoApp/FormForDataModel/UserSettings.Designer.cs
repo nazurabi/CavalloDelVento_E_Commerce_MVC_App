@@ -62,7 +62,7 @@
             this.dgv_userInformation.RowHeadersWidth = 51;
             this.dgv_userInformation.RowTemplate.Height = 24;
             this.dgv_userInformation.Size = new System.Drawing.Size(1546, 557);
-            this.dgv_userInformation.TabIndex = 11;
+            this.dgv_userInformation.TabIndex = 18;
             this.dgv_userInformation.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_userInformation_CellFormatting);
             this.dgv_userInformation.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_userInformation_DataBindingComplete);
             this.dgv_userInformation.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_userInformation_RowHeaderMouseClick);
@@ -74,7 +74,7 @@
             this.cbb_userType.Location = new System.Drawing.Point(486, 89);
             this.cbb_userType.Name = "cbb_userType";
             this.cbb_userType.Size = new System.Drawing.Size(161, 32);
-            this.cbb_userType.TabIndex = 10;
+            this.cbb_userType.TabIndex = 9;
             this.cbb_userType.SelectedIndexChanged += new System.EventHandler(this.cbb_userType_SelectedIndexChanged);
             // 
             // btn_cancelEdit
@@ -82,7 +82,7 @@
             this.btn_cancelEdit.Location = new System.Drawing.Point(320, 225);
             this.btn_cancelEdit.Name = "btn_cancelEdit";
             this.btn_cancelEdit.Size = new System.Drawing.Size(142, 42);
-            this.btn_cancelEdit.TabIndex = 8;
+            this.btn_cancelEdit.TabIndex = 16;
             this.btn_cancelEdit.Text = "Cancel Edit";
             this.btn_cancelEdit.UseVisualStyleBackColor = true;
             this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
@@ -92,7 +92,7 @@
             this.btn_clear.Location = new System.Drawing.Point(463, 225);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(142, 42);
-            this.btn_clear.TabIndex = 8;
+            this.btn_clear.TabIndex = 17;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -102,7 +102,7 @@
             this.btn_save.Location = new System.Drawing.Point(34, 225);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(142, 42);
-            this.btn_save.TabIndex = 9;
+            this.btn_save.TabIndex = 14;
             this.btn_save.Text = "Add";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -113,7 +113,7 @@
             this.tb_userName.Location = new System.Drawing.Point(152, 89);
             this.tb_userName.Name = "tb_userName";
             this.tb_userName.Size = new System.Drawing.Size(161, 32);
-            this.tb_userName.TabIndex = 3;
+            this.tb_userName.TabIndex = 5;
             // 
             // tb_userPassword
             // 
@@ -121,7 +121,7 @@
             this.tb_userPassword.Location = new System.Drawing.Point(319, 89);
             this.tb_userPassword.Name = "tb_userPassword";
             this.tb_userPassword.Size = new System.Drawing.Size(161, 32);
-            this.tb_userPassword.TabIndex = 3;
+            this.tb_userPassword.TabIndex = 7;
             // 
             // tb_userID
             // 
@@ -135,10 +135,11 @@
             // cb_userIsDelete
             // 
             this.cb_userIsDelete.AutoSize = true;
+            this.cb_userIsDelete.Enabled = false;
             this.cb_userIsDelete.Location = new System.Drawing.Point(295, 175);
             this.cb_userIsDelete.Name = "cb_userIsDelete";
             this.cb_userIsDelete.Size = new System.Drawing.Size(18, 17);
-            this.cb_userIsDelete.TabIndex = 5;
+            this.cb_userIsDelete.TabIndex = 13;
             this.cb_userIsDelete.UseVisualStyleBackColor = true;
             // 
             // lbl_userType
@@ -148,7 +149,7 @@
             this.lbl_userType.Location = new System.Drawing.Point(482, 45);
             this.lbl_userType.Name = "lbl_userType";
             this.lbl_userType.Size = new System.Drawing.Size(92, 24);
-            this.lbl_userType.TabIndex = 2;
+            this.lbl_userType.TabIndex = 8;
             this.lbl_userType.Text = "User Type";
             // 
             // lbl_userPassword
@@ -158,7 +159,7 @@
             this.lbl_userPassword.Location = new System.Drawing.Point(315, 45);
             this.lbl_userPassword.Name = "lbl_userPassword";
             this.lbl_userPassword.Size = new System.Drawing.Size(132, 24);
-            this.lbl_userPassword.TabIndex = 2;
+            this.lbl_userPassword.TabIndex = 6;
             this.lbl_userPassword.Text = "User Password";
             // 
             // lbl_userName
@@ -168,7 +169,7 @@
             this.lbl_userName.Location = new System.Drawing.Point(148, 45);
             this.lbl_userName.Name = "lbl_userName";
             this.lbl_userName.Size = new System.Drawing.Size(102, 24);
-            this.lbl_userName.TabIndex = 2;
+            this.lbl_userName.TabIndex = 4;
             this.lbl_userName.Text = "User Name";
             // 
             // lbl_userID
@@ -189,7 +190,7 @@
             this.lbl_userIsDelete.Location = new System.Drawing.Point(33, 168);
             this.lbl_userIsDelete.Name = "lbl_userIsDelete";
             this.lbl_userIsDelete.Size = new System.Drawing.Size(205, 28);
-            this.lbl_userIsDelete.TabIndex = 4;
+            this.lbl_userIsDelete.TabIndex = 12;
             this.lbl_userIsDelete.Text = "Delete Selected Data";
             // 
             // btn_editUser
@@ -197,7 +198,7 @@
             this.btn_editUser.Location = new System.Drawing.Point(177, 225);
             this.btn_editUser.Name = "btn_editUser";
             this.btn_editUser.Size = new System.Drawing.Size(142, 42);
-            this.btn_editUser.TabIndex = 9;
+            this.btn_editUser.TabIndex = 15;
             this.btn_editUser.Text = "Edit";
             this.btn_editUser.UseVisualStyleBackColor = true;
             this.btn_editUser.Click += new System.EventHandler(this.btn_editUser_Click);
@@ -209,7 +210,7 @@
             this.lbl_userSettings.Location = new System.Drawing.Point(12, 10);
             this.lbl_userSettings.Name = "lbl_userSettings";
             this.lbl_userSettings.Size = new System.Drawing.Size(165, 35);
-            this.lbl_userSettings.TabIndex = 9;
+            this.lbl_userSettings.TabIndex = 0;
             this.lbl_userSettings.Text = "User Settings";
             // 
             // gb_userInformation
@@ -235,7 +236,7 @@
             this.gb_userInformation.Location = new System.Drawing.Point(12, 48);
             this.gb_userInformation.Name = "gb_userInformation";
             this.gb_userInformation.Size = new System.Drawing.Size(1546, 273);
-            this.gb_userInformation.TabIndex = 10;
+            this.gb_userInformation.TabIndex = 1;
             this.gb_userInformation.TabStop = false;
             this.gb_userInformation.Text = "User Information";
             // 
@@ -245,7 +246,7 @@
             this.cb_seeDataInformation.Location = new System.Drawing.Point(295, 147);
             this.cb_seeDataInformation.Name = "cb_seeDataInformation";
             this.cb_seeDataInformation.Size = new System.Drawing.Size(18, 17);
-            this.cb_seeDataInformation.TabIndex = 5;
+            this.cb_seeDataInformation.TabIndex = 11;
             this.cb_seeDataInformation.UseVisualStyleBackColor = true;
             this.cb_seeDataInformation.CheckedChanged += new System.EventHandler(this.cb_seeDataInformation_CheckedChanged);
             // 
@@ -257,7 +258,7 @@
             this.lbl_seeDataInformation.Location = new System.Drawing.Point(33, 140);
             this.lbl_seeDataInformation.Name = "lbl_seeDataInformation";
             this.lbl_seeDataInformation.Size = new System.Drawing.Size(210, 28);
-            this.lbl_seeDataInformation.TabIndex = 4;
+            this.lbl_seeDataInformation.TabIndex = 10;
             this.lbl_seeDataInformation.Text = "See Data Information";
             // 
             // UserSettings

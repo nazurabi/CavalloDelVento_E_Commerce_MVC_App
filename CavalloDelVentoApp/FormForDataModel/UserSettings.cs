@@ -148,6 +148,7 @@ namespace FormForDataModel
                         btn_cancelEdit.Enabled = false;
                         btn_editUser.Enabled = false;
                         btn_save.Enabled = true;
+                        cb_userIsDelete.Enabled = false;
 
                     }
                     else
@@ -171,6 +172,8 @@ namespace FormForDataModel
                         btn_cancelEdit.Enabled = false;
                         btn_editUser.Enabled = false;
                         btn_save.Enabled = true;
+                        cb_userIsDelete.Enabled = false;
+
                     }
                     else
                     {
@@ -196,6 +199,8 @@ namespace FormForDataModel
             btn_save.Enabled = false;
             btn_editUser.Enabled = true;
             btn_cancelEdit.Enabled = true;
+            cb_userIsDelete.Enabled = true;
+
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
@@ -208,6 +213,7 @@ namespace FormForDataModel
             btn_save.Enabled = true;
             btn_cancelEdit.Enabled = false;
             btn_editUser.Enabled = false;
+            cb_userIsDelete.Enabled = false;
             UserDataBind();
             dm.clearControls(gb_userInformation);
         }

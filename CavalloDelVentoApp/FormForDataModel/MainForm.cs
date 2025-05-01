@@ -233,7 +233,7 @@ namespace FormForDataModel
 
         private void TSMI_logOut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Buraya ne yazcaz la");
+            MessageBox.Show("Oturumdan Çıkma İşlemleri Kodlanacak");
 
         }
 
@@ -244,7 +244,7 @@ namespace FormForDataModel
 
         private void TSMI_info_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Ben Yaptım");
+            MessageBox.Show("Bir Nasuh BERBER Kolay Yetişmiyor");
         }
     }
 }

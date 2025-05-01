@@ -64,7 +64,7 @@
             this.lbl_mainDealerSettings.Location = new System.Drawing.Point(12, 9);
             this.lbl_mainDealerSettings.Name = "lbl_mainDealerSettings";
             this.lbl_mainDealerSettings.Size = new System.Drawing.Size(255, 35);
-            this.lbl_mainDealerSettings.TabIndex = 3;
+            this.lbl_mainDealerSettings.TabIndex = 0;
             this.lbl_mainDealerSettings.Text = "Main Dealer Settings";
             // 
             // dgv_editMainDealer
@@ -78,7 +78,7 @@
             this.dgv_editMainDealer.RowHeadersWidth = 51;
             this.dgv_editMainDealer.RowTemplate.Height = 24;
             this.dgv_editMainDealer.Size = new System.Drawing.Size(1500, 557);
-            this.dgv_editMainDealer.TabIndex = 10;
+            this.dgv_editMainDealer.TabIndex = 20;
             this.dgv_editMainDealer.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editMainDealer_RowHeaderMouseClick);
             // 
             // btn_cancelEdit
@@ -86,7 +86,7 @@
             this.btn_cancelEdit.Location = new System.Drawing.Point(354, 225);
             this.btn_cancelEdit.Name = "btn_cancelEdit";
             this.btn_cancelEdit.Size = new System.Drawing.Size(154, 42);
-            this.btn_cancelEdit.TabIndex = 8;
+            this.btn_cancelEdit.TabIndex = 19;
             this.btn_cancelEdit.Text = "Cancel Edit";
             this.btn_cancelEdit.UseVisualStyleBackColor = true;
             this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
@@ -96,7 +96,7 @@
             this.btn_selectImage.Location = new System.Drawing.Point(194, 225);
             this.btn_selectImage.Name = "btn_selectImage";
             this.btn_selectImage.Size = new System.Drawing.Size(154, 42);
-            this.btn_selectImage.TabIndex = 8;
+            this.btn_selectImage.TabIndex = 18;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
             this.btn_selectImage.Click += new System.EventHandler(this.btn_selectImage_Click);
@@ -107,7 +107,7 @@
             this.tb_mainDealerCountry.Location = new System.Drawing.Point(951, 89);
             this.tb_mainDealerCountry.Name = "tb_mainDealerCountry";
             this.tb_mainDealerCountry.Size = new System.Drawing.Size(161, 32);
-            this.tb_mainDealerCountry.TabIndex = 3;
+            this.tb_mainDealerCountry.TabIndex = 13;
             // 
             // tb_mainDealerPostalCode
             // 
@@ -115,7 +115,7 @@
             this.tb_mainDealerPostalCode.Location = new System.Drawing.Point(784, 89);
             this.tb_mainDealerPostalCode.Name = "tb_mainDealerPostalCode";
             this.tb_mainDealerPostalCode.Size = new System.Drawing.Size(161, 32);
-            this.tb_mainDealerPostalCode.TabIndex = 3;
+            this.tb_mainDealerPostalCode.TabIndex = 11;
             // 
             // tb_mainDealerCity
             // 
@@ -123,7 +123,7 @@
             this.tb_mainDealerCity.Location = new System.Drawing.Point(617, 89);
             this.tb_mainDealerCity.Name = "tb_mainDealerCity";
             this.tb_mainDealerCity.Size = new System.Drawing.Size(161, 32);
-            this.tb_mainDealerCity.TabIndex = 3;
+            this.tb_mainDealerCity.TabIndex = 9;
             // 
             // tb_mainDealerAdress
             // 
@@ -132,7 +132,7 @@
             this.tb_mainDealerAdress.Multiline = true;
             this.tb_mainDealerAdress.Name = "tb_mainDealerAdress";
             this.tb_mainDealerAdress.Size = new System.Drawing.Size(243, 32);
-            this.tb_mainDealerAdress.TabIndex = 3;
+            this.tb_mainDealerAdress.TabIndex = 7;
             // 
             // tb_mainDealerMail
             // 
@@ -140,7 +140,7 @@
             this.tb_mainDealerMail.Location = new System.Drawing.Point(201, 89);
             this.tb_mainDealerMail.Name = "tb_mainDealerMail";
             this.tb_mainDealerMail.Size = new System.Drawing.Size(161, 32);
-            this.tb_mainDealerMail.TabIndex = 3;
+            this.tb_mainDealerMail.TabIndex = 5;
             // 
             // lbl_dealerCountry
             // 
@@ -149,7 +149,7 @@
             this.lbl_dealerCountry.Location = new System.Drawing.Point(947, 45);
             this.lbl_dealerCountry.Name = "lbl_dealerCountry";
             this.lbl_dealerCountry.Size = new System.Drawing.Size(136, 24);
-            this.lbl_dealerCountry.TabIndex = 2;
+            this.lbl_dealerCountry.TabIndex = 12;
             this.lbl_dealerCountry.Text = "Dealer Country";
             // 
             // lbl_dealerPostalCode
@@ -159,7 +159,7 @@
             this.lbl_dealerPostalCode.Location = new System.Drawing.Point(780, 45);
             this.lbl_dealerPostalCode.Name = "lbl_dealerPostalCode";
             this.lbl_dealerPostalCode.Size = new System.Drawing.Size(124, 24);
-            this.lbl_dealerPostalCode.TabIndex = 2;
+            this.lbl_dealerPostalCode.TabIndex = 10;
             this.lbl_dealerPostalCode.Text = "Dealer P.Code";
             // 
             // lbl_dealerCity
@@ -169,7 +169,7 @@
             this.lbl_dealerCity.Location = new System.Drawing.Point(613, 45);
             this.lbl_dealerCity.Name = "lbl_dealerCity";
             this.lbl_dealerCity.Size = new System.Drawing.Size(101, 24);
-            this.lbl_dealerCity.TabIndex = 2;
+            this.lbl_dealerCity.TabIndex = 8;
             this.lbl_dealerCity.Text = "Dealer City";
             // 
             // lbl_dealerAdress
@@ -179,7 +179,7 @@
             this.lbl_dealerAdress.Location = new System.Drawing.Point(364, 45);
             this.lbl_dealerAdress.Name = "lbl_dealerAdress";
             this.lbl_dealerAdress.Size = new System.Drawing.Size(136, 24);
-            this.lbl_dealerAdress.TabIndex = 2;
+            this.lbl_dealerAdress.TabIndex = 6;
             this.lbl_dealerAdress.Text = "Dealer Address";
             // 
             // lbl_dealerMail
@@ -189,7 +189,7 @@
             this.lbl_dealerMail.Location = new System.Drawing.Point(197, 45);
             this.lbl_dealerMail.Name = "lbl_dealerMail";
             this.lbl_dealerMail.Size = new System.Drawing.Size(106, 24);
-            this.lbl_dealerMail.TabIndex = 2;
+            this.lbl_dealerMail.TabIndex = 4;
             this.lbl_dealerMail.Text = "Dealer Mail";
             // 
             // lbl_dealerName
@@ -207,7 +207,7 @@
             this.btn_editMainDealer.Location = new System.Drawing.Point(34, 225);
             this.btn_editMainDealer.Name = "btn_editMainDealer";
             this.btn_editMainDealer.Size = new System.Drawing.Size(154, 42);
-            this.btn_editMainDealer.TabIndex = 9;
+            this.btn_editMainDealer.TabIndex = 17;
             this.btn_editMainDealer.Text = "Edit";
             this.btn_editMainDealer.UseVisualStyleBackColor = true;
             this.btn_editMainDealer.Click += new System.EventHandler(this.btn_editMainDealer_Click);
@@ -237,7 +237,7 @@
             this.gb_mainDealer.Location = new System.Drawing.Point(12, 47);
             this.gb_mainDealer.Name = "gb_mainDealer";
             this.gb_mainDealer.Size = new System.Drawing.Size(1500, 273);
-            this.gb_mainDealer.TabIndex = 9;
+            this.gb_mainDealer.TabIndex = 1;
             this.gb_mainDealer.TabStop = false;
             this.gb_mainDealer.Text = "Main Dealers Information";
             // 
@@ -255,7 +255,7 @@
             this.nud_taxAmount.Location = new System.Drawing.Point(1119, 89);
             this.nud_taxAmount.Name = "nud_taxAmount";
             this.nud_taxAmount.Size = new System.Drawing.Size(161, 32);
-            this.nud_taxAmount.TabIndex = 11;
+            this.nud_taxAmount.TabIndex = 15;
             this.nud_taxAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_taxAmount_KeyPress);
             // 
             // pb_mainDealer
@@ -273,7 +273,7 @@
             this.lbl_taxAmount.Location = new System.Drawing.Point(1114, 45);
             this.lbl_taxAmount.Name = "lbl_taxAmount";
             this.lbl_taxAmount.Size = new System.Drawing.Size(110, 24);
-            this.lbl_taxAmount.TabIndex = 2;
+            this.lbl_taxAmount.TabIndex = 14;
             this.lbl_taxAmount.Text = "Tax Amount";
             // 
             // openFileDialog1

@@ -111,7 +111,7 @@
             this.btn_selectImage.Location = new System.Drawing.Point(198, 216);
             this.btn_selectImage.Name = "btn_selectImage";
             this.btn_selectImage.Size = new System.Drawing.Size(165, 42);
-            this.btn_selectImage.TabIndex = 6;
+            this.btn_selectImage.TabIndex = 9;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
             this.btn_selectImage.Click += new System.EventHandler(this.btn_selectImage_Click);
@@ -131,7 +131,7 @@
             this.btn_save.Location = new System.Drawing.Point(27, 264);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(336, 42);
-            this.btn_save.TabIndex = 9;
+            this.btn_save.TabIndex = 10;
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -159,7 +159,7 @@
             this.lbl_brandImage.Location = new System.Drawing.Point(395, 45);
             this.lbl_brandImage.Name = "lbl_brandImage";
             this.lbl_brandImage.Size = new System.Drawing.Size(234, 28);
-            this.lbl_brandImage.TabIndex = 7;
+            this.lbl_brandImage.TabIndex = 6;
             this.lbl_brandImage.Text = "Brand\'s Image Selection";
             // 
             // dgv_addBrand
@@ -173,7 +173,7 @@
             this.dgv_addBrand.RowHeadersWidth = 51;
             this.dgv_addBrand.RowTemplate.Height = 24;
             this.dgv_addBrand.Size = new System.Drawing.Size(1500, 500);
-            this.dgv_addBrand.TabIndex = 2;
+            this.dgv_addBrand.TabIndex = 11;
             this.dgv_addBrand.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_addBrand_DataBindingComplete);
             // 
             // openFileDialog1
