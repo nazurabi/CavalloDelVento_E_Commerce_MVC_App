@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataModelWithADO
 {
-    internal class MainUser
+    public class MainUser
     {
         public int mainUserID { get; set; }
         public string userName { get; set; }

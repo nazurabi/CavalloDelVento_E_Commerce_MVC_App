@@ -7,7 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace DataModelWithADO
 {
-    internal class Product
+    public class Product
     {
         public int productID { get; set; }
         public int brandIDFK { get; set; }
@@ -21,7 +21,9 @@ namespace DataModelWithADO
         public short unitsOnOrder { get; set; }
         public short reorderLevel { get; set; }
         public bool discontinued { get; set; }
-        public short isDeleted { get; set; }
+        public bool isDeleted { get; set; }
+        public bool isActive { get; set; }
+
 
     }
 }

@@ -21,6 +21,7 @@ namespace FormForDataModel
         int selectedDiscountID = 0;
         string discountIDFK = "";
         string subDealerID = "";
+        string nullableControl = "tb_subDealerUserID";
 
         public SubDealerSettings()
         {
@@ -63,7 +64,8 @@ namespace FormForDataModel
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            if (!dm.isTextBoxesEmpty(gb_addSubDealers))
+            
+            if (!dm.isTextBoxesEmpty(gb_addSubDealers,nullableControl))
             {
                 if (cbb_subDealers.SelectedIndex != 0)
                 {
@@ -103,7 +105,7 @@ namespace FormForDataModel
                         }
                         else
                         {
-                            MessageBox.Show("Dealer Mail or Dealer Name too long, it can be max 50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Sub Dealer Mail or Sub Dealer Name too long, it can be max 50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -124,7 +126,7 @@ namespace FormForDataModel
 
         private void btn_editSubDealers_Click(object sender, EventArgs e)
         {
-            if (!dm.isTextBoxesEmpty(gb_addSubDealers))
+            if (!dm.isTextBoxesEmpty(gb_addSubDealers,nullableControl))
             {
                 if (cbb_subDealers.SelectedIndex != 0)
                 {
@@ -165,7 +167,7 @@ namespace FormForDataModel
                         }
                         else
                         {
-                            MessageBox.Show("Dealer Mail or Dealer Name too long, it can be max 50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Sub Dealer Mail or Sub Dealer Name too long, it can be max 50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -202,7 +204,7 @@ namespace FormForDataModel
                         }
                         else
                         {
-                            MessageBox.Show("Dealer Mail or Dealer Name too long, it can be max 50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Sub Dealer Mail or Sub Dealer Name too long, it can be max 50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }

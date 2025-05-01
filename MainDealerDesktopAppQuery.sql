@@ -11,7 +11,7 @@ City nvarchar(50),
 PostalCode nvarchar(20),
 Country nvarchar(50),
 Image nvarchar(max),
-InvoiceTaxAmount smallint not null,
+InvoiceTaxAmount decimal(18,2) not null,
 CONSTRAINT pk_mainDealer PRIMARY KEY (SettingID)
 )
 GO
@@ -105,20 +105,22 @@ SendID int IDENTITY (1,1),
 BrandIDFK int,
 CategoryIDFK int,
 ProductIDFK int,
-SettingIDFK int,
-UserIDFK int,
+MainUserIDFK int,
+SubDealerUserIDFK int,
 SendDate datetime,
 SendQuantity smallint,
+UnitPrice decimal (18,2),
 SubTotalPrice decimal(18,2),
 Tax decimal(18,2),
 TotalPrice decimal(18,2),
 Description nvarchar(max),
+IsDeleted bit,
 CONSTRAINT pk_send PRIMARY KEY (SendID),
 CONSTRAINT fk_brandForSub FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
 CONSTRAINT fk_categoryForSub FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID),
 CONSTRAINT fk_productForSub FOREIGN KEY (ProductIDFK) REFERENCES Products(ProductID),
-CONSTRAINT fk_settingForSub FOREIGN KEY (SettingIDFK) REFERENCES MainDealerSettings(SettingID),
-CONSTRAINT fk_userForSub FOREIGN KEY (UserIDFK) REFERENCES MainDealerUsers(MainUserID)
+CONSTRAINT fk_userForSub FOREIGN KEY (SubDealerUserIDFK) REFERENCES SubDealerUsers(SubDealerUserID),
+CONSTRAINT fk_mainUserForSub FOREIGN KEY (MainUserIDFK) REFERENCES MainDealerUsers(MainUserID)
 )
 GO
 CREATE TABLE LevelIntegration(
@@ -132,6 +134,7 @@ OrderDate datetime,
 CompletionLevel smallint,
 OrderCompletionDate datetime,
 Description nvarchar(max),
+IsDeleted bit,
 CONSTRAINT pk_levelIntegration PRIMARY KEY (LevelIntegrationID),
 CONSTRAINT fk_brandForLev FOREIGN KEY (BrandIDFK) REFERENCES Brands(BrandID),
 CONSTRAINT fk_categoryForLev FOREIGN KEY (CategoryIDFK) REFERENCES Categories(CategoryID),

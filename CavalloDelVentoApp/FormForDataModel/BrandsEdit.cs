@@ -36,7 +36,6 @@ namespace FormForDataModel
             DataTable dt = dm.brandDataBind();
 
             #region filePath active here
-
             dgv_editBrand.DataSource = dt;
             dgv_editBrand.Columns["BrandID"].Visible = false;
             dgv_editBrand.Columns["Brand Image Name"].Visible = false;

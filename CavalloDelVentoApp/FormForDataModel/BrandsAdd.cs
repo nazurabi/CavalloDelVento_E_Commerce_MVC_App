@@ -67,11 +67,11 @@ namespace FormForDataModel
             #endregion
 
             #region filePath active here
-
             dgv_addBrand.DataSource = dt;
             dgv_addBrand.RowHeadersVisible = false;
             dgv_addBrand.Columns["BrandID"].Visible=false;
             dgv_addBrand.Columns["Brand Image Name"].Visible=false;
+         
 
             foreach (DataGridViewColumn column in dgv_addBrand.Columns)
             {

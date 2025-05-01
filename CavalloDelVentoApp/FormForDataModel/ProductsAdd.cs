@@ -32,8 +32,8 @@ namespace FormForDataModel
         private void ProductsAdd_Load(object sender, EventArgs e)
         {
             ProductsAddLoad();
-            comboBoxBrandsLoad();
-            comboBoxCategoriesLoad();
+            ComboBoxBrandsLoad();
+            ComboBoxCategoriesLoad();
 
         }
 
@@ -114,22 +114,22 @@ namespace FormForDataModel
             }
         }
 
-        private void comboBoxCategoriesLoad()
+        private void ComboBoxCategoriesLoad()
         {
             List<Categories> categories = dm.getCategoriesForProducts(selectedBrandID.ToString());
             categories.Insert(0, new Categories { categoryID = 0, categoryName = "---Choose---" });
             cbb_categoryName.DataSource = categories;
-            cbb_categoryName.DisplayMember = "CategoryName";
-            cbb_categoryName.ValueMember = "CategoryID";
+            cbb_categoryName.DisplayMember = "categoryName";
+            cbb_categoryName.ValueMember = "categoryID";
             cbb_categoryName.SelectedIndex = 0;
         }
-        private void comboBoxBrandsLoad()
+        private void ComboBoxBrandsLoad()
         {
             List<Brands> brands = dm.getBrandsForProducts();
             brands.Insert(0, new Brands { brandID = 0, brandName = "---Choose---" });
             cbb_brandName.DataSource = brands;
-            cbb_brandName.DisplayMember = "BrandName";
-            cbb_brandName.ValueMember = "BrandID";
+            cbb_brandName.DisplayMember = "brandName";
+            cbb_brandName.ValueMember = "brandID";
             cbb_brandName.SelectedIndex = 0;
         }
 
@@ -156,7 +156,7 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
                 {
                     selectedBrandID = id;
-                    comboBoxCategoriesLoad();
+                    ComboBoxCategoriesLoad();
                 }
             }
         }
@@ -234,6 +234,11 @@ namespace FormForDataModel
                                 destinationImagePath = Path.GetFullPath(destinationImagePath);
                                 File.Copy(selectedImagePath, destinationImagePath, true);
                                 tb_productName.Text = "";
+                                tb_quentityPerUnit.Text = "";
+                                nud_products.Value = 0;
+                                tb_unitsInStock.Text = "";
+                                tb_reorderLevel.Text = "";
+                                tb_description.Text = "";
                                 cb_productActive.Checked = false;
                                 imageName = "";
                                 pb_productImage.ImageLocation = "";
@@ -253,6 +258,11 @@ namespace FormForDataModel
                                 imageName = "none.jpg";
                                 dm.addProduct(brandIDFK, categoryIDFK, productName, description, imageName, quantityPerUnit, unitPrice, unitInStock, unitsOnOrder, reorderLevel, discontinued, isDeleted, isActive);
                                 tb_productName.Text = "";
+                                tb_quentityPerUnit.Text = "";
+                                nud_products.Value = 0;
+                                tb_unitsInStock.Text = "";
+                                tb_reorderLevel.Text = "";
+                                tb_description.Text = "";
                                 cb_productActive.Checked = false;
                                 imageName = "";
                                 pb_productImage.ImageLocation = "";

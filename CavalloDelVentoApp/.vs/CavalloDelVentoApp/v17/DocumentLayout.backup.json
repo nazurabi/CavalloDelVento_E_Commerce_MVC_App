@@ -3,24 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4D2B8F22-E806-4DA3-92B0-D851393F5F54}|DataModelWithADO\\DataModelWithADO.csproj|C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\datamodelwithado\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4D2B8F22-E806-4DA3-92B0-D851393F5F54}|DataModelWithADO\\DataModelWithADO.csproj|solutionrelative:datamodelwithado\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\maindealersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\maindealersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\formfordatamodel\\sendtosubdealers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\sendtosubdealers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\productsedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\productsedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4D2B8F22-E806-4DA3-92B0-D851393F5F54}|DataModelWithADO\\DataModelWithADO.csproj|C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\datamodelwithado\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D2B8F22-E806-4DA3-92B0-D851393F5F54}|DataModelWithADO\\DataModelWithADO.csproj|solutionrelative:datamodelwithado\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\productsadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\productsadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\sendtosubdealers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\sendtosubdealers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\productsadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\productsadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\formfordatamodel\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\subdealersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\subdealersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\maindealersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\maindealersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|c:\\users\\nazurabi\\desktop\\cavallodelvento_e_commerce_mvc_app\\cavallodelventoapp\\formfordatamodel\\productsedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FBE16464-63D0-46BF-BD21-59C178EAB36E}|FormForDataModel\\FormForDataModel.csproj|solutionrelative:formfordatamodel\\productsedit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,75 +45,135 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 193,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 158,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DataModel.cs",
-              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\DataModelWithADO\\DataModel.cs",
-              "RelativeDocumentMoniker": "DataModelWithADO\\DataModel.cs",
-              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\DataModelWithADO\\DataModel.cs*",
-              "RelativeToolTip": "DataModelWithADO\\DataModel.cs*",
-              "ViewState": "AgIAAMcEAAAAAAAAAAAAAOcEAAAqAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\MainForm.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\MainForm.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\MainForm.cs",
+              "RelativeToolTip": "FormForDataModel\\MainForm.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwEYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T12:02:33.594Z",
+              "WhenOpened": "2025-04-30T23:02:10.123Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SendToSubDealers.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SendToSubDealers.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\SendToSubDealers.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SendToSubDealers.cs [Design]*",
+              "RelativeToolTip": "FormForDataModel\\SendToSubDealers.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T21:05:26.292Z",
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProductsAdd.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsAdd.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\ProductsAdd.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsAdd.cs [Design]",
+              "RelativeToolTip": "FormForDataModel\\ProductsAdd.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T07:51:09.88Z",
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "SubDealerSettings.cs",
-              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SubDealerSettings.cs",
-              "RelativeDocumentMoniker": "FormForDataModel\\SubDealerSettings.cs",
-              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SubDealerSettings.cs",
-              "RelativeToolTip": "FormForDataModel\\SubDealerSettings.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAA5wDoAAAAKAAAAAAAAAA==",
+              "Title": "ProductsAdd.cs",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsAdd.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\ProductsAdd.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsAdd.cs",
+              "RelativeToolTip": "FormForDataModel\\ProductsAdd.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwMkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T22:06:16.581Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProductsEdit.cs",
-              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsEdit.cs",
-              "RelativeDocumentMoniker": "FormForDataModel\\ProductsEdit.cs",
-              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsEdit.cs",
-              "RelativeToolTip": "FormForDataModel\\ProductsEdit.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwEAAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T22:39:39.293Z",
+              "WhenOpened": "2025-05-01T08:32:23.213Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainDealerSettings.cs",
-              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\MainDealerSettings.cs",
-              "RelativeDocumentMoniker": "FormForDataModel\\MainDealerSettings.cs",
-              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\MainDealerSettings.cs",
-              "RelativeToolTip": "FormForDataModel\\MainDealerSettings.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAmwCkAAABCAAAAAAAAAA==",
+              "Title": "ProductsEdit.cs",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsEdit.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\ProductsEdit.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsEdit.cs",
+              "RelativeToolTip": "FormForDataModel\\ProductsEdit.cs",
+              "ViewState": "AgIAAJYBAAAAAAAAAAA4wLgBAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T22:31:12.903Z",
+              "WhenOpened": "2025-05-01T08:30:50.097Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainDealerSettings.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\MainDealerSettings.cs",
-              "RelativeDocumentMoniker": "FormForDataModel\\MainDealerSettings.cs",
-              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\MainDealerSettings.cs [Design]",
-              "RelativeToolTip": "FormForDataModel\\MainDealerSettings.cs [Design]",
+              "DocumentIndex": 8,
+              "Title": "ProductsEdit.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsEdit.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\ProductsEdit.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\ProductsEdit.cs [Design]",
+              "RelativeToolTip": "FormForDataModel\\ProductsEdit.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T22:06:44.182Z",
+              "WhenOpened": "2025-05-01T08:30:48.035Z",
+              "IsPinned": true,
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataModel.cs",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\DataModelWithADO\\DataModel.cs",
+              "RelativeDocumentMoniker": "DataModelWithADO\\DataModel.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\DataModelWithADO\\DataModel.cs",
+              "RelativeToolTip": "DataModelWithADO\\DataModel.cs",
+              "ViewState": "AgIAACEEAAAAAAAAAAAjwNgDAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T23:12:10.422Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 278,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SubDealerSettings.cs",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SubDealerSettings.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\SubDealerSettings.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SubDealerSettings.cs",
+              "RelativeToolTip": "FormForDataModel\\SubDealerSettings.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAswHsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T08:46:40.047Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SendToSubDealers.cs",
+              "DocumentMoniker": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SendToSubDealers.cs",
+              "RelativeDocumentMoniker": "FormForDataModel\\SendToSubDealers.cs",
+              "ToolTip": "C:\\Users\\nazurabi\\Desktop\\CavalloDelVento_E_Commerce_MVC_App\\CavalloDelVentoApp\\FormForDataModel\\SendToSubDealers.cs*",
+              "RelativeToolTip": "FormForDataModel\\SendToSubDealers.cs*",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAIwJcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T22:59:00.817Z",
+              "EditorCaption": ""
             }
           ]
         }

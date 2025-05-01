@@ -46,13 +46,15 @@
             this.btn_editMainDealer = new System.Windows.Forms.Button();
             this.gb_mainDealer = new System.Windows.Forms.GroupBox();
             this.tb_mainDealerName = new System.Windows.Forms.TextBox();
+            this.nud_taxAmount = new System.Windows.Forms.NumericUpDown();
             this.pb_mainDealer = new System.Windows.Forms.PictureBox();
             this.lbl_taxAmount = new System.Windows.Forms.Label();
-            this.nud_taxAmount = new System.Windows.Forms.NumericUpDown();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_editMainDealer)).BeginInit();
             this.gb_mainDealer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_mainDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_taxAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_mainDealer)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_mainDealerSettings
@@ -77,6 +79,7 @@
             this.dgv_editMainDealer.RowTemplate.Height = 24;
             this.dgv_editMainDealer.Size = new System.Drawing.Size(1500, 557);
             this.dgv_editMainDealer.TabIndex = 10;
+            this.dgv_editMainDealer.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_editMainDealer_RowHeaderMouseClick);
             // 
             // btn_cancelEdit
             // 
@@ -86,6 +89,7 @@
             this.btn_cancelEdit.TabIndex = 8;
             this.btn_cancelEdit.Text = "Cancel Edit";
             this.btn_cancelEdit.UseVisualStyleBackColor = true;
+            this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
             // 
             // btn_selectImage
             // 
@@ -95,6 +99,7 @@
             this.btn_selectImage.TabIndex = 8;
             this.btn_selectImage.Text = "Select Image";
             this.btn_selectImage.UseVisualStyleBackColor = true;
+            this.btn_selectImage.Click += new System.EventHandler(this.btn_selectImage_Click);
             // 
             // tb_mainDealerCountry
             // 
@@ -205,6 +210,7 @@
             this.btn_editMainDealer.TabIndex = 9;
             this.btn_editMainDealer.Text = "Edit";
             this.btn_editMainDealer.UseVisualStyleBackColor = true;
+            this.btn_editMainDealer.Click += new System.EventHandler(this.btn_editMainDealer_Click);
             // 
             // gb_mainDealer
             // 
@@ -243,6 +249,15 @@
             this.tb_mainDealerName.Size = new System.Drawing.Size(161, 32);
             this.tb_mainDealerName.TabIndex = 3;
             // 
+            // nud_taxAmount
+            // 
+            this.nud_taxAmount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.nud_taxAmount.Location = new System.Drawing.Point(1119, 89);
+            this.nud_taxAmount.Name = "nud_taxAmount";
+            this.nud_taxAmount.Size = new System.Drawing.Size(161, 32);
+            this.nud_taxAmount.TabIndex = 11;
+            this.nud_taxAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nud_taxAmount_KeyPress);
+            // 
             // pb_mainDealer
             // 
             this.pb_mainDealer.Location = new System.Drawing.Point(1286, 45);
@@ -261,13 +276,9 @@
             this.lbl_taxAmount.TabIndex = 2;
             this.lbl_taxAmount.Text = "Tax Amount";
             // 
-            // nud_taxAmount
+            // openFileDialog1
             // 
-            this.nud_taxAmount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.nud_taxAmount.Location = new System.Drawing.Point(1119, 89);
-            this.nud_taxAmount.Name = "nud_taxAmount";
-            this.nud_taxAmount.Size = new System.Drawing.Size(161, 32);
-            this.nud_taxAmount.TabIndex = 11;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainDealerSettings
             // 
@@ -288,8 +299,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_editMainDealer)).EndInit();
             this.gb_mainDealer.ResumeLayout(false);
             this.gb_mainDealer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_mainDealer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_taxAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_mainDealer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,5 +329,7 @@
         private System.Windows.Forms.PictureBox pb_mainDealer;
         private System.Windows.Forms.Label lbl_taxAmount;
         private System.Windows.Forms.NumericUpDown nud_taxAmount;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

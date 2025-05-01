@@ -11,6 +11,7 @@ namespace DataModelWithADO
         public int brandID { get; set; }
         public string brandName { get; set; }
         public bool isDeleted { get; set; }
+        public bool isActive { get; set; }
         public string image { get; set; }
     }
 }

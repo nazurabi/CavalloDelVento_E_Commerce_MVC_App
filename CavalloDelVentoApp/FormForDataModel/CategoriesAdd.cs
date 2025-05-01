@@ -70,7 +70,7 @@ namespace FormForDataModel
         {
             DataTable dt = dm.categoryDataBind();
             #region filePath active here
-            
+
             dgv_addCategory.DataSource = dt;
             dgv_addCategory.RowHeadersVisible = false;
             dgv_addCategory.Columns["BrandIDFK"].Visible = false;

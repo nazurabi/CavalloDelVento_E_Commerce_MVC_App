@@ -15,16 +15,13 @@ namespace FormForDataModel
     public partial class MainDealerSettings : Form
     {
         DataModel dm = new DataModel();
+        string userID = "";
+        string selectedImagePath = "";
+        string destinationImagePath = "";
+        string imageName = "";
+        string imageForEdit = "";
 
-        //public int settingID { get; set; }
-        //public string dealerName { get; set; }
-        //public string mail { get; set; }
-        //public string adress { get; set; }
-        //public string city { get; set; }
-        //public string postalCode { get; set; }
-        //public string country { get; set; }
-        //public byte invoiceTaxAmount { get; set; }
-        //public string image { get; set; }
+
         public MainDealerSettings()
         {
             InitializeComponent();
@@ -33,6 +30,11 @@ namespace FormForDataModel
         private void MainDealerSettings_Load(object sender, EventArgs e)
         {
             MainDealerLoad();
+            dm.disableControls(gb_mainDealer);
+            btn_cancelEdit.Enabled = false;
+            btn_editMainDealer.Enabled = false;
+            btn_selectImage.Enabled = false;
+
         }
 
         private void MainDealerLoad()
@@ -59,78 +61,131 @@ namespace FormForDataModel
             }
         }
 
-        //PictureBox ayarlamasını yapıyordun ve edit işlemini ayarlayacaksın 
+        private void dgv_editMainDealer_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dm.enableControls(gb_mainDealer);
 
+            DataGridViewRow selectedRow = dgv_editMainDealer.Rows[e.RowIndex];
+            userID = selectedRow.Cells["User ID"].Value.ToString();
+            tb_mainDealerName.Text = selectedRow.Cells["Dealer Name"].Value.ToString();
+            tb_mainDealerMail.Text = selectedRow.Cells["Dealer Mail"].Value.ToString();
+            tb_mainDealerAdress.Text = selectedRow.Cells["Dealer Address"].Value.ToString();
+            tb_mainDealerCity.Text = selectedRow.Cells["Dealer City"].Value.ToString();
+            tb_mainDealerPostalCode.Text = selectedRow.Cells["Dealer Postal Code"].Value.ToString();
+            tb_mainDealerCountry.Text = selectedRow.Cells["Dealer Country"].Value.ToString();
+            nud_taxAmount.Value = Convert.ToDecimal(selectedRow.Cells["Invoice Tax Amount"].Value);
+            imageForEdit = dm.listImageForEditMainDealer(selectedRow.Cells["User ID"].Value.ToString());
+            pb_mainDealer.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageForEdit);
+            pb_mainDealer.SizeMode = PictureBoxSizeMode.Zoom;
 
+            btn_cancelEdit.Enabled = true;
+            btn_editMainDealer.Enabled = true;
+            btn_selectImage.Enabled = true;
 
+        }
 
-
-            private void btn_selectImage_Click(object sender, EventArgs e)
+        private void nud_taxAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
             {
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                e.Handled = true;
+            }
+        }
+
+        private void btn_selectImage_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string imagePath = openFileDialog1.FileName;
+                FileInfo fi = new FileInfo(openFileDialog1.FileName);
+                if (fi.Extension == ".jpg" || fi.Extension == ".jpeg" || fi.Extension == ".png")
                 {
-                    string imagePath = openFileDialog1.FileName;
-                    FileInfo fi = new FileInfo(openFileDialog1.FileName);
-                    if (fi.Extension == ".jpg" || fi.Extension == ".jpeg" || fi.Extension == ".png")
+                    pb_mainDealer.SizeMode = PictureBoxSizeMode.Zoom;
+                    pb_mainDealer.ImageLocation = fi.FullName;
+                    selectedImagePath = fi.FullName;
+                    imageName = Guid.NewGuid().ToString() + fi.Extension;
+                }
+            }
+        }
+
+        private void btn_editMainDealer_Click(object sender, EventArgs e)
+        {
+            if (!dm.isTextBoxesEmpty(gb_mainDealer))
+            {
+                string mainDealerName = "";
+                string mainDealerMail = "";
+                string mainDealerAdress = "";
+                string mainDealerCity = "";
+                string mianDealerPostalCode = "";
+                string mainDealerCountry = "";
+                decimal taxAmount = 0;
+                if (tb_mainDealerName.Text.Length < 100 && tb_mainDealerMail.Text.Length < 50)
+                {
+                    if (tb_mainDealerCity.Text.Length < 50 && tb_mainDealerPostalCode.Text.Length < 20 && tb_mainDealerCountry.Text.Length < 50)
                     {
-                        pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
-                        pb_productImage.ImageLocation = fi.FullName;
-                        selectedImagePath = fi.FullName;
-                        imageName = Guid.NewGuid().ToString() + fi.Extension;
+                        if (!string.IsNullOrEmpty(imageName))
+                        {
+                            mainDealerName = tb_mainDealerName.Text;
+                            mainDealerMail = tb_mainDealerMail.Text;
+                            mainDealerAdress = tb_mainDealerAdress.Text;
+                            mainDealerCity = tb_mainDealerCity.Text;
+                            mianDealerPostalCode = tb_mainDealerPostalCode.Text;
+                            mainDealerCountry = tb_mainDealerCountry.Text;
+                            taxAmount = nud_taxAmount.Value;
+                            dm.editMainDealers(userID, mainDealerName, mainDealerMail, mainDealerAdress, mainDealerCity, mianDealerPostalCode, mainDealerCountry, taxAmount, imageName);
+                            destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageName);
+                            destinationImagePath = Path.GetFullPath(destinationImagePath);
+                            File.Copy(selectedImagePath, destinationImagePath, true);
+                            MainDealerLoad();
+                            dm.clearControls(gb_mainDealer);
+                            imageName = "";
+                            btn_cancelEdit.Enabled = false;
+                            btn_editMainDealer.Enabled = false;
+                            btn_selectImage.Enabled = false;
+                        }
+                        else
+                        {
+                            mainDealerName = tb_mainDealerName.Text;
+                            mainDealerMail = tb_mainDealerMail.Text;
+                            mainDealerAdress = tb_mainDealerAdress.Text;
+                            mainDealerCity = tb_mainDealerCity.Text;
+                            mianDealerPostalCode = tb_mainDealerPostalCode.Text;
+                            mainDealerCountry = tb_mainDealerCountry.Text;
+                            taxAmount = nud_taxAmount.Value;
+                            imageName = imageForEdit;
+                            dm.editMainDealers(userID, mainDealerName, mainDealerMail, mainDealerAdress, mainDealerCity, mianDealerPostalCode, mainDealerCountry, taxAmount, imageName);
+                            MainDealerLoad();
+                            dm.clearControls(gb_mainDealer);
+                            imageName = "";
+                            btn_cancelEdit.Enabled = false;
+                            btn_editMainDealer.Enabled = false;
+                            btn_selectImage.Enabled = false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Main Dealer City/ Main Dealer Postal Code/ Main Dealer Country name too long, it can be max 50/20/50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }
-
-            private void nud_products_KeyPress(object sender, KeyPressEventArgs e)
-            {
-                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',')
+                else
                 {
-                    e.Handled = true;
+                    MessageBox.Show("Main Dealer Mail or Main Dealer Name too long, it can be max 100/50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-          
-
-            private void dgv_addProduct_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+            else
             {
-                tb_productName.Enabled = true;
-                cbb_brandName.Enabled = true;
-                cbb_categoryName.Enabled = true;
-                cb_productActive.Enabled = true;
-                cb_productDiscontinued.Enabled = true;
-                cb_productDeleted.Enabled = true;
-                tb_quentityPerUnit.Enabled = true;
-                nud_products.Enabled = true;
-                tb_unitsInStock.Enabled = true;
-                tb_reorderLevel.Enabled = true;
-                tb_description.Enabled = true;
-                btn_clear.Enabled = true;
-                btn_selectImage.Enabled = true;
-                btn_save.Enabled = true;
-
-                DataGridViewRow selectedRow = dgv_editProduct.Rows[e.RowIndex];
-                productID = selectedRow.Cells["ProductID"].Value.ToString();
-                brandIDFK = selectedRow.Cells["BrandIDFK"].Value.ToString();
-                cbb_brandName.SelectedValue = Convert.ToInt32(selectedRow.Cells["BrandIDFK"].Value);
-                categoryIDFK = selectedRow.Cells["CategoryIDFK"].Value.ToString();
-                cbb_categoryName.SelectedValue = Convert.ToInt32(selectedRow.Cells["CategoryIDFK"].Value);
-                tb_productName.Text = selectedRow.Cells["Product Name"].Value.ToString();
-                tb_quentityPerUnit.Text = selectedRow.Cells["Quantity Per Unit"].Value.ToString();
-                nud_products.Text = selectedRow.Cells["Unit Price"].Value.ToString();
-                tb_unitsInStock.Text = selectedRow.Cells["Units In Stock"].Value.ToString();
-                tb_reorderLevel.Text = selectedRow.Cells["Reorder Level"].Value.ToString();
-                tb_description.Text = selectedRow.Cells["Description"].Value.ToString();
-                cb_productActive.Checked = selectedRow.Cells["Is Product Active For Sale"].Value.ToString() == "Yes" ? true : false;
-                cb_productDeleted.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
-                cb_productDiscontinued.Checked = selectedRow.Cells["Discontinued"].Value.ToString() == "Yes" ? true : false;
-                imageForEdit = dm.listImageForEditProducts(selectedRow.Cells["ProductID"].Value.ToString());
-                pb_productImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageForEdit);
-                pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
+                MessageBox.Show("You have entered an incomplete entry, please enter all data!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-           
+        private void btn_cancelEdit_Click(object sender, EventArgs e)
+        {
+            btn_editMainDealer.Enabled = false;
+            btn_cancelEdit.Enabled = false;
+            btn_selectImage.Enabled = false;
+            dm.clearControls(gb_mainDealer);
+            MainDealerLoad();
         }
     }
+}
 
-}
-}

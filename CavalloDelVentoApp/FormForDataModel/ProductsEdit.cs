@@ -43,8 +43,8 @@ namespace FormForDataModel
             List<Brands> brands = dm.getBrandsForProducts();
             brands.Insert(0, new Brands { brandID = 0, brandName = "---Choose---" });
             cbb_brandName.DataSource = brands;
-            cbb_brandName.DisplayMember = "BrandName";
-            cbb_brandName.ValueMember = "BrandID";
+            cbb_brandName.DisplayMember = "brandName";
+            cbb_brandName.ValueMember = "brandID";
             cbb_brandName.SelectedIndex = 0;
         }
 
@@ -53,8 +53,8 @@ namespace FormForDataModel
             List<Categories> categories = dm.getCategoriesForProducts(selectedBrandID.ToString());
             categories.Insert(0, new Categories { categoryID = 0, categoryName = "---Choose---" });
             cbb_categoryName.DataSource = categories;
-            cbb_categoryName.DisplayMember = "CategoryName";
-            cbb_categoryName.ValueMember = "CategoryID";
+            cbb_categoryName.DisplayMember = "categoryName";
+            cbb_categoryName.ValueMember = "categoryID";
             cbb_categoryName.SelectedIndex = 0;
         }
 
@@ -277,7 +277,7 @@ namespace FormForDataModel
                         categoryIDFK = cbb_categoryName.SelectedValue.ToString();
                         description = tb_description.Text;
                         dm.editProduct(productID,brandIDFK, categoryIDFK, description, imageName, quantityPerUnit, unitPrice, unitInStock, reorderLevel, discontinued, isDeleted, isActive);
-                        destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageName);
+                        destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageName);
                         destinationImagePath = Path.GetFullPath(destinationImagePath);
                         File.Copy(selectedImagePath, destinationImagePath, true);
                         tb_productName.Text = "";
