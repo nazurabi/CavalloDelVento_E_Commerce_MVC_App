@@ -48,6 +48,8 @@
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_listBrands = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_listCategories = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Products = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_sendProductListToSubDealer = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_listProducts = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_settingMainDealer = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +88,7 @@
             this.otherToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1900, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1900, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -115,14 +117,14 @@
             // TSMI_addBrand
             // 
             this.TSMI_addBrand.Name = "TSMI_addBrand";
-            this.TSMI_addBrand.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_addBrand.Size = new System.Drawing.Size(120, 26);
             this.TSMI_addBrand.Text = "Add";
             this.TSMI_addBrand.Click += new System.EventHandler(this.TSMI_addBrand_Click);
             // 
             // TSMI_editBrand
             // 
             this.TSMI_editBrand.Name = "TSMI_editBrand";
-            this.TSMI_editBrand.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_editBrand.Size = new System.Drawing.Size(120, 26);
             this.TSMI_editBrand.Text = "Edit";
             this.TSMI_editBrand.Click += new System.EventHandler(this.TSMI_editBrand_Click);
             // 
@@ -138,14 +140,14 @@
             // TSMI_addCategory
             // 
             this.TSMI_addCategory.Name = "TSMI_addCategory";
-            this.TSMI_addCategory.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_addCategory.Size = new System.Drawing.Size(120, 26);
             this.TSMI_addCategory.Text = "Add";
             this.TSMI_addCategory.Click += new System.EventHandler(this.TSMI_addCategory_Click);
             // 
             // TSMI_editCategory
             // 
             this.TSMI_editCategory.Name = "TSMI_editCategory";
-            this.TSMI_editCategory.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_editCategory.Size = new System.Drawing.Size(120, 26);
             this.TSMI_editCategory.Text = "Edit";
             this.TSMI_editCategory.Click += new System.EventHandler(this.TSMI_editCategory_Click);
             // 
@@ -196,7 +198,7 @@
             this.listToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_listBrands,
             this.TSMI_listCategories,
-            this.TSMI_listProducts});
+            this.TSMI_Products});
             this.listToolStripMenuItem.Name = "listToolStripMenuItem";
             this.listToolStripMenuItem.Size = new System.Drawing.Size(45, 24);
             this.listToolStripMenuItem.Text = "List";
@@ -204,22 +206,38 @@
             // TSMI_listBrands
             // 
             this.TSMI_listBrands.Name = "TSMI_listBrands";
-            this.TSMI_listBrands.Size = new System.Drawing.Size(163, 26);
-            this.TSMI_listBrands.Text = "Brands";
+            this.TSMI_listBrands.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_listBrands.Text = "Brands List";
             this.TSMI_listBrands.Click += new System.EventHandler(this.TSMI_listBrands_Click);
             // 
             // TSMI_listCategories
             // 
             this.TSMI_listCategories.Name = "TSMI_listCategories";
-            this.TSMI_listCategories.Size = new System.Drawing.Size(163, 26);
-            this.TSMI_listCategories.Text = "Categories";
+            this.TSMI_listCategories.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_listCategories.Text = "Categories List";
             this.TSMI_listCategories.Click += new System.EventHandler(this.TSMI_listCategories_Click);
+            // 
+            // TSMI_Products
+            // 
+            this.TSMI_Products.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_listProducts,
+            this.TSMI_sendProductListToSubDealer});
+            this.TSMI_Products.Name = "TSMI_Products";
+            this.TSMI_Products.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_Products.Text = "Products";
+            // 
+            // TSMI_sendProductListToSubDealer
+            // 
+            this.TSMI_sendProductListToSubDealer.Name = "TSMI_sendProductListToSubDealer";
+            this.TSMI_sendProductListToSubDealer.Size = new System.Drawing.Size(307, 26);
+            this.TSMI_sendProductListToSubDealer.Text = "Send Product List to Sub Dealers";
+            this.TSMI_sendProductListToSubDealer.Click += new System.EventHandler(this.TSMI_sendProductListToSubDealer_Click);
             // 
             // TSMI_listProducts
             // 
             this.TSMI_listProducts.Name = "TSMI_listProducts";
-            this.TSMI_listProducts.Size = new System.Drawing.Size(163, 26);
-            this.TSMI_listProducts.Text = "Products";
+            this.TSMI_listProducts.Size = new System.Drawing.Size(307, 26);
+            this.TSMI_listProducts.Text = "Products List";
             this.TSMI_listProducts.Click += new System.EventHandler(this.TSMI_listProducts_Click);
             // 
             // settingsToolStripMenuItem
@@ -331,7 +349,7 @@
         private System.Windows.Forms.ToolStripMenuItem listToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMI_listBrands;
         private System.Windows.Forms.ToolStripMenuItem TSMI_listCategories;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_listProducts;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Products;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMI_settingMainDealer;
         private System.Windows.Forms.ToolStripMenuItem TSMI_settingSubDealers;
@@ -348,5 +366,7 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_logOut;
         private System.Windows.Forms.ToolStripMenuItem TSMI_close;
         private System.Windows.Forms.ToolStripMenuItem TSMI_info;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_sendProductListToSubDealer;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_listProducts;
     }
 }

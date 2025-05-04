@@ -55,6 +55,71 @@ namespace FormForDataModel
             btn_editData.Enabled = false;
 
         }
+
+        private void SendToSubDealersDataBind()
+        {
+            DataTable dt = dm.SendToSubDealerDataBind();
+            dgv_sendToSubDealers.DataSource = dt;
+            dgv_sendToSubDealers.Columns["BrandIDFK"].Visible = false;
+            dgv_sendToSubDealers.Columns["CategoryIDFK"].Visible = false;
+            dgv_sendToSubDealers.Columns["ProductIDFK"].Visible = false;
+            dgv_sendToSubDealers.Columns["MainUserIDFK"].Visible = false;
+            dgv_sendToSubDealers.Columns["SubDealerIDFK"].Visible = false;
+            dgv_sendToSubDealers.Columns["Sub Dealer Discount Amount"].Visible = false;
+            dgv_sendToSubDealers.Columns["ImageFileName"].Visible = false;
+
+            dgv_sendToSubDealers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+            foreach (DataGridViewColumn column in dgv_sendToSubDealers.Columns)
+            {
+                if (column.Name == "Product Description")
+                {
+                    column.Width = 150;
+                }
+                if (dgv_sendToSubDealers.Columns["Product Image"] is DataGridViewImageColumn imageCol)
+                {
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_sendToSubDealers.RowTemplate.Height = 100;
+                }
+            }
+        }
+
+        private void dgv_sendToSubDealers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_sendToSubDealers.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
+
+        private void dgv_sendToSubDealers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow selectedRow = dgv_sendToSubDealers.Rows[e.RowIndex];
+            sendID = selectedRow.Cells["Shipment Number"].Value.ToString();
+            tb_productItemNumber.Text = selectedRow.Cells["Product Item Number"].Value.ToString();
+            cbb_brandName.SelectedValue = Convert.ToInt32(selectedRow.Cells["BrandIDFK"].Value);
+            cbb_categoryName.SelectedValue = Convert.ToInt32(selectedRow.Cells["CategoryIDFK"].Value);
+            cbb_productName.SelectedValue = Convert.ToInt32(selectedRow.Cells["ProductIDFK"].Value);
+            imageName = dm.listImageForEditProducts(selectedRow.Cells["ProductIDFK"].Value.ToString());
+            pb_productImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageName);
+            pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
+            tb_productDescription.Text = selectedRow.Cells["Product Description"].Value.ToString();
+            cbb_subDealerInformation.SelectedValue = Convert.ToInt32(selectedRow.Cells["SubDealerIDFK"].Value);
+            tb_sendQuentity.Text = selectedRow.Cells["Send Quantity"].Value.ToString();
+            tb_unitPrice.Text = selectedRow.Cells["Unit Price"].Value.ToString();
+            tb_shipmentInformation.Text = selectedRow.Cells["Description"].Value.ToString();
+            cb_sendDeleted.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
+            cb_sendDeleted.Enabled = true;
+            btn_editData.Enabled = true;
+            btn_cancelEdit.Enabled = true;
+            btn_sendProduct.Enabled = false;
+        }
+
         private void tb_sendQuentity_TextChanged(object sender, EventArgs e)
         {
 
@@ -87,107 +152,6 @@ namespace FormForDataModel
                 nud_subTotalPrice.Value = 0;
                 nud_totalPrice.Value = 0;
                 nud_discountedPrice.Value = 0;
-            }
-        }
-
-        private void CalculeteTotalPrice()
-        {
-            if (tb_sendQuentity.Text != "" && tb_sendQuentity.Text != "0")
-            {
-                subTotalPrice = Convert.ToDecimal(tb_sendQuentity.Text) * Convert.ToDecimal(unitPrice);
-                totalPrice = subTotalPrice + (subTotalPrice * tax);
-                nud_subTotalPrice.Value = subTotalPrice;
-                nud_totalPrice.Value = totalPrice;
-
-                if (tb_subDealerDiscAmount.Text != "" && tb_subDealerDiscAmount.Text != "0")
-                {
-                    nud_discountedPrice.Visible = true;
-                    tb_discountedPrice.Visible = false;
-
-                    discountPercent = Convert.ToDecimal(tb_subDealerDiscAmount.Text) / 100;
-                    discountedPrice = totalPrice - (totalPrice * discountPercent);
-                    nud_discountedPrice.Value = discountedPrice;
-                }
-                else
-                {
-                    tb_discountedPrice.Visible = true;
-                    nud_discountedPrice.Visible = false;
-                    nud_discountedPrice.Value = 0;
-                    tb_discountedPrice.Text = "Discount not applied.";
-                }
-            }
-            else
-            {
-                nud_subTotalPrice.Value = 0;
-                nud_totalPrice.Value = 0;
-                nud_discountedPrice.Value = 0;
-            }
-
-
-        }
-
-        private void SendToSubDealersDataBind()
-        {
-            DataTable dt = dm.SendToSubDealerDataBind();
-            dgv_sendToSubDealers.DataSource = dt;
-            dgv_sendToSubDealers.Columns["BrandIDFK"].Visible = false;
-            dgv_sendToSubDealers.Columns["CategoryIDFK"].Visible = false;
-            dgv_sendToSubDealers.Columns["ProductIDFK"].Visible = false;
-            dgv_sendToSubDealers.Columns["MainUserIDFK"].Visible = false;
-            dgv_sendToSubDealers.Columns["SubDealerIDFK"].Visible = false;
-            dgv_sendToSubDealers.Columns["Sub Dealer Discount Amount"].Visible = false;
-            dgv_sendToSubDealers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-
-            foreach (DataGridViewColumn column in dgv_sendToSubDealers.Columns)
-            {
-                if (column.Name == "Product Description")
-                {
-                    column.Width = 150;
-                }
-                if (dgv_sendToSubDealers.Columns["Product Image"] is DataGridViewImageColumn imageCol)
-                {
-                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                    imageCol.Width = 100;
-                    dgv_sendToSubDealers.RowTemplate.Height = 100;
-                }
-            }
-        }
-
-        private void ComboBoxSubDealersLoad()
-        {
-            List<SubDealer> subDealers = dm.getSubDealers();
-            subDealers.Insert(0, new SubDealer { subDealerUserID = 0, subDealerName = "---Choose---" });
-            cbb_subDealerInformation.DataSource = subDealers;
-            cbb_subDealerInformation.DisplayMember = "subDealerName";
-            cbb_subDealerInformation.ValueMember = "subDealerUserID";
-            cbb_subDealerInformation.SelectedIndex = 0;
-        }
-
-        private void cbb_subDealerInformation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbb_subDealerInformation.SelectedIndex != 0 && cbb_subDealerInformation.SelectedValue != null)
-            {
-                tb_sendQuentity.Enabled = true;
-                tb_shipmentInformation.Enabled = true;
-                if (int.TryParse(cbb_subDealerInformation.SelectedValue.ToString(), out int id))
-                {
-                    selectedSubDealerID = id;
-                    List<SubDealer> sd = dm.getSubDealers();
-                    for (int i = 0; i < sd.Count; i++)
-                    {
-                        if (sd[i].subDealerUserID == id)
-                        {
-                            tb_subDealerType.Text = dm.getDiscountType(sd[i].discountIDFK.ToString());
-                            tb_subDealerDiscAmount.Text = dm.getDiscountAmount(sd[i].discountIDFK.ToString());
-                            if (tb_subDealerDiscAmount.Text != "" && tb_subDealerDiscAmount.Text != "0")
-                            {
-                                discountPercent = Convert.ToDecimal(tb_subDealerDiscAmount.Text) / 100;
-                            }
-                        }
-                    }
-                }
-                CalculeteTotalPrice();
             }
         }
 
@@ -269,49 +233,77 @@ namespace FormForDataModel
             }
         }
 
-        private void btn_clear_Click(object sender, EventArgs e)
+        private void ComboBoxSubDealersLoad()
         {
-            gbClear();
-        }
-
-        private void gbClear()
-        {
-            cbb_brandName.SelectedIndex = 0;
-            cbb_categoryName.SelectedIndex = 0;
-            cbb_productName.SelectedIndex = 0;
-            tb_productItemNumber.Text = "";
-            pb_productImage.ImageLocation = "";
-            tb_productDescription.Text = "";
+            List<SubDealer> subDealers = dm.getSubDealers();
+            subDealers.Insert(0, new SubDealer { subDealerUserID = 0, subDealerName = "---Choose---" });
+            cbb_subDealerInformation.DataSource = subDealers;
+            cbb_subDealerInformation.DisplayMember = "subDealerName";
+            cbb_subDealerInformation.ValueMember = "subDealerUserID";
             cbb_subDealerInformation.SelectedIndex = 0;
-            tb_subDealerType.Text = "";
-            tb_subDealerDiscAmount.Text = "";
-            tb_sendQuentity.Text = "";
-            tb_unitPrice.Text = "";
-            nud_subTotalPrice.Value = 0;
-            nud_totalPrice.Value = 0;
-            nud_discountedPrice.Value = 0;
-            tb_shipmentInformation.Text = "";
-            subTotalPrice = 0;
-            totalPrice = 0;
-            unitPrice = 0;
-            discountPercent = 0;
-            discountedPrice = 0;
-            nud_discountedPrice.Visible = false;
-            tb_discountedPrice.Visible = false;
-            tb_sendQuentity.Enabled = false;
-            tb_shipmentInformation.Enabled = false;
-            cbb_subDealerInformation.Enabled = false;
         }
 
-        private void dgv_sendToSubDealers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void cbb_subDealerInformation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow rows in dgv_sendToSubDealers.Rows)
+            if (cbb_subDealerInformation.SelectedIndex != 0 && cbb_subDealerInformation.SelectedValue != null)
             {
-                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                tb_sendQuentity.Enabled = true;
+                tb_shipmentInformation.Enabled = true;
+                if (int.TryParse(cbb_subDealerInformation.SelectedValue.ToString(), out int id))
                 {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                    selectedSubDealerID = id;
+                    List<SubDealer> sd = dm.getSubDealers();
+                    for (int i = 0; i < sd.Count; i++)
+                    {
+                        if (sd[i].subDealerUserID == id)
+                        {
+                            tb_subDealerType.Text = dm.getDiscountType(sd[i].discountIDFK.ToString());
+                            tb_subDealerDiscAmount.Text = dm.getDiscountAmount(sd[i].discountIDFK.ToString());
+                            if (tb_subDealerDiscAmount.Text != "" && tb_subDealerDiscAmount.Text != "0")
+                            {
+                                discountPercent = Convert.ToDecimal(tb_subDealerDiscAmount.Text) / 100;
+                            }
+                        }
+                    }
+                }
+                CalculeteTotalPrice();
+            }
+        }
+
+        private void CalculeteTotalPrice()
+        {
+            if (tb_sendQuentity.Text != "" && tb_sendQuentity.Text != "0")
+            {
+                subTotalPrice = Convert.ToDecimal(tb_sendQuentity.Text) * Convert.ToDecimal(unitPrice);
+                totalPrice = subTotalPrice + (subTotalPrice * tax);
+                nud_subTotalPrice.Value = subTotalPrice;
+                nud_totalPrice.Value = totalPrice;
+
+                if (tb_subDealerDiscAmount.Text != "" && tb_subDealerDiscAmount.Text != "0")
+                {
+                    nud_discountedPrice.Visible = true;
+                    tb_discountedPrice.Visible = false;
+
+                    discountPercent = Convert.ToDecimal(tb_subDealerDiscAmount.Text) / 100;
+                    discountedPrice = totalPrice - (totalPrice * discountPercent);
+                    nud_discountedPrice.Value = discountedPrice;
+                }
+                else
+                {
+                    tb_discountedPrice.Visible = true;
+                    nud_discountedPrice.Visible = false;
+                    nud_discountedPrice.Value = 0;
+                    tb_discountedPrice.Text = "Discount not applied.";
                 }
             }
+            else
+            {
+                nud_subTotalPrice.Value = 0;
+                nud_totalPrice.Value = 0;
+                nud_discountedPrice.Value = 0;
+            }
+
+
         }
 
         private void btn_sendProduct_Click(object sender, EventArgs e)
@@ -365,41 +357,6 @@ namespace FormForDataModel
             {
                 e.Handled = true;
             }
-        }
-
-        private void dgv_sendToSubDealers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            DataGridViewRow selectedRow = dgv_sendToSubDealers.Rows[e.RowIndex];
-            sendID = selectedRow.Cells["Shipment Number"].Value.ToString();
-            tb_productItemNumber.Text = selectedRow.Cells["Product Item Number"].Value.ToString();
-            cbb_brandName.SelectedValue = Convert.ToInt32(selectedRow.Cells["BrandIDFK"].Value);
-            cbb_categoryName.SelectedValue = Convert.ToInt32(selectedRow.Cells["CategoryIDFK"].Value);
-            cbb_productName.SelectedValue = Convert.ToInt32(selectedRow.Cells["ProductIDFK"].Value);
-            imageName = dm.listImageForEditProducts(selectedRow.Cells["ProductIDFK"].Value.ToString());
-            pb_productImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageName);
-            pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
-            tb_productDescription.Text = selectedRow.Cells["Product Description"].Value.ToString();
-            cbb_subDealerInformation.SelectedValue = Convert.ToInt32(selectedRow.Cells["SubDealerIDFK"].Value);
-            tb_sendQuentity.Text = selectedRow.Cells["Send Quantity"].Value.ToString();
-            tb_unitPrice.Text = selectedRow.Cells["Unit Price"].Value.ToString();
-            tb_shipmentInformation.Text = selectedRow.Cells["Description"].Value.ToString();
-            cb_sendDeleted.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
-            cb_sendDeleted.Enabled = true;
-            btn_editData.Enabled = true;
-            btn_cancelEdit.Enabled = true;
-            btn_sendProduct.Enabled = false;
-        }
-
-        private void btn_cancelEdit_Click(object sender, EventArgs e)
-        {
-            btn_sendProduct.Enabled = true;
-            btn_cancelEdit.Enabled = false;
-            btn_editData.Enabled = false;
-            cb_sendDeleted.Enabled = false;
-            cbb_subDealerInformation.Enabled = false;
-            tb_sendQuentity.Enabled = false;
-            SendToSubDealersDataBind();
-            gbClear();
         }
 
         private void btn_editData_Click(object sender, EventArgs e)
@@ -480,6 +437,52 @@ namespace FormForDataModel
                     }
                 }
             }
+        }
+
+        private void btn_cancelEdit_Click(object sender, EventArgs e)
+        {
+            btn_sendProduct.Enabled = true;
+            btn_cancelEdit.Enabled = false;
+            btn_editData.Enabled = false;
+            cb_sendDeleted.Enabled = false;
+            cbb_subDealerInformation.Enabled = false;
+            tb_sendQuentity.Enabled = false;
+            SendToSubDealersDataBind();
+            gbClear();
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            gbClear();
+        }
+
+        private void gbClear()
+        {
+            cbb_brandName.SelectedIndex = 0;
+            cbb_categoryName.SelectedIndex = 0;
+            cbb_productName.SelectedIndex = 0;
+            tb_productItemNumber.Text = "";
+            pb_productImage.ImageLocation = "";
+            tb_productDescription.Text = "";
+            cbb_subDealerInformation.SelectedIndex = 0;
+            tb_subDealerType.Text = "";
+            tb_subDealerDiscAmount.Text = "";
+            tb_sendQuentity.Text = "";
+            tb_unitPrice.Text = "";
+            nud_subTotalPrice.Value = 0;
+            nud_totalPrice.Value = 0;
+            nud_discountedPrice.Value = 0;
+            tb_shipmentInformation.Text = "";
+            subTotalPrice = 0;
+            totalPrice = 0;
+            unitPrice = 0;
+            discountPercent = 0;
+            discountedPrice = 0;
+            nud_discountedPrice.Visible = false;
+            tb_discountedPrice.Visible = false;
+            tb_sendQuentity.Enabled = false;
+            tb_shipmentInformation.Enabled = false;
+            cbb_subDealerInformation.Enabled = false;
         }
     }
 }

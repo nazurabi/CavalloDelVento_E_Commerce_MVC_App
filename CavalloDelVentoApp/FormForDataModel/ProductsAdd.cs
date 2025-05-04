@@ -48,68 +48,41 @@ namespace FormForDataModel
             dgv_addProduct.Columns["ProductID"].Visible = false;
             dgv_addProduct.Columns["Product Image Name"].Visible = false;
 
+            #region Image Column and Sequence Number Settings
+
+            int dgvaddBrandColumnWidth = dgv_addProduct.Width - 100; // 100 = Image Column Width
+            int otherColumnCount = dgv_addProduct.Columns.Count - 6; // (6 --> S/N, ProductID, BrandIDFK, CategoryIDFK, Image, Image Name Column)
+            int columnWidth = dgvaddBrandColumnWidth / otherColumnCount;
+
+            for (int i = 0; i < otherColumnCount; i++)
+            {
+                dgv_addProduct.Columns[i].Width = columnWidth;
+            }
             foreach (DataGridViewColumn column in dgv_addProduct.Columns)
             {
                 if (column.Name == "S/N")
                 {
                     column.Width = 50;
                 }
-                if (column.Name == "Brand Name")
-                {
-                    column.Width = 150;
-                }
-                if (column.Name == "Category Name")
-                {
-                    column.Width = 150;
-                }
-                if (column.Name == "Product Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Description")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Quantity Per Unit")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Unit Price")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Units In Stock")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Units On Order")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Reorder Level")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Discontinued")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Is Product Active For Sale")
-                {
-                    column.Width = 100;
-                }
-                if (column.Name == "Is Deleted")
-                {
-                    column.Width = 100;
-                }
                 if (column.Name == "Product Image")
                 {
-                    if (dgv_addProduct.Columns["Product Image"] is DataGridViewImageColumn imageCol)
-                    {
-                        imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                        imageCol.Width = 100;
-                        dgv_addProduct.RowTemplate.Height = 100;
-                    }
+                    DataGridViewImageColumn imageCol = (DataGridViewImageColumn)column;
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_addProduct.RowTemplate.Height = 100;
+                }
+            }
+
+            #endregion
+        }
+
+        private void dgv_addProduct_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_addProduct.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
                 }
             }
         }
@@ -123,6 +96,7 @@ namespace FormForDataModel
             cbb_categoryName.ValueMember = "categoryID";
             cbb_categoryName.SelectedIndex = 0;
         }
+
         private void ComboBoxBrandsLoad()
         {
             List<Brands> brands = dm.getBrandsForProducts();
@@ -178,21 +152,6 @@ namespace FormForDataModel
             {
                 e.Handled = true;
             }
-        }
-
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            tb_productName.Text = "";
-            tb_description.Text = "";
-            tb_quentityPerUnit.Text = "";
-            tb_unitsInStock.Text = "";
-            tb_reorderLevel.Text = "";
-            nud_products.Value = 0;
-            cb_productActive.Checked = false;
-            imageName = "";
-            selectedImagePath = "";
-            destinationImagePath = "";
-            pb_productImage.ImageLocation = "";
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -291,15 +250,20 @@ namespace FormForDataModel
             }
         }
 
-        private void dgv_addProduct_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void btn_clear_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow rows in dgv_addProduct.Rows)
-            {
-                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
-                {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
+            tb_productName.Text = "";
+            tb_description.Text = "";
+            tb_quentityPerUnit.Text = "";
+            tb_unitsInStock.Text = "";
+            tb_reorderLevel.Text = "";
+            nud_products.Value = 0;
+            cb_productActive.Checked = false;
+            imageName = "";
+            selectedImagePath = "";
+            destinationImagePath = "";
+            pb_productImage.ImageLocation = "";
         }
+
     }
 }

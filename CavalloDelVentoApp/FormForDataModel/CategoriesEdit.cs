@@ -33,69 +33,52 @@ namespace FormForDataModel
             comboBoxBrandsLoad();
         }
 
-        private void comboBoxBrandsLoad()
-        {
-            List<Brands> brands = dm.getBrandsForCategories();
-            cbb_brandName.DataSource = brands;
-            cbb_brandName.DisplayMember = "BrandName";
-            cbb_brandName.ValueMember = "BrandID";
-            cbb_brandName.SelectedIndex = -1;
-        }
-        private void cbb_brandName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbb_brandName.SelectedIndex != -1 && cbb_brandName.SelectedValue != null)
-            {
-                if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
-                {
-                    selectedBrandID = id;
-                }
-            }
-        }
         private void CategoriesEditLoad()
         {
             DataTable dt = dm.categoryDataBind();
-            #region filePath active here
 
             dgv_editCategory.DataSource = dt;
             dgv_editCategory.Columns["BrandIDFK"].Visible = false;
             dgv_editCategory.Columns["CategoryID"].Visible = false;
             dgv_editCategory.Columns["Category Image Name"].Visible = false;
 
+            #region Image Column and Sequence Number Settings
+
+            int dgvaddBrandColumnWidth = dgv_editCategory.Width - dgv_editCategory.RowHeadersWidth - 100; // 100 = Image Column Width
+            int otherColumnCount = dgv_editCategory.Columns.Count - 2; // (2 --> S/N and Image Column)
+            int columnWidth = dgvaddBrandColumnWidth / otherColumnCount;
+
+            for (int i = 0; i < otherColumnCount; i++)
+            {
+                dgv_editCategory.Columns[i].Width = columnWidth;
+            }
             foreach (DataGridViewColumn column in dgv_editCategory.Columns)
             {
                 if (column.Name == "S/N")
                 {
                     column.Width = 50;
                 }
-                if (column.Name == "Brand Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Category Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Is Category Active For Sale")
-                {
-                    column.Width = 150;
-                }
-                if (column.Name == "Is Deleted")
-                {
-                    column.Width = 150;
-                }
-
                 if (column.Name == "Category Image")
                 {
-
-                    if (dgv_editCategory.Columns["Category Image"] is DataGridViewImageColumn imageCol)
-                    {
-                        imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                        imageCol.Width = 100;
-                        dgv_editCategory.RowTemplate.Height = 100;
-                    }
+                    DataGridViewImageColumn imageCol = (DataGridViewImageColumn)column;
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_editCategory.RowTemplate.Height = 100;
                 }
             }
+
             #endregion
+        }
+
+        private void dgv_editCategory_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_editCategory.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
         }
 
         private void dgv_editCategory_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -122,6 +105,26 @@ namespace FormForDataModel
             pb_categoryImage.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
+        private void comboBoxBrandsLoad()
+        {
+            List<Brands> brands = dm.getBrandsForCategories();
+            cbb_brandName.DataSource = brands;
+            cbb_brandName.DisplayMember = "BrandName";
+            cbb_brandName.ValueMember = "BrandID";
+            cbb_brandName.SelectedIndex = -1;
+        }
+
+        private void cbb_brandName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbb_brandName.SelectedIndex != -1 && cbb_brandName.SelectedValue != null)
+            {
+                if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
+                {
+                    selectedBrandID = id;
+                }
+            }
+        }
+
         private void btn_selectImage_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -136,18 +139,6 @@ namespace FormForDataModel
                     imageName = Guid.NewGuid().ToString() + fi.Extension;
                 }
             }
-        }
-
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            tb_categoryName.Text = "";
-            tb_description.Text = "";
-            cb_categoryActive.Checked = false;
-            cb_categoryDelete.Checked = false;
-            imageName = "";
-            selectedImagePath = "";
-            destinationImagePath = "";
-            pb_categoryImage.ImageLocation = "";
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -285,15 +276,16 @@ namespace FormForDataModel
             }
         }
 
-        private void dgv_editCategory_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void btn_clear_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow rows in dgv_editCategory.Rows)
-            {
-                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
-                {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
+            tb_categoryName.Text = "";
+            tb_description.Text = "";
+            cb_categoryActive.Checked = false;
+            cb_categoryDelete.Checked = false;
+            imageName = "";
+            selectedImagePath = "";
+            destinationImagePath = "";
+            pb_categoryImage.ImageLocation = "";
         }
     }
 }

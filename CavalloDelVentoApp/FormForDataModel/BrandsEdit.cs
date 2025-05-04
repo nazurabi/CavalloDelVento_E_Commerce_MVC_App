@@ -35,53 +35,66 @@ namespace FormForDataModel
         {
             DataTable dt = dm.brandDataBind();
 
-            #region filePath active here
             dgv_editBrand.DataSource = dt;
             dgv_editBrand.Columns["BrandID"].Visible = false;
             dgv_editBrand.Columns["Brand Image Name"].Visible = false;
 
+            #region Image Column and Sequence Number Settings
+
+            int dgvaddBrandColumnWidth = dgv_editBrand.Width - dgv_editBrand.RowHeadersWidth - 100; // 100 = Image Column Width
+            int otherColumnCount = dgv_editBrand.Columns.Count - 2; // (2 --> S/N and Image Column)
+            int columnWidth = dgvaddBrandColumnWidth / otherColumnCount;
+
+            for (int i = 0; i < otherColumnCount; i++)
+            {
+                dgv_editBrand.Columns[i].Width = columnWidth;
+            }
             foreach (DataGridViewColumn column in dgv_editBrand.Columns)
             {
                 if (column.Name == "S/N")
                 {
                     column.Width = 50;
                 }
-                if (column.Name == "Brand Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Is Brand Active For Sale")
-                {
-                    column.Width = 150;
-                }
-                if (column.Name == "Is Deleted")
-                {
-                    column.Width = 150;
-                }
-
                 if (column.Name == "Brand Image")
                 {
-
-                    if (dgv_editBrand.Columns["Brand Image"] is DataGridViewImageColumn imageCol)
-                    {
-                        imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                        imageCol.Width = 100;
-                        dgv_editBrand.RowTemplate.Height = 100;
-                    }
+                    DataGridViewImageColumn imageCol = (DataGridViewImageColumn)column;
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_editBrand.RowTemplate.Height = 100;
                 }
             }
+
             #endregion
         }
 
-        private void btn_clear_Click(object sender, EventArgs e)
+        private void dgv_editBrand_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            tb_brandName.Text = "";
-            cb_brandActive.Checked = false;
-            cb_brandDelete.Checked = false;
-            imageName = "";
-            selectedImagePath = "";
-            destinationImagePath = "";
-            pb_brandImage.ImageLocation = "";
+            foreach (DataGridViewRow rows in dgv_editBrand.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
+
+        private void dgv_editBrand_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            tb_brandName.Enabled = true;
+            cb_brandActive.Enabled = true;
+            cb_brandDelete.Enabled = true;
+            btn_clear.Enabled = true;
+            btn_selectImage.Enabled = true;
+            btn_save.Enabled = true;
+
+            DataGridViewRow selectedRow = dgv_editBrand.Rows[e.RowIndex];
+            tb_brandName.Text = selectedRow.Cells["Brand Name"].Value.ToString();
+            cb_brandActive.Checked = selectedRow.Cells["Is Brand Active For Sale"].Value.ToString() == "Yes" ? true : false;
+            cb_brandDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
+            imageForEdit = dm.listImageForEditBrands(selectedRow.Cells["BrandID"].Value.ToString());
+            brandID = selectedRow.Cells["BrandID"].Value.ToString();
+            pb_brandImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageForEdit);
+            pb_brandImage.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void btn_selectImage_Click(object sender, EventArgs e)
@@ -156,7 +169,7 @@ namespace FormForDataModel
                             isDeleted = cb_brandDelete.Checked;
                             isActive = isDeleted ? false : cb_brandActive.Checked;
                             imageName = imageForEdit;
-                            dm.editBrand(brandID, brandName, isActive,isDeleted, imageName);
+                            dm.editBrand(brandID, brandName, isActive, isDeleted, imageName);
                             tb_brandName.Text = "";
                             cb_brandActive.Checked = false;
                             cb_brandDelete.Checked = false;
@@ -184,7 +197,7 @@ namespace FormForDataModel
                     {
                         isDeleted = cb_brandDelete.Checked;
                         isActive = isDeleted ? false : cb_brandActive.Checked;
-                        dm.editBrand(brandID, isActive,isDeleted, imageName);
+                        dm.editBrand(brandID, isActive, isDeleted, imageName);
                         destinationImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageName);
                         destinationImagePath = Path.GetFullPath(destinationImagePath);
                         File.Copy(selectedImagePath, destinationImagePath, true);
@@ -245,34 +258,16 @@ namespace FormForDataModel
                 MessageBox.Show("Brand name cannot empty!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void dgv_editBrand_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            tb_brandName.Enabled = true;
-            cb_brandActive.Enabled = true;
-            cb_brandDelete.Enabled = true;
-            btn_clear.Enabled = true;
-            btn_selectImage.Enabled = true;
-            btn_save.Enabled = true;
 
-            DataGridViewRow selectedRow = dgv_editBrand.Rows[e.RowIndex];
-            tb_brandName.Text = selectedRow.Cells["Brand Name"].Value.ToString();
-            cb_brandActive.Checked = selectedRow.Cells["Is Brand Active For Sale"].Value.ToString() == "Yes" ? true : false;
-            cb_brandDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
-            imageForEdit = dm.listImageForEditBrands(selectedRow.Cells["BrandID"].Value.ToString());
-            brandID = selectedRow.Cells["BrandID"].Value.ToString();
-            pb_brandImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\BrandImages", imageForEdit);
-            pb_brandImage.SizeMode = PictureBoxSizeMode.Zoom;
-        }
-
-        private void dgv_editBrand_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void btn_clear_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow rows in dgv_editBrand.Rows)
-            {
-                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
-                {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
+            tb_brandName.Text = "";
+            cb_brandActive.Checked = false;
+            cb_brandDelete.Checked = false;
+            imageName = "";
+            selectedImagePath = "";
+            destinationImagePath = "";
+            pb_brandImage.ImageLocation = "";
         }
     }
 }

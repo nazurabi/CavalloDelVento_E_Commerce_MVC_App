@@ -33,6 +33,48 @@ namespace FormForDataModel
             ComboboxSubDealersLoad();
         }
 
+        private void SubDealersLoad()
+        {
+            DataTable dt = dm.subDealerDataBind();
+            dgv_editSubDealers.DataSource = dt;
+            dgv_editSubDealers.Columns["DiscountIDFK"].Visible = false;
+            btn_cancelEdit.Enabled = false;
+            btn_editSubDealers.Enabled = false;
+        }
+
+        private void dgv_editSubDealers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_editSubDealers.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
+
+        private void dgv_editSubDealers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            dm.enableControls(gb_addSubDealers);
+
+            DataGridViewRow selectedRow = dgv_editSubDealers.Rows[e.RowIndex];
+            tb_subDealerUserID.Text = selectedRow.Cells["User ID"].Value.ToString();
+            subDealerID = selectedRow.Cells["User ID"].Value.ToString();
+            tb_dealerName.Text = selectedRow.Cells["Dealer Name"].Value.ToString();
+            tb_dealerMail.Text = selectedRow.Cells["Dealer Mail"].Value.ToString();
+            discountIDFK = selectedRow.Cells["DiscountIDFK"].Value.ToString();
+            cbb_subDealers.SelectedValue = Convert.ToInt32(selectedRow.Cells["DiscountIDFK"].Value);
+            tb_dealerAdress.Text = selectedRow.Cells["Dealer Address"].Value.ToString();
+            tb_dealerCity.Text = selectedRow.Cells["Dealer City"].Value.ToString();
+            tb_dealerPostalCode.Text = selectedRow.Cells["Dealer Postal Code"].Value.ToString();
+            tb_dealerCountry.Text = selectedRow.Cells["Dealer Country"].Value.ToString();
+            cb_subDealerUser.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
+            btn_save.Enabled = false;
+            btn_cancelEdit.Enabled = true;
+            btn_editSubDealers.Enabled = true;
+            tb_subDealerUserID.Enabled = false;
+        }
+
         private void ComboboxSubDealersLoad()
         {
             List<DiscountRates> dr = dm.getDiscountRates();
@@ -42,6 +84,7 @@ namespace FormForDataModel
             cbb_subDealers.ValueMember = "discountID";
             cbb_subDealers.SelectedIndex = 0;
         }
+
         private void cbb_subDealers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbb_subDealers.SelectedIndex != 0 && cbb_subDealers.SelectedValue != null)
@@ -51,15 +94,6 @@ namespace FormForDataModel
                     selectedDiscountID = id;
                 }
             }
-        }
-
-        private void SubDealersLoad()
-        {
-            DataTable dt = dm.subDealerDataBind();
-            dgv_editSubDealers.DataSource = dt;
-            dgv_editSubDealers.Columns["DiscountIDFK"].Visible = false;
-            btn_cancelEdit.Enabled = false;
-            btn_editSubDealers.Enabled = false;
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -221,10 +255,6 @@ namespace FormForDataModel
                 MessageBox.Show("You have entered an incomplete entry, please enter all data!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            dm.clearControls(gb_addSubDealers);
-        }
 
         private void btn_cancelEdit_Click(object sender, EventArgs e)
         {
@@ -236,39 +266,10 @@ namespace FormForDataModel
             dm.clearControls(gb_addSubDealers);
         }
 
-        private void dgv_editSubDealers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void btn_clear_Click(object sender, EventArgs e)
         {
-            dm.enableControls(gb_addSubDealers);
-
-            DataGridViewRow selectedRow = dgv_editSubDealers.Rows[e.RowIndex];
-            tb_subDealerUserID.Text = selectedRow.Cells["User ID"].Value.ToString();
-            subDealerID = selectedRow.Cells["User ID"].Value.ToString();
-            tb_dealerName.Text = selectedRow.Cells["Dealer Name"].Value.ToString();
-            tb_dealerMail.Text = selectedRow.Cells["Dealer Mail"].Value.ToString();
-            discountIDFK = selectedRow.Cells["DiscountIDFK"].Value.ToString();
-            cbb_subDealers.SelectedValue = Convert.ToInt32(selectedRow.Cells["DiscountIDFK"].Value);
-            tb_dealerAdress.Text = selectedRow.Cells["Dealer Address"].Value.ToString();
-            tb_dealerCity.Text = selectedRow.Cells["Dealer City"].Value.ToString();
-            tb_dealerPostalCode.Text = selectedRow.Cells["Dealer Postal Code"].Value.ToString();
-            tb_dealerCountry.Text = selectedRow.Cells["Dealer Country"].Value.ToString();
-            cb_subDealerUser.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
-            btn_save.Enabled = false;
-            btn_cancelEdit.Enabled = true;
-            btn_editSubDealers.Enabled = true;
-            tb_subDealerUserID.Enabled = false;
+            dm.clearControls(gb_addSubDealers);
         }
-
-        private void dgv_editSubDealers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow rows in dgv_editSubDealers.Rows)
-            {
-                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
-                {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
-        }
-
 
     }
 }

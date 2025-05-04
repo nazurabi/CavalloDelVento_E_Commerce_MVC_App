@@ -23,14 +23,6 @@ namespace FormForDataModel
             InitializeComponent();
         }
 
-        private void nud_discountRates_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void DiscountRatesSettings_Load(object sender, EventArgs e)
         {
             DiscountRatesLoad();
@@ -61,22 +53,6 @@ namespace FormForDataModel
             }
         }
 
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            nud_discountRates.Value = 0;
-            pb_discountRates.ImageLocation = "";
-            nud_discountRates.Enabled = false;
-            btn_clear.Enabled = false;
-            btn_save.Enabled = false;
-        }
-
-        private void btn_save_Click(object sender, EventArgs e)
-        {
-            discountAmount = Convert.ToByte(nud_discountRates.Value);
-            dm.editDiscountRates(discountID, discountAmount);
-            DiscountRatesLoad();
-        }
-
         private void dgv_discountRates_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             nud_discountRates.Enabled = true;
@@ -93,7 +69,7 @@ namespace FormForDataModel
             {
                 imageForEdit = "Silver.png";
             }
-            else if(3 == Convert.ToByte(selectedRow.Cells["DiscountID"].Value))
+            else if (3 == Convert.ToByte(selectedRow.Cells["DiscountID"].Value))
             {
                 imageForEdit = "Bronze.png";
             }
@@ -101,8 +77,34 @@ namespace FormForDataModel
             {
                 imageForEdit = "Normaluser.png";
             }
-                pb_discountRates.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageForEdit);
+            pb_discountRates.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ApplicationImages", imageForEdit);
             pb_discountRates.SizeMode = PictureBoxSizeMode.Zoom;
         }
+
+        private void nud_discountRates_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            discountAmount = Convert.ToByte(nud_discountRates.Value);
+            dm.editDiscountRates(discountID, discountAmount);
+            DiscountRatesLoad();
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            nud_discountRates.Value = 0;
+            pb_discountRates.ImageLocation = "";
+            nud_discountRates.Enabled = false;
+            btn_clear.Enabled = false;
+            btn_save.Enabled = false;
+        }
+
+
     }
 }

@@ -43,23 +43,34 @@ namespace FormForDataModel
             dgv_editMainDealer.DataSource = dt;
             dgv_editMainDealer.Columns["User ID"].Visible = false;
 
+            #region Image Column and Sequence Number Settings
 
+            int dgvaddBrandColumnWidth = dgv_editMainDealer.Width - dgv_editMainDealer.RowHeadersWidth - 100; // 100 = Image Column Width
+            int otherColumnCount = dgv_editMainDealer.Columns.Count - 2; // (2 --> S/N and Image Column)
+            int columnWidth = dgvaddBrandColumnWidth / otherColumnCount;
 
+            for (int i = 0; i < otherColumnCount; i++)
+            {
+                dgv_editMainDealer.Columns[i].Width = columnWidth;
+            }
             foreach (DataGridViewColumn column in dgv_editMainDealer.Columns)
             {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+                if (column.Name == "S/N")
+                {
+                    column.Width = 50;
+                }
                 if (column.Name == "Image")
                 {
-                    if (dgv_editMainDealer.Columns["Image"] is DataGridViewImageColumn imageCol)
-                    {
-                        imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                        imageCol.Width = 100;
-                        dgv_editMainDealer.RowTemplate.Height = 100;
-                    }
+                    DataGridViewImageColumn imageCol = (DataGridViewImageColumn)column;
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_editMainDealer.RowTemplate.Height = 100;
                 }
             }
-        }
+
+            #endregion
+
+                   }
 
         private void dgv_editMainDealer_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

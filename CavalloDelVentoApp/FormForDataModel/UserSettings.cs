@@ -32,6 +32,41 @@ namespace FormForDataModel
             ComboboxUserLoad();
         }
 
+        private void UserDataBind()
+        {
+            DataTable dt = dm.userDataBind();
+            dgv_userInformation.DataSource = dt;
+            btn_cancelEdit.Enabled = false;
+            btn_editUser.Enabled = false;
+
+        }
+
+        private void dgv_userInformation_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow rows in dgv_userInformation.Rows)
+            {
+                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
+                {
+                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
+
+        private void dgv_userInformation_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow selectedRow = dgv_userInformation.Rows[e.RowIndex];
+            selectedUserID = selectedRow.Cells["User ID"].Value.ToString();
+            tb_userName.Text = selectedRow.Cells["User Name"].Value.ToString();
+            tb_userPassword.Text = selectedRow.Cells["User Password"].Value.ToString();
+            cbb_userType.SelectedValue = (selectedRow.Cells["User Type"].Value.ToString()) == "Admin" ? 0 : 1;
+            cb_userIsDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
+            btn_save.Enabled = false;
+            btn_editUser.Enabled = true;
+            btn_cancelEdit.Enabled = true;
+            cb_userIsDelete.Enabled = true;
+
+        }
+
         private void ComboboxUserLoad()
         {
             List<MainUser> mu = new List<MainUser>();
@@ -41,15 +76,6 @@ namespace FormForDataModel
             cbb_userType.DisplayMember = "userName";
             cbb_userType.ValueMember = "mainUserID";
             cbb_userType.SelectedIndex = 1;
-        }
-
-        private void UserDataBind()
-        {
-            DataTable dt = dm.userDataBind();
-            dgv_userInformation.DataSource = dt;
-            btn_cancelEdit.Enabled = false;
-            btn_editUser.Enabled = false;
-
         }
 
         private void cbb_userType_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,27 +213,6 @@ namespace FormForDataModel
             }
         }
 
-
-        private void dgv_userInformation_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            DataGridViewRow selectedRow = dgv_userInformation.Rows[e.RowIndex];
-            selectedUserID = selectedRow.Cells["User ID"].Value.ToString();
-            tb_userName.Text = selectedRow.Cells["User Name"].Value.ToString();
-            tb_userPassword.Text = selectedRow.Cells["User Password"].Value.ToString();
-            cbb_userType.SelectedValue = (selectedRow.Cells["User Type"].Value.ToString()) == "Admin" ? 0 : 1;
-            cb_userIsDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
-            btn_save.Enabled = false;
-            btn_editUser.Enabled = true;
-            btn_cancelEdit.Enabled = true;
-            cb_userIsDelete.Enabled = true;
-
-        }
-
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            dm.clearControls(gb_userInformation);
-        }
-
         private void btn_cancelEdit_Click(object sender, EventArgs e)
         {
             btn_save.Enabled = true;
@@ -218,15 +223,11 @@ namespace FormForDataModel
             dm.clearControls(gb_userInformation);
         }
 
-        private void dgv_userInformation_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void btn_clear_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow rows in dgv_userInformation.Rows)
-            {
-                if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
-                {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
+            dm.clearControls(gb_userInformation);
         }
+
+
     }
 }

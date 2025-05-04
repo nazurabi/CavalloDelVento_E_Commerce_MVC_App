@@ -132,9 +132,6 @@ namespace DataModelWithADO
             }
         }
 
-
-
-
         #region Brand Applications
 
         public DataTable brandDataBind()
@@ -223,7 +220,7 @@ namespace DataModelWithADO
                     img = System.Drawing.Image.FromFile(fullPath);
                 }
 
-                returnToForm.Rows.Add(sequenceNumber, brandID, brandName, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
+                returnToForm.Rows.Add(sequenceNumber, brandID, brandName, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", imageFile, img);
             }
 
             return returnToForm;
@@ -411,10 +408,10 @@ namespace DataModelWithADO
 
             DataTable returnToForm = new DataTable();
             returnToForm.Columns.Add("S/N", typeof(string));
-            returnToForm.Columns.Add("BrandIDFK", typeof(int));
             returnToForm.Columns.Add("CategoryID", typeof(int));
-            returnToForm.Columns.Add("Brand Name", typeof(string));
             returnToForm.Columns.Add("Category Name", typeof(string));
+            returnToForm.Columns.Add("BrandIDFK", typeof(int));
+            returnToForm.Columns.Add("Brand Name", typeof(string));
             returnToForm.Columns.Add("Description", typeof(string));
             returnToForm.Columns.Add("Is Category Active For Sale", typeof(string));
             returnToForm.Columns.Add("Is Deleted", typeof(string));
@@ -430,10 +427,10 @@ namespace DataModelWithADO
                 if (!isBrandDelete(row["BrandIDFK"].ToString()))
                 {
                     sequenceNumber++;
-                    string brandIDFK = row["BrandIDFK"].ToString();
                     string categoryID = row["CategoryID"].ToString();
-                    string brandName = getBrandNameForCategories(brandIDFK);
                     string categoryName = row["CategoryName"].ToString();
+                    string brandIDFK = row["BrandIDFK"].ToString();
+                    string brandName = getBrandNameForCategories(brandIDFK);
                     string description = row["Description"].ToString();
                     bool isActiveForSale = Convert.ToBoolean(row["IsActive"]);
                     bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
@@ -444,7 +441,7 @@ namespace DataModelWithADO
                     {
                         img = System.Drawing.Image.FromFile(fullPath);
                     }
-                    returnToForm.Rows.Add(sequenceNumber, brandIDFK, categoryID, brandName, categoryName, description, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
+                    returnToForm.Rows.Add(sequenceNumber, categoryID, categoryName, brandIDFK, brandName, description, isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", imageFile, img);
                 }
             }
             return returnToForm;
@@ -682,11 +679,11 @@ namespace DataModelWithADO
             DataTable returnToForm = new DataTable();
             returnToForm.Columns.Add("S/N", typeof(string));
             returnToForm.Columns.Add("ProductID", typeof(string));
+            returnToForm.Columns.Add("Product Name", typeof(string));
             returnToForm.Columns.Add("BrandIDFK", typeof(string));
             returnToForm.Columns.Add("Brand Name", typeof(string));
             returnToForm.Columns.Add("CategoryIDFK", typeof(string));
             returnToForm.Columns.Add("Category Name", typeof(string));
-            returnToForm.Columns.Add("Product Name", typeof(string));
             returnToForm.Columns.Add("Description", typeof(string));
             returnToForm.Columns.Add("Quantity Per Unit", typeof(string));
             returnToForm.Columns.Add("Unit Price", typeof(decimal));
@@ -710,11 +707,11 @@ namespace DataModelWithADO
                     {
                         sequenceNumber++;
                         string productID = row["ProductID"].ToString();
+                        string productName = row["ProductName"].ToString();
                         string brandIDFK = row["BrandIDFK"].ToString();
                         string brandName = getBrandNameForProducts(brandIDFK);
                         string categoryIDFK = row["CategoryIDFK"].ToString();
                         string categoryName = getCategoryNameForProducts(categoryIDFK);
-                        string productName = row["ProductName"].ToString();
                         string description = row["Description"].ToString();
                         string quantityPerUnit = row["QuantityPerUnit"].ToString();
                         decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
@@ -734,7 +731,7 @@ namespace DataModelWithADO
 
                         }
 
-                        returnToForm.Rows.Add(sequenceNumber, productID, brandIDFK, brandName, categoryIDFK, categoryName, productName, description, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued ? "Yes" : "No", isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", fullPath, img);
+                        returnToForm.Rows.Add(sequenceNumber, productID, productName, brandIDFK, brandName, categoryIDFK, categoryName, description, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued ? "Yes" : "No", isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", imageFile, img);
                     }
                 }
             }
@@ -1699,16 +1696,13 @@ namespace DataModelWithADO
 
         public DataTable SendToSubDealerDataBind()
         {
-
             cmd.CommandText = "SELECT * FROM SendToSubDealers";
             SqlDataAdapter da = new SqlDataAdapter();
             SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
             commandBuilder.DataAdapter = da;
             da.SelectCommand = cmd;
-
             DataTable temporaryDataTable = new DataTable();
             da.Fill(temporaryDataTable);
-
             DataTable returnToForm = new DataTable();
             returnToForm.Columns.Add("S/N", typeof(string));
             returnToForm.Columns.Add("Shipment Number", typeof(string));
@@ -1735,6 +1729,7 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("Description", typeof(string));
             returnToForm.Columns.Add("Is Deleted", typeof(string));
             returnToForm.Columns.Add("Product Image", typeof(System.Drawing.Image));
+            returnToForm.Columns.Add("ImageFileName", typeof(string));
             short sequenceNumber = 0;
             string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages");
             imagePath = Path.GetFullPath(imagePath);
@@ -1777,17 +1772,219 @@ namespace DataModelWithADO
                                 bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
                                 string imageFile = listImageForEditProducts(productIDFK);
                                 string fullPath = Path.Combine(imagePath, imageFile);
-
                                 System.Drawing.Image img = null;
                                 if (File.Exists(fullPath))
                                 {
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
+                    }
+                }
+            }
+            return returnToForm;
+        }
+
+        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate)
+        {
+            cmd.CommandText = "SELECT * FROM SendToSubDealers";
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+            commandBuilder.DataAdapter = da;
+            da.SelectCommand = cmd;
+            DataTable temporaryDataTable = new DataTable();
+            da.Fill(temporaryDataTable);
+            DataTable returnToForm = new DataTable();
+            returnToForm.Columns.Add("S/N", typeof(string));
+            returnToForm.Columns.Add("Shipment Number", typeof(string));
+            returnToForm.Columns.Add("BrandIDFK", typeof(string));
+            returnToForm.Columns.Add("Brand Name", typeof(string));
+            returnToForm.Columns.Add("CategoryIDFK", typeof(string));
+            returnToForm.Columns.Add("Category Name", typeof(string));
+            returnToForm.Columns.Add("ProductIDFK", typeof(string));
+            returnToForm.Columns.Add("Product Item Number", typeof(string));
+            returnToForm.Columns.Add("Product Name", typeof(string));
+            returnToForm.Columns.Add("Product Description", typeof(string));
+            returnToForm.Columns.Add("MainUserIDFK", typeof(string));
+            returnToForm.Columns.Add("SubDealerIDFK", typeof(string));
+            returnToForm.Columns.Add("Sub Dealer Name", typeof(string));
+            returnToForm.Columns.Add("Sub Dealer Type", typeof(string));
+            returnToForm.Columns.Add("Sub Dealer Discount Amount", typeof(string));
+            returnToForm.Columns.Add("Send Date", typeof(DateTime));
+            returnToForm.Columns.Add("Send Quantity", typeof(short));
+            returnToForm.Columns.Add("Unit Price", typeof(decimal));
+            returnToForm.Columns.Add("Sub Total Price", typeof(decimal));
+            returnToForm.Columns.Add("Tax", typeof(decimal));
+            returnToForm.Columns.Add("Total Price", typeof(decimal));
+            returnToForm.Columns.Add("Discounted Price", typeof(decimal));
+            returnToForm.Columns.Add("Description", typeof(string));
+            returnToForm.Columns.Add("Is Deleted", typeof(string));
+            returnToForm.Columns.Add("Product Image", typeof(System.Drawing.Image));
+            returnToForm.Columns.Add("ImageFileName", typeof(string));
+            short sequenceNumber = 0;
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages");
+            imagePath = Path.GetFullPath(imagePath);
+
+            foreach (DataRow row in temporaryDataTable.Rows)
+            {
+                bool checkDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                if (!checkDeleted)
+                {
+                    DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
+                    if (checkStartDate != null)
+                    {
+                        if (checkEndDate != null)
+                        {
+                            if (sendDate >= checkStartDate && sendDate <= checkEndDate)
+                            {
+                                sequenceNumber++;
+                                string shipmenNumber = row["SendID"].ToString();
+                                string brandIDFK = row["BrandIDFK"].ToString();
+                                string brandName = getBrandNameForProducts(brandIDFK);
+                                string categoryIDFK = row["CategoryIDFK"].ToString();
+                                string categoryName = getCategoryNameForProducts(categoryIDFK);
+                                string productIDFK = row["ProductIDFK"].ToString();
+                                string productItemNumber = row["ProductItemNumber"].ToString();
+                                string productName = getProductNameForSendToSubDealer(row["ProductIDFK"].ToString());
+                                string productDescription = getProductDescription(row["ProductIDFK"].ToString());
+                                string mainUserIDFK = row["MainUserIDFK"].ToString();
+                                string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
+                                string subDealerName = getSubDealerName(subDealerIDFK);
+                                string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
+                                string subDealerDiscountType = getDiscountType(subDealerDiscountIDFK);
+                                string subDealerDiscountAmount = getDiscountAmount(subDealerDiscountIDFK);
+                                short sendQuantity = Convert.ToInt16(row["SendQuantity"]);
+                                decimal unitPrice = Convert.ToDecimal(getUnitPrice(productIDFK));
+                                decimal subTotalPrice = Convert.ToDecimal(row["SubTotalPrice"]);
+                                decimal tax = Convert.ToDecimal(getTax("1"));
+                                decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                                decimal discountedPrice = Convert.ToDecimal(row["DiscountedPrice"]);
+                                string description = row["Description"].ToString();
+                                bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                                string imageFile = listImageForEditProducts(productIDFK);
+                                string fullPath = Path.Combine(imagePath, imageFile);
+                                System.Drawing.Image img = null;
+                                if (File.Exists(fullPath))
+                                {
+                                    img = System.Drawing.Image.FromFile(fullPath);
+
+                                }
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("End date not null, please select end date!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Start date not null, please select start date!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            return returnToForm;
+        }
+        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate, string SubDealerIDFK)
+        {
+            cmd.CommandText = "SELECT * FROM SendToSubDealers WHERE SubDealerUserIDFK=@subDealerUserIDFK";
+            SqlDataAdapter da = new SqlDataAdapter();
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder();
+            commandBuilder.DataAdapter = da;
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@subDealerUserIDFK", SubDealerIDFK);
+            da.SelectCommand = cmd;
+            DataTable temporaryDataTable = new DataTable();
+            da.Fill(temporaryDataTable);
+            DataTable returnToForm = new DataTable();
+            returnToForm.Columns.Add("S/N", typeof(string));
+            returnToForm.Columns.Add("Shipment Number", typeof(string));
+            returnToForm.Columns.Add("BrandIDFK", typeof(string));
+            returnToForm.Columns.Add("Brand Name", typeof(string));
+            returnToForm.Columns.Add("CategoryIDFK", typeof(string));
+            returnToForm.Columns.Add("Category Name", typeof(string));
+            returnToForm.Columns.Add("ProductIDFK", typeof(string));
+            returnToForm.Columns.Add("Product Item Number", typeof(string));
+            returnToForm.Columns.Add("Product Name", typeof(string));
+            returnToForm.Columns.Add("Product Description", typeof(string));
+            returnToForm.Columns.Add("MainUserIDFK", typeof(string));
+            returnToForm.Columns.Add("SubDealerIDFK", typeof(string));
+            returnToForm.Columns.Add("Sub Dealer Name", typeof(string));
+            returnToForm.Columns.Add("Sub Dealer Type", typeof(string));
+            returnToForm.Columns.Add("Sub Dealer Discount Amount", typeof(string));
+            returnToForm.Columns.Add("Send Date", typeof(DateTime));
+            returnToForm.Columns.Add("Send Quantity", typeof(short));
+            returnToForm.Columns.Add("Unit Price", typeof(decimal));
+            returnToForm.Columns.Add("Sub Total Price", typeof(decimal));
+            returnToForm.Columns.Add("Tax", typeof(decimal));
+            returnToForm.Columns.Add("Total Price", typeof(decimal));
+            returnToForm.Columns.Add("Discounted Price", typeof(decimal));
+            returnToForm.Columns.Add("Description", typeof(string));
+            returnToForm.Columns.Add("Is Deleted", typeof(string));
+            returnToForm.Columns.Add("Product Image", typeof(System.Drawing.Image));
+            returnToForm.Columns.Add("ImageFileName", typeof(string));
+            short sequenceNumber = 0;
+            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages");
+            imagePath = Path.GetFullPath(imagePath);
+            foreach (DataRow row in temporaryDataTable.Rows)
+            {
+
+                bool checkDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                if (!checkDeleted)
+                {
+                    DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
+                    if (checkStartDate != null)
+                    {
+                        if (checkEndDate != null)
+                        {
+                            if (sendDate >= checkStartDate && sendDate <= checkEndDate)
+                            {
+                                sequenceNumber++;
+                                string shipmenNumber = row["SendID"].ToString();
+                                string brandIDFK = row["BrandIDFK"].ToString();
+                                string brandName = getBrandNameForProducts(brandIDFK);
+                                string categoryIDFK = row["CategoryIDFK"].ToString();
+                                string categoryName = getCategoryNameForProducts(categoryIDFK);
+                                string productIDFK = row["ProductIDFK"].ToString();
+                                string productItemNumber = row["ProductItemNumber"].ToString();
+                                string productName = getProductNameForSendToSubDealer(row["ProductIDFK"].ToString());
+                                string productDescription = getProductDescription(row["ProductIDFK"].ToString());
+                                string mainUserIDFK = row["MainUserIDFK"].ToString();
+                                string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
+                                string subDealerName = getSubDealerName(subDealerIDFK);
+                                string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
+                                string subDealerDiscountType = getDiscountType(subDealerDiscountIDFK);
+                                string subDealerDiscountAmount = getDiscountAmount(subDealerDiscountIDFK);
+                                short sendQuantity = Convert.ToInt16(row["SendQuantity"]);
+                                decimal unitPrice = Convert.ToDecimal(getUnitPrice(productIDFK));
+                                decimal subTotalPrice = Convert.ToDecimal(row["SubTotalPrice"]);
+                                decimal tax = Convert.ToDecimal(getTax("1"));
+                                decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                                decimal discountedPrice = Convert.ToDecimal(row["DiscountedPrice"]);
+                                string description = row["Description"].ToString();
+                                bool isDeleted = Convert.ToBoolean(row["IsDeleted"]);
+                                string imageFile = listImageForEditProducts(productIDFK);
+                                string fullPath = Path.Combine(imagePath, imageFile);
+                                System.Drawing.Image img = null;
+                                if (File.Exists(fullPath))
+                                {
+                                    img = System.Drawing.Image.FromFile(fullPath);
+
+                                }
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                            }
+                        }
+                        else
+                        {
+
+                            MessageBox.Show("End date not null, please select end date!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Start date not null, please select start date!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -1894,6 +2091,7 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
+
         public List<SubDealer> getSubDealers()
         {
             List<SubDealer> subDealers = new List<SubDealer>();
@@ -2019,6 +2217,47 @@ namespace DataModelWithADO
             }
         }
 
+        //public List<SendListProductToSubDealers> getSendInformationList()
+        //{
+        //    try
+        //    {
+        //        cmd.CommandText = "SELECT * FROM SendToSubDealers";
+        //        con.Open();
+        //        SqlDataReader reader = cmd.ExecuteReader();
+        //        List<SendListProductToSubDealers> sl = new List<SendListProductToSubDealers>();
+        //        while (reader.Read())
+        //        {
+        //            SendListProductToSubDealers slp = new SendListProductToSubDealers();
+        //            slp.sendID = reader.GetInt32(0);
+        //            slp.brandIDFK = reader.GetInt32(1);
+        //            slp.categoryIDFK = reader.GetInt32(2);
+        //            slp.productIDFK = reader.GetInt32(3);
+        //            slp.productItemNumber = reader.GetString(4);
+        //            slp.mainUserIDFK = reader.GetInt32(5);
+        //            slp.subDealerUserIDFK = reader.GetInt32(6);
+        //            slp.sendDate = reader.GetDateTime(7);
+        //            slp.sendQuantity = reader.GetInt16(8);
+        //            slp.unitPrice = reader.GetDecimal(9);
+        //            slp.subTotalPrice = reader.GetDecimal(10);
+        //            slp.tax = reader.GetDecimal(11);
+        //            slp.totalPrice = reader.GetDecimal(12);
+        //            slp.discountedPrice = reader.GetDecimal(13);
+        //            slp.description = reader.GetString(14);
+        //            sl.Add(slp);
+        //        }
+        //        return sl;
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
+
         #endregion
+
     }
 }

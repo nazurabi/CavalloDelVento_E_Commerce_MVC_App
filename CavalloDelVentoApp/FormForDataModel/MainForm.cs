@@ -174,6 +174,7 @@ namespace FormForDataModel
             CategoriesList categoriesList = new CategoriesList();
             categoriesList.MdiParent = this;
             categoriesList.Show();
+
         }
 
         private void TSMI_listProducts_Click(object sender, EventArgs e)
@@ -185,6 +186,16 @@ namespace FormForDataModel
             ProductsList productsList = new ProductsList();
             productsList.MdiParent = this;
             productsList.Show();
+        }
+        private void TSMI_sendProductListToSubDealer_Click(object sender, EventArgs e)
+        {
+            foreach (var item in MdiChildren)
+            {
+                item.Close();
+            }
+            SendedList sendProductsListToSubDealers = new SendedList();
+            sendProductsListToSubDealers.MdiParent = this;
+            sendProductsListToSubDealers.Show();
         }
 
         private void TSMI_settingMainDealer_Click(object sender, EventArgs e)
@@ -246,5 +257,7 @@ namespace FormForDataModel
         {
             MessageBox.Show("Bir Nasuh BERBER Kolay Yetişmiyor");
         }
+
+       
     }
 }

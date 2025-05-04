@@ -26,22 +26,6 @@ namespace FormForDataModel
             InitializeComponent();
         }
 
-        private void btn_selectImage_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string imagePath = openFileDialog1.FileName;
-                FileInfo fi = new FileInfo(openFileDialog1.FileName);
-                if (fi.Extension == ".jpg" || fi.Extension == ".jpeg" || fi.Extension == ".png")
-                {
-                    pb_brandImage.SizeMode = PictureBoxSizeMode.Zoom;
-                    pb_brandImage.ImageLocation = fi.FullName;
-                    selectedImagePath = fi.FullName;
-                    imageName = Guid.NewGuid().ToString() + fi.Extension;
-                }
-            }
-        }
-
         private void BrandsAdd_Load(object sender, EventArgs e)
         {
             BrandsAddLoad();
@@ -67,38 +51,45 @@ namespace FormForDataModel
             #endregion
 
             #region filePath active here
+
             dgv_addBrand.DataSource = dt;
             dgv_addBrand.RowHeadersVisible = false;
-            dgv_addBrand.Columns["BrandID"].Visible=false;
-            dgv_addBrand.Columns["Brand Image Name"].Visible=false;
-         
+            dgv_addBrand.Columns["BrandID"].Visible = false;
+            dgv_addBrand.Columns["Brand Image Name"].Visible = false;
 
+            #region Image Column and Sequence Number Settings
+
+            int dgvaddBrandColumnWidth = dgv_addBrand.Width - 100; // 100 = Image Column Width
+            int otherColumnCount = dgv_addBrand.Columns.Count - 2; // (2 --> S/N and Image Column)
+            int columnWidth = dgvaddBrandColumnWidth / otherColumnCount;
+
+            for (int i = 0; i < otherColumnCount; i++)
+            {
+                dgv_addBrand.Columns[i].Width = columnWidth;
+            }
             foreach (DataGridViewColumn column in dgv_addBrand.Columns)
             {
                 if (column.Name == "S/N")
                 {
                     column.Width = 50;
                 }
-                if (column.Name == "Brand Name")
-                {
-                    column.Width = 200;
-                }
-                if (column.Name == "Is Brand Active For Sale")
-                {
-                    column.Width = 150;
-                }
-
                 if (column.Name == "Brand Image")
                 {
-
-                    if (dgv_addBrand.Columns["Brand Image"] is DataGridViewImageColumn imageCol)
-                    {
-                        imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-                        imageCol.Width = 100;
-                        dgv_addBrand.RowTemplate.Height = 100;
-                    }
+                    DataGridViewImageColumn imageCol = (DataGridViewImageColumn)column;
+                    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                    imageCol.Width = 100;
+                    dgv_addBrand.RowTemplate.Height = 100;
                 }
+                //if (dgv_addBrand.Columns["Brand Image"] is DataGridViewImageColumn imageCol)
+                //{
+                //    imageCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+                //    imageCol.Width = 100;
+                //    dgv_addBrand.RowTemplate.Height = 100;
+                //}
             }
+
+            #endregion
+
             #endregion
         }
 
@@ -112,6 +103,23 @@ namespace FormForDataModel
                 }
             }
         }
+
+        private void btn_selectImage_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string imagePath = openFileDialog1.FileName;
+                FileInfo fi = new FileInfo(openFileDialog1.FileName);
+                if (fi.Extension == ".jpg" || fi.Extension == ".jpeg" || fi.Extension == ".png")
+                {
+                    pb_brandImage.SizeMode = PictureBoxSizeMode.Zoom;
+                    pb_brandImage.ImageLocation = fi.FullName;
+                    selectedImagePath = fi.FullName;
+                    imageName = Guid.NewGuid().ToString() + fi.Extension;
+                }
+            }
+        }
+
         private void btn_save_Click(object sender, EventArgs e)
         {
             string brandName = "";
@@ -176,7 +184,5 @@ namespace FormForDataModel
             destinationImagePath = "";
             pb_brandImage.ImageLocation = "";
         }
-
-       
     }
 }

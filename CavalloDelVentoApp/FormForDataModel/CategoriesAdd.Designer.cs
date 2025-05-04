@@ -224,7 +224,6 @@
             this.Controls.Add(this.gb_addCategory);
             this.Controls.Add(this.dgv_addCategory);
             this.Controls.Add(this.lbl_addCategories);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(1918, 1028);
             this.MinimumSize = new System.Drawing.Size(1918, 1028);
             this.Name = "CategoriesAdd";
