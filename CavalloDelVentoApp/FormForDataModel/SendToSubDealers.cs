@@ -26,6 +26,7 @@ namespace FormForDataModel
         string description = "";
         string imageName = "";
         short sendQuantity = 0;
+        short unitsInStock = 0;
         decimal unitPrice = 0;
         decimal subTotalPrice;
         decimal tax = 0;
@@ -68,7 +69,7 @@ namespace FormForDataModel
             dgv_sendToSubDealers.Columns["Sub Dealer Discount Amount"].Visible = false;
             dgv_sendToSubDealers.Columns["ImageFileName"].Visible = false;
 
-            dgv_sendToSubDealers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_sendToSubDealers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
 
             foreach (DataGridViewColumn column in dgv_sendToSubDealers.Columns)
@@ -105,6 +106,8 @@ namespace FormForDataModel
             cbb_brandName.SelectedValue = Convert.ToInt32(selectedRow.Cells["BrandIDFK"].Value);
             cbb_categoryName.SelectedValue = Convert.ToInt32(selectedRow.Cells["CategoryIDFK"].Value);
             cbb_productName.SelectedValue = Convert.ToInt32(selectedRow.Cells["ProductIDFK"].Value);
+            tb_unitsInStock.Text = selectedRow.Cells["Product Units In Stock"].Value.ToString();
+            tb_quantityPerUnit.Text = selectedRow.Cells["Product Quantity Per Unit"].Value.ToString();
             imageName = dm.listImageForEditProducts(selectedRow.Cells["ProductIDFK"].Value.ToString());
             pb_productImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageName);
             pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
@@ -172,7 +175,11 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_brandName.SelectedValue.ToString(), out int id))
                 {
                     selectedBrandID = id;
+                    tb_productItemNumber.Text = "";
+                    tb_unitPrice.Text = "";
                     tb_sendQuentity.Text = "";
+                    tb_quantityPerUnit.Text = "";
+                    tb_unitsInStock.Text = "";
                     ComboBoxCategoriesLoad();
                 }
             }
@@ -195,7 +202,11 @@ namespace FormForDataModel
                 if (int.TryParse(cbb_categoryName.SelectedValue.ToString(), out int id))
                 {
                     selectedCategoryID = id;
+                    tb_productItemNumber.Text = "";
+                    tb_unitPrice.Text = "";
                     tb_sendQuentity.Text = "";
+                    tb_quantityPerUnit.Text = "";
+                    tb_unitsInStock.Text = "";
                     ComboBoxProductsLoad();
 
                 }
@@ -214,7 +225,11 @@ namespace FormForDataModel
 
         private void cbb_productName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            tb_productItemNumber.Text = "";
+            tb_unitPrice.Text = "";
             tb_sendQuentity.Text = "";
+            tb_quantityPerUnit.Text = "";
+            tb_unitsInStock.Text = "";
             if (cbb_productName.SelectedIndex != 0 && cbb_productName.SelectedValue != null)
             {
                 if (int.TryParse(cbb_productName.SelectedValue.ToString(), out int id))
@@ -224,9 +239,11 @@ namespace FormForDataModel
                     pb_productImage.ImageLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FormForDataModel\Images\ProductImages", imageName);
                     pb_productImage.SizeMode = PictureBoxSizeMode.Zoom;
                     tb_productDescription.Text = dm.getProductDescription(selectedProductID.ToString());
-                    tb_productItemNumber.Text = "md" + selectedProductID.ToString();
+                    tb_productItemNumber.Text = "MD" + selectedProductID.ToString();
                     tb_unitPrice.Text = dm.getUnitPrice(selectedProductID.ToString());
                     unitPrice = Convert.ToDecimal(dm.getUnitPrice(selectedProductID.ToString()));
+                    tb_unitsInStock.Text = dm.getProductUnitsInStock(selectedProductID.ToString());
+                    tb_quantityPerUnit.Text = dm.getProductQuantityPerUnit(selectedProductID.ToString());
                     cbb_subDealerInformation.Enabled = true;
 
                 }
@@ -313,32 +330,42 @@ namespace FormForDataModel
             {
                 if (cbb_brandName.SelectedIndex != 0 && cbb_categoryName.SelectedIndex != 0 && cbb_productName.SelectedIndex != 0)
                 {
-                    brandIDFK = selectedBrandID.ToString();
-                    categoryIDFK = selectedCategoryID.ToString();
-                    productIDFK = selectedProductID.ToString();
-                    productItemNumber = tb_productItemNumber.Text;
-                    mainUserIDFK = "1";
-                    subDealerUserIDFK = cbb_subDealerInformation.SelectedValue.ToString();
-                    DateTime sendDate = DateTime.Now;
+                    unitsInStock = Convert.ToInt16(tb_unitsInStock.Text);
                     sendQuantity = Convert.ToInt16(tb_sendQuentity.Text);
-                    unitPrice = Convert.ToDecimal(tb_unitPrice.Text);
-                    subTotalPrice = nud_subTotalPrice.Value;
-                    tax = Convert.ToDecimal(tb_tax.Text);
-                    totalPrice = nud_totalPrice.Value;
-                    if (nud_discountedPrice.Value == 0)
+                    if (unitsInStock >= sendQuantity && unitsInStock != 0 && sendQuantity !=0)
                     {
-                        discountedPrice = 0;
+                        short newStock = (short)(unitsInStock - sendQuantity);
+                        brandIDFK = selectedBrandID.ToString();
+                        categoryIDFK = selectedCategoryID.ToString();
+                        productIDFK = selectedProductID.ToString();
+                        productItemNumber = tb_productItemNumber.Text;
+                        mainUserIDFK = "1";
+                        subDealerUserIDFK = cbb_subDealerInformation.SelectedValue.ToString();
+                        DateTime sendDate = DateTime.Now;
+                        unitPrice = Convert.ToDecimal(tb_unitPrice.Text);
+                        subTotalPrice = nud_subTotalPrice.Value;
+                        tax = Convert.ToDecimal(tb_tax.Text);
+                        totalPrice = nud_totalPrice.Value;
+                        if (nud_discountedPrice.Value == 0)
+                        {
+                            discountedPrice = 0;
+                        }
+                        else
+                        {
+                            discountedPrice = nud_discountedPrice.Value;
+                        }
+                        description = tb_shipmentInformation.Text;
+                        isDeleted = cb_sendDeleted.Checked;
+
+                        dm.sendToSubDealers(brandIDFK, categoryIDFK, productIDFK, productItemNumber, mainUserIDFK, subDealerUserIDFK, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted);
+                        dm.updateUnitsInStock(productIDFK, newStock);
+                        SendToSubDealersDataBind();
+                        gbClear();
                     }
                     else
                     {
-                        discountedPrice = nud_discountedPrice.Value;
+                        MessageBox.Show("Insufficient stock, shipping not possible!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    description = tb_shipmentInformation.Text;
-                    isDeleted = cb_sendDeleted.Checked;
-
-                    dm.sendToSubDealers(brandIDFK, categoryIDFK, productIDFK, productItemNumber, mainUserIDFK, subDealerUserIDFK, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted);
-                    SendToSubDealersDataBind();
-                    gbClear();
                 }
                 else
                 {
@@ -368,16 +395,27 @@ namespace FormForDataModel
                 {
                     if (tb_shipmentInformation.Text != "")
                     {
-                        isDeleted = true;
-                        description = tb_shipmentInformation.Text;
-                        dm.editSendToSubDealers(sendID, description, isDeleted);
-                        btn_sendProduct.Enabled = true;
-                        btn_cancelEdit.Enabled = false;
-                        btn_editData.Enabled = false;
-                        cb_sendDeleted.Enabled = false;
-                        cbb_subDealerInformation.Enabled = false;
-                        SendToSubDealersDataBind();
-                        gbClear();
+                        unitsInStock = Convert.ToInt16(tb_unitsInStock.Text);
+                        sendQuantity = Convert.ToInt16(tb_sendQuentity.Text);
+                        if (unitsInStock >= sendQuantity && unitsInStock != 0 && sendQuantity != 0)
+                        {
+                            short newStock = (short)(unitsInStock - sendQuantity);
+                            isDeleted = true;
+                            description = tb_shipmentInformation.Text;
+                            dm.editSendToSubDealers(sendID, description, isDeleted);
+                            dm.updateUnitsInStock(productIDFK, newStock);
+                            btn_sendProduct.Enabled = true;
+                            btn_cancelEdit.Enabled = false;
+                            btn_editData.Enabled = false;
+                            cb_sendDeleted.Enabled = false;
+                            cbb_subDealerInformation.Enabled = false;
+                            SendToSubDealersDataBind();
+                            gbClear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Insufficient stock, shipping not possible!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
@@ -395,35 +433,45 @@ namespace FormForDataModel
                     {
                         if (cbb_brandName.SelectedIndex != 0 && cbb_categoryName.SelectedIndex != 0 && cbb_productName.SelectedIndex != 0)
                         {
-                            brandIDFK = selectedBrandID.ToString();
-                            categoryIDFK = selectedCategoryID.ToString();
-                            productIDFK = selectedProductID.ToString();
-                            productItemNumber = tb_productItemNumber.Text;
-                            mainUserIDFK = "1";
-                            subDealerUserIDFK = cbb_subDealerInformation.SelectedValue.ToString();
+                            unitsInStock = Convert.ToInt16(tb_unitsInStock.Text);
                             sendQuantity = Convert.ToInt16(tb_sendQuentity.Text);
-                            unitPrice = Convert.ToDecimal(tb_unitPrice.Text);
-                            subTotalPrice = nud_subTotalPrice.Value;
-                            tax = Convert.ToDecimal(tb_tax.Text);
-                            totalPrice = nud_totalPrice.Value;
-                            if (nud_discountedPrice.Value == 0)
+                            if (unitsInStock >= sendQuantity && unitsInStock != 0 && sendQuantity != 0)
                             {
-                                discountedPrice = 0;
+                                short newStock = (short)(unitsInStock - sendQuantity);
+                                brandIDFK = selectedBrandID.ToString();
+                                categoryIDFK = selectedCategoryID.ToString();
+                                productIDFK = selectedProductID.ToString();
+                                productItemNumber = tb_productItemNumber.Text;
+                                mainUserIDFK = "1";
+                                subDealerUserIDFK = cbb_subDealerInformation.SelectedValue.ToString();
+                                unitPrice = Convert.ToDecimal(tb_unitPrice.Text);
+                                subTotalPrice = nud_subTotalPrice.Value;
+                                tax = Convert.ToDecimal(tb_tax.Text);
+                                totalPrice = nud_totalPrice.Value;
+                                if (nud_discountedPrice.Value == 0)
+                                {
+                                    discountedPrice = 0;
+                                }
+                                else
+                                {
+                                    discountedPrice = nud_discountedPrice.Value;
+                                }
+                                description = tb_shipmentInformation.Text;
+
+                                dm.editSendToSubDealers(sendID, brandIDFK, categoryIDFK, productIDFK, productItemNumber, mainUserIDFK, subDealerUserIDFK, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description);
+                                dm.updateUnitsInStock(productIDFK, newStock);
+                                btn_sendProduct.Enabled = true;
+                                btn_cancelEdit.Enabled = false;
+                                btn_editData.Enabled = false;
+                                cb_sendDeleted.Enabled = false;
+                                cbb_subDealerInformation.Enabled = false;
+                                SendToSubDealersDataBind();
+                                gbClear();
                             }
                             else
                             {
-                                discountedPrice = nud_discountedPrice.Value;
+                                MessageBox.Show("Insufficient stock, shipping not possible!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            description = tb_shipmentInformation.Text;
-
-                            dm.editSendToSubDealers(sendID, brandIDFK, categoryIDFK, productIDFK, productItemNumber, mainUserIDFK, subDealerUserIDFK, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description);
-                            btn_sendProduct.Enabled = true;
-                            btn_cancelEdit.Enabled = false;
-                            btn_editData.Enabled = false;
-                            cb_sendDeleted.Enabled = false;
-                            cbb_subDealerInformation.Enabled = false;
-                            SendToSubDealersDataBind();
-                            gbClear();
 
                         }
                         else
@@ -473,6 +521,8 @@ namespace FormForDataModel
             nud_totalPrice.Value = 0;
             nud_discountedPrice.Value = 0;
             tb_shipmentInformation.Text = "";
+            tb_quantityPerUnit.Text = "";
+            tb_unitsInStock.Text = "";
             subTotalPrice = 0;
             totalPrice = 0;
             unitPrice = 0;

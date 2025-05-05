@@ -30,11 +30,10 @@
         {
             this.lbl_listProducts = new System.Windows.Forms.Label();
             this.gb_productList = new System.Windows.Forms.GroupBox();
-            this.btn_print = new System.Windows.Forms.Button();
+            this.btn_sendImages = new System.Windows.Forms.Button();
             this.btn_exportToExcel = new System.Windows.Forms.Button();
             this.btn_exportListToXml = new System.Windows.Forms.Button();
             this.dgv_productList = new System.Windows.Forms.DataGridView();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.gb_productList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_productList)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +50,7 @@
             // 
             // gb_productList
             // 
-            this.gb_productList.Controls.Add(this.btn_print);
+            this.gb_productList.Controls.Add(this.btn_sendImages);
             this.gb_productList.Controls.Add(this.btn_exportToExcel);
             this.gb_productList.Controls.Add(this.btn_exportListToXml);
             this.gb_productList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -63,31 +62,33 @@
             this.gb_productList.TabStop = false;
             this.gb_productList.Text = "Products Information";
             // 
-            // btn_print
+            // btn_sendImages
             // 
-            this.btn_print.Location = new System.Drawing.Point(348, 65);
-            this.btn_print.Name = "btn_print";
-            this.btn_print.Size = new System.Drawing.Size(165, 36);
-            this.btn_print.TabIndex = 4;
-            this.btn_print.Text = "print";
-            this.btn_print.UseVisualStyleBackColor = true;
+            this.btn_sendImages.Location = new System.Drawing.Point(384, 65);
+            this.btn_sendImages.Name = "btn_sendImages";
+            this.btn_sendImages.Size = new System.Drawing.Size(215, 36);
+            this.btn_sendImages.TabIndex = 4;
+            this.btn_sendImages.Text = "Export Images Files";
+            this.btn_sendImages.UseVisualStyleBackColor = true;
+            this.btn_sendImages.Click += new System.EventHandler(this.btn_sendImages_Click);
             // 
             // btn_exportToExcel
             // 
-            this.btn_exportToExcel.Location = new System.Drawing.Point(177, 65);
+            this.btn_exportToExcel.Location = new System.Drawing.Point(195, 65);
             this.btn_exportToExcel.Name = "btn_exportToExcel";
-            this.btn_exportToExcel.Size = new System.Drawing.Size(165, 36);
+            this.btn_exportToExcel.Size = new System.Drawing.Size(183, 36);
             this.btn_exportToExcel.TabIndex = 3;
-            this.btn_exportToExcel.Text = "export excel";
+            this.btn_exportToExcel.Text = "Export to Excel";
             this.btn_exportToExcel.UseVisualStyleBackColor = true;
+            this.btn_exportToExcel.Click += new System.EventHandler(this.btn_exportToExcel_Click);
             // 
             // btn_exportListToXml
             // 
             this.btn_exportListToXml.Location = new System.Drawing.Point(6, 65);
             this.btn_exportListToXml.Name = "btn_exportListToXml";
-            this.btn_exportListToXml.Size = new System.Drawing.Size(165, 36);
+            this.btn_exportListToXml.Size = new System.Drawing.Size(183, 36);
             this.btn_exportListToXml.TabIndex = 2;
-            this.btn_exportListToXml.Text = "export xml";
+            this.btn_exportListToXml.Text = "Export To XML";
             this.btn_exportListToXml.UseVisualStyleBackColor = true;
             this.btn_exportListToXml.Click += new System.EventHandler(this.btn_exportListToXml_Click);
             // 
@@ -132,10 +133,9 @@
 
         private System.Windows.Forms.Label lbl_listProducts;
         private System.Windows.Forms.GroupBox gb_productList;
-        private System.Windows.Forms.Button btn_print;
         private System.Windows.Forms.Button btn_exportToExcel;
         private System.Windows.Forms.Button btn_exportListToXml;
         private System.Windows.Forms.DataGridView dgv_productList;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button btn_sendImages;
     }
 }

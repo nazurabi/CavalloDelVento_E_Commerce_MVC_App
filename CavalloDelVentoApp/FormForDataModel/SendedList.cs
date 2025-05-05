@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using DataModelWithADO;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace FormForDataModel
 {
@@ -19,6 +20,7 @@ namespace FormForDataModel
         DataModel dm = new DataModel();
         List<SendListProductToSubDealers> listOfSendedProduct = new List<SendListProductToSubDealers>();
         List<ExportedImages> listOfSendedImages = new List<ExportedImages>();
+        List<SendedListForExcel> listForExcel = new List<SendedListForExcel>();
         DataTable dt = new DataTable();
         DateTime checkDateStart;
         DateTime checkDateEnd;
@@ -118,7 +120,7 @@ namespace FormForDataModel
             }
             else
             {
-                MessageBox.Show("No records were found for the date range you specified.!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No records were found for the date range you specified!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -170,7 +172,43 @@ namespace FormForDataModel
             }
             else
             {
-                MessageBox.Show("No records were found for the date range you specified.!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No records were found for the date range you specified!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_exportListToXml_Click(object sender, EventArgs e)
+        {
+            listOfSendedProduct.Clear();
+            ListOfProductsForSubDealers(dt);
+            if (listOfSendedProduct.Count != 0)
+            {
+                try
+                {
+                    using (SaveFileDialog sf = new SaveFileDialog())
+                    {
+                        sf.Title = "Save XML File";
+                        sf.Filter = "XML dosyası (*.xml)|*.xml";
+                        DialogResult result = sf.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string filePath = sf.FileName;
+                            using (StreamWriter swr = new StreamWriter(filePath))
+                            {
+                                XmlSerializer sralz = new XmlSerializer(typeof(List<SendListProductToSubDealers>));
+                                sralz.Serialize(swr, listOfSendedProduct);
+                            }
+                            MessageBox.Show("Export completed successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Export not complited!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No records were found for export you specified!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -199,33 +237,7 @@ namespace FormForDataModel
             }
         }
 
-        private void btn_exportListToXml_Click(object sender, EventArgs e)
-        {
-            listOfSendedProduct.Clear();
-            ListOfProductsForSubDealers(dt);
-            saveFileDialog1.Title = "Save XML File";
-            saveFileDialog1.Filter = "XML dosyası (*.xml)|*.xml";
-            try
-            {
-                DialogResult result = saveFileDialog1.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string filePath = saveFileDialog1.FileName;
-                    using (StreamWriter swr = new StreamWriter(filePath))
-                    {
-                        XmlSerializer sralz = new XmlSerializer(typeof(List<SendListProductToSubDealers>));
-                        sralz.Serialize(swr, listOfSendedProduct);
-                    }
-                    MessageBox.Show("Export completed successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Export not completed!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btn_sendImages_Click(object sender, EventArgs e) // kopyalama oldu şimdi bunu brand, category, product için de yap aynı zamanda excel ve print butonlarını da yap.
+        private void btn_sendImages_Click(object sender, EventArgs e)
         {
             if (listOfSendedImages.Count != 0)
             {
@@ -267,9 +279,129 @@ namespace FormForDataModel
             {
                 MessageBox.Show("No records were found for export you specified!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btn_exportExcel_Click(object sender, EventArgs e)
+        {
+            listForExcel.Clear();
+            ProductListForExcel(dt);
+            if (listForExcel.Count != 0)
+            {
+                try
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx|Excel 97-2003 (*.xls)|*.xls";
+                    saveFileDialog.Title = "Save Excel File";
+                    saveFileDialog.FileName = "Sended list of products.xlsx";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+
+                        Excel.Application excelApp = new Excel.Application();
+                        if (excelApp == null)
+                        {
+                            MessageBox.Show("Please install Microsoft Excel!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        Excel.Workbook workbook = excelApp.Workbooks.Add(Type.Missing);
+                        Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Sheets[1];
+                        worksheet.Name = "Sended product list";
+
+                        worksheet.Cells[1, 1] = "Shipment Number";
+                        worksheet.Cells[1, 2] = "Brand Name";
+                        worksheet.Cells[1, 3] = "Category Name";
+                        worksheet.Cells[1, 4] = "Product Name";
+                        worksheet.Cells[1, 5] = "Product Item Number";
+                        worksheet.Cells[1, 6] = "Product Description";
+                        worksheet.Cells[1, 7] = "Sub Dealer Name";
+                        worksheet.Cells[1, 8] = "Send Date";
+                        worksheet.Cells[1, 9] = "Send Quantity";
+                        worksheet.Cells[1, 10] = "Unit Price";
+                        worksheet.Cells[1, 11] = "Sub Total Price";
+                        worksheet.Cells[1, 12] = "Tax";
+                        worksheet.Cells[1, 13] = "Total Price";
+                        worksheet.Cells[1, 14] = "Discounted Price";
+                        worksheet.Cells[1, 15] = "Description";
+                        worksheet.Cells[1, 16] = "ImageFileName";
+
+                        Excel.Range headerRange = worksheet.get_Range("A1", "P1");
+                        headerRange.Font.Bold = true;
+                        headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+
+                        for (int i = 0; i < listForExcel.Count; i++)
+                        {
+                            worksheet.Cells[i + 2, 1] = listForExcel[i].sendID;
+                            worksheet.Cells[i + 2, 2] = listForExcel[i].brandName;
+                            worksheet.Cells[i + 2, 3] = listForExcel[i].categoryName;
+                            worksheet.Cells[i + 2, 4] = listForExcel[i].productName;
+                            worksheet.Cells[i + 2, 5] = listForExcel[i].productItemNumber;
+                            worksheet.Cells[i + 2, 6] = listForExcel[i].productDescription;
+                            worksheet.Cells[i + 2, 7] = listForExcel[i].subDealerName;
+                            worksheet.Cells[i + 2, 8] = listForExcel[i].sendDate;
+                            worksheet.Cells[i + 2, 9] = listForExcel[i].sendQuantity;
+                            worksheet.Cells[i + 2, 10] = listForExcel[i].unitPrice;
+                            worksheet.Cells[i + 2, 11] = listForExcel[i].subTotalPrice;
+                            worksheet.Cells[i + 2, 12] = listForExcel[i].tax;
+                            worksheet.Cells[i + 2, 13] = listForExcel[i].totalPrice;
+                            worksheet.Cells[i + 2, 14] = listForExcel[i].discountedPrice;
+                            worksheet.Cells[i + 2, 15] = listForExcel[i].description;
+                            worksheet.Cells[i + 2, 16] = listForExcel[i].productImageName;
+                        }
+                        Excel.Range dataRange = worksheet.get_Range("A2", $"P{listForExcel.Count + 1}");
+                        dataRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
+
+                        workbook.SaveAs(saveFileDialog.FileName);
+                        workbook.Close();
+                        excelApp.Quit();
+
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                        System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+
+                        MessageBox.Show("Excel file exported succesfully!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Excel file can not exported!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No records were found for export you specified!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ProductListForExcel(DataTable sendDataInfo)
+        {
+            foreach (DataRow dr in sendDataInfo.Rows)
+            {
+                SendedListForExcel lfe = new SendedListForExcel();
+                lfe.sendID = Convert.ToInt32(dr["Shipment Number"]);
+                lfe.brandName = dr["Brand Name"].ToString();
+                lfe.categoryName = dr["Category Name"].ToString();
+                lfe.productItemNumber = dr["Product Item Number"].ToString();
+                lfe.productName = dr["Product Name"].ToString();
+                lfe.productDescription = dr["Product Description"].ToString();
+                lfe.subDealerName = dr["Sub Dealer Name"].ToString();
+                lfe.sendDate = Convert.ToDateTime(dr["Send Date"]);
+                lfe.sendQuantity = Convert.ToInt16(dr["Send Quantity"]);
+                lfe.unitPrice = Convert.ToDecimal(dr["Unit Price"]);
+                lfe.subTotalPrice = Convert.ToDecimal(dr["Sub Total Price"]);
+                lfe.tax = Convert.ToDecimal(dr["Tax"]);
+                lfe.totalPrice = Convert.ToDecimal(dr["Total Price"]);
+                lfe.discountedPrice = Convert.ToDecimal(dr["Discounted Price"]);
+                lfe.productDescription = dr["Description"].ToString();
+                lfe.productImageName = dr["ImageFileName"].ToString();
+                listForExcel.Add(lfe);
+            }
+        }
+
     }
+}
 
 //public void serilestirmeDeneme()
 //{

@@ -261,6 +261,7 @@
             this.tb_reorderLevel.Name = "tb_reorderLevel";
             this.tb_reorderLevel.Size = new System.Drawing.Size(326, 36);
             this.tb_reorderLevel.TabIndex = 21;
+            this.tb_reorderLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_reorderLevel_KeyPress);
             // 
             // tb_unitsInStock
             // 
@@ -269,6 +270,7 @@
             this.tb_unitsInStock.Name = "tb_unitsInStock";
             this.tb_unitsInStock.Size = new System.Drawing.Size(326, 36);
             this.tb_unitsInStock.TabIndex = 19;
+            this.tb_unitsInStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_unitsInStock_KeyPress);
             // 
             // tb_quentityPerUnit
             // 

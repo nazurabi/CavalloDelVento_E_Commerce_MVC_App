@@ -143,7 +143,7 @@ namespace FormForDataModel
             sendToSubDealers.Show();
         }
 
-        private void TSMI_editLevelIntegration_Click(object sender, EventArgs e)
+        private void TSMI_createLevelIntegration_Click(object sender, EventArgs e)
         {
             foreach (var item in MdiChildren)
             {
@@ -153,6 +153,7 @@ namespace FormForDataModel
             levelIntegrationOrders.MdiParent = this;
             levelIntegrationOrders.Show();
         }
+
 
         private void TSMI_listBrands_Click(object sender, EventArgs e)
         {

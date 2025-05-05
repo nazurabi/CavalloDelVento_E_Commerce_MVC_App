@@ -66,11 +66,15 @@
             this.nud_totalPrice = new System.Windows.Forms.NumericUpDown();
             this.nud_subTotalPrice = new System.Windows.Forms.NumericUpDown();
             this.lbl_shipmentInformation = new System.Windows.Forms.Label();
+            this.btn_cancelEdit = new System.Windows.Forms.Button();
             this.tb_discountedPrice = new System.Windows.Forms.TextBox();
+            this.tb_quantityPerUnit = new System.Windows.Forms.TextBox();
+            this.tb_unitsInStock = new System.Windows.Forms.TextBox();
             this.tb_unitPrice = new System.Windows.Forms.TextBox();
             this.lbl_discountedPrice = new System.Windows.Forms.Label();
+            this.lbl_quantityPerUnit = new System.Windows.Forms.Label();
+            this.lbl_unitsInStock = new System.Windows.Forms.Label();
             this.dgv_sendToSubDealers = new System.Windows.Forms.DataGridView();
-            this.btn_cancelEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_productImage)).BeginInit();
             this.gb_sendToSubDealers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_discountedPrice)).BeginInit();
@@ -98,7 +102,7 @@
             this.lbl_categoryName.AutoSize = true;
             this.lbl_categoryName.Font = new System.Drawing.Font("Calibri", 13.8F);
             this.lbl_categoryName.ForeColor = System.Drawing.Color.Red;
-            this.lbl_categoryName.Location = new System.Drawing.Point(32, 199);
+            this.lbl_categoryName.Location = new System.Drawing.Point(32, 185);
             this.lbl_categoryName.Name = "lbl_categoryName";
             this.lbl_categoryName.Size = new System.Drawing.Size(155, 28);
             this.lbl_categoryName.TabIndex = 6;
@@ -109,7 +113,7 @@
             this.lbl_productName.AutoSize = true;
             this.lbl_productName.Font = new System.Drawing.Font("Calibri", 13.8F);
             this.lbl_productName.ForeColor = System.Drawing.Color.Red;
-            this.lbl_productName.Location = new System.Drawing.Point(32, 275);
+            this.lbl_productName.Location = new System.Drawing.Point(32, 255);
             this.lbl_productName.Name = "lbl_productName";
             this.lbl_productName.Size = new System.Drawing.Size(146, 28);
             this.lbl_productName.TabIndex = 8;
@@ -123,7 +127,7 @@
             this.lbl_subTotalPrice.Location = new System.Drawing.Point(1212, 45);
             this.lbl_subTotalPrice.Name = "lbl_subTotalPrice";
             this.lbl_subTotalPrice.Size = new System.Drawing.Size(159, 28);
-            this.lbl_subTotalPrice.TabIndex = 19;
+            this.lbl_subTotalPrice.TabIndex = 24;
             this.lbl_subTotalPrice.Text = "=Sub Total Price";
             // 
             // lbl_subDealerInformation
@@ -134,7 +138,7 @@
             this.lbl_subDealerInformation.Location = new System.Drawing.Point(674, 45);
             this.lbl_subDealerInformation.Name = "lbl_subDealerInformation";
             this.lbl_subDealerInformation.Size = new System.Drawing.Size(228, 28);
-            this.lbl_subDealerInformation.TabIndex = 13;
+            this.lbl_subDealerInformation.TabIndex = 17;
             this.lbl_subDealerInformation.Text = "Sub Dealer Information";
             // 
             // lbl_subDealerType
@@ -145,7 +149,7 @@
             this.lbl_subDealerType.Location = new System.Drawing.Point(674, 123);
             this.lbl_subDealerType.Name = "lbl_subDealerType";
             this.lbl_subDealerType.Size = new System.Drawing.Size(160, 28);
-            this.lbl_subDealerType.TabIndex = 15;
+            this.lbl_subDealerType.TabIndex = 19;
             this.lbl_subDealerType.Text = "Sub Dealer Type";
             // 
             // lbl_productItemNumber
@@ -167,7 +171,7 @@
             this.lbl_subDealerDiscAmount.Location = new System.Drawing.Point(674, 199);
             this.lbl_subDealerDiscAmount.Name = "lbl_subDealerDiscAmount";
             this.lbl_subDealerDiscAmount.Size = new System.Drawing.Size(279, 28);
-            this.lbl_subDealerDiscAmount.TabIndex = 17;
+            this.lbl_subDealerDiscAmount.TabIndex = 21;
             this.lbl_subDealerDiscAmount.Text = "Sub Dealer Discount Amount";
             // 
             // lbl_productImage
@@ -177,9 +181,9 @@
             this.lbl_productImage.ForeColor = System.Drawing.Color.Red;
             this.lbl_productImage.Location = new System.Drawing.Point(364, 45);
             this.lbl_productImage.Name = "lbl_productImage";
-            this.lbl_productImage.Size = new System.Drawing.Size(252, 28);
-            this.lbl_productImage.TabIndex = 10;
-            this.lbl_productImage.Text = "Product\'s Image Selection";
+            this.lbl_productImage.Size = new System.Drawing.Size(162, 28);
+            this.lbl_productImage.TabIndex = 14;
+            this.lbl_productImage.Text = "Product\'s Image";
             // 
             // lbl_tax
             // 
@@ -189,7 +193,7 @@
             this.lbl_tax.Location = new System.Drawing.Point(1076, 123);
             this.lbl_tax.Name = "lbl_tax";
             this.lbl_tax.Size = new System.Drawing.Size(53, 28);
-            this.lbl_tax.TabIndex = 23;
+            this.lbl_tax.TabIndex = 28;
             this.lbl_tax.Text = "+Tax";
             // 
             // lbl_totalPrice
@@ -200,7 +204,7 @@
             this.lbl_totalPrice.Location = new System.Drawing.Point(1212, 123);
             this.lbl_totalPrice.Name = "lbl_totalPrice";
             this.lbl_totalPrice.Size = new System.Drawing.Size(122, 28);
-            this.lbl_totalPrice.TabIndex = 24;
+            this.lbl_totalPrice.TabIndex = 29;
             this.lbl_totalPrice.Text = "=Total Price";
             // 
             // tb_sendQuentity
@@ -209,7 +213,7 @@
             this.tb_sendQuentity.Location = new System.Drawing.Point(944, 76);
             this.tb_sendQuentity.Name = "tb_sendQuentity";
             this.tb_sendQuentity.Size = new System.Drawing.Size(130, 36);
-            this.tb_sendQuentity.TabIndex = 20;
+            this.tb_sendQuentity.TabIndex = 25;
             this.tb_sendQuentity.TextChanged += new System.EventHandler(this.tb_sendQuentity_TextChanged);
             this.tb_sendQuentity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sendQuentity_KeyPress);
             // 
@@ -219,7 +223,7 @@
             this.tb_tax.Location = new System.Drawing.Point(1081, 154);
             this.tb_tax.Name = "tb_tax";
             this.tb_tax.Size = new System.Drawing.Size(130, 36);
-            this.tb_tax.TabIndex = 25;
+            this.tb_tax.TabIndex = 30;
             // 
             // tb_subDealerType
             // 
@@ -227,7 +231,7 @@
             this.tb_subDealerType.Location = new System.Drawing.Point(679, 154);
             this.tb_subDealerType.Name = "tb_subDealerType";
             this.tb_subDealerType.Size = new System.Drawing.Size(223, 36);
-            this.tb_subDealerType.TabIndex = 16;
+            this.tb_subDealerType.TabIndex = 20;
             // 
             // tb_subDealerDiscAmount
             // 
@@ -235,25 +239,25 @@
             this.tb_subDealerDiscAmount.Location = new System.Drawing.Point(679, 230);
             this.tb_subDealerDiscAmount.Name = "tb_subDealerDiscAmount";
             this.tb_subDealerDiscAmount.Size = new System.Drawing.Size(223, 36);
-            this.tb_subDealerDiscAmount.TabIndex = 18;
+            this.tb_subDealerDiscAmount.TabIndex = 22;
             // 
             // tb_productItemNumber
             // 
             this.tb_productItemNumber.Enabled = false;
-            this.tb_productItemNumber.Location = new System.Drawing.Point(37, 76);
+            this.tb_productItemNumber.Location = new System.Drawing.Point(37, 75);
             this.tb_productItemNumber.Name = "tb_productItemNumber";
             this.tb_productItemNumber.Size = new System.Drawing.Size(326, 36);
             this.tb_productItemNumber.TabIndex = 3;
             // 
             // tb_productDescription
             // 
-            this.tb_productDescription.Location = new System.Drawing.Point(369, 230);
+            this.tb_productDescription.Location = new System.Drawing.Point(369, 286);
             this.tb_productDescription.Multiline = true;
             this.tb_productDescription.Name = "tb_productDescription";
             this.tb_productDescription.ReadOnly = true;
             this.tb_productDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_productDescription.Size = new System.Drawing.Size(266, 112);
-            this.tb_productDescription.TabIndex = 12;
+            this.tb_productDescription.Size = new System.Drawing.Size(266, 174);
+            this.tb_productDescription.TabIndex = 16;
             // 
             // tb_shipmentInformation
             // 
@@ -263,14 +267,14 @@
             this.tb_shipmentInformation.Name = "tb_shipmentInformation";
             this.tb_shipmentInformation.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tb_shipmentInformation.Size = new System.Drawing.Size(367, 190);
-            this.tb_shipmentInformation.TabIndex = 31;
+            this.tb_shipmentInformation.TabIndex = 35;
             // 
             // btn_editData
             // 
             this.btn_editData.Location = new System.Drawing.Point(1030, 302);
             this.btn_editData.Name = "btn_editData";
             this.btn_editData.Size = new System.Drawing.Size(139, 36);
-            this.btn_editData.TabIndex = 35;
+            this.btn_editData.TabIndex = 39;
             this.btn_editData.Text = "Edit Data";
             this.btn_editData.UseVisualStyleBackColor = true;
             this.btn_editData.Click += new System.EventHandler(this.btn_editData_Click);
@@ -280,7 +284,7 @@
             this.btn_sendProduct.Location = new System.Drawing.Point(911, 302);
             this.btn_sendProduct.Name = "btn_sendProduct";
             this.btn_sendProduct.Size = new System.Drawing.Size(113, 36);
-            this.btn_sendProduct.TabIndex = 34;
+            this.btn_sendProduct.TabIndex = 38;
             this.btn_sendProduct.Text = "Send";
             this.btn_sendProduct.UseVisualStyleBackColor = true;
             this.btn_sendProduct.Click += new System.EventHandler(this.btn_sendProduct_Click);
@@ -290,7 +294,7 @@
             this.btn_clear.Location = new System.Drawing.Point(1320, 302);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(113, 36);
-            this.btn_clear.TabIndex = 37;
+            this.btn_clear.TabIndex = 41;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -301,7 +305,7 @@
             this.pb_productImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pb_productImage.Location = new System.Drawing.Point(369, 76);
             this.pb_productImage.Name = "pb_productImage";
-            this.pb_productImage.Size = new System.Drawing.Size(266, 114);
+            this.pb_productImage.Size = new System.Drawing.Size(266, 176);
             this.pb_productImage.TabIndex = 4;
             this.pb_productImage.TabStop = false;
             // 
@@ -310,7 +314,7 @@
             this.lbl_brandName.AutoSize = true;
             this.lbl_brandName.Font = new System.Drawing.Font("Calibri", 13.8F);
             this.lbl_brandName.ForeColor = System.Drawing.Color.Red;
-            this.lbl_brandName.Location = new System.Drawing.Point(32, 123);
+            this.lbl_brandName.Location = new System.Drawing.Point(32, 115);
             this.lbl_brandName.Name = "lbl_brandName";
             this.lbl_brandName.Size = new System.Drawing.Size(128, 28);
             this.lbl_brandName.TabIndex = 4;
@@ -324,7 +328,7 @@
             this.lbl_sendQuentity.Location = new System.Drawing.Point(939, 45);
             this.lbl_sendQuentity.Name = "lbl_sendQuentity";
             this.lbl_sendQuentity.Size = new System.Drawing.Size(257, 28);
-            this.lbl_sendQuentity.TabIndex = 19;
+            this.lbl_sendQuentity.TabIndex = 23;
             this.lbl_sendQuentity.Text = "Send Quantity X Unit Price";
             // 
             // lbl_productDescription
@@ -332,16 +336,16 @@
             this.lbl_productDescription.AutoSize = true;
             this.lbl_productDescription.Font = new System.Drawing.Font("Calibri", 13.8F);
             this.lbl_productDescription.ForeColor = System.Drawing.Color.Red;
-            this.lbl_productDescription.Location = new System.Drawing.Point(364, 199);
+            this.lbl_productDescription.Location = new System.Drawing.Point(364, 255);
             this.lbl_productDescription.Name = "lbl_productDescription";
             this.lbl_productDescription.Size = new System.Drawing.Size(197, 28);
-            this.lbl_productDescription.TabIndex = 11;
+            this.lbl_productDescription.TabIndex = 15;
             this.lbl_productDescription.Text = "Product Description";
             // 
             // cbb_brandName
             // 
             this.cbb_brandName.FormattingEnabled = true;
-            this.cbb_brandName.Location = new System.Drawing.Point(37, 154);
+            this.cbb_brandName.Location = new System.Drawing.Point(37, 146);
             this.cbb_brandName.Name = "cbb_brandName";
             this.cbb_brandName.Size = new System.Drawing.Size(326, 36);
             this.cbb_brandName.TabIndex = 5;
@@ -351,7 +355,7 @@
             // cbb_categoryName
             // 
             this.cbb_categoryName.FormattingEnabled = true;
-            this.cbb_categoryName.Location = new System.Drawing.Point(37, 230);
+            this.cbb_categoryName.Location = new System.Drawing.Point(37, 216);
             this.cbb_categoryName.Name = "cbb_categoryName";
             this.cbb_categoryName.Size = new System.Drawing.Size(326, 36);
             this.cbb_categoryName.TabIndex = 7;
@@ -366,7 +370,7 @@
             this.cb_sendDeleted.Location = new System.Drawing.Point(1805, 309);
             this.cb_sendDeleted.Name = "cb_sendDeleted";
             this.cb_sendDeleted.Size = new System.Drawing.Size(18, 17);
-            this.cb_sendDeleted.TabIndex = 33;
+            this.cb_sendDeleted.TabIndex = 37;
             this.cb_sendDeleted.UseVisualStyleBackColor = true;
             // 
             // lbl_deleted
@@ -377,13 +381,13 @@
             this.lbl_deleted.Location = new System.Drawing.Point(1610, 302);
             this.lbl_deleted.Name = "lbl_deleted";
             this.lbl_deleted.Size = new System.Drawing.Size(167, 28);
-            this.lbl_deleted.TabIndex = 32;
+            this.lbl_deleted.TabIndex = 36;
             this.lbl_deleted.Text = "Cancel Shipment";
             // 
             // cbb_productName
             // 
             this.cbb_productName.FormattingEnabled = true;
-            this.cbb_productName.Location = new System.Drawing.Point(37, 306);
+            this.cbb_productName.Location = new System.Drawing.Point(37, 286);
             this.cbb_productName.Name = "cbb_productName";
             this.cbb_productName.Size = new System.Drawing.Size(326, 36);
             this.cbb_productName.TabIndex = 9;
@@ -397,7 +401,7 @@
             this.cbb_subDealerInformation.Location = new System.Drawing.Point(679, 76);
             this.cbb_subDealerInformation.Name = "cbb_subDealerInformation";
             this.cbb_subDealerInformation.Size = new System.Drawing.Size(223, 36);
-            this.cbb_subDealerInformation.TabIndex = 14;
+            this.cbb_subDealerInformation.TabIndex = 18;
             this.cbb_subDealerInformation.Text = "---Choose---";
             this.cbb_subDealerInformation.SelectedIndexChanged += new System.EventHandler(this.cbb_subDealerInformation_SelectedIndexChanged);
             // 
@@ -424,6 +428,8 @@
             this.gb_sendToSubDealers.Controls.Add(this.tb_shipmentInformation);
             this.gb_sendToSubDealers.Controls.Add(this.tb_productDescription);
             this.gb_sendToSubDealers.Controls.Add(this.tb_discountedPrice);
+            this.gb_sendToSubDealers.Controls.Add(this.tb_quantityPerUnit);
+            this.gb_sendToSubDealers.Controls.Add(this.tb_unitsInStock);
             this.gb_sendToSubDealers.Controls.Add(this.tb_productItemNumber);
             this.gb_sendToSubDealers.Controls.Add(this.tb_subDealerDiscAmount);
             this.gb_sendToSubDealers.Controls.Add(this.tb_subDealerType);
@@ -433,7 +439,9 @@
             this.gb_sendToSubDealers.Controls.Add(this.lbl_discountedPrice);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_totalPrice);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_tax);
+            this.gb_sendToSubDealers.Controls.Add(this.lbl_quantityPerUnit);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_productImage);
+            this.gb_sendToSubDealers.Controls.Add(this.lbl_unitsInStock);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_subDealerDiscAmount);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_productItemNumber);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_subDealerType);
@@ -445,7 +453,7 @@
             this.gb_sendToSubDealers.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.gb_sendToSubDealers.Location = new System.Drawing.Point(12, 47);
             this.gb_sendToSubDealers.Name = "gb_sendToSubDealers";
-            this.gb_sendToSubDealers.Size = new System.Drawing.Size(1863, 397);
+            this.gb_sendToSubDealers.Size = new System.Drawing.Size(1863, 493);
             this.gb_sendToSubDealers.TabIndex = 1;
             this.gb_sendToSubDealers.TabStop = false;
             this.gb_sendToSubDealers.Text = "Products Information";
@@ -462,7 +470,7 @@
             0});
             this.nud_discountedPrice.Name = "nud_discountedPrice";
             this.nud_discountedPrice.Size = new System.Drawing.Size(216, 36);
-            this.nud_discountedPrice.TabIndex = 28;
+            this.nud_discountedPrice.TabIndex = 33;
             this.nud_discountedPrice.ThousandsSeparator = true;
             this.nud_discountedPrice.Visible = false;
             // 
@@ -478,7 +486,7 @@
             0});
             this.nud_totalPrice.Name = "nud_totalPrice";
             this.nud_totalPrice.Size = new System.Drawing.Size(216, 36);
-            this.nud_totalPrice.TabIndex = 26;
+            this.nud_totalPrice.TabIndex = 31;
             this.nud_totalPrice.ThousandsSeparator = true;
             // 
             // nud_subTotalPrice
@@ -493,7 +501,7 @@
             0});
             this.nud_subTotalPrice.Name = "nud_subTotalPrice";
             this.nud_subTotalPrice.Size = new System.Drawing.Size(216, 36);
-            this.nud_subTotalPrice.TabIndex = 22;
+            this.nud_subTotalPrice.TabIndex = 27;
             this.nud_subTotalPrice.ThousandsSeparator = true;
             // 
             // lbl_shipmentInformation
@@ -504,8 +512,19 @@
             this.lbl_shipmentInformation.Location = new System.Drawing.Point(1451, 45);
             this.lbl_shipmentInformation.Name = "lbl_shipmentInformation";
             this.lbl_shipmentInformation.Size = new System.Drawing.Size(316, 28);
-            this.lbl_shipmentInformation.TabIndex = 30;
+            this.lbl_shipmentInformation.TabIndex = 34;
             this.lbl_shipmentInformation.Text = "Shipment Information (Optional)";
+            // 
+            // btn_cancelEdit
+            // 
+            this.btn_cancelEdit.Enabled = false;
+            this.btn_cancelEdit.Location = new System.Drawing.Point(1175, 302);
+            this.btn_cancelEdit.Name = "btn_cancelEdit";
+            this.btn_cancelEdit.Size = new System.Drawing.Size(139, 36);
+            this.btn_cancelEdit.TabIndex = 40;
+            this.btn_cancelEdit.Text = "Cancel Edit";
+            this.btn_cancelEdit.UseVisualStyleBackColor = true;
+            this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
             // 
             // tb_discountedPrice
             // 
@@ -516,13 +535,29 @@
             this.tb_discountedPrice.TabIndex = 29;
             this.tb_discountedPrice.Visible = false;
             // 
+            // tb_quantityPerUnit
+            // 
+            this.tb_quantityPerUnit.Enabled = false;
+            this.tb_quantityPerUnit.Location = new System.Drawing.Point(37, 424);
+            this.tb_quantityPerUnit.Name = "tb_quantityPerUnit";
+            this.tb_quantityPerUnit.Size = new System.Drawing.Size(326, 36);
+            this.tb_quantityPerUnit.TabIndex = 13;
+            // 
+            // tb_unitsInStock
+            // 
+            this.tb_unitsInStock.Enabled = false;
+            this.tb_unitsInStock.Location = new System.Drawing.Point(37, 356);
+            this.tb_unitsInStock.Name = "tb_unitsInStock";
+            this.tb_unitsInStock.Size = new System.Drawing.Size(326, 36);
+            this.tb_unitsInStock.TabIndex = 11;
+            // 
             // tb_unitPrice
             // 
             this.tb_unitPrice.Enabled = false;
             this.tb_unitPrice.Location = new System.Drawing.Point(1081, 76);
             this.tb_unitPrice.Name = "tb_unitPrice";
             this.tb_unitPrice.Size = new System.Drawing.Size(130, 36);
-            this.tb_unitPrice.TabIndex = 21;
+            this.tb_unitPrice.TabIndex = 26;
             // 
             // lbl_discountedPrice
             // 
@@ -532,34 +567,45 @@
             this.lbl_discountedPrice.Location = new System.Drawing.Point(1212, 199);
             this.lbl_discountedPrice.Name = "lbl_discountedPrice";
             this.lbl_discountedPrice.Size = new System.Drawing.Size(173, 28);
-            this.lbl_discountedPrice.TabIndex = 27;
+            this.lbl_discountedPrice.TabIndex = 32;
             this.lbl_discountedPrice.Text = "Discounted Price";
+            // 
+            // lbl_quantityPerUnit
+            // 
+            this.lbl_quantityPerUnit.AutoSize = true;
+            this.lbl_quantityPerUnit.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.lbl_quantityPerUnit.ForeColor = System.Drawing.Color.Red;
+            this.lbl_quantityPerUnit.Location = new System.Drawing.Point(32, 393);
+            this.lbl_quantityPerUnit.Name = "lbl_quantityPerUnit";
+            this.lbl_quantityPerUnit.Size = new System.Drawing.Size(174, 28);
+            this.lbl_quantityPerUnit.TabIndex = 12;
+            this.lbl_quantityPerUnit.Text = "Quantity Per Unit";
+            // 
+            // lbl_unitsInStock
+            // 
+            this.lbl_unitsInStock.AutoSize = true;
+            this.lbl_unitsInStock.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.lbl_unitsInStock.ForeColor = System.Drawing.Color.Red;
+            this.lbl_unitsInStock.Location = new System.Drawing.Point(32, 325);
+            this.lbl_unitsInStock.Name = "lbl_unitsInStock";
+            this.lbl_unitsInStock.Size = new System.Drawing.Size(140, 28);
+            this.lbl_unitsInStock.TabIndex = 10;
+            this.lbl_unitsInStock.Text = "Units In Stock";
             // 
             // dgv_sendToSubDealers
             // 
             this.dgv_sendToSubDealers.AllowUserToAddRows = false;
             this.dgv_sendToSubDealers.AllowUserToDeleteRows = false;
             this.dgv_sendToSubDealers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_sendToSubDealers.Location = new System.Drawing.Point(12, 450);
+            this.dgv_sendToSubDealers.Location = new System.Drawing.Point(12, 546);
             this.dgv_sendToSubDealers.Name = "dgv_sendToSubDealers";
             this.dgv_sendToSubDealers.ReadOnly = true;
             this.dgv_sendToSubDealers.RowHeadersWidth = 51;
             this.dgv_sendToSubDealers.RowTemplate.Height = 24;
-            this.dgv_sendToSubDealers.Size = new System.Drawing.Size(1863, 475);
-            this.dgv_sendToSubDealers.TabIndex = 38;
+            this.dgv_sendToSubDealers.Size = new System.Drawing.Size(1863, 379);
+            this.dgv_sendToSubDealers.TabIndex = 42;
             this.dgv_sendToSubDealers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_sendToSubDealers_DataBindingComplete);
             this.dgv_sendToSubDealers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_sendToSubDealers_RowHeaderMouseClick);
-            // 
-            // btn_cancelEdit
-            // 
-            this.btn_cancelEdit.Enabled = false;
-            this.btn_cancelEdit.Location = new System.Drawing.Point(1175, 302);
-            this.btn_cancelEdit.Name = "btn_cancelEdit";
-            this.btn_cancelEdit.Size = new System.Drawing.Size(139, 36);
-            this.btn_cancelEdit.TabIndex = 36;
-            this.btn_cancelEdit.Text = "Cancel Edit";
-            this.btn_cancelEdit.UseVisualStyleBackColor = true;
-            this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
             // 
             // SendToSubDealers
             // 
@@ -633,5 +679,9 @@
         private System.Windows.Forms.NumericUpDown nud_totalPrice;
         private System.Windows.Forms.NumericUpDown nud_subTotalPrice;
         private System.Windows.Forms.Button btn_cancelEdit;
+        private System.Windows.Forms.TextBox tb_quantityPerUnit;
+        private System.Windows.Forms.TextBox tb_unitsInStock;
+        private System.Windows.Forms.Label lbl_quantityPerUnit;
+        private System.Windows.Forms.Label lbl_unitsInStock;
     }
 }

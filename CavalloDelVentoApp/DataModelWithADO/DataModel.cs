@@ -679,6 +679,7 @@ namespace DataModelWithADO
             DataTable returnToForm = new DataTable();
             returnToForm.Columns.Add("S/N", typeof(string));
             returnToForm.Columns.Add("ProductID", typeof(string));
+            returnToForm.Columns.Add("Product Item Number", typeof(string));
             returnToForm.Columns.Add("Product Name", typeof(string));
             returnToForm.Columns.Add("BrandIDFK", typeof(string));
             returnToForm.Columns.Add("Brand Name", typeof(string));
@@ -707,6 +708,7 @@ namespace DataModelWithADO
                     {
                         sequenceNumber++;
                         string productID = row["ProductID"].ToString();
+                        string productItemNumber = "MD" + productID;
                         string productName = row["ProductName"].ToString();
                         string brandIDFK = row["BrandIDFK"].ToString();
                         string brandName = getBrandNameForProducts(brandIDFK);
@@ -728,10 +730,9 @@ namespace DataModelWithADO
                         if (File.Exists(fullPath))
                         {
                             img = System.Drawing.Image.FromFile(fullPath);
-
                         }
 
-                        returnToForm.Rows.Add(sequenceNumber, productID, productName, brandIDFK, brandName, categoryIDFK, categoryName, description, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued ? "Yes" : "No", isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", imageFile, img);
+                        returnToForm.Rows.Add(sequenceNumber, productID, productItemNumber, productName, brandIDFK, brandName, categoryIDFK, categoryName, description, quantityPerUnit, unitPrice, unitsInStock, unitsOnOrder, reorderLevel, discontinued ? "Yes" : "No", isActiveForSale ? "Yes" : "No", isDeleted ? "Yes" : "No", imageFile, img);
                     }
                 }
             }
@@ -901,8 +902,6 @@ namespace DataModelWithADO
             }
         }
 
-
-
         public List<Categories> getCategoriesForProducts(string brandIDFK)
         {
             List<Categories> categories = new List<Categories>();
@@ -1047,7 +1046,6 @@ namespace DataModelWithADO
                 con.Close();
             }
         }
-
 
         public string listImageForEditProducts(string productIDForCheck)
         {
@@ -1713,6 +1711,8 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("ProductIDFK", typeof(string));
             returnToForm.Columns.Add("Product Item Number", typeof(string));
             returnToForm.Columns.Add("Product Name", typeof(string));
+            returnToForm.Columns.Add("Product Units In Stock", typeof(string));
+            returnToForm.Columns.Add("Product Quantity Per Unit", typeof(string));
             returnToForm.Columns.Add("Product Description", typeof(string));
             returnToForm.Columns.Add("MainUserIDFK", typeof(string));
             returnToForm.Columns.Add("SubDealerIDFK", typeof(string));
@@ -1754,6 +1754,8 @@ namespace DataModelWithADO
                                 string productIDFK = row["ProductIDFK"].ToString();
                                 string productItemNumber = row["ProductItemNumber"].ToString();
                                 string productName = getProductNameForSendToSubDealer(row["ProductIDFK"].ToString());
+                                string productUnitsInStock = getProductUnitsInStock(row["ProductIDFK"].ToString());
+                                string productQuantityPerUnit = getProductQuantityPerUnit(row["ProductIDFK"].ToString());
                                 string productDescription = getProductDescription(row["ProductIDFK"].ToString());
                                 string mainUserIDFK = row["MainUserIDFK"].ToString();
                                 string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
@@ -1778,7 +1780,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productUnitsInStock, productQuantityPerUnit, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                     }
@@ -2008,6 +2010,40 @@ namespace DataModelWithADO
             }
         }
 
+        public string getProductUnitsInStock(string productIDForCheck)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT UnitsInStock FROM Products WHERE ProductID=@productID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@productID", productIDForCheck);
+                con.Open();
+                string productUnitsInStock = Convert.ToString(cmd.ExecuteScalar());
+                return productUnitsInStock;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public string getProductQuantityPerUnit(string productIDForCheck)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT QuantityPerUnit FROM Products WHERE ProductID=@productID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@productID", productIDForCheck);
+                con.Open();
+                string productQuantityPerUnit = Convert.ToString(cmd.ExecuteScalar());
+                return productQuantityPerUnit;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public string getProductDescription(string productIDForCheck)
         {
             try
@@ -2034,6 +2070,30 @@ namespace DataModelWithADO
                 con.Open();
                 string unitPrice = Convert.ToString(cmd.ExecuteScalar());
                 return unitPrice;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void updateUnitsInStock(string productIDForCheck, decimal newStock)
+        {
+            cmd.CommandText = "UPDATE Products SET UnitsInStock=@unitsInStock WHERE ProductID=@productID";
+
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@unitsInStock", newStock);
+            cmd.Parameters.AddWithValue("@productID", productIDForCheck);
+         
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Product's stock level edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to edit product's stock level, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
