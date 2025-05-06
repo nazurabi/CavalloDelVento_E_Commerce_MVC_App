@@ -24,6 +24,12 @@ namespace FormForDataModel
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            LogForm lg = new LogForm();
+            lg.ShowDialog();
+            menuStrip1.Visible = true;
+            toolStripStatusLabel1.Visible = true;
+            lbl_welcomeTitle.Visible = true;
+            toolStripStatusLabel1.Text = LoginUser.loginUser.userName; 
             this.Text = dm.FormTitle();
             lbl_welcomeTitle.Text = "Welcome To " + dm.FormTitle();
             lbl_welcomeTitle.Location = new Point(
@@ -36,6 +42,7 @@ namespace FormForDataModel
                 }
             }
             tmr_welcomeTitle.Start();
+
 
         }
         private void tmr_welcomeTitle_Tick(object sender, EventArgs e)

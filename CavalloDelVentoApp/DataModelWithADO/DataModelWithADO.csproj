@@ -54,6 +54,7 @@
     <Compile Include="DiscountRates.cs" />
     <Compile Include="ExportedImages.cs" />
     <Compile Include="LevelIntegration.cs" />
+    <Compile Include="LoginUser.cs" />
     <Compile Include="SendedListForExcel.cs" />
     <Compile Include="MainDealer.cs" />
     <Compile Include="MainUser.cs" />

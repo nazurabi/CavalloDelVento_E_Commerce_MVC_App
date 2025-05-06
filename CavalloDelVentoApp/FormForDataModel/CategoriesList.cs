@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using DataModelWithADO;
-using DataModelWithADO;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace FormForDataModel
@@ -252,8 +251,8 @@ namespace FormForDataModel
                 cat.brandName = dr["Brand Name"].ToString();
                 cat.categoryName = dr["Category Name"].ToString();
                 cat.description = dr["Description"].ToString();
-                cat.isDeleted = Convert.ToBoolean((dr["Is Deleted"]) == "Yes" ? true : false);
-                cat.isActive = Convert.ToBoolean((dr["Is Category Active For Sale"]) == "Yes" ? true : false);
+                cat.isDeleted = Convert.ToBoolean((dr["Is Deleted"].ToString()) == "Yes" ? true : false);
+                cat.isActive = Convert.ToBoolean((dr["Is Category Active For Sale"].ToString()) == "Yes" ? true : false);
                 cat.image = dr["Category Image Name"].ToString();
                 listOfCategory.Add(cat);
             }

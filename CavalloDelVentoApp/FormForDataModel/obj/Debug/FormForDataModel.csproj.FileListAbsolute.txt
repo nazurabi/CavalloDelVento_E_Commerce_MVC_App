@@ -44,3 +44,4 @@ C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\
 C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\FormForDataModel\bin\Debug\System.Drawing.Common.xml
 C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\FormForDataModel\obj\Debug\FormForDataModel.SendedList.resources
 C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\FormForDataModel\obj\Debug\FormForDataModel.csproj.ResolveComReference.cache
+C:\Users\nazurabi\Desktop\CavalloDelVento_E_Commerce_MVC_App\CavalloDelVentoApp\FormForDataModel\obj\Debug\FormForDataModel.LogForm.resources

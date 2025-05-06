@@ -241,9 +241,9 @@ namespace FormForDataModel
                 prod.unitsInStock = Convert.ToInt16(dr["Units In Stock"]);
                 prod.unitsOnOrder = Convert.ToInt16(dr["Units On Order"]);
                 prod.reorderLevel = Convert.ToInt16(dr["Reorder Level"]);
-                prod.discontinued = Convert.ToBoolean((dr["Discontinued"]) == "Yes" ? true : false);
-                prod.isDeleted = Convert.ToBoolean((dr["Is Deleted"]) == "Yes" ? true : false);
-                prod.isActive = Convert.ToBoolean((dr["Is Product Active For Sale"]) == "Yes" ? true : false);
+                prod.discontinued = Convert.ToBoolean((dr["Discontinued"].ToString()) == "Yes" ? true : false);
+                prod.isDeleted = Convert.ToBoolean((dr["Is Deleted"].ToString()) == "Yes" ? true : false);
+                prod.isActive = Convert.ToBoolean((dr["Is Product Active For Sale"].ToString()) == "Yes" ? true : false);
                 prod.image = dr["Product Image Name"].ToString();
                 listForExcelAndXML.Add(prod);
             }

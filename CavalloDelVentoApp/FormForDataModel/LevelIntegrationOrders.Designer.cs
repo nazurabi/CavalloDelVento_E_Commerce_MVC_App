@@ -48,15 +48,17 @@
             this.lbl_categoryName = new System.Windows.Forms.Label();
             this.dgv_levelIntegrationProduct = new System.Windows.Forms.DataGridView();
             this.gb_addProduct = new System.Windows.Forms.GroupBox();
-            this.tb_brandName = new System.Windows.Forms.TextBox();
-            this.tb_categoryName = new System.Windows.Forms.TextBox();
-            this.tb_unitPrice = new System.Windows.Forms.TextBox();
-            this.lb_acceptedAmount = new System.Windows.Forms.Label();
-            this.tb_acceptedAmount = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tb_acceptedAmount = new System.Windows.Forms.TextBox();
+            this.tb_unitPrice = new System.Windows.Forms.TextBox();
+            this.tb_categoryName = new System.Windows.Forms.TextBox();
+            this.tb_brandName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lb_acceptedAmount = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_productImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_levelIntegrationProduct)).BeginInit();
             this.gb_addProduct.SuspendLayout();
@@ -242,7 +244,9 @@
             this.gb_addProduct.Controls.Add(this.lbl_quentityPerUnit);
             this.gb_addProduct.Controls.Add(this.lbl_brandName);
             this.gb_addProduct.Controls.Add(this.pb_productImage);
+            this.gb_addProduct.Controls.Add(this.button2);
             this.gb_addProduct.Controls.Add(this.button1);
+            this.gb_addProduct.Controls.Add(this.button3);
             this.gb_addProduct.Controls.Add(this.btn_save);
             this.gb_addProduct.Controls.Add(this.tb_description);
             this.gb_addProduct.Controls.Add(this.textBox2);
@@ -271,13 +275,37 @@
             this.gb_addProduct.TabStop = false;
             this.gb_addProduct.Text = "Order Information";
             // 
-            // tb_brandName
+            // button1
             // 
-            this.tb_brandName.Enabled = false;
-            this.tb_brandName.Location = new System.Drawing.Point(35, 76);
-            this.tb_brandName.Name = "tb_brandName";
-            this.tb_brandName.Size = new System.Drawing.Size(326, 36);
-            this.tb_brandName.TabIndex = 3;
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(1097, 121);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(221, 36);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Create Order";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(1097, 228);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(326, 36);
+            this.textBox2.TabIndex = 17;
+            // 
+            // tb_acceptedAmount
+            // 
+            this.tb_acceptedAmount.Location = new System.Drawing.Point(1097, 76);
+            this.tb_acceptedAmount.Name = "tb_acceptedAmount";
+            this.tb_acceptedAmount.Size = new System.Drawing.Size(326, 36);
+            this.tb_acceptedAmount.TabIndex = 17;
+            // 
+            // tb_unitPrice
+            // 
+            this.tb_unitPrice.Enabled = false;
+            this.tb_unitPrice.Location = new System.Drawing.Point(35, 380);
+            this.tb_unitPrice.Name = "tb_unitPrice";
+            this.tb_unitPrice.Size = new System.Drawing.Size(326, 36);
+            this.tb_unitPrice.TabIndex = 11;
             // 
             // tb_categoryName
             // 
@@ -287,13 +315,23 @@
             this.tb_categoryName.Size = new System.Drawing.Size(326, 36);
             this.tb_categoryName.TabIndex = 5;
             // 
-            // tb_unitPrice
+            // tb_brandName
             // 
-            this.tb_unitPrice.Enabled = false;
-            this.tb_unitPrice.Location = new System.Drawing.Point(35, 380);
-            this.tb_unitPrice.Name = "tb_unitPrice";
-            this.tb_unitPrice.Size = new System.Drawing.Size(326, 36);
-            this.tb_unitPrice.TabIndex = 11;
+            this.tb_brandName.Enabled = false;
+            this.tb_brandName.Location = new System.Drawing.Point(35, 76);
+            this.tb_brandName.Name = "tb_brandName";
+            this.tb_brandName.Size = new System.Drawing.Size(326, 36);
+            this.tb_brandName.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 13.8F);
+            this.label3.Location = new System.Drawing.Point(1092, 197);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(199, 28);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Quantity Completed";
             // 
             // lb_acceptedAmount
             // 
@@ -304,13 +342,6 @@
             this.lb_acceptedAmount.Size = new System.Drawing.Size(152, 28);
             this.lb_acceptedAmount.TabIndex = 16;
             this.lb_acceptedAmount.Text = "Order Quantity";
-            // 
-            // tb_acceptedAmount
-            // 
-            this.tb_acceptedAmount.Location = new System.Drawing.Point(1097, 76);
-            this.tb_acceptedAmount.Name = "tb_acceptedAmount";
-            this.tb_acceptedAmount.Size = new System.Drawing.Size(326, 36);
-            this.tb_acceptedAmount.TabIndex = 17;
             // 
             // label1
             // 
@@ -323,32 +354,25 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Kodlanacak, henüz kodları yazılmadı";
             // 
-            // label3
+            // button2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 13.8F);
-            this.label3.Location = new System.Drawing.Point(1092, 197);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(199, 28);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Quantity Completed";
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(1324, 121);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(221, 36);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Edit Order";
+            this.button2.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // button3
             // 
-            this.textBox2.Location = new System.Drawing.Point(1097, 228);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(326, 36);
-            this.textBox2.TabIndex = 17;
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(1097, 121);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(221, 36);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Create Order";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button3.Enabled = false;
+            this.button3.Location = new System.Drawing.Point(1324, 273);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(221, 36);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "Edit Acceptance";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // LevelIntegrationOrders
             // 
@@ -406,5 +430,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

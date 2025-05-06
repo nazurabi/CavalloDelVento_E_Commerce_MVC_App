@@ -2319,5 +2319,42 @@ namespace DataModelWithADO
 
         #endregion
 
+        #region Login
+
+        public MainUser getUserInformation(string userName, string password)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT * FROM MainDealerUsers WHERE UserName=@userName AND UserPassword=@userPassword";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@userName",userName);
+                cmd.Parameters.AddWithValue("@userPassword",password);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                MainUser mu = null;
+                while (reader.Read())
+                {
+                    mu = new MainUser();
+                    mu.mainUserID = reader.GetInt32(0);
+                    mu.userName = reader.GetString(1);
+                    mu.userPassword = reader.GetString(2);
+                    mu.userType = reader.GetString(3);
+                    mu.isDeleted = reader.GetBoolean(4);
+                }
+                return mu;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+        #endregion
+
     }
 }

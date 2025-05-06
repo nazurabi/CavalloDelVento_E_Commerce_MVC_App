@@ -12,5 +12,6 @@ namespace DataModelWithADO
         public string userName { get; set; }
         public string userPassword { get; set; }
         public string userType { get; set; }
+        public bool isDeleted { get; set; }
     }
 }

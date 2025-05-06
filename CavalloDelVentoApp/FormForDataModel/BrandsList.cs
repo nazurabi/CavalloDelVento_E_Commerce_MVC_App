@@ -248,8 +248,8 @@ namespace FormForDataModel
                 Brands brand = new Brands();
                 brand.brandID = Convert.ToInt32(dr["BrandID"]);
                 brand.brandName = dr["Brand Name"].ToString();
-                brand.isActive = Convert.ToBoolean((dr["Is Brand Active For Sale"]) == "Yes" ? true : false);
-                brand.isDeleted = Convert.ToBoolean((dr["Is Deleted"]) == "Yes" ? true : false);
+                brand.isActive = Convert.ToBoolean((dr["Is Brand Active For Sale"].ToString()) == "Yes" ? true : false);
+                brand.isDeleted = Convert.ToBoolean((dr["Is Deleted"].ToString()) == "Yes" ? true : false);
                 brand.image = dr["Brand Image Name"].ToString();
                 listOfBrands.Add(brand);
             }

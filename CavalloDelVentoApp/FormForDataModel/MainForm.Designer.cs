@@ -63,7 +63,10 @@
             this.TSMI_logOut = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_close = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_info = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_welcomeTitle
@@ -75,6 +78,7 @@
             this.lbl_welcomeTitle.Size = new System.Drawing.Size(240, 49);
             this.lbl_welcomeTitle.TabIndex = 1;
             this.lbl_welcomeTitle.Text = "Welcome Tag";
+            this.lbl_welcomeTitle.Visible = false;
             // 
             // tmr_welcomeTitle
             // 
@@ -94,6 +98,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1900, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Visible = false;
             // 
             // editToolStripMenuItem
             // 
@@ -203,20 +208,20 @@
             // TSMI_createLevelIntegration
             // 
             this.TSMI_createLevelIntegration.Name = "TSMI_createLevelIntegration";
-            this.TSMI_createLevelIntegration.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_createLevelIntegration.Size = new System.Drawing.Size(220, 26);
             this.TSMI_createLevelIntegration.Text = "Create Order";
             this.TSMI_createLevelIntegration.Click += new System.EventHandler(this.TSMI_createLevelIntegration_Click);
             // 
             // TSMI_acceptEditLevelIntegration
             // 
             this.TSMI_acceptEditLevelIntegration.Name = "TSMI_acceptEditLevelIntegration";
-            this.TSMI_acceptEditLevelIntegration.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_acceptEditLevelIntegration.Size = new System.Drawing.Size(220, 26);
             this.TSMI_acceptEditLevelIntegration.Text = "Accept / Edit Order";
             // 
             // TSMI_listLevelIntegration
             // 
             this.TSMI_listLevelIntegration.Name = "TSMI_listLevelIntegration";
-            this.TSMI_listLevelIntegration.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_listLevelIntegration.Size = new System.Drawing.Size(220, 26);
             this.TSMI_listLevelIntegration.Text = "List Order";
             // 
             // listToolStripMenuItem
@@ -336,11 +341,30 @@
             this.TSMI_info.Text = "Info";
             this.TSMI_info.Click += new System.EventHandler(this.TSMI_info_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 959);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1900, 22);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1900, 981);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lbl_welcomeTitle);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -356,6 +380,8 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,5 +423,7 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_createLevelIntegration;
         private System.Windows.Forms.ToolStripMenuItem TSMI_acceptEditLevelIntegration;
         private System.Windows.Forms.ToolStripMenuItem TSMI_listLevelIntegration;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
