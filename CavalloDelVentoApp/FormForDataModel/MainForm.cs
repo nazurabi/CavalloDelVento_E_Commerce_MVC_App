@@ -29,7 +29,7 @@ namespace FormForDataModel
             menuStrip1.Visible = true;
             toolStripStatusLabel1.Visible = true;
             lbl_welcomeTitle.Visible = true;
-            toolStripStatusLabel1.Text = LoginUser.loginUser.userName; 
+            toolStripStatusLabel1.Text = LoginUser.loginUser.userName + "/" + LoginUser.loginUser.userType; 
             this.Text = dm.FormTitle();
             lbl_welcomeTitle.Text = "Welcome To " + dm.FormTitle();
             lbl_welcomeTitle.Location = new Point(
@@ -252,7 +252,8 @@ namespace FormForDataModel
 
         private void TSMI_logOut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Oturumdan Çıkma İşlemleri Kodlanacak");
+            LoginUser.loginUser = null;
+            Application.Restart();
 
         }
 

@@ -32,7 +32,8 @@
             this.dtp_endDate = new System.Windows.Forms.DateTimePicker();
             this.dtp_startDate = new System.Windows.Forms.DateTimePicker();
             this.cbb_subDealerName = new System.Windows.Forms.ComboBox();
-            this.btn_list = new System.Windows.Forms.Button();
+            this.btn_deletedList = new System.Windows.Forms.Button();
+            this.btn_activeList = new System.Windows.Forms.Button();
             this.btn_sendImages = new System.Windows.Forms.Button();
             this.btn_exportExcel = new System.Windows.Forms.Button();
             this.btn_exportListToXml = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@
             this.lbl__SubDealerName = new System.Windows.Forms.Label();
             this.lbl_productListSentToSubDealer = new System.Windows.Forms.Label();
             this.dgv_productListSentToSubDealer = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.gb_productListSentToSubDealer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_productListSentToSubDealer)).BeginInit();
             this.SuspendLayout();
@@ -51,8 +51,8 @@
             this.gb_productListSentToSubDealer.Controls.Add(this.dtp_endDate);
             this.gb_productListSentToSubDealer.Controls.Add(this.dtp_startDate);
             this.gb_productListSentToSubDealer.Controls.Add(this.cbb_subDealerName);
-            this.gb_productListSentToSubDealer.Controls.Add(this.button1);
-            this.gb_productListSentToSubDealer.Controls.Add(this.btn_list);
+            this.gb_productListSentToSubDealer.Controls.Add(this.btn_deletedList);
+            this.gb_productListSentToSubDealer.Controls.Add(this.btn_activeList);
             this.gb_productListSentToSubDealer.Controls.Add(this.btn_sendImages);
             this.gb_productListSentToSubDealer.Controls.Add(this.btn_exportExcel);
             this.gb_productListSentToSubDealer.Controls.Add(this.btn_exportListToXml);
@@ -91,22 +91,32 @@
             this.cbb_subDealerName.TabIndex = 5;
             this.cbb_subDealerName.SelectedIndexChanged += new System.EventHandler(this.cbb_subDealerName_SelectedIndexChanged);
             // 
-            // btn_list
+            // btn_deletedList
             // 
-            this.btn_list.Location = new System.Drawing.Point(888, 76);
-            this.btn_list.Name = "btn_list";
-            this.btn_list.Size = new System.Drawing.Size(227, 36);
-            this.btn_list.TabIndex = 8;
-            this.btn_list.Text = "List Active Sends";
-            this.btn_list.UseVisualStyleBackColor = true;
-            this.btn_list.Click += new System.EventHandler(this.btn_list_Click);
+            this.btn_deletedList.Location = new System.Drawing.Point(1121, 76);
+            this.btn_deletedList.Name = "btn_deletedList";
+            this.btn_deletedList.Size = new System.Drawing.Size(227, 36);
+            this.btn_deletedList.TabIndex = 9;
+            this.btn_deletedList.Text = "List Deleted Sends";
+            this.btn_deletedList.UseVisualStyleBackColor = true;
+            this.btn_deletedList.Click += new System.EventHandler(this.btn_deletedList_Click);
+            // 
+            // btn_activeList
+            // 
+            this.btn_activeList.Location = new System.Drawing.Point(888, 76);
+            this.btn_activeList.Name = "btn_activeList";
+            this.btn_activeList.Size = new System.Drawing.Size(227, 36);
+            this.btn_activeList.TabIndex = 8;
+            this.btn_activeList.Text = "List Active Sends";
+            this.btn_activeList.UseVisualStyleBackColor = true;
+            this.btn_activeList.Click += new System.EventHandler(this.btn_activeList_Click);
             // 
             // btn_sendImages
             // 
             this.btn_sendImages.Location = new System.Drawing.Point(457, 133);
             this.btn_sendImages.Name = "btn_sendImages";
             this.btn_sendImages.Size = new System.Drawing.Size(205, 36);
-            this.btn_sendImages.TabIndex = 11;
+            this.btn_sendImages.TabIndex = 12;
             this.btn_sendImages.Text = "Export Images Files";
             this.btn_sendImages.UseVisualStyleBackColor = true;
             this.btn_sendImages.Click += new System.EventHandler(this.btn_sendImages_Click);
@@ -116,7 +126,7 @@
             this.btn_exportExcel.Location = new System.Drawing.Point(246, 133);
             this.btn_exportExcel.Name = "btn_exportExcel";
             this.btn_exportExcel.Size = new System.Drawing.Size(205, 36);
-            this.btn_exportExcel.TabIndex = 10;
+            this.btn_exportExcel.TabIndex = 11;
             this.btn_exportExcel.Text = "Export to Excel";
             this.btn_exportExcel.UseVisualStyleBackColor = true;
             this.btn_exportExcel.Click += new System.EventHandler(this.btn_exportExcel_Click);
@@ -126,7 +136,7 @@
             this.btn_exportListToXml.Location = new System.Drawing.Point(35, 133);
             this.btn_exportListToXml.Name = "btn_exportListToXml";
             this.btn_exportListToXml.Size = new System.Drawing.Size(205, 36);
-            this.btn_exportListToXml.TabIndex = 9;
+            this.btn_exportListToXml.TabIndex = 10;
             this.btn_exportListToXml.Text = "Export To XML";
             this.btn_exportListToXml.UseVisualStyleBackColor = true;
             this.btn_exportListToXml.Click += new System.EventHandler(this.btn_exportListToXml_Click);
@@ -181,18 +191,8 @@
             this.dgv_productListSentToSubDealer.ReadOnly = true;
             this.dgv_productListSentToSubDealer.RowHeadersWidth = 51;
             this.dgv_productListSentToSubDealer.RowTemplate.Height = 100;
-            this.dgv_productListSentToSubDealer.Size = new System.Drawing.Size(1847, 715);
-            this.dgv_productListSentToSubDealer.TabIndex = 12;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1121, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(227, 36);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "List Deleted Sends";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btn_list_Click);
+            this.dgv_productListSentToSubDealer.Size = new System.Drawing.Size(1847, 685);
+            this.dgv_productListSentToSubDealer.TabIndex = 13;
             // 
             // SendedList
             // 
@@ -230,9 +230,9 @@
         private System.Windows.Forms.Label lbl_endDate;
         private System.Windows.Forms.Label lbl_startDate;
         private System.Windows.Forms.Button btn_exportExcel;
-        private System.Windows.Forms.Button btn_list;
+        private System.Windows.Forms.Button btn_activeList;
         private System.Windows.Forms.DataGridView dgv_productListSentToSubDealer;
         private System.Windows.Forms.Button btn_sendImages;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_deletedList;
     }
 }

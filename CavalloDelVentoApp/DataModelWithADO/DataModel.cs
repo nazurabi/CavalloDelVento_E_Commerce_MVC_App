@@ -1715,6 +1715,7 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("Product Quantity Per Unit", typeof(string));
             returnToForm.Columns.Add("Product Description", typeof(string));
             returnToForm.Columns.Add("MainUserIDFK", typeof(string));
+            returnToForm.Columns.Add("User Making Transaction", typeof(string));
             returnToForm.Columns.Add("SubDealerIDFK", typeof(string));
             returnToForm.Columns.Add("Sub Dealer Name", typeof(string));
             returnToForm.Columns.Add("Sub Dealer Type", typeof(string));
@@ -1758,6 +1759,7 @@ namespace DataModelWithADO
                                 string productQuantityPerUnit = getProductQuantityPerUnit(row["ProductIDFK"].ToString());
                                 string productDescription = getProductDescription(row["ProductIDFK"].ToString());
                                 string mainUserIDFK = row["MainUserIDFK"].ToString();
+                                string mainUserNameAndType = getMainUserNameAndType(row["mainUserIDFK"].ToString());
                                 string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
                                 string subDealerName = getSubDealerName(subDealerIDFK);
                                 string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
@@ -1780,7 +1782,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productUnitsInStock, productQuantityPerUnit, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productUnitsInStock, productQuantityPerUnit, productDescription, mainUserIDFK,mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                     }
@@ -1789,7 +1791,7 @@ namespace DataModelWithADO
             return returnToForm;
         }
 
-        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate)
+        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate, bool listIsDeleted)
         {
             cmd.CommandText = "SELECT * FROM SendToSubDealers";
             SqlDataAdapter da = new SqlDataAdapter();
@@ -1810,6 +1812,7 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("Product Name", typeof(string));
             returnToForm.Columns.Add("Product Description", typeof(string));
             returnToForm.Columns.Add("MainUserIDFK", typeof(string));
+            returnToForm.Columns.Add("User Making Transaction", typeof(string));
             returnToForm.Columns.Add("SubDealerIDFK", typeof(string));
             returnToForm.Columns.Add("Sub Dealer Name", typeof(string));
             returnToForm.Columns.Add("Sub Dealer Type", typeof(string));
@@ -1831,8 +1834,7 @@ namespace DataModelWithADO
 
             foreach (DataRow row in temporaryDataTable.Rows)
             {
-                bool checkDeleted = Convert.ToBoolean(row["IsDeleted"]);
-                if (!checkDeleted)
+                if (listIsDeleted== Convert.ToBoolean(row["IsDeleted"]))
                 {
                     DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
                     if (checkStartDate != null)
@@ -1852,6 +1854,7 @@ namespace DataModelWithADO
                                 string productName = getProductNameForSendToSubDealer(row["ProductIDFK"].ToString());
                                 string productDescription = getProductDescription(row["ProductIDFK"].ToString());
                                 string mainUserIDFK = row["MainUserIDFK"].ToString();
+                                string mainUserNameAndType = getMainUserNameAndType(row["mainUserIDFK"].ToString());
                                 string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
                                 string subDealerName = getSubDealerName(subDealerIDFK);
                                 string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
@@ -1873,7 +1876,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK,mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                         else
@@ -1889,7 +1892,7 @@ namespace DataModelWithADO
             }
             return returnToForm;
         }
-        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate, string SubDealerIDFK)
+        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate, string SubDealerIDFK,bool listIsDeleted)
         {
             cmd.CommandText = "SELECT * FROM SendToSubDealers WHERE SubDealerUserIDFK=@subDealerUserIDFK";
             SqlDataAdapter da = new SqlDataAdapter();
@@ -1912,6 +1915,7 @@ namespace DataModelWithADO
             returnToForm.Columns.Add("Product Name", typeof(string));
             returnToForm.Columns.Add("Product Description", typeof(string));
             returnToForm.Columns.Add("MainUserIDFK", typeof(string));
+            returnToForm.Columns.Add("User Making Transaction", typeof(string));
             returnToForm.Columns.Add("SubDealerIDFK", typeof(string));
             returnToForm.Columns.Add("Sub Dealer Name", typeof(string));
             returnToForm.Columns.Add("Sub Dealer Type", typeof(string));
@@ -1933,8 +1937,7 @@ namespace DataModelWithADO
             foreach (DataRow row in temporaryDataTable.Rows)
             {
 
-                bool checkDeleted = Convert.ToBoolean(row["IsDeleted"]);
-                if (!checkDeleted)
+                if (listIsDeleted == Convert.ToBoolean(row["IsDeleted"]))
                 {
                     DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
                     if (checkStartDate != null)
@@ -1954,6 +1957,7 @@ namespace DataModelWithADO
                                 string productName = getProductNameForSendToSubDealer(row["ProductIDFK"].ToString());
                                 string productDescription = getProductDescription(row["ProductIDFK"].ToString());
                                 string mainUserIDFK = row["MainUserIDFK"].ToString();
+                                string mainUserNameAndType = getMainUserNameAndType(row["mainUserIDFK"].ToString());
                                 string subDealerIDFK = row["SubDealerUserIDFK"].ToString();
                                 string subDealerName = getSubDealerName(subDealerIDFK);
                                 string subDealerDiscountIDFK = getSubDealerDiscountIDFK(subDealerIDFK);
@@ -1975,7 +1979,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, mainUserNameAndType,subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                         else
@@ -2084,12 +2088,12 @@ namespace DataModelWithADO
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@unitsInStock", newStock);
             cmd.Parameters.AddWithValue("@productID", productIDForCheck);
-         
+
             try
             {
                 con.Open();
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Product's stock level edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Product's stock level edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception)
             {
@@ -2216,41 +2220,41 @@ namespace DataModelWithADO
             }
         }
 
-        public void editSendToSubDealers(string sendID, string brandIDFK, string categoryIDFK, string productIDFK, string productItemNumber, string mainUserIDFK, string subDealerUserIDFK, short sendQuantity, decimal unitPrice, decimal subTotalPrice, decimal tax, decimal totalPrice, decimal discountedPrice, string description)
-        {
-            cmd.CommandText = "UPDATE SendToSubDealers SET BrandIDFK=@brandIDFK, CategoryIDFK=@categoryIDFK, ProductIDFK=@productIDFK, ProductItemNumber=@productItemNumber, MainUserIDFK=@mainUserIDFK, SubDealerUserIDFK=@subDealerUserIDFK, SendQuantity=@sendQuantity, UnitPrice=@unitPrice, SubTotalPrice=@subTotalPrice, Tax=@tax, TotalPrice=@totalPrice, DiscountedPrice=@discountedPrice, Description=@description WHERE SendID=@sendID";
+        //public void editSendToSubDealers(string sendID, string brandIDFK, string categoryIDFK, string productIDFK, string productItemNumber, string mainUserIDFK, string subDealerUserIDFK, short sendQuantity, decimal unitPrice, decimal subTotalPrice, decimal tax, decimal totalPrice, decimal discountedPrice, string description)
+        //{
+        //    cmd.CommandText = "UPDATE SendToSubDealers SET BrandIDFK=@brandIDFK, CategoryIDFK=@categoryIDFK, ProductIDFK=@productIDFK, ProductItemNumber=@productItemNumber, MainUserIDFK=@mainUserIDFK, SubDealerUserIDFK=@subDealerUserIDFK, SendQuantity=@sendQuantity, UnitPrice=@unitPrice, SubTotalPrice=@subTotalPrice, Tax=@tax, TotalPrice=@totalPrice, DiscountedPrice=@discountedPrice, Description=@description WHERE SendID=@sendID";
 
-            cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@sendID", sendID);
-            cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
-            cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
-            cmd.Parameters.AddWithValue("@productIDFK", productIDFK);
-            cmd.Parameters.AddWithValue("@productItemNumber", productItemNumber);
-            cmd.Parameters.AddWithValue("@mainUserIDFK", mainUserIDFK);
-            cmd.Parameters.AddWithValue("@subDealerUserIDFK", subDealerUserIDFK);
-            cmd.Parameters.AddWithValue("@sendQuantity", sendQuantity);
-            cmd.Parameters.AddWithValue("@unitPrice", unitPrice);
-            cmd.Parameters.AddWithValue("@subTotalPrice", subTotalPrice);
-            cmd.Parameters.AddWithValue("@tax", tax);
-            cmd.Parameters.AddWithValue("@totalPrice", totalPrice);
-            cmd.Parameters.AddWithValue("@discountedPrice", discountedPrice);
-            cmd.Parameters.AddWithValue("@description", description);
+        //    cmd.Parameters.Clear();
+        //    cmd.Parameters.AddWithValue("@sendID", sendID);
+        //    cmd.Parameters.AddWithValue("@brandIDFK", brandIDFK);
+        //    cmd.Parameters.AddWithValue("@categoryIDFK", categoryIDFK);
+        //    cmd.Parameters.AddWithValue("@productIDFK", productIDFK);
+        //    cmd.Parameters.AddWithValue("@productItemNumber", productItemNumber);
+        //    cmd.Parameters.AddWithValue("@mainUserIDFK", mainUserIDFK);
+        //    cmd.Parameters.AddWithValue("@subDealerUserIDFK", subDealerUserIDFK);
+        //    cmd.Parameters.AddWithValue("@sendQuantity", sendQuantity);
+        //    cmd.Parameters.AddWithValue("@unitPrice", unitPrice);
+        //    cmd.Parameters.AddWithValue("@subTotalPrice", subTotalPrice);
+        //    cmd.Parameters.AddWithValue("@tax", tax);
+        //    cmd.Parameters.AddWithValue("@totalPrice", totalPrice);
+        //    cmd.Parameters.AddWithValue("@discountedPrice", discountedPrice);
+        //    cmd.Parameters.AddWithValue("@description", description);
 
-            try
-            {
-                con.Open();
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Shipment list edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Unable to edit shipment list, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
+        //    try
+        //    {
+        //        con.Open();
+        //        cmd.ExecuteNonQuery();
+        //        MessageBox.Show("Shipment list edited successfully.", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MessageBox.Show("Unable to edit shipment list, please check the information you entered!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
 
         public void editSendToSubDealers(string sendID, string description, bool isDeleted)
         {
@@ -2327,8 +2331,8 @@ namespace DataModelWithADO
             {
                 cmd.CommandText = "SELECT * FROM MainDealerUsers WHERE UserName=@userName AND UserPassword=@userPassword";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@userName",userName);
-                cmd.Parameters.AddWithValue("@userPassword",password);
+                cmd.Parameters.AddWithValue("@userName", userName);
+                cmd.Parameters.AddWithValue("@userPassword", password);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 MainUser mu = null;
@@ -2353,6 +2357,34 @@ namespace DataModelWithADO
             }
         }
 
+        public string getMainUserNameAndType(string mainUserIDFK)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT UserName, UserType FROM MainDealerUsers WHERE MainUserID=@mainUserIDFK";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@mainUserIDFK", mainUserIDFK);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                MainUser mu = null;
+                while (reader.Read())
+                {
+                    mu = new MainUser();
+                    mu.userName = reader.GetString(0);
+                    mu.userType = reader.GetString(1);
+
+                }
+                return mu.userName + "/" + mu.userType;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         #endregion
 

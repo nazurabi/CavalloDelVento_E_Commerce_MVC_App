@@ -48,7 +48,7 @@
             this.tb_productItemNumber = new System.Windows.Forms.TextBox();
             this.tb_productDescription = new System.Windows.Forms.TextBox();
             this.tb_shipmentInformation = new System.Windows.Forms.TextBox();
-            this.btn_editData = new System.Windows.Forms.Button();
+            this.btn_cancelShipment = new System.Windows.Forms.Button();
             this.btn_sendProduct = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.pb_productImage = new System.Windows.Forms.PictureBox();
@@ -57,8 +57,6 @@
             this.lbl_productDescription = new System.Windows.Forms.Label();
             this.cbb_brandName = new System.Windows.Forms.ComboBox();
             this.cbb_categoryName = new System.Windows.Forms.ComboBox();
-            this.cb_sendDeleted = new System.Windows.Forms.CheckBox();
-            this.lbl_deleted = new System.Windows.Forms.Label();
             this.cbb_productName = new System.Windows.Forms.ComboBox();
             this.cbb_subDealerInformation = new System.Windows.Forms.ComboBox();
             this.gb_sendToSubDealers = new System.Windows.Forms.GroupBox();
@@ -66,7 +64,6 @@
             this.nud_totalPrice = new System.Windows.Forms.NumericUpDown();
             this.nud_subTotalPrice = new System.Windows.Forms.NumericUpDown();
             this.lbl_shipmentInformation = new System.Windows.Forms.Label();
-            this.btn_cancelEdit = new System.Windows.Forms.Button();
             this.tb_discountedPrice = new System.Windows.Forms.TextBox();
             this.tb_quantityPerUnit = new System.Windows.Forms.TextBox();
             this.tb_unitsInStock = new System.Windows.Forms.TextBox();
@@ -269,19 +266,20 @@
             this.tb_shipmentInformation.Size = new System.Drawing.Size(367, 190);
             this.tb_shipmentInformation.TabIndex = 35;
             // 
-            // btn_editData
+            // btn_cancelShipment
             // 
-            this.btn_editData.Location = new System.Drawing.Point(1030, 302);
-            this.btn_editData.Name = "btn_editData";
-            this.btn_editData.Size = new System.Drawing.Size(139, 36);
-            this.btn_editData.TabIndex = 39;
-            this.btn_editData.Text = "Edit Data";
-            this.btn_editData.UseVisualStyleBackColor = true;
-            this.btn_editData.Click += new System.EventHandler(this.btn_editData_Click);
+            this.btn_cancelShipment.ForeColor = System.Drawing.Color.Red;
+            this.btn_cancelShipment.Location = new System.Drawing.Point(1106, 286);
+            this.btn_cancelShipment.Name = "btn_cancelShipment";
+            this.btn_cancelShipment.Size = new System.Drawing.Size(208, 36);
+            this.btn_cancelShipment.TabIndex = 39;
+            this.btn_cancelShipment.Text = "Cancel Shipment";
+            this.btn_cancelShipment.UseVisualStyleBackColor = true;
+            this.btn_cancelShipment.Click += new System.EventHandler(this.btn_cancelShipment_Click);
             // 
             // btn_sendProduct
             // 
-            this.btn_sendProduct.Location = new System.Drawing.Point(911, 302);
+            this.btn_sendProduct.Location = new System.Drawing.Point(987, 286);
             this.btn_sendProduct.Name = "btn_sendProduct";
             this.btn_sendProduct.Size = new System.Drawing.Size(113, 36);
             this.btn_sendProduct.TabIndex = 38;
@@ -291,7 +289,7 @@
             // 
             // btn_clear
             // 
-            this.btn_clear.Location = new System.Drawing.Point(1320, 302);
+            this.btn_clear.Location = new System.Drawing.Point(1320, 286);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(113, 36);
             this.btn_clear.TabIndex = 41;
@@ -362,28 +360,6 @@
             this.cbb_categoryName.Text = "---Choose---";
             this.cbb_categoryName.SelectedIndexChanged += new System.EventHandler(this.cbb_categoryName_SelectedIndexChanged);
             // 
-            // cb_sendDeleted
-            // 
-            this.cb_sendDeleted.AutoSize = true;
-            this.cb_sendDeleted.Enabled = false;
-            this.cb_sendDeleted.ForeColor = System.Drawing.Color.Red;
-            this.cb_sendDeleted.Location = new System.Drawing.Point(1805, 309);
-            this.cb_sendDeleted.Name = "cb_sendDeleted";
-            this.cb_sendDeleted.Size = new System.Drawing.Size(18, 17);
-            this.cb_sendDeleted.TabIndex = 37;
-            this.cb_sendDeleted.UseVisualStyleBackColor = true;
-            // 
-            // lbl_deleted
-            // 
-            this.lbl_deleted.AutoSize = true;
-            this.lbl_deleted.Font = new System.Drawing.Font("Calibri", 13.8F);
-            this.lbl_deleted.ForeColor = System.Drawing.Color.Red;
-            this.lbl_deleted.Location = new System.Drawing.Point(1610, 302);
-            this.lbl_deleted.Name = "lbl_deleted";
-            this.lbl_deleted.Size = new System.Drawing.Size(167, 28);
-            this.lbl_deleted.TabIndex = 36;
-            this.lbl_deleted.Text = "Cancel Shipment";
-            // 
             // cbb_productName
             // 
             this.cbb_productName.FormattingEnabled = true;
@@ -412,8 +388,6 @@
             this.gb_sendToSubDealers.Controls.Add(this.nud_subTotalPrice);
             this.gb_sendToSubDealers.Controls.Add(this.cbb_subDealerInformation);
             this.gb_sendToSubDealers.Controls.Add(this.cbb_productName);
-            this.gb_sendToSubDealers.Controls.Add(this.lbl_deleted);
-            this.gb_sendToSubDealers.Controls.Add(this.cb_sendDeleted);
             this.gb_sendToSubDealers.Controls.Add(this.cbb_categoryName);
             this.gb_sendToSubDealers.Controls.Add(this.cbb_brandName);
             this.gb_sendToSubDealers.Controls.Add(this.lbl_productDescription);
@@ -423,8 +397,7 @@
             this.gb_sendToSubDealers.Controls.Add(this.pb_productImage);
             this.gb_sendToSubDealers.Controls.Add(this.btn_clear);
             this.gb_sendToSubDealers.Controls.Add(this.btn_sendProduct);
-            this.gb_sendToSubDealers.Controls.Add(this.btn_cancelEdit);
-            this.gb_sendToSubDealers.Controls.Add(this.btn_editData);
+            this.gb_sendToSubDealers.Controls.Add(this.btn_cancelShipment);
             this.gb_sendToSubDealers.Controls.Add(this.tb_shipmentInformation);
             this.gb_sendToSubDealers.Controls.Add(this.tb_productDescription);
             this.gb_sendToSubDealers.Controls.Add(this.tb_discountedPrice);
@@ -514,17 +487,6 @@
             this.lbl_shipmentInformation.Size = new System.Drawing.Size(316, 28);
             this.lbl_shipmentInformation.TabIndex = 34;
             this.lbl_shipmentInformation.Text = "Shipment Information (Optional)";
-            // 
-            // btn_cancelEdit
-            // 
-            this.btn_cancelEdit.Enabled = false;
-            this.btn_cancelEdit.Location = new System.Drawing.Point(1175, 302);
-            this.btn_cancelEdit.Name = "btn_cancelEdit";
-            this.btn_cancelEdit.Size = new System.Drawing.Size(139, 36);
-            this.btn_cancelEdit.TabIndex = 40;
-            this.btn_cancelEdit.Text = "Cancel Edit";
-            this.btn_cancelEdit.UseVisualStyleBackColor = true;
-            this.btn_cancelEdit.Click += new System.EventHandler(this.btn_cancelEdit_Click);
             // 
             // tb_discountedPrice
             // 
@@ -656,7 +618,7 @@
         private System.Windows.Forms.TextBox tb_productItemNumber;
         private System.Windows.Forms.TextBox tb_productDescription;
         private System.Windows.Forms.TextBox tb_shipmentInformation;
-        private System.Windows.Forms.Button btn_editData;
+        private System.Windows.Forms.Button btn_cancelShipment;
         private System.Windows.Forms.Button btn_sendProduct;
         private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.PictureBox pb_productImage;
@@ -665,8 +627,6 @@
         private System.Windows.Forms.Label lbl_productDescription;
         private System.Windows.Forms.ComboBox cbb_brandName;
         private System.Windows.Forms.ComboBox cbb_categoryName;
-        private System.Windows.Forms.CheckBox cb_sendDeleted;
-        private System.Windows.Forms.Label lbl_deleted;
         private System.Windows.Forms.ComboBox cbb_productName;
         private System.Windows.Forms.ComboBox cbb_subDealerInformation;
         private System.Windows.Forms.GroupBox gb_sendToSubDealers;
@@ -678,7 +638,6 @@
         private System.Windows.Forms.NumericUpDown nud_discountedPrice;
         private System.Windows.Forms.NumericUpDown nud_totalPrice;
         private System.Windows.Forms.NumericUpDown nud_subTotalPrice;
-        private System.Windows.Forms.Button btn_cancelEdit;
         private System.Windows.Forms.TextBox tb_quantityPerUnit;
         private System.Windows.Forms.TextBox tb_unitsInStock;
         private System.Windows.Forms.Label lbl_quantityPerUnit;

@@ -28,8 +28,8 @@ namespace FormForDataModel
         string imageLocation = "";
         string imageFullPath = "";
         string imageDestinationPath = "";
-
         string selectedSubDealerID = "";
+        bool isDeleted;
         public SendedList()
         {
             InitializeComponent();
@@ -61,8 +61,9 @@ namespace FormForDataModel
             }
         }
 
-        private void btn_list_Click(object sender, EventArgs e)
+        private void btn_activeList_Click(object sender, EventArgs e)
         {
+            isDeleted = false;
             if (cbb_subDealerName.SelectedIndex != 0 && cbb_subDealerName.SelectedValue != null)
             {
                 SendListDataBindWithSubDealerID();
@@ -72,13 +73,27 @@ namespace FormForDataModel
                 SendListDataBind();
             }
         }
+
+        private void btn_deletedList_Click(object sender, EventArgs e)
+        {
+            isDeleted = true;
+            if (cbb_subDealerName.SelectedIndex != 0 && cbb_subDealerName.SelectedValue != null)
+            {
+                SendListDataBindWithSubDealerID();
+            }
+            else
+            {
+                SendListDataBind();
+            }
+        }
+
         private void SendListDataBind()
         {
             dt.Clear();
             listOfSendedImages.Clear();
             checkDateStart = dtp_startDate.Value;
             checkDateEnd = dtp_endDate.Value;
-            dt = dm.SendToSubDealerListDataBind(checkDateStart, checkDateEnd);
+            dt = dm.SendToSubDealerListDataBind(checkDateStart, checkDateEnd, isDeleted);
             if (dt.Rows.Count != 0)
             {
                 dgv_productListSentToSubDealer.DataSource = dt;
@@ -130,7 +145,7 @@ namespace FormForDataModel
             listOfSendedImages.Clear();
             checkDateStart = dtp_startDate.Value;
             checkDateEnd = dtp_endDate.Value;
-            dt = dm.SendToSubDealerListDataBind(checkDateStart, checkDateEnd, selectedSubDealerID);
+            dt = dm.SendToSubDealerListDataBind(checkDateStart, checkDateEnd, selectedSubDealerID, isDeleted);
             if (dt.Rows.Count != 0)
             {
                 dgv_productListSentToSubDealer.DataSource = dt;
@@ -400,6 +415,7 @@ namespace FormForDataModel
             }
         }
 
+      
     }
 }
 
