@@ -26,8 +26,9 @@ namespace FormForDataModel
         {
             LogForm lg = new LogForm();
             lg.ShowDialog();
-            menuStrip1.Visible = true;
+            ms_mainMenu.Visible = true;
             toolStripStatusLabel1.Visible = true;
+            toolStripStatusLabel2.Visible = true;
             lbl_welcomeTitle.Visible = true;
             toolStripStatusLabel1.Text = LoginUser.loginUser.userName + "/" + LoginUser.loginUser.userType; 
             this.Text = dm.FormTitle();
@@ -42,6 +43,7 @@ namespace FormForDataModel
                 }
             }
             tmr_welcomeTitle.Start();
+            tmr_clock.Start();
 
 
         }
@@ -53,6 +55,11 @@ namespace FormForDataModel
                 lbl_welcomeTitle.Visible = false;
                 tmr_welcomeTitle.Stop();
             }
+        }
+
+        private void tmr_clock_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel2.Text = DateTime.Now.ToString();
         }
 
         private void TSMI_addBrand_Click(object sender, EventArgs e)

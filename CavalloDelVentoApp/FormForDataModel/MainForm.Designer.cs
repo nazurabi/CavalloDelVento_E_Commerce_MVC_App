@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.lbl_welcomeTitle = new System.Windows.Forms.Label();
             this.tmr_welcomeTitle = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ms_mainMenu = new System.Windows.Forms.MenuStrip();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_editBrands = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_addBrand = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,10 +63,14 @@
             this.TSMI_logOut = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_close = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_info = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.ss_user = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.ss_clock = new System.Windows.Forms.StatusStrip();
+            this.tmr_clock = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ms_mainMenu.SuspendLayout();
+            this.ss_user.SuspendLayout();
+            this.ss_clock.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_welcomeTitle
@@ -85,20 +89,20 @@
             this.tmr_welcomeTitle.Interval = 1000;
             this.tmr_welcomeTitle.Tick += new System.EventHandler(this.tmr_welcomeTitle_Tick);
             // 
-            // menuStrip1
+            // ms_mainMenu
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ms_mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ms_mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
             this.listToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.otherToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1900, 28);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.Visible = false;
+            this.ms_mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.ms_mainMenu.Name = "ms_mainMenu";
+            this.ms_mainMenu.Size = new System.Drawing.Size(1900, 28);
+            this.ms_mainMenu.TabIndex = 3;
+            this.ms_mainMenu.Text = "menuStrip1";
+            this.ms_mainMenu.Visible = false;
             // 
             // editToolStripMenuItem
             // 
@@ -341,16 +345,16 @@
             this.TSMI_info.Text = "Info";
             this.TSMI_info.Click += new System.EventHandler(this.TSMI_info_Click);
             // 
-            // statusStrip1
+            // ss_user
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ss_user.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ss_user.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 959);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1900, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
+            this.ss_user.Location = new System.Drawing.Point(0, 955);
+            this.ss_user.Name = "ss_user";
+            this.ss_user.Size = new System.Drawing.Size(1900, 26);
+            this.ss_user.TabIndex = 5;
+            this.ss_user.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
@@ -359,17 +363,40 @@
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Visible = false;
             // 
+            // ss_clock
+            // 
+            this.ss_clock.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ss_clock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2});
+            this.ss_clock.Location = new System.Drawing.Point(0, 933);
+            this.ss_clock.Name = "ss_clock";
+            this.ss_clock.Size = new System.Drawing.Size(1900, 22);
+            this.ss_clock.TabIndex = 7;
+            this.ss_clock.Text = "statusStrip2";
+            // 
+            // tmr_clock
+            // 
+            this.tmr_clock.Tick += new System.EventHandler(this.tmr_clock_Tick);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1900, 981);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.ss_clock);
+            this.Controls.Add(this.ss_user);
             this.Controls.Add(this.lbl_welcomeTitle);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.ms_mainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.ms_mainMenu;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1918, 1028);
             this.MinimumSize = new System.Drawing.Size(1918, 1028);
@@ -378,10 +405,12 @@
             this.Text = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.ms_mainMenu.ResumeLayout(false);
+            this.ms_mainMenu.PerformLayout();
+            this.ss_user.ResumeLayout(false);
+            this.ss_user.PerformLayout();
+            this.ss_clock.ResumeLayout(false);
+            this.ss_clock.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,7 +420,7 @@
 
         private System.Windows.Forms.Label lbl_welcomeTitle;
         private System.Windows.Forms.Timer tmr_welcomeTitle;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip ms_mainMenu;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMI_editBrands;
         private System.Windows.Forms.ToolStripMenuItem TSMI_editCategories;
@@ -423,7 +452,10 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_createLevelIntegration;
         private System.Windows.Forms.ToolStripMenuItem TSMI_acceptEditLevelIntegration;
         private System.Windows.Forms.ToolStripMenuItem TSMI_listLevelIntegration;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip ss_user;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.StatusStrip ss_clock;
+        private System.Windows.Forms.Timer tmr_clock;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }

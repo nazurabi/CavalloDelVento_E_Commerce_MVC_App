@@ -121,7 +121,7 @@ namespace DataModelWithADO
                 {
                     cb.Checked = false;
                 }
-                else if (controller is ComboBox cbb)
+                else if (controller is ComboBox cbb && controller.Name!="cbb_userType")
                 {
                     cbb.SelectedIndex = 0;
                 }
