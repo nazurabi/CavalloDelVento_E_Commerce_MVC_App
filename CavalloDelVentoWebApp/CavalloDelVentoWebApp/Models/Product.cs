@@ -16,15 +16,15 @@ namespace CavalloDelVentoWebApp.Models
             isDeleted = false;
             isActive = true;
         }
-        //public int brand_ID { get; set; }
+        public int brand_ID { get; set; }
 
-        //[ForeignKey("brand_ID")]
-        //public virtual Brand brand { get; set; }
+        [ForeignKey("brand_ID")]
+        public virtual Brand brand { get; set; }
 
-        //public int category_ID { get; set; }
+        public int category_ID { get; set; }
 
-        //[ForeignKey("category_ID")]
-        //public virtual Category category { get; set; }
+        [ForeignKey("category_ID")]
+        public virtual Category category { get; set; }
 
         [Required(ErrorMessage = "This field can not blank!")]
         [StringLength(maximumLength: 50, ErrorMessage = "This field can be a maximum of 50 characters!")]

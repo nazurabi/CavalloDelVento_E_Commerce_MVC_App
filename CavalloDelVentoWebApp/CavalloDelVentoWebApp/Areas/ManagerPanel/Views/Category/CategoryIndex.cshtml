@@ -22,7 +22,8 @@
             <th>@Html.DisplayNameFor(model => model.categoryName)</th>
             <th>Description</th>
             <th>Is Category Active For Sale</th>
-            <th>Seçenekler</th>
+            <th>Category Image</th>
+            <th>Options</th>
         </tr>
         @foreach (CavalloDelVentoWebApp.Models.Category item in Model)
         {
@@ -52,6 +53,7 @@
                     <label>@catDescription</label>
                 </td>
                 <td>@item.isActive</td>
+                <td>@item.image</td>
                 <td>
                     <a href="@Url.Action("Edit", "Category", new {id = item.ID})" class="editButton">Edit Category</a>
                     <a href="@Url.Action("Delete", "Category", new {id = item.ID})" class="deleteButton">Delete Category</a>

@@ -1,0 +1,59 @@
+﻿@model CavalloDelVentoWebApp.Models.Brand
+@{
+    ViewBag.Title = "Add Brand";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+
+    <style>
+        .sol {
+            float: left;
+            width: 450px;
+            margin-right: 10px;
+        }
+
+        .sag {
+            float: left;
+            width: 450px;
+            margin-left: 10px;
+        }
+        .imageInputTextBox {
+            display: none;
+        }
+    </style>
+}
+<div class="pageTitle">
+    <h2>Add Brand</h2>
+</div>
+<div class="formContainer">
+    @using (Html.BeginForm("Create", "Brand", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        if (ViewBag.message != null)
+        {
+            <label class="validationMessage">@ViewBag.message</label>
+        }
+        <div class="sol">
+            <div class="row">
+                @Html.EditorFor(x => x.brandName, new { htmlAttributes = new { @class = "textBox", @placeholder = "Brand Name" } })
+                @Html.ValidationMessageFor(x => x.brandName, "", new { @class = "validationMessage" })
+            </div>
+           
+            <div class="row">
+                @Html.EditorFor(x => x.isActive, new { htmlAttributes = new { @id = "IsActive" } })
+                <label for="isActive">Is Brand Active For Sale</label>
+            </div>
+        </div>
+
+        <div class="sag">
+            <div class="row">
+                <input type="file" name="image" class="textBox" />
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="row">
+            <button type="submit" class="formButton">Add Brand</button>
+        </div>
+    }
+</div>

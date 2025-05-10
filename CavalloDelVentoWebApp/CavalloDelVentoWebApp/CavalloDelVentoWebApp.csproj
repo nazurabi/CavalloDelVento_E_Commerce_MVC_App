@@ -101,11 +101,15 @@
     <Content Include="Areas\ManagerPanel\Assets\Css\ManagerLogin.css" />
     <Content Include="Areas\ManagerPanel\Assets\Css\ManagerStyle.css" />
     <Content Include="Areas\ManagerPanel\Assets\Images\cavallodelventologo.png" />
+    <Content Include="Assets\BrandImages\none.jpg" />
+    <Content Include="Assets\CategoryImages\none.jpg" />
+    <Content Include="Assets\ProductImages\none.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\ManagerPanel\Controllers\BrandController.cs" />
     <Compile Include="Areas\ManagerPanel\Controllers\CategoryController.cs" />
     <Compile Include="Areas\ManagerPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\ManagerPanel\Controllers\LoginController.cs" />
@@ -132,6 +136,8 @@
     <Content Include="Areas\ManagerPanel\Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Areas\ManagerPanel\Views\Home\HomeIndex.cshtml" />
     <Content Include="Areas\ManagerPanel\Views\Category\CategoryIndex.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Brand\BrandIndex.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Brand\Create.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

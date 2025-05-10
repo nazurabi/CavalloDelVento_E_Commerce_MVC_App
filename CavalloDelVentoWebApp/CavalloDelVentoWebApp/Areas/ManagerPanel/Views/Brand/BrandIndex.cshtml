@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CavalloDelVentoWebApp.Models.Brand>
+@{
+    ViewBag.Title = "Brands";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+}
+<div class="pageTitle">
+    <h2>Brands</h2>
+</div>
+<div class="">
+    @if (TempData["message"] != null)
+    {
+        <h3 style="color:forestgreen; margin-bottom:10px;">@TempData["message"]</h3>
+        TempData["message"] = null;
+    }
+    <table class="tablo" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Image</th>
+            <th>Brand Name</th>
+            <th>Is Brand Active For Sale</th>
+            <th>Options</th>
+        </tr>
+        @foreach (CavalloDelVentoWebApp.Models.Brand item in Model)
+        {
+            <tr>
+                <td align="center"><img src="~/Assets/BrandImages/@item.image" width="80" /> </td>
+                <td align="center">@item.brandName</td>
+                <td align="center">
+                    @if (item.isActive)
+                    {
+                        <label>In Stock</label>
+                    }
+                    else
+                    {
+                        <label style="color:orangered;">Out Of Stock</label>
+                    }
+
+                </td>
+               
+                <td>
+                    <a href="@Url.Action("Edit", "Brand", new {id = item.ID})" class="editButton">Edit</a>
+                    <a href="@Url.Action("Delete", "Brand", new {id = item.ID})" class="deleteButton">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

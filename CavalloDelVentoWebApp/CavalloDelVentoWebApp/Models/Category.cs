@@ -20,11 +20,6 @@ namespace CavalloDelVentoWebApp.Models
         [StringLength(maximumLength: 50, ErrorMessage = "This field can be a maximum of 50 characters!")]
         public string categoryName { get; set; }
 
-        public int brand_ID { get; set; }
-
-        [ForeignKey("brand_ID")]
-        public virtual Brand brand { get; set; }
-
         [Display(Name = "Description")]
         [DataType(DataType.MultilineText)]
         [StringLength(maximumLength: 500, ErrorMessage = "This field can be a maximum of 500 characters!")]
