@@ -163,7 +163,13 @@ namespace FormForDataModel
             {
                 if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
                 {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                    rows.Cells["Is Deleted"].Style.ForeColor = Color.Red;
+                    //rows.DefaultCellStyle.ForeColor = Color.Red;
+                }
+
+                if (rows.Cells["Is Product Active For Sale"].Value.ToString() == "No")
+                {
+                    rows.Cells["Is Product Active For Sale"].Style.ForeColor = Color.Red;
                 }
             }
         }

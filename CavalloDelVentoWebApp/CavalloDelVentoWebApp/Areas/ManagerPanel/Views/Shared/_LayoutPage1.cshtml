@@ -1,0 +1,51 @@
+﻿@using CavalloDelVentoWebApp.Models;
+@{
+    Manager mngr = new Manager();
+    if (Session["ManagerSession"] != null)
+    {
+        mngr = (Manager)Session["ManagerSession"];
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/ManagerPanel/Assets/css/ManagerStyle.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+</head>
+<body>
+    <div class="menuContainer">
+        <div class="logoBase">
+            <img src="~/Areas/ManagerPanel/Assets/Images/cavallodelventologo.png" />
+        </div>
+        <div class="userBase">
+            <a href="#" style="color:gray">@mngr.subDealerName</a>
+            <a href="@Url.Action("LogOut","Login")">Log Out</a>
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="sideMenu">
+        <label>Management</label>
+        <a href="@Url.Action("HomeIndex","Home")">Home Page</a>
+
+        <label>Brand</label>
+        <a href="@Url.Action("Create","Brand")">Add Brand</a>
+        <a href="@Url.Action("BrandIndex","Brand")">List Brands</a>
+
+        <label>Category</label>
+        <a href="@Url.Action("Create","Category")">Add Category</a>
+        <a href="@Url.Action("CategoryIndex","Category")">List Categories</a>
+
+        <label>Product</label>
+        <a href="@Url.Action("Create","Product")">Add Product</a>
+        <a href="@Url.Action("ProductIndex","Product")">List Products</a>
+    </div>
+    <div class="mainContainer">
+        @RenderBody()
+    </div>
+    <div style="clear:both"></div>
+</body>
+</html>

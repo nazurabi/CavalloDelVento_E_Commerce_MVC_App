@@ -85,7 +85,14 @@ namespace FormForDataModel
                     rows.Cells["Is Deleted"].Style.ForeColor = Color.Red;
                     //rows.DefaultCellStyle.ForeColor = Color.Red;
                 }
+
+                if (rows.Cells["Is Product Active For Sale"].Value.ToString() == "No")
+                {
+                    rows.Cells["Is Product Active For Sale"].Style.ForeColor = Color.Red;
+                }
             }
+
+
         }
 
         private void ComboBoxCategoriesLoad()

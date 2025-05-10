@@ -1,0 +1,71 @@
+﻿*, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0px;
+}
+
+body {
+    background-color: #efefef;
+    font-family: Calibri;
+}
+
+.logo {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+    .logo img {
+        width: 250px;
+    }
+
+.row {
+    margin: 20px 0;
+}
+
+.container {
+    padding: 20px;
+    width: 400px;
+    min-height: 300px;
+    margin: 250px auto;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.formTextbox {
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+.loginButton {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 15px;
+    background-color: #7e0490;
+    color: white;
+    font-size: 15pt;
+    border: 1px solid #7e0490;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.validation-summary-errors {
+    padding: 20px;
+    color: darkred;
+    background-color: #fbb2b2;
+    border-radius: 5px;
+}
+
+    .validation-summary-errors ul {
+        list-style-type: none;
+    }
+
+        .validation-summary-errors ul li {
+            margin: 7px 0;
+        }

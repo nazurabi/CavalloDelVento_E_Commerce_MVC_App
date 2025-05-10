@@ -57,6 +57,7 @@ namespace FormForDataModel
             dgv_sendToSubDealers.Columns["ProductIDFK"].Visible = false;
             dgv_sendToSubDealers.Columns["MainUserIDFK"].Visible = false;
             dgv_sendToSubDealers.Columns["SubDealerIDFK"].Visible = false;
+            dgv_sendToSubDealers.Columns["Product Units In Stock"].Visible = false;
             dgv_sendToSubDealers.Columns["Sub Dealer Discount Amount"].Visible = false;
             dgv_sendToSubDealers.Columns["ImageFileName"].Visible = false;
 
@@ -78,16 +79,16 @@ namespace FormForDataModel
             }
         }
 
-        private void dgv_sendToSubDealers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            foreach (DataGridViewRow rows in dgv_sendToSubDealers.Rows)
-            {
-                if (rows.Cells["Product Units In Stock"].Value.ToString() == "0")
-                {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
-                }
-            }
-        }
+        //private void dgv_sendToSubDealers_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        //{
+        //    foreach (DataGridViewRow rows in dgv_sendToSubDealers.Rows)
+        //    {
+        //        if (rows.Cells["Product Units In Stock"].Value.ToString() == "0")
+        //        {
+        //           rows.Cells["Is Deleted"].Style.ForeColor = Color.Red;
+        //        }
+        //    }
+        //}
 
         private void dgv_sendToSubDealers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {

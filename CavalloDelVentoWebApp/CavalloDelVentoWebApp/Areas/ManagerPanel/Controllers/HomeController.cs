@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using CavalloDelVentoWebApp.Areas.ManagerPanel.Filters;
+
+namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
+{
+    public class HomeController : Controller
+    {
+        [ManagerRequiredFilter]
+        public ActionResult HomeIndex()
+        {
+            return View();
+        }
+    }
+}

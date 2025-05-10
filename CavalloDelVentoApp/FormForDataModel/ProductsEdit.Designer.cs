@@ -86,7 +86,7 @@
             this.dgv_editProduct.ReadOnly = true;
             this.dgv_editProduct.RowHeadersWidth = 51;
             this.dgv_editProduct.RowTemplate.Height = 24;
-            this.dgv_editProduct.Size = new System.Drawing.Size(1863, 475);
+            this.dgv_editProduct.Size = new System.Drawing.Size(1863, 430);
             this.dgv_editProduct.TabIndex = 28;
             this.dgv_editProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_editProduct_DataBindingComplete);
             this.dgv_editProduct.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_addProduct_RowHeaderMouseClick);

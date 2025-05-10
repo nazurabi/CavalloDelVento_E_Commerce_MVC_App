@@ -191,7 +191,7 @@
             this.dgv_productListSentToSubDealer.ReadOnly = true;
             this.dgv_productListSentToSubDealer.RowHeadersWidth = 51;
             this.dgv_productListSentToSubDealer.RowTemplate.Height = 100;
-            this.dgv_productListSentToSubDealer.Size = new System.Drawing.Size(1847, 685);
+            this.dgv_productListSentToSubDealer.Size = new System.Drawing.Size(1847, 650);
             this.dgv_productListSentToSubDealer.TabIndex = 13;
             // 
             // SendedList

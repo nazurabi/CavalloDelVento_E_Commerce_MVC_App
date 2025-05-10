@@ -564,9 +564,9 @@
             this.dgv_sendToSubDealers.ReadOnly = true;
             this.dgv_sendToSubDealers.RowHeadersWidth = 51;
             this.dgv_sendToSubDealers.RowTemplate.Height = 24;
-            this.dgv_sendToSubDealers.Size = new System.Drawing.Size(1863, 379);
+            this.dgv_sendToSubDealers.Size = new System.Drawing.Size(1863, 342);
             this.dgv_sendToSubDealers.TabIndex = 42;
-            this.dgv_sendToSubDealers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_sendToSubDealers_DataBindingComplete);
+            //this.dgv_sendToSubDealers.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_sendToSubDealers_DataBindingComplete);
             this.dgv_sendToSubDealers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_sendToSubDealers_RowHeaderMouseClick);
             // 
             // SendToSubDealers

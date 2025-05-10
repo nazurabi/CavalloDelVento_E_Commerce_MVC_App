@@ -219,9 +219,17 @@ namespace FormForDataModel
             {
                 item.Close();
             }
-            MainDealerSettings mainDealerSettings = new MainDealerSettings();
-            mainDealerSettings.MdiParent = this;
-            mainDealerSettings.Show();
+            if (LoginUser.loginUser.userType == "Admin")
+            {
+                MainDealerSettings mainDealerSettings = new MainDealerSettings();
+                mainDealerSettings.MdiParent = this;
+                mainDealerSettings.Show();
+            }
+            else
+            {
+                MessageBox.Show("You are not authorized to enter here!", "STOP", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+            }
         }
 
         private void TSMI_settingMainUsers_Click(object sender, EventArgs e)

@@ -1,0 +1,96 @@
+﻿.tablo {
+    width: 100%;
+    border: 1px solid silver;
+}
+
+    .tablo tr th {
+        border: 1px solid silver;
+        background-color: #f7f7f7;
+        color: #808080;
+        padding: 7px;
+    }
+
+    .tablo tr td {
+        border: 1px solid silver;
+        padding: 4px;
+    }
+
+.pageTitle {
+    padding: 15px;
+    padding-top: 0;
+    margin: 15px 0;
+    margin-top: 0;
+    border-bottom: 2px solid #7b0dbb;
+}
+
+.editButton {
+    padding: 3px 7px;
+    background-color: #0094ff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.deleteButton {
+    padding: 3px 7px;
+    background-color: orangered;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.formContainer {
+    border: 1px solid silver;
+    padding: 15px;
+}
+
+.validationMessage {
+    color: red;
+}
+
+.row {
+    margin: 10px 0;
+}
+
+.textBox {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 7px;
+}
+
+.formButton {
+    padding: 15px;
+    background-color: #7e0490;
+    color: white;
+    font-size: 15pt;
+    border: 1px solid #7e0490;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.productEditImage {
+    width: 150px;
+    float: left;
+}
+
+.productEditImageFile {
+    width: 500px;
+    float: left;
+    padding-left: 20px;
+}
+
+.textBox-maks {
+    width: 100%;
+    max-width: 912px;
+    resize: vertical;
+    padding: 7px;
+}
+
+.textBox-maks-product {
+    width: 100%;
+    max-width: 436px;
+    resize: vertical;
+    padding: 7px;
+}

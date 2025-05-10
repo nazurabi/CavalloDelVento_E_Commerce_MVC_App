@@ -30,6 +30,12 @@ namespace FormForDataModel
         {
             UserDataBind();
             ComboboxUserLoad();
+            if (LoginUser.loginUser.userType == "User")
+            {
+                btn_save.Enabled = false;
+                cb_userIsDelete.Enabled = false;
+                cb_seeDataInformation.Enabled = false;
+            }
         }
 
         private void UserDataBind()
@@ -39,6 +45,7 @@ namespace FormForDataModel
             btn_cancelEdit.Enabled = false;
             btn_editUser.Enabled = false;
 
+
         }
 
         private void dgv_userInformation_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -47,41 +54,60 @@ namespace FormForDataModel
             {
                 if (rows.Cells["Is Deleted"].Value.ToString() == "Yes")
                 {
-                    rows.DefaultCellStyle.ForeColor = Color.Red;
+                   rows.Cells["Is Deleted"].Style.ForeColor = Color.Red;
                 }
             }
         }
 
         private void dgv_userInformation_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            btn_editUser.Enabled = false;
+            tb_userName.Enabled = false;
+            tb_userPassword.Enabled = false;
+            cb_userIsDelete.Enabled = (LoginUser.loginUser.userType == "Admin") ? true : false;
+
             DataGridViewRow selectedRow = dgv_userInformation.Rows[e.RowIndex];
             selectedUserID = selectedRow.Cells["User ID"].Value.ToString();
             tb_userID.Text = selectedRow.Cells["User ID"].Value.ToString();
             tb_userName.Text = selectedRow.Cells["User Name"].Value.ToString();
-            string loginUserName = selectedRow.Cells["User Name"].Value.ToString();
+            string dgvUserName = selectedRow.Cells["User Name"].Value.ToString();
+            cbb_userType.SelectedValue = (selectedRow.Cells["User Type"].Value.ToString()) == "Admin" ? 2 : 1;
+            string dgvUserType = selectedRow.Cells["User Type"].Value.ToString();
 
-            if (loginUserName == LoginUser.loginUser.userName.ToString() && LoginUser.loginUser.userType == "User")
+            if (LoginUser.loginUser.userType == "Admin" && dgvUserType == "User")
             {
                 tb_userPassword.Text = selectedRow.Cells["User Password"].Value.ToString();
-
+                tb_userName.Enabled = true;
+                tb_userPassword.Enabled = true;
+                btn_editUser.Enabled = true;
             }
-            if (loginUserName != LoginUser.loginUser.userName && LoginUser.loginUser.userType == "Admin")
+            else if (LoginUser.loginUser.userType == "User" && dgvUserName == LoginUser.loginUser.userName.ToString())
+            {
+                tb_userPassword.Text = selectedRow.Cells["User Password"].Value.ToString();
+                tb_userName.Enabled = true;
+                tb_userPassword.Enabled = true;
+                btn_editUser.Enabled = true;
+            }
+            else if (LoginUser.loginUser.userType == "Admin" && dgvUserName == LoginUser.loginUser.userName)
+            {
+                tb_userPassword.Text = selectedRow.Cells["User Password"].Value.ToString();
+                tb_userName.Enabled = true;
+                tb_userPassword.Enabled = true;
+                btn_editUser.Enabled = true;
+            }
+            else
             {
                 string encryptIt = new string('*', selectedRow.Cells["User Password"].Value.ToString().Length);
                 tb_userPassword.Text = encryptIt;
             }
-            else
+
+            if (LoginUser.loginUser.userType == "Admin")
             {
-                tb_userPassword.Text = selectedRow.Cells["User Password"].Value.ToString();
+                btn_editUser.Enabled = true;
             }
-
-            cbb_userType.SelectedValue = (selectedRow.Cells["User Type"].Value.ToString()) == "Admin" ? 2 : 1; // senden ilerlicez
-
             cb_userIsDelete.Checked = selectedRow.Cells["Is Deleted"].Value.ToString() == "Yes" ? true : false;
             btn_save.Enabled = false;
-            btn_editUser.Enabled = true;
             btn_cancelEdit.Enabled = true;
-            cb_userIsDelete.Enabled = true;
         }
 
         private void ComboboxUserLoad()
@@ -137,16 +163,8 @@ namespace FormForDataModel
 
         private void cb_seeDataInformation_CheckedChanged(object sender, EventArgs e)
         {
-            if (LoginUser.loginUser.userType == "Admin")
-            {
-                seePass = cb_seeDataInformation.Checked;
-                dgv_userInformation.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Your user type is 'User', you can not see special information!", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cb_seeDataInformation.Checked = false;
-            }
+            seePass = cb_seeDataInformation.Checked;
+            dgv_userInformation.Refresh();
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -194,23 +212,57 @@ namespace FormForDataModel
                 byte checkSubDealer = dm.listUser(tb_userName.Text);
                 if (checkSubDealer == 0)
                 {
-                    string userName = "";
-                    string userPassword = "";
                     string userType = selectedUserType;
                     bool isDeleted = false;
                     if (tb_userName.Text.Length < 50 && tb_userPassword.Text.Length < 50)
                     {
-                        userName = tb_userName.Text;
-                        userPassword = tb_userPassword.Text;
+                        string userName = tb_userName.Text;
+                        string userPassword = tb_userPassword.Text;
                         isDeleted = cb_userIsDelete.Checked;
-                        dm.editUser(selectedUserID, userName, userPassword, userType, isDeleted);
-                        UserDataBind();
-                        clearControl();
-                        btn_cancelEdit.Enabled = false;
-                        btn_editUser.Enabled = false;
-                        btn_save.Enabled = true;
-                        cb_userIsDelete.Enabled = false;
-
+                        if (isDeleted == false)
+                        {
+                            dm.editUser(selectedUserID, userName, userPassword, userType, isDeleted);
+                            UserDataBind();
+                            clearControl();
+                            btn_cancelEdit.Enabled = false;
+                            btn_cancelEdit.Enabled = false;
+                            btn_editUser.Enabled = false;
+                            btn_save.Enabled = true;
+                            cb_userIsDelete.Enabled = false;
+                        }
+                        else
+                        {
+                            if (userType == "Admin")
+                            {
+                                byte checkAdmin = dm.checkAdmin();
+                                if (checkAdmin > 1)
+                                {
+                                    dm.editUser(selectedUserID, userName, userPassword, userType, isDeleted);
+                                    UserDataBind();
+                                    clearControl();
+                                    btn_cancelEdit.Enabled = false;
+                                    btn_cancelEdit.Enabled = false;
+                                    btn_editUser.Enabled = false;
+                                    btn_save.Enabled = true;
+                                    cb_userIsDelete.Enabled = false;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("You can not delete last admin! If you want to delete this admin, you must add new one.");
+                                }
+                            }
+                            else
+                            {
+                                dm.editUser(selectedUserID, userName, userPassword, userType, isDeleted);
+                                UserDataBind();
+                                clearControl();
+                                btn_cancelEdit.Enabled = false;
+                                btn_cancelEdit.Enabled = false;
+                                btn_editUser.Enabled = false;
+                                btn_save.Enabled = true;
+                                cb_userIsDelete.Enabled = false;
+                            }
+                        }
                     }
                     else
                     {
@@ -219,7 +271,7 @@ namespace FormForDataModel
                 }
                 else
                 {
-                    DialogResult result = MessageBox.Show("Since the user is registered in your system, you can only update the password or user type information. Do you want to continue?", "INFORMATION", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    DialogResult result = MessageBox.Show("Since the user is registered in your system, you can only update the password or user information. Do you want to continue?", "INFORMATION", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                     if (result == DialogResult.Yes)
                     {
@@ -230,19 +282,54 @@ namespace FormForDataModel
                         {
                             userPassword = tb_userPassword.Text;
                             isDeleted = cb_userIsDelete.Checked;
-                            dm.editUser(selectedUserID, userPassword, userType, isDeleted);
-                            UserDataBind();
-                            clearControl();
-                            btn_cancelEdit.Enabled = false;
-                            btn_editUser.Enabled = false;
-                            btn_save.Enabled = true;
-                            cb_userIsDelete.Enabled = false;
+                            if (isDeleted == false)
+                            {
 
+                                dm.editUser(selectedUserID, userPassword, userType, isDeleted);
+                                UserDataBind();
+                                clearControl();
+                                btn_cancelEdit.Enabled = false;
+                                btn_editUser.Enabled = false;
+                                btn_save.Enabled = true;
+                                cb_userIsDelete.Enabled = false;
+                            }
+                            else
+                            {
+                                if (userType == "Admin")
+                                {
+                                    byte checkAdmin = dm.checkAdmin();
+                                    if (checkAdmin > 1)
+                                    {
+                                        dm.editUser(selectedUserID, userPassword, userType, isDeleted);
+                                        UserDataBind();
+                                        clearControl();
+                                        btn_cancelEdit.Enabled = false;
+                                        btn_editUser.Enabled = false;
+                                        btn_save.Enabled = true;
+                                        cb_userIsDelete.Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("You can not delete last admin! If you want to delete this admin, you must add new one.");
+                                    }
+                                }
+                                else
+                                {
+                                    dm.editUser(selectedUserID, userPassword, userType, isDeleted);
+                                    UserDataBind();
+                                    clearControl();
+                                    btn_cancelEdit.Enabled = false;
+                                    btn_editUser.Enabled = false;
+                                    btn_save.Enabled = true;
+                                    cb_userIsDelete.Enabled = false;
+                                }
+                            }
                         }
                         else
                         {
                             MessageBox.Show("User name or password too long, it can be max 50/50 characters!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
                     }
                 }
             }
@@ -254,7 +341,10 @@ namespace FormForDataModel
 
         private void btn_cancelEdit_Click(object sender, EventArgs e)
         {
-            btn_save.Enabled = true;
+            if (LoginUser.loginUser.userType == "Admin")
+            {
+                btn_save.Enabled = true;
+            }
             btn_cancelEdit.Enabled = false;
             btn_editUser.Enabled = false;
             cb_userIsDelete.Enabled = false;

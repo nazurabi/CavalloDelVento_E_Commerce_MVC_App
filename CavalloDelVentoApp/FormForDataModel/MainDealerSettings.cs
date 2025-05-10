@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -29,12 +30,11 @@ namespace FormForDataModel
 
         private void MainDealerSettings_Load(object sender, EventArgs e)
         {
-            MainDealerLoad();
-            dm.disableControls(gb_mainDealer);
-            btn_cancelEdit.Enabled = false;
-            btn_editMainDealer.Enabled = false;
-            btn_selectImage.Enabled = false;
-
+                MainDealerLoad();
+                dm.disableControls(gb_mainDealer);
+                btn_cancelEdit.Enabled = false;
+                btn_editMainDealer.Enabled = false;
+                btn_selectImage.Enabled = false;
         }
 
         private void MainDealerLoad()

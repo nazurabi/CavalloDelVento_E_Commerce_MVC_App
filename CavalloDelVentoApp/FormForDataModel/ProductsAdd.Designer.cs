@@ -347,7 +347,7 @@
             this.dgv_addProduct.ReadOnly = true;
             this.dgv_addProduct.RowHeadersWidth = 51;
             this.dgv_addProduct.RowTemplate.Height = 24;
-            this.dgv_addProduct.Size = new System.Drawing.Size(1863, 475);
+            this.dgv_addProduct.Size = new System.Drawing.Size(1863, 430);
             this.dgv_addProduct.TabIndex = 24;
             this.dgv_addProduct.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_addProduct_DataBindingComplete);
             // 

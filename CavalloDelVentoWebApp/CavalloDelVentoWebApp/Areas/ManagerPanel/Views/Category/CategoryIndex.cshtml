@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CavalloDelVentoWebApp.Models.Category>
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+}
+<div class="pageTitle">
+    <h2>Kategoriler</h2>
+</div>
+<div class="">
+    @if (TempData["message"] != null)
+    {
+        <h3 style="color:forestgreen; margin-bottom:10px;">@TempData["mesaj"]</h3>
+        TempData["message"] = null;
+    }
+    <table class="tablo" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ID)</th>
+            <th>@Html.DisplayNameFor(model => model.categoryName)</th>
+            <th>Description</th>
+            <th>Is Category Active For Sale</th>
+            <th>Seçenekler</th>
+        </tr>
+        @foreach (CavalloDelVentoWebApp.Models.Category item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.categoryName</td>
+                <td>
+                    @{
+                        string catDescription = string.Empty;
+                        if (item.description != null)
+                        {
+                            if (item.description.Length > 30)
+                            {
+                                catDescription = item.description.Substring(0, 30) + "...";
+                            }
+                            else
+                            {
+
+                                catDescription = item.description;
+                            }
+                        }
+                        else
+                        {
+                            catDescription = string.Empty;
+                        }
+                    }
+                    <label>@catDescription</label>
+                </td>
+                <td>@item.isActive</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Category", new {id = item.ID})" class="editButton">Edit Category</a>
+                    <a href="@Url.Action("Delete", "Category", new {id = item.ID})" class="deleteButton">Delete Category</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

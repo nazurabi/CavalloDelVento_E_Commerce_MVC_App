@@ -1,0 +1,47 @@
+﻿@model CavalloDelVentoWebApp.Areas.ManagerPanel.Data.LoginViewModel 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Administrator login</title>
+    <link href="~/Areas/ManagerPanel/Assets/css/ManagerLogin.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="~/Areas/ManagerPanel/Assets/Images/cavallodelventologo.png" />
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.message != null)
+            {
+                <div class="validation-summary-errors">
+                    @ViewBag.message
+                </div>
+            }
+            @Html.ValidationSummary()
+            <div class="row">
+                @Html.EditorFor(x => x.mail, new { htmlAttributes = new { @class = "formTextbox", @placeholder = "e-mail address" } })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(x => x.password, new { htmlAttributes = new { @class = "formTextbox", @placeholder = "password" } })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(x => x.rememberMe) <label for="RememberMe">Remember Me</label>
+            </div>
+            <div class="row">
+                <input type="submit" value="Login" class="loginButton" />
+            </div>
+        }
+
+    </div>
+</body>
+</html>

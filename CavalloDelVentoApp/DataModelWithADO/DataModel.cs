@@ -121,7 +121,7 @@ namespace DataModelWithADO
                 {
                     cb.Checked = false;
                 }
-                else if (controller is ComboBox cbb && controller.Name!="cbb_userType")
+                else if (controller is ComboBox cbb && controller.Name != "cbb_userType")
                 {
                     cbb.SelectedIndex = 0;
                 }
@@ -1591,8 +1591,9 @@ namespace DataModelWithADO
             byte checkCounter = 0;
             try
             {
-                cmd.CommandText = "SELECT UserType FROM MainDealerUsers";
+                cmd.CommandText = "SELECT UserType FROM MainDealerUsers WHERE IsDeleted = @isDeleted";
                 cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@isDeleted", false);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -1782,7 +1783,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productUnitsInStock, productQuantityPerUnit, productDescription, mainUserIDFK,mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productUnitsInStock, productQuantityPerUnit, productDescription, mainUserIDFK, mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                     }
@@ -1834,7 +1835,7 @@ namespace DataModelWithADO
 
             foreach (DataRow row in temporaryDataTable.Rows)
             {
-                if (listIsDeleted== Convert.ToBoolean(row["IsDeleted"]))
+                if (listIsDeleted == Convert.ToBoolean(row["IsDeleted"]))
                 {
                     DateTime sendDate = Convert.ToDateTime(row["SendDate"]);
                     if (checkStartDate != null)
@@ -1876,7 +1877,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK,mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                         else
@@ -1892,7 +1893,7 @@ namespace DataModelWithADO
             }
             return returnToForm;
         }
-        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate, string SubDealerIDFK,bool listIsDeleted)
+        public DataTable SendToSubDealerListDataBind(DateTime checkStartDate, DateTime checkEndDate, string SubDealerIDFK, bool listIsDeleted)
         {
             cmd.CommandText = "SELECT * FROM SendToSubDealers WHERE SubDealerUserIDFK=@subDealerUserIDFK";
             SqlDataAdapter da = new SqlDataAdapter();
@@ -1979,7 +1980,7 @@ namespace DataModelWithADO
                                     img = System.Drawing.Image.FromFile(fullPath);
 
                                 }
-                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, mainUserNameAndType,subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
+                                returnToForm.Rows.Add(sequenceNumber, shipmenNumber, brandIDFK, brandName, categoryIDFK, categoryName, productIDFK, productItemNumber, productName, productDescription, mainUserIDFK, mainUserNameAndType, subDealerIDFK, subDealerName, subDealerDiscountType, subDealerDiscountAmount, sendDate, sendQuantity, unitPrice, subTotalPrice, tax, totalPrice, discountedPrice, description, isDeleted ? "Yes" : "No", img, imageFile);
                             }
                         }
                         else
