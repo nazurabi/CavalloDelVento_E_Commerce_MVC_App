@@ -21,7 +21,7 @@
             <img src="~/Areas/ManagerPanel/Assets/Images/cavallodelventologo.png" />
         </div>
         <div class="userBase">
-            <a href="#" style="color:gray">@mngr.subDealerName</a>
+            <a href="#" style="color:white; text-decoration:none;">@mngr.subDealerName</a>
             <a href="@Url.Action("LogOut","Login")">Log Out</a>
 
         </div>
@@ -32,16 +32,19 @@
         <a href="@Url.Action("HomeIndex","Home")">Home Page</a>
 
         <label>Brand</label>
-        <a href="@Url.Action("Create","Brand")">Add Brand</a>
+        <a href="@Url.Action("BrandCreate","Brand")">Add Brand</a>
         <a href="@Url.Action("BrandIndex","Brand")">List Brands</a>
 
         <label>Category</label>
-        <a href="@Url.Action("Create","Category")">Add Category</a>
+        <a href="@Url.Action("CategoryCreate","Category")">Add Category</a>
         <a href="@Url.Action("CategoryIndex","Category")">List Categories</a>
 
         <label>Product</label>
-        <a href="@Url.Action("Create","Product")">Add Product</a>
+        <a href="@Url.Action("ProductCreate","Product")">Add Product</a>
         <a href="@Url.Action("ProductIndex","Product")">List Products</a>
+
+        <label>Product acceptance <br /> from main dealer</label>
+        <a href="@Url.Action("AcceptXML","Product")">Accept Product</a>
     </div>
     <div class="mainContainer">
         @RenderBody()

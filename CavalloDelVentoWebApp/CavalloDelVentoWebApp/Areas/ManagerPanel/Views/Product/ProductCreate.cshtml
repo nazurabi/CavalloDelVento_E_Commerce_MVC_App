@@ -1,0 +1,91 @@
+﻿@model CavalloDelVentoWebApp.Models.Product
+@{
+    ViewBag.Title = "Add Product";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+
+    <style>
+        .sol {
+            float: left;
+            width: 450px;
+            margin-right: 10px;
+        }
+
+        .sag {
+            float: left;
+            width: 450px;
+            margin-left: 10px;
+        }
+    </style>
+}
+<div class="pageTitle">
+    <h2>Add Product</h2>
+</div>
+<div class="formContainer">
+    @using (Html.BeginForm("ProductCreate", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        if (ViewBag.message != null)
+        {
+            <label class="validationMessage">@ViewBag.message</label>
+        }
+        <div class="sol">
+            <div class="row">
+                @Html.EditorFor(x => x.productName, new { htmlAttributes = new { @class = "textBox", @placeholder = "Product Name" } })
+                @Html.ValidationMessageFor(x => x.productName, "", new { @class = "validationMessage" })
+            </div>
+            <div class="row">
+                <label>Brand</label>
+                @Html.DropDownList("brand_ID", null, htmlAttributes: new { @class = "textBox" })
+            </div>
+
+            <div class="row">
+                <label>Category</label>
+                @Html.DropDownList("category_ID", null, htmlAttributes: new { @class = "textBox" })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(x => x.description, new { htmlAttributes = new { @class = "textBox-maks-product", @placeholder = "Product Description" } })
+                @Html.ValidationMessageFor(x => x.description, "", new { @class = "validationMessage" })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.summary, new { htmlAttributes = new { @class = "textBox-maks-product", @placeholder = "Summary" } })
+                @Html.ValidationMessageFor(x => x.summary, "", new { @class = "validationMessage" })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.isActive, new { htmlAttributes = new { @id = "isActive" } })
+                <label for="isActive">Is Product Active For Sale</label>
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(x => x.isRecent, new { htmlAttributes = new { @id = "isRecent" } })
+                <label for="IsRecent">Is Recent Product</label>
+            </div>
+        </div>
+
+        <div class="sag">
+            <div class="row">
+                @Html.EditorFor(x => x.unitsInStock, new { htmlAttributes = new { @class = "textBox", @placeholder = "Product Stock" } })
+                @Html.ValidationMessageFor(x => x.unitsInStock, "", new { @class = "validationMessage" })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.quantityPerUnit, new { htmlAttributes = new { @class = "textBox", @placeholder = "Quantity Per Unit" } })
+                @Html.ValidationMessageFor(x => x.quantityPerUnit, "", new { @class = "validationMessage" })
+            </div>
+            <div class="row">
+                @Html.EditorFor(x => x.unitPrice, new { htmlAttributes = new { @class = "textBox", @placeholder = "Product Price" } })
+                @Html.ValidationMessageFor(x => x.unitPrice, "", new { @class = "validationMessage" })
+            </div>
+            <div class="row">
+                <label>Product Image</label>
+                <input type="file" name="image" class="textBox" />
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="row">
+            <button type="submit" class="formButton">Add Product</button>
+        </div>
+    }
+</div>

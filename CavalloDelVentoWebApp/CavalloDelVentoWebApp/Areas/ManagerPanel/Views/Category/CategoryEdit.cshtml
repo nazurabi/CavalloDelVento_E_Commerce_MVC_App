@@ -1,0 +1,71 @@
+﻿@model CavalloDelVentoWebApp.Models.Category
+@{
+    ViewBag.Title = "Edit Category";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+    <style>
+        .sol {
+            float: left;
+            width: 450px;
+            margin-right: 10px;
+        }
+
+        .sag {
+            float: left;
+            width: 450px;
+            margin-left: 10px;
+        }
+    </style>
+}
+<div class="pageTitle">
+    <h2>Edit Category</h2>
+</div>
+<div class="formContainer">
+    @using (Html.BeginForm("CategoryEdit", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(x => x.ID)
+        @Html.HiddenFor(x => x.image)
+        @Html.HiddenFor(x => x.isDeleted)
+        if (ViewBag.message != null)
+        {
+            <label class="validationMessage">@ViewBag.message</label>
+        }
+        <div class="sol">
+            <div class="row">
+                @Html.EditorFor(x => x.categoryName, new { htmlAttributes = new { @class = "textBox", @placeholder = "Category Name" } })
+                @Html.ValidationMessageFor(x => x.categoryName, "", new { @class = "validationMessage" })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(x => x.description, new { htmlAttributes = new { @class = "textBox-maks-cat", @placeholder = "Category Description" } })
+                @Html.ValidationMessageFor(x => x.description, "", new { @class = "validationMessage" })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(x => x.isActive, new { htmlAttributes = new { @id = "isActive" } })
+                <label for="isActive">Is Category Active For Sale</label>
+            </div>
+
+        </div>
+        <div class="sag">
+            <div class="row">
+                <div class="categoryEditImage">
+                    <label>Category's Image</label><br />
+                    <img src="~/Assets/CategoryImages/@Model.image" style="width:100%" />
+                </div>
+                <div class="categoryEditImageFile">
+                    <label>Select New Image</label>
+                    <input type="file" name="image" class="textBox" />
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="row">
+            <button type="submit" class="formButton">Edit Category</button>
+        </div>
+    }
+</div>

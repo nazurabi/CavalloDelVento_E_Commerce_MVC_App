@@ -9,21 +9,21 @@ body {
 }
 
 .menuContainer {
-    background-color: #e6e6e6;
-    width: 1300px;
+    background-color: #006CC5;
+    width: 1500px;
     float: left;
 }
 
 .mainContainer {
-    width: 960px;
+    width: 1290px;
     float: left;
-    padding: 30px;
+    padding: 10px;
 }
 
 .logoBase {
     padding: 15px 60px;
-    width: 160px;
-    background-color: #7b0dbb;
+    width: 80px;
+    background-color: #FECA28;
     float: left;
 }
 
@@ -32,7 +32,7 @@ body {
     }
 
 .userBase {
-    width: 300px;
+    width: 100px;
     float: right;
     padding-top: 20px;
     font-weight: 600;
@@ -40,26 +40,27 @@ body {
 
     .userBase a {
         text-decoration: none;
-        color: #7b0dbb;
+        color: #FECA28;
         margin-right: 20px;
     }
 
         .userBase a:hover {
             text-decoration: underline;
+            color:orangered;
         }
 
 .sideMenu {
     min-height: 600px;
-    background-color: #e6e6e6;
-    color: #7b0dbb;
-    width: 280px;
+    background-color: #006CC5;
+    color: #ffffff;
+    width: 200px;
     padding: 15px 0;
     float: left;
     font-weight: 800;
 }
 
     .sideMenu label {
-        color: gray;
+        color: #FECA28;
         display: block;
         padding: 3px 15px;
     }
@@ -68,10 +69,11 @@ body {
         display: block;
         padding: 3px 30px;
         text-decoration: none;
-        border-bottom: 1px solid #e6e6e6;
+        color: #ffffff;
+        border-bottom: 1px solid #ffffff;
     }
 
         .sideMenu a:hover {
-            background-color: #efefef;
-            border-bottom: 1px solid #7b0dbb;
+            background-color: orangered;
+            border-bottom: 1px solid #006CC5;
         }

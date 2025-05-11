@@ -35,7 +35,6 @@ namespace FormForDataModel
                 {
                     LoginUser.loginUser = mu;
                     isLogin = true;
-                    MessageBox.Show("Login successfull, welcome to " + dm.FormTitle(), "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else

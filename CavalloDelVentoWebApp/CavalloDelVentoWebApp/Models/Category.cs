@@ -16,7 +16,7 @@ namespace CavalloDelVentoWebApp.Models
         }
         [Display(Name = "Category Name")]
 
-        [Required(ErrorMessage = "This field can not blank!")]
+        [Required(ErrorMessage = "Category Name can not blank!")]
         [StringLength(maximumLength: 50, ErrorMessage = "This field can be a maximum of 50 characters!")]
         public string categoryName { get; set; }
 

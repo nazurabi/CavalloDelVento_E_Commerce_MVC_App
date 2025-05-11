@@ -14,7 +14,7 @@ namespace CavalloDelVentoWebApp.Models
             isActive = true;
         }
         [Display(Name = "Brand Name")]
-        [Required(ErrorMessage = "This field can not blank!")]
+        [Required(ErrorMessage = "Brand Name can not blank!")]
         [StringLength(maximumLength: 50, ErrorMessage = "This field can be a maximum of 50 characters!")]
         public string brandName { get; set; }
 

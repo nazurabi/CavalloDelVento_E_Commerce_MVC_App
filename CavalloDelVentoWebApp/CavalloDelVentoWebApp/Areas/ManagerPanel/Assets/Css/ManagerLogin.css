@@ -47,10 +47,10 @@ body {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     padding: 15px;
-    background-color: #7e0490;
+    background-color: orangered;
     color: white;
     font-size: 15pt;
-    border: 1px solid #7e0490;
+    border: 1px solid orangered;
     border-radius: 5px;
     cursor: pointer;
 }

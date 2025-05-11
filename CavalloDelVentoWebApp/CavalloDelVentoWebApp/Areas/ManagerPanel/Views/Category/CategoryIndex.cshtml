@@ -8,54 +8,65 @@
     <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
 }
 <div class="pageTitle">
-    <h2>Kategoriler</h2>
+    <h2>Categories</h2>
 </div>
 <div class="">
     @if (TempData["message"] != null)
     {
-        <h3 style="color:forestgreen; margin-bottom:10px;">@TempData["mesaj"]</h3>
+        <h3 style="color:forestgreen; margin-bottom:10px;">@TempData["message"]</h3>
         TempData["message"] = null;
     }
     <table class="tablo" cellpadding="0" cellspacing="0">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.ID)</th>
+            <th>Image</th>
             <th>@Html.DisplayNameFor(model => model.categoryName)</th>
-            <th>Description</th>
             <th>Is Category Active For Sale</th>
-            <th>Category Image</th>
+            <th>Description</th>
             <th>Options</th>
         </tr>
         @foreach (CavalloDelVentoWebApp.Models.Category item in Model)
         {
             <tr>
-                <td>@item.ID</td>
-                <td>@item.categoryName</td>
+
+                <td align="center"><img src="~/Assets/CategoryImages/@item.image" width="80" /> </td>
+                <td align="center">@item.categoryName</td>
+                <td align="center">
+                    @if (item.isActive)
+                    {
+                        <label style="color:forestgreen;">In Stock</label>
+                    }
+                    else
+                    {
+                        <label style="color:orangered;">Out Of Stock</label>
+                    }
+
+                </td>
+
                 <td>
-                    @{
-                        string catDescription = string.Empty;
-                        if (item.description != null)
-                        {
-                            if (item.description.Length > 30)
+                    <div style=" width: 250px; height: 60px; overflow-y: auto; overflow-x: hidden; padding: 5px;">
+                        @{
+                            string catDescription = string.Empty;
+                            if (item.description != null)
                             {
-                                catDescription = item.description.Substring(0, 30) + "...";
+                                //if (item.description.Length > 30)
+                                //{
+                                //    catDescription = item.description.Substring(0, 30) + "...";
+                                //}
+                                //else
+                                //{
+                                catDescription = item.description;
+                                //}
                             }
                             else
                             {
-
-                                catDescription = item.description;
+                                catDescription = string.Empty;
                             }
                         }
-                        else
-                        {
-                            catDescription = string.Empty;
-                        }
-                    }
-                    <label>@catDescription</label>
+                        <label>@catDescription</label>
+                    </div>
                 </td>
-                <td>@item.isActive</td>
-                <td>@item.image</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Category", new {id = item.ID})" class="editButton">Edit Category</a>
+                    <a href="@Url.Action("CategoryEdit", "Category", new {id = item.ID})" class="editButton">Edit Category</a>
                     <a href="@Url.Action("Delete", "Category", new {id = item.ID})" class="deleteButton">Delete Category</a>
                 </td>
             </tr>

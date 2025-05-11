@@ -31,7 +31,7 @@
                 <td align="center">
                     @if (item.isActive)
                     {
-                        <label>In Stock</label>
+                        <label style="color:forestgreen;">In Stock</label>
                     }
                     else
                     {
@@ -41,7 +41,7 @@
                 </td>
                
                 <td>
-                    <a href="@Url.Action("Edit", "Brand", new {id = item.ID})" class="editButton">Edit</a>
+                    <a href="@Url.Action("BrandEdit", "Brand", new {id = item.ID})" class="editButton">Edit</a>
                     <a href="@Url.Action("Delete", "Brand", new {id = item.ID})" class="deleteButton">Delete</a>
                 </td>
             </tr>

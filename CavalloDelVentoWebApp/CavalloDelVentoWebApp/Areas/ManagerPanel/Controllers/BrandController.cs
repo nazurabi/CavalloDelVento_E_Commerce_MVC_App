@@ -24,13 +24,13 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
         #region Add Brand
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult BrandCreate()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Brand model, HttpPostedFileBase image)
+        public ActionResult BrandCreate(Brand model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
                     {
                         cdvdb.brands.Add(model);
                         cdvdb.SaveChanges();
-                        TempData["message"] = "Brand added succesful";
+                        TempData["message"] = "Brand added succesfully";
                         return RedirectToAction("BrandIndex", "Brand");
                     }
                 }
@@ -77,7 +77,7 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
         #region Edit Brand
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult BrandEdit(int? id)
         {
             if (id != null)
             {
@@ -107,7 +107,7 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Brand model, HttpPostedFileBase image)
+        public ActionResult BrandEdit(Brand model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -130,16 +130,12 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
                             ViewBag.message = "Image extension must be '.jpg, .jpeg, .png' please choose true extension!";
                         }
                     }
-                    else
-                    {
-                        model.image = "none.jpg";
-                    }
-
+                   
                     if (isValidImage)
                     {
                         cdvdb.Entry(model).State = System.Data.Entity.EntityState.Modified;
                         cdvdb.SaveChanges();
-                        TempData["message"] = "Brand update successful";
+                        TempData["message"] = "Brand update successfully";
                         return RedirectToAction("BrandIndex", "Brand");
                     }
                 }
@@ -164,7 +160,7 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
                     br.isDeleted = true; // Soft Delete
                     br.isActive = false;
                     cdvdb.SaveChanges();
-                    TempData["message"] = "Brand deleted successful";
+                    TempData["message"] = "Brand deleted successfully";
                     return RedirectToAction("BrandIndex", "Brand");
                 }
                 else

@@ -20,7 +20,7 @@
     padding-top: 0;
     margin: 15px 0;
     margin-top: 0;
-    border-bottom: 2px solid #7b0dbb;
+    border-bottom: 2px solid #006cc5;
 }
 
 .editButton {
@@ -62,35 +62,67 @@
 
 .formButton {
     padding: 15px;
-    background-color: #7e0490;
+    background-color: orangered;
     color: white;
     font-size: 15pt;
-    border: 1px solid #7e0490;
+    border: 1px solid orangered;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .productEditImage {
-    width: 150px;
+    width: 250px;
     float: left;
 }
 
 .productEditImageFile {
-    width: 500px;
+    width: 250;
     float: left;
     padding-left: 20px;
 }
 
-.textBox-maks {
+.brandEditImage {
+    width: 250px;
+    float: left;
+}
+
+.brandEditImageFile {
+    width: 250px;
+    float: left;
+}
+
+.categoryEditImage {
+    width: 250px;
+    float: left;
+}
+
+.categoryEditImageFile {
+    width: 250px;
+    float: left;
+}
+
+    .textBox-maks {
     width: 100%;
     max-width: 912px;
     resize: vertical;
     padding: 7px;
 }
 
+.textBox-maks-cat {
+    width: 100%;
+    height:100px;
+    max-width: 436px;
+    min-height:100px;
+    max-height:200px;
+    resize: vertical;
+    padding: 7px;
+}
 .textBox-maks-product {
     width: 100%;
+    height:100px;
     max-width: 436px;
+    min-height:100px;
+    max-height:200px;
     resize: vertical;
     padding: 7px;
 }

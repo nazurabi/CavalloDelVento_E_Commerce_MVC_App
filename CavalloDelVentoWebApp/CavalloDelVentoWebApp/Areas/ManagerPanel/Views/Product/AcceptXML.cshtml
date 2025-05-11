@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CavalloDelVentoWebApp.Models.XMLDeserialize>
+@{
+    ViewBag.Title = "AcceptXML";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+}
+<div class="pageTitle">
+    <h2>AcceptXML</h2>
+</div>
+<div class="">
+
+    @using (Html.BeginForm("AcceptXML", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="xmlFile" accept=".xml" required />
+        <button type="submit">XML Yükle</button>
+    }
+    @if (Model != null)
+    {
+        <table class="tablo" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Send ID</th>
+                <th>Brand Name</th>
+                <th>Category Name</th>
+                <th>Product Item Number</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Send Quantity</th>
+                <th>Unit Price</th>
+                <th>Sub Total Price</th>
+                <th>Tax</th>
+                <th>Total Price</th>
+                <th>Discounted Price</th>
+                <th>Image Name</th>
+            </tr>
+            @foreach (CavalloDelVentoWebApp.Models.XMLDeserialize item in Model)
+            {
+                <tr>
+                    <td align="center">@item.sendID</td>
+                    <td align="center">@item.brandName</td>
+                    <td align="center">@item.categoryName</td>
+                    <td align="center">@item.productItemNumber</td>
+                    <td align="center">@item.productName</td>
+                    <td align="center">@item.description</td>
+                    <td align="center">@item.sendQuantity</td>
+                    <td align="center">@item.unitPrice</td>
+                    <td align="center">@item.subTotalPrice</td>
+                    <td align="center">@item.tax</td>
+                    <td align="center">@item.totalPrice</td>
+                    <td align="center">@item.discountedPrice</td>
+                    <td align="center">@item.imageName</td>
+                    <td>
+                        <div style="margin-top: 5px;">
+                            <a href="@Url.Action("XmlToProduct", "Product", new {id = item.sendID})" class="editButton">Accept</a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("XMLToProductCopyImages", "Product", new {id = item.sendID})" class="editButton">Copy Images</a>
+                        </div>
+
+                    </td>
+                </tr>
+
+            }
+        </table>
+    }
+</div>

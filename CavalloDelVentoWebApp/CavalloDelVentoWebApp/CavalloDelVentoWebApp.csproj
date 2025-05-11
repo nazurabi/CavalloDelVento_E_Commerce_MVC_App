@@ -101,6 +101,8 @@
     <Content Include="Areas\ManagerPanel\Assets\Css\ManagerLogin.css" />
     <Content Include="Areas\ManagerPanel\Assets\Css\ManagerStyle.css" />
     <Content Include="Areas\ManagerPanel\Assets\Images\cavallodelventologo.png" />
+    <Content Include="Areas\ManagerPanel\Assets\Images\notfound.gif" />
+    <Content Include="Areas\ManagerPanel\Assets\Images\recent.png" />
     <Content Include="Assets\BrandImages\none.jpg" />
     <Content Include="Assets\CategoryImages\none.jpg" />
     <Content Include="Assets\ProductImages\none.jpg" />
@@ -113,6 +115,8 @@
     <Compile Include="Areas\ManagerPanel\Controllers\CategoryController.cs" />
     <Compile Include="Areas\ManagerPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\ManagerPanel\Controllers\LoginController.cs" />
+    <Compile Include="Areas\ManagerPanel\Controllers\ProductController.cs" />
+    <Compile Include="Areas\ManagerPanel\Controllers\SystemController.cs" />
     <Compile Include="Areas\ManagerPanel\Data\LoginViewModel.cs" />
     <Compile Include="Areas\ManagerPanel\Filters\ManagerRequiredFilterAttribute.cs" />
     <Compile Include="Areas\ManagerPanel\ManagerPanelAreaRegistration.cs" />
@@ -127,6 +131,7 @@
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\ManagerRole.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\XMLDeserialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +142,15 @@
     <Content Include="Areas\ManagerPanel\Views\Home\HomeIndex.cshtml" />
     <Content Include="Areas\ManagerPanel\Views\Category\CategoryIndex.cshtml" />
     <Content Include="Areas\ManagerPanel\Views\Brand\BrandIndex.cshtml" />
-    <Content Include="Areas\ManagerPanel\Views\Brand\Create.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Brand\BrandCreate.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Brand\BrandEdit.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\System\Error.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Category\CategoryEdit.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Category\CategoryCreate.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Product\ProductIndex.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Product\ProductCreate.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Product\ProductEdit.cshtml" />
+    <Content Include="Areas\ManagerPanel\Views\Product\AcceptXML.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<CavalloDelVentoWebApp.Models.Product>
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Areas/ManagerPanel/Views/Shared/_LayoutPage1.cshtml";
+}
+@section styles
+{
+    <link href="~/Areas/ManagerPanel/Assets/css/FormStyle.css" rel="stylesheet" />
+}
+<div class="pageTitle">
+    <h2>Products</h2>
+</div>
+<div class="">
+    @if (TempData["message"] != null)
+    {
+        <h3 style="color:forestgreen; margin-bottom:10px;">@TempData["message"]</h3>
+        TempData["message"] = null;
+    }
+    <table class="tablo" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Image</th>
+            <th>Product Item Number</th>
+            <th>@Html.DisplayNameFor(model => model.productName)</th>
+            <th>Brand Name</th>
+            <th>Category Name</th>
+            <th>Summary</th>
+            <th>Quantity Per Unit</th>
+            <th>Unit Price</th>
+            <th>Units In Stock</th>
+            <th>Is Product Active For Sale</th>
+            <th>Is Recent</th>
+            <th>Options</th>
+        </tr>
+        @foreach (CavalloDelVentoWebApp.Models.Product item in Model)
+        {
+            <tr>
+
+                <td align="center"><img src="~/Assets/ProductImages/@item.image" width="80" /> </td>
+                <td align="center">@item.productItemNumber</td>
+                <td align="center">@item.productName</td>
+                <td align="center">@item.brand.brandName</td>
+                <td align="center">@item.category.categoryName</td>
+                <td>
+                    <div style=" width: 150px; height: 60px; overflow-y: auto; overflow-x: hidden; padding: 5px;">
+                        @{
+                            string productSummary = string.Empty;
+                            if (item.summary != null)
+                            {
+                                productSummary = item.summary;
+                            }
+                            else
+                            {
+                                productSummary = string.Empty;
+                            }
+                        }
+                        <label>@productSummary</label>
+                    </div>
+                </td>
+                <td align="center">@item.quantityPerUnit</td>
+                <td align="center">@item.unitPrice</td>
+                <td align="center">@item.unitsInStock</td>
+                <td align="center">
+                    @if (item.isActive)
+                    {
+                        <label style="color:forestgreen;">In Stock</label>
+                    }
+                    else
+                    {
+                        <label style="color:orangered;">Out Of Stock</label>
+                    }
+
+                </td>
+
+                <td align="center">
+                    @if (item.isRecent)
+                    {
+                        <img src="~/Areas/ManagerPanel/Assets/Images/recent.png" width="25" />
+                    }
+
+                </td>
+                <td>
+                    <div style="width:50px; margin-bottom:10px;">
+                        <a href="@Url.Action("ProductEdit", "Product", new {id = item.ID})" class="editButton">Edit</a>
+                    </div>
+                    <div style="width:50px;">
+                        <a href="@Url.Action("Delete", "Product", new {id = item.ID})" class="deleteButton">Delete</a>
+                    </div>
+                    <div style="clear:both"></div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

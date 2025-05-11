@@ -13,21 +13,25 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
     public class CategoryController : Controller
     {
         CavalloDelVentoWebAppModel cdvdb = new CavalloDelVentoWebAppModel();
+        #region List Category
+
         public ActionResult CategoryIndex()
         {
             return View(cdvdb.categories.Where(x => x.isDeleted == false).ToList());
         }
 
+        #endregion
+
         #region Add Category
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult CategoryCreate()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Category model, HttpPostedFileBase image)
+        public ActionResult CategoryCreate(Category model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +63,7 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
 
                         cdvdb.categories.Add(model);
                         cdvdb.SaveChanges();
-                        TempData["message"] = "Category added succesful";
+                        TempData["message"] = "Category added succesfully";
                         return RedirectToAction("CategoryIndex", "Category");
                     }
                 }
@@ -69,7 +73,7 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
                 }
 
             }
-            ViewBag.brand_ID = new SelectList(cdvdb.brands.Where(x => x.isDeleted == false), "ID", "Brand Name");
+
             return View(model);
         }
         #endregion
@@ -77,36 +81,73 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
         #region Edit Category
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult CategoryEdit(int? id)
         {
             if (id != null)
             {
                 Category c = cdvdb.categories.Find(id);
                 if (c != null)
                 {
-                    return View(c);
+                    if (!c.isDeleted)
+                    {
+                        return View(c);
+                    }
+                    else
+                    {
+                        TempData["systemError"] = "Category deleted!";
+                        return RedirectToAction("Error", "System");
+                    }
+                }
+                else
+                {
+                    TempData["systemError"] = "Category is not found!";
+                    return RedirectToAction("Error", "System");
+
                 }
             }
-            return RedirectToAction("CategoryIndex", "Category");
+            else
+            {
+                return RedirectToAction("CategoryIndex", "Category");
+            }
         }
 
         [HttpPost]
-        public ActionResult Edit(Category model)
+        public ActionResult CategoryEdit(Category model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    cdvdb.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                    cdvdb.SaveChanges();
-                    TempData["message"] = "Category update successful";
-                    return RedirectToAction("CategoryIndex", "Category");
+                    bool isValidImage = true;
+                    if (image != null)
+                    {
+                        FileInfo fi = new FileInfo(image.FileName);
+                        string extension = fi.Extension;
+                        if (extension == ".jpeg" || extension == ".jpg" || extension == ".png")
+                        {
+                            string name = Guid.NewGuid().ToString() + extension;
+                            model.image = name;
+                            image.SaveAs(Server.MapPath("~/Assets/CategoryImages/" + name));
+                        }
+                        else
+                        {
+                            isValidImage = false;
+                            ViewBag.message = "Image extension must be '.jpg, .jpeg, .png' please choose true extension!";
+                        }
+                    }
+
+                    if (isValidImage)
+                    {
+                        cdvdb.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                        cdvdb.SaveChanges();
+                        TempData["message"] = "Category update successfully";
+                        return RedirectToAction("CategoryIndex", "Category");
+                    }
                 }
                 catch
                 {
                     ViewBag.mesaj = "An error occurred while editing a category!";
                 }
-
             }
             return View(model);
         }
@@ -120,13 +161,22 @@ namespace CavalloDelVentoWebApp.Areas.ManagerPanel.Controllers
                 Category c = cdvdb.categories.Find(id);
                 if (c != null)
                 {
-                    //db.Categories.Remove(c); // Hard Delete
-                    c.isDeleted = true; // Soft Delete
+                    c.isDeleted = true;
+                    c.isActive = false;
                     cdvdb.SaveChanges();
-                    TempData["message"] = "Category deleted successful";
+                    TempData["message"] = "Category deleted successfully";
+                    return RedirectToAction("CategoryIndex", "Category");
+                }
+                else
+                {
+                    TempData["systemError"] = "Category can not find!";
+                    return RedirectToAction("Error", "System");
                 }
             }
-            return RedirectToAction("CategoryIndex", "Category");
+            else
+            {
+                return RedirectToAction("CategoryIndex", "Category");
+            }
         }
         #endregion
 
